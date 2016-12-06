@@ -1,0 +1,2 @@
+Con JSP si possono includere parti di HTML da un file separato, per esempio la upper-bar o la side-bar. In questo modo si possono modificare 
+una sola volta per tutte - invece con l'attuale AdminLTE bisogna cambiare tutte le pagine
