@@ -2,11 +2,32 @@ package wpb.item;
 
 import java.lang.reflect.Field;
 
-public class Item {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "item")
+public class Item {
+   
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "item_id")
+    private Long item_id;
+	
+	@Column(name = "name", nullable = false)
 	String name;
+	
+	@Column(name = "price")
 	double price;
+	
+	@Column(name = "available", nullable=false)
 	boolean available;
+
 
 	public String getName() {
 		return name;
