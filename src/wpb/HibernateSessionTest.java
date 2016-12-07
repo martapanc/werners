@@ -50,8 +50,10 @@ public class HibernateSessionTest extends TestCase {
 	protected void setUp() throws Exception {
 		// A SessionFactory is set up once for an application!
         try {
-            Configuration configuration = new Configuration().configure();
-            configuration.addAnnotatedClass(wpb.item.Item.class);
+            Configuration configuration = new Configuration().
+            		configure().
+            		//addPackage("com.xyz") //add package if used.
+            		addAnnotatedClass(wpb.item.Item.class);
             serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         } catch (Throwable ex) {
@@ -84,6 +86,8 @@ public class HibernateSessionTest extends TestCase {
             session.save(i);
             session.getTransaction().commit();
         	}
+
+
         session.close();
 
         // now lets pull events from the database and list them
