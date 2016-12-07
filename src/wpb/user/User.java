@@ -1,4 +1,4 @@
-package user;
+package wpb.user;
 
 import java.lang.reflect.Field;
 

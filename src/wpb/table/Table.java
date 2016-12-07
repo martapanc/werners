@@ -1,4 +1,4 @@
-package table;
+package wpb.table;
 
 import java.lang.reflect.Field;
 
