@@ -33,11 +33,11 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-<jsp:include page="upper-navbar.html" />
+<jsp:include page="pages/upper-navbar.html" />
   
-<jsp:include page="left-sidebar.html" />
+<jsp:include page="pages/left-sidebar.html" />
 
-<jsp:include page="content-wrapper.jsp" />
+<jsp:include page="pages/content-wrapper.jsp" />
 
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
@@ -58,7 +58,7 @@
     <div class="tab-content">
 
 <!--Can this be removed? -->
-<jsp:include page="home-tab-content.html" />
+<jsp:include page="pages/home-tab-content.html" />
 
       <!-- Settings tab content -->
       <div class="tab-pane" id="control-sidebar-settings-tab">
