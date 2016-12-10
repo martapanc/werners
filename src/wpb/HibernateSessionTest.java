@@ -77,7 +77,7 @@ public class HibernateSessionTest extends TestCase {
         // create a couple of events...
         Session session = sessionFactory.openSession();
         
-    	for(int a = 1;a<=5000; a++){
+    	for(int a = 1;a<=20; a++){
             Item i = new Item();
             i.setAvailable(true);
             i.setPrice(1.2);

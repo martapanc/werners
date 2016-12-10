@@ -6,13 +6,12 @@ import javax.persistence.*;
 import org.hibernate.validator.constraints.*;
 
 @Entity
-@Table(name = "Employee")
+@Table(name = "User")
 public class User {
 
     @Id
-    @SequenceGenerator(name = "user_seq", sequenceName = "seq_user")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
-    @Column(name = "id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long userId;
     
     @NotBlank

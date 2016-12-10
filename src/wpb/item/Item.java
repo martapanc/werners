@@ -2,13 +2,7 @@ package wpb.item;
 
 import java.lang.reflect.Field;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "item")
@@ -17,7 +11,7 @@ public class Item {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "item_id")
-    private Long item_id;
+    private Long itemId;
 	
 	@Column(name = "name", nullable = false)
 	String name;

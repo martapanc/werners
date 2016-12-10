@@ -1,13 +1,35 @@
 package wpb.table;
 
 import java.lang.reflect.Field;
+import javax.persistence.*;
+import org.hibernate.validator.constraints.NotBlank;
 
+@Entity
+@Table(name = "table")
 public class Table {
-
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "table_id")
+    private Long tableId;
+	
+    @NotBlank
+    @Column(name = "number", unique = true, nullable = false)
 	int number;
-	String room;
-	int seats;
-	enum category;
+	
+    @Column(name = "room") 
+    String room;
+	
+    @Column(name = "seats")
+    int seats;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "category", nullable = false)
+	private CategoryType category;
+
+	public enum CategoryType {
+		lowcost, medium, highend
+	};
 	
 	@Override
     //<editor-fold defaultstate="collapsed" desc="toString override">
