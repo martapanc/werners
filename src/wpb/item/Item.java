@@ -14,13 +14,13 @@ public class Item {
     private Long itemId;
 	
 	@Column(name = "name", nullable = false)
-	String name;
+	private String name;
 	
 	@Column(name = "price")
-	double price;
+	private double price;
 	
 	@Column(name = "available", nullable=false)
-	boolean available;
+	private boolean available;
 
 
 	public String getName() {
