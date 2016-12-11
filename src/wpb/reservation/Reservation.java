@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import wpb.user.User;
+
 @Entity
 @Table(name = "reservation")
 public class Reservation {
@@ -24,6 +26,8 @@ public class Reservation {
 	private Set<Table> tableList;  
 	
 	private String comment;
+    
+	@ManyToOne(cascade = CascadeType.ALL)
+    private User Guest;
 	
-	//user id is missing
 }
