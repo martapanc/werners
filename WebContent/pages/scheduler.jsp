@@ -302,6 +302,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
 <script src='https://fullcalendar.io/js/fullcalendar-3.0.1/fullcalendar.min.js'></script>
 <script src='https://fullcalendar.io/js/fullcalendar-scheduler-1.4.0/scheduler.min.js'></script>
+<script src='https://fullcalendar.io/js/fullcalendar-3.0.1/locale-all.js'></script>
 <script>
   $(function () {
 
@@ -348,8 +349,13 @@
 		schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
 		nowIndicator: true,
 		resourceAreaWidth: 150,
+		height: 'auto',
 		editable: true,
-		slotDuration: "00:15",
+		slotDuration: '00:15',
+		columnFormat: 'H(:mm)',
+		minTime: '11:00',
+		maxTime: '26:00',
+		slotWidth: 15,
 		aspectRatio: 1.5,
 		scrollTime: new Date(),
 		header: {
@@ -402,21 +408,22 @@
 			{ id: 'p', title: 'Table P' }
 		],
 		events: [
-			{ id: '1', resourceId: 'b', start: TODAY + 'T02:00:00', end: TODAY + 'T07:00:00', title: 'event 1' },
+			{ id: '1', resourceId: 'b', start: TODAY + 'T15:00:00', end: TODAY + 'T17:00:00', title: 'event 1' },
 			{ id: '2', resourceId: 'c', start: TODAY + 'T05:00:00', end: TODAY + 'T22:00:00', title: 'event 2' },
 			{ id: '3', resourceId: 'd', start: YESTERDAY, end: TOMORROW, title: 'event 3' },
 			{ id: '4', resourceId: 'e', start: TODAY + 'T03:00:00', end: TODAY + 'T08:00:00', title: 'event 4' },
 			{ id: '5', resourceId: 'f', start: TODAY + 'T00:30:00', end: TODAY + 'T02:30:00', title: 'event 5' }
 		],
       
-      windowResize: function(view) {
+	
+      /*windowResize: function(view) {
       alert('The scheduler has adjusted to a window resize');
       if ($(window).width() < 514){
         $('#scheduler').fullCalendar( 'changeView', 'agendaDay' );
       } else {
         $('#scheduler').fullCalendar( 'changeView', 'agendaWeek' );
       }
-  }
+  }*/
 });
 });
 

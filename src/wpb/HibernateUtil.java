@@ -7,6 +7,12 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+/**
+ * Hibernate Utility class with convenient methods to get Session Factory
+ * object.
+ *
+ * @author Werner Sperandio
+ */
 
 public class HibernateUtil {
 
@@ -44,7 +50,7 @@ public class HibernateUtil {
         try {
             // Create the SessionFactory from hibernate.cfg.xml
             Configuration configuration = new Configuration();
-            configuration.configure("hibernate-annotation.cfg.xml");
+            configuration.configure("hibernate.cfg.xml");
             System.out.println("Hibernate Annotation Configuration loaded");
 
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
@@ -94,7 +100,9 @@ public class HibernateUtil {
             // com/journaldev/hibernate/model/Employee1.hbm.xml (not good)
             configuration.addAnnotatedClass(wpb.item.Item.class);
             configuration.addAnnotatedClass(wpb.roomtable.RoomTable.class);
-
+            configuration.addAnnotatedClass(wpb.reservation.Reservation.class);
+            configuration.addAnnotatedClass(wpb.user.User.class);
+            
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
             System.out.println("Hibernate Java Config serviceRegistry created");
 
@@ -108,16 +116,28 @@ public class HibernateUtil {
         }
     }
 
+    /**
+     * creates/gets a SessionFactory from XML based configuration
+     * @return	a SessionFactory object
+     */
     public static SessionFactory getSessionFactory() {
         if(sessionFactory == null) sessionFactory = buildSessionFactory();
         return sessionFactory;
     }
 
+    /**
+     * creates/gets a SessionFactory from annotation based configuration
+     * @return a SessionFactory object
+     */
     public static SessionFactory getSessionAnnotationFactory() {
         if(sessionAnnotationFactory == null) sessionAnnotationFactory = buildSessionAnnotationFactory();
         return sessionAnnotationFactory;
     }
 
+    /**
+     * creates/gets a SessionFactory from property based configuration
+     * @return a SessionFactory object
+     */
     public static SessionFactory getSessionJavaConfigFactory() {
         if(sessionJavaConfigFactory == null) sessionJavaConfigFactory = buildSessionJavaConfigFactory();
         return sessionJavaConfigFactory;
