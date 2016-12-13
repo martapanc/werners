@@ -28,7 +28,13 @@ import wpb.roomtable.RoomTable.CategoryType;
 public class SeedDB {
 
 	private static Connection connection = null;
-
+	private static SessionFactory mySessionFactory = null;
+	
+	public static void setSessionFactory(SessionFactory sf) {
+		mySessionFactory = sf;
+	}
+	
+	@Deprecated
 	public static void testDBConnection() {
 		try {
 			if (connection == null) {
@@ -54,14 +60,13 @@ public class SeedDB {
 		}
 	}
 
-	public static void main(String[] args) {
-
-		SessionFactory mySessionFactory = HibernateUtil.getSessionJavaConfigFactory();
+	public static void seedItems(int count){
+		
 		ItemManager itmManager = new ItemManager(mySessionFactory);
 		SessionIdentifierGenerator idgen= new SessionIdentifierGenerator();
 		
-		//creating 50 random items
-		for (int i = 1; i < 50; i++) {
+		//creating random items
+		for (int i = 1; i <= count; i++) {
 			Item newItem = new Item();
 			newItem.setAvailable(true);
 			newItem.setPrice(Math.floor(ThreadLocalRandom.current().nextDouble(0.1, 12) * 100) / 100);
@@ -69,87 +74,26 @@ public class SeedDB {
 			itmManager.addItem(newItem);
 		}
 		
-		// create a new session
-		Session session = mySessionFactory.openSession();
-
-		RoomTable vipTable = new RoomTable();
-		vipTable.setCategory(CategoryType.highend);
-		vipTable.setSeats(5);
-		vipTable.setRoom("left door behind picture");
-		vipTable.setNumber(1);
-		session.beginTransaction();
-		session.save(vipTable);
-		session.getTransaction().commit();
-
-		Set<RoomTable> tableList = new HashSet<RoomTable>();
-		tableList.add(vipTable);
-
-		Reservation res = new Reservation();
-		res.setTableList(tableList);
-		session.beginTransaction();
-		session.save(res);
-		session.getTransaction().commit();
+		System.out.println(itmManager.getTotalCount() + " new Items created");
 	}
-
-	/*
-	 * public static void main(String[] args) throws FileNotFoundException {
-	 * 
-	 * HibernateUtil.createSessionFactory(); DepartmentManager dm = new
-	 * DepartmentManager(HibernateUtil.getSessionFactory()); EmployeeManager em
-	 * = new EmployeeManager(HibernateUtil.getSessionFactory()); RoleManager rm
-	 * = new RoleManager(HibernateUtil.getSessionFactory());
-	 * 
-	 * Employee e = new Employee(); // e.setGender(Employee.GenderType.female);
-	 * // em.updateEmployee("p883050", e);
-	 * 
-	 * //em.updateEmployeeGender(pMatricola, GenderType.male); Department d1 =
-	 * new Department("PRODTV", "produzione televisiva"); Department d2 = new
-	 * Department("PRODRF", "produzione radiofonica"); Department d3 = new
-	 * Department("ADMIN", "amministrazione"); Department d4 = new
-	 * Department("TGRBZ", "redazione TGR Bolzano"); Department d5 = new
-	 * Department("TGTBZ", "redazione TGR Bolzano"); Department d6 = new
-	 * Department("TGLBZ", "redazione TGR Bolzano"); Department d7 = new
-	 * Department("MAINTENANCE", "reparto manutenzione"); Department d8 = new
-	 * Department("EST1", "esterna 1");
-	 * 
-	 * dm.addDepartment(d1); dm.addDepartment(d2); dm.addDepartment(d3);
-	 * dm.addDepartment(d4); dm.addDepartment(d5); dm.addDepartment(d6);
-	 * dm.addDepartment(d7); dm.addDepartment(d8);
-	 * 
-	 * Role r1 = new Role("Redattore", "semplice giornalista"); Role r2 = new
-	 * Role("caporedattore", "president"); Role r3 = new
-	 * Role("vicecaporedattore", "vice president"); Role r4 = new
-	 * Role("tecnico", "soldato semplice"); Role r5 = new Role("capotecnico",
-	 * "tecnico figo"); Role r6 = new Role("capoproduzione",
-	 * "capo della produzione");
-	 * 
-	 * rm.addRole(r1); rm.addRole(r2); rm.addRole(r3); rm.addRole(r4);
-	 * rm.addRole(r5); rm.addRole(r6);
-	 * 
-	 * 
-	 * // Employee e = null; // Scanner sc = new Scanner(new
-	 * FileReader("D://test.txt")); // while (sc.hasNextLine()) { //
-	 * System.out.println(sc.next()); // e = new Employee(); //
-	 * e.setMatriculationNumber("R883050"); // e.setFirstName("Ennio"); //
-	 * e.setLastName("Morricone"); // e.setGender(Employee.GenderType.female);
-	 * // e.setEmploymentDate(parseDate("2014-05-01")); // e.setDepartment(d1);
-	 * // }
-	 * 
-	 * Map m = new HashMap<>(); m.put("matriculationNumber","p883050");
-	 * m.put("active", true); m.put("firstName", "Werner"); m.put("lastName",
-	 * "Sperandio"); m.put("gender",Employee.GenderType.male); m.put("email",
-	 * "werner.sperandio@rai.it"); m.put("birthDate",
-	 * HibernateUtil.parseDate("2014-01-01")); m.put("employmentDate",
-	 * HibernateUtil.parseDate("2014-01-01")); m.put("department", d1);
-	 * m.put("role",r1);
-	 * 
-	 * Random randomGenerator = new Random(); for (int idx = 1; idx <= 50;
-	 * ++idx) { int randomInt = randomGenerator.nextInt(999998); String mat =
-	 * String.format("p%06d", randomInt); m.replace("matriculationNumber", mat);
-	 * System.out.println(randomInt); e = new Employee(m); em.addEmployee(e); }
-	 * 
-	 * System.out.println(em.listEmployee());
-	 * 
-	 * }
-	 */
+	
+	public static void seedTables(int count){
+		
+		/*
+		TabManager tableManager = new ItemManager(mySessionFactory);
+		SessionIdentifierGenerator idgen= new SessionIdentifierGenerator();
+		
+		//creating random Tables
+		for (int i = 1; i <= count; i++) {
+			RoomTable newTable = new RoomTable();
+			newItem.setAvailable(true);
+			newItem.setPrice(Math.floor(ThreadLocalRandom.current().nextDouble(0.1, 12) * 100) / 100);
+			newItem.setName(idgen.nextSessionId());
+			itmManager.addItem(newItem);
+		}
+		
+		System.out.println(itmManager.getTotalCount() + " new Items created");
+		*/
+	}
+	
 }

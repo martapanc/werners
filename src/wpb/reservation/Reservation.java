@@ -34,7 +34,7 @@ public class Reservation {
 	private String comment;
     
 	@ManyToOne(cascade = CascadeType.ALL)
-    private User Guest;
+    private User guest;
 
 	public Timestamp getStartDate() {
 		return startDate;
@@ -69,11 +69,11 @@ public class Reservation {
 	}
 
 	public User getGuest() {
-		return Guest;
+		return guest;
 	}
 
 	public void setGuest(User guest) {
-		Guest = guest;
+		guest = guest;
 	}
 	
 	@Override
