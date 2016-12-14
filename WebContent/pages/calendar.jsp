@@ -133,13 +133,7 @@
   </div>
   <!-- /.content-wrapper -->
 
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.3.7
-    </div>
-    <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-    reserved.
-  </footer>
+<jsp:include page="footer.html" />
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -356,6 +350,15 @@
 <script src="../plugins/fullcalendar/fullcalendar.min.js"></script>
 <!-- Page specific script -->
 <script>
+
+$(function () { 
+	  $( document ).ready(function() {
+			$('#dashboard-menu').removeClass('active');
+		    $('#scheduler-menu').removeClass('active');
+		    $('#calendar-menu').addClass('active');
+	  });
+});
+	  
   $(function () {
 
     /* initialize the external events
