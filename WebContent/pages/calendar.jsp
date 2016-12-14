@@ -350,6 +350,15 @@
 <script src="../plugins/fullcalendar/fullcalendar.min.js"></script>
 <!-- Page specific script -->
 <script>
+
+$(function () { 
+	  $( document ).ready(function() {
+			$('#dashboard-menu').removeClass('active');
+		    $('#scheduler-menu').removeClass('active');
+		    $('#calendar-menu').addClass('active');
+	  });
+});
+	  
   $(function () {
 
     /* initialize the external events

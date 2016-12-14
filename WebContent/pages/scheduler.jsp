@@ -301,13 +301,11 @@
 
 
 
-  $(function () {
-	  
+  $(function () { 
 	  $( document ).ready(function() {
-			$(“#dashboard-menu").removeClass("active");
-			$(“#calendar-menu").removeClass("active");
-		    $(“#scheduler-menu").addClass("active");
-		    
+			$('#dashboard-menu').removeClass('active');
+			$('#calendar-menu').removeClass('active');
+		    $('#scheduler-menu').addClass('active');
 		});
 
     /* initialize the external events
