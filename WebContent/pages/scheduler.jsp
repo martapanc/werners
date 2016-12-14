@@ -297,6 +297,8 @@
 <script src='https://fullcalendar.io/js/fullcalendar-3.0.1/fullcalendar.min.js'></script>
 <script src='https://fullcalendar.io/js/fullcalendar-scheduler-1.4.0/scheduler.min.js'></script>
 <script src='https://fullcalendar.io/js/fullcalendar-3.0.1/locale-all.js'></script>
+<!-- bootstrap time picker -->
+<script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
 <script>
 
 
@@ -304,8 +306,12 @@
   $(function () { 
 	  $( document ).ready(function() {
 			$('#dashboard-menu').removeClass('active');
-			$('#calendar-menu').removeClass('active');
 		    $('#scheduler-menu').addClass('active');
+		    $('#table-menu').removeClass('active');
+		    $('#chart-menu').removeClass('active');
+		    $('#customer-menu').removeClass('active');
+		    
+		    $('#calendar-menu').removeClass('active');
 		});
 
     /* initialize the external events
