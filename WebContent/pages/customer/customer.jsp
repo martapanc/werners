@@ -34,6 +34,8 @@
 <!-- Bootstrap time Picker -->
 <link rel="stylesheet"
 	href="../../plugins/timepicker/bootstrap-timepicker.min.css">
+<!-- Select2 -->
+<link rel="stylesheet" href="../../plugins/select2/select2.min.css">
 
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -67,7 +69,7 @@
 			<section class="content">
 
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-12">
 					<div class="box box-info">
 						<div class="box-header with-border">
 							<h3 class="box-title">Online Table Reservation</h3>
@@ -75,57 +77,131 @@
 
 						<form>
 							<div class="box-body">
-								<!-- Date dd/mm/yyyy -->
-								<div class="form-group">
-									<label>Date:</label>
-
-									<div class="input-group">
-										<div class="input-group-addon">
-											<i class="fa fa-calendar"></i>
-										</div>
-										<input type="text" class="form-control"
-											data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
-									</div>
-									<!-- /.input group -->
-								</div>
-								<!-- /.form group -->
-
-								<!-- time Picker -->
-								<div class="bootstrap-timepicker">
+								<div class="col-md-1">
+									<!-- First name -->
 									<div class="form-group">
-										<label>Time picker:</label>
+										<label>Choose:</label> <select class="form-group select2">
+											<option selected="selected">Mr</option>
+											<option>Mrs</option>
+											<option>Ms</option>
+										</select>
+									</div>
+									<!-- /.form group -->
+								</div>
 
-										<div class="input-group">
+								<div class="col-md-5">
+									<!-- First name -->
+									<div class="form-group">
+										<label>First name:</label> <input type="text"
+											class="form-control" placeholder="John">
+									</div>
+									<!-- /.form group -->
+								</div>
+
+								<div class="col-md-6">
+									<!-- Last name -->
+									<div class="bootstrap-timepicker">
+										<div class="form-group">
+											<label>Last name:</label> <input type="text"
+												class="form-control" placeholder="Snow">
+										</div>
+										<!-- /.form group -->
+									</div>
+								</div>
+
+								<div class="col-md-5">
+									<!-- Date dd/mm/yyyy -->
+									<div class="form-group">
+										<label>Date:</label>
+
+										<div class="input-group date">
 											<div class="input-group-addon">
-												<i class="fa fa-clock-o"></i>
+												<i class="fa fa-calendar"></i>
 											</div>
-											<input type="text" class="form-control timepicker">
+											<input type="text" class="form-control pull-right" id="datepicker">
 										</div>
 										<!-- /.input group -->
 									</div>
 									<!-- /.form group -->
 								</div>
 
-								<!-- phone mask -->
-								<div class="form-group">
-									<label>Telephone number:</label>
+								<div class="col-md-5">
+									<!-- time Picker -->
+									<div class="bootstrap-timepicker">
+										<div class="form-group">
+											<label>Time:</label>
 
-									<div class="input-group">
-										<div class="input-group-addon">
-											<i class="fa fa-phone"></i>
+											<div class="input-group">
+												<div class="input-group-addon">
+													<i class="fa fa-clock-o"></i>
+												</div>
+												<input type="text" class="form-control timepicker"
+													data-date-container="tp">
+											</div>
+											<!-- /.input group -->
 										</div>
-										<input type="text" class="form-control"
-											data-inputmask='"mask": "9999999999"' data-mask>
+										<!-- /.form group -->
 									</div>
-									<!-- /.input group -->
 								</div>
-								<!-- /.form group -->
 
+								<div class="col-md-2">
+									<!-- Guest number -->
+									<div class="bootstrap-timepicker">
+										<div class="form-group">
+											<label>Number of guests:</label>
+
+											<div class="input-group">
+												<div class="input-group-addon">
+													<i class="fa fa-users"></i>
+												</div>
+												<input type="number" class="form-control" placeholder="2"
+													min="1" max="40">
+											</div>
+
+										</div>
+										<!-- /.form group -->
+									</div>
+								</div>
+
+								<!-- phone mask -->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Telephone number:</label>
+
+										<div class="input-group">
+											<div class="input-group-addon">
+												<i class="fa fa-phone"></i>
+											</div>
+											<input type="text" class="form-control"
+												data-inputmask='"mask": "9999999999"' data-mask>
+										</div>
+										<!-- /.input group -->
+									</div>
+									<!-- /.form group -->
+								</div>
+
+								<!-- email mask -->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Email:</label>
+
+										<div class="input-group">
+											<div class="input-group-addon">
+												<i class="fa fa-at"></i>
+											</div>
+											<input type="email" class="form-control"
+												placeholder="email@example.com">
+										</div>
+										<!-- /.input group -->
+									</div>
+									<!-- /.form group -->
+								</div>
 
 							</div>
 							<!-- /. box body -->
 							<div class="box-footer">
 								<button type="submit" class="btn btn-primary">Submit</button>
+								<button type="reset" class="btn btn-warning">Reset</button>
 							</div>
 
 						</form>
@@ -190,6 +266,10 @@
 				$('#calendar-menu').removeClass('active');
 				$('#customer-menu').addClass('active');
 			});
+
+			//Initialize Select2 Elements
+			$(".select2").select2();
+
 			//Datemask dd/mm/yyyy
 			$("#datemask").inputmask("dd/mm/yyyy", {
 				"placeholder" : "dd/mm/yyyy"
@@ -234,14 +314,24 @@
 					});
 
 			//Date picker
+			
+			var d = new Date();
 			$('#datepicker').datepicker({
-				autoclose : true
+				autoclose : true,
+				daysOfWeekDisabled: "1",
+				format: 'D, dd M yyyy',
+				startDate: d,
+				todayBtn: true,
+				todayHighlight: true,
+				weekStart: 1
 			});
 
 			//Timepicker
 			$(".timepicker").timepicker({
-				showInputs : false
-
+				showInputs : false,
+				container : "#tp",
+				defaultTime: 'current',
+				showMeridian: false
 			});
 
 		});
