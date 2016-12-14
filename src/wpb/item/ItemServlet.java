@@ -16,7 +16,7 @@ import wpb.HibernateUtil;
 /**
  * Servlet implementation class ItemServlet
  */
-@WebServlet("/getItem")
+@WebServlet("/listItem")
 public class ItemServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

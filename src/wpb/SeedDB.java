@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -64,11 +65,12 @@ public class SeedDB {
 		
 		ItemManager itmManager = new ItemManager(mySessionFactory);
 		SessionIdentifierGenerator idgen= new SessionIdentifierGenerator();
+		Random R = new Random();
 		
 		//creating random items
 		for (int i = 1; i <= count; i++) {
 			Item newItem = new Item();
-			newItem.setAvailable(true);
+			newItem.setAvailable(R.nextBoolean());
 			newItem.setPrice(Math.floor(ThreadLocalRandom.current().nextDouble(0.1, 12) * 100) / 100);
 			newItem.setName(idgen.nextSessionId());
 			itmManager.addItem(newItem);
@@ -77,7 +79,7 @@ public class SeedDB {
 		System.out.println(itmManager.getTotalCount() + " new Items created");
 	}
 	
-	public static void seedTables(int count){
+	public static void seedRoomTables(int count){
 		
 		/*
 		TabManager tableManager = new ItemManager(mySessionFactory);

@@ -9,19 +9,19 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Bootstrap table --> 
-  <link rel="stylesheet" href="../plugins/bootstrap-table/bootstrap-table.css">
+  <link rel="stylesheet" href="../../plugins/bootstrap-table/bootstrap-table.css">
     
   <!-- Theme style -->
-  <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,9 +33,9 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
- <jsp:include page="upper-navbar.html" />
+ <jsp:include page="../upper-navbar.html" />
   
- <jsp:include page="left-sidebar.html" />
+ <jsp:include page="../left-sidebar.html" />
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -47,10 +47,11 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Scheduler</li>
+        <li><a href="#">Tables</a></li>
+        <li class="active">Items</li>
       </ol>
     </section>
-
+        
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -58,7 +59,29 @@
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-body table-responsive">
-              <table id="table"></table>
+              <table id="item-table"
+              data-toggle="table"
+              data-url="../../listItem"
+              data-method="post"
+              data-striped="true"
+              data-pagination="true"
+              data-pagination-loop="false"
+              data-page-size="25"
+              data-show-refresh="true"
+              data-search="true"
+              data-resizable="true"
+              data-show-toggle="true"
+              data-show-export="true"
+              >
+              	<thead>
+    				<tr>
+        				<th data-field="itemId" data-sortable="true">Id</th>
+        				<th data-field="name" data-sortable="true">Name</th>
+        				<th data-field="price" data-sortable="true" data-align="right">Price</th>
+        				<th data-field="isAvailable" data-sortable="true" data-sorter="availableSorter" data-formatter="availableFormatter">Availability</th>
+    				</tr>
+    			</thead>             
+              </table>
             </div>
             <!-- /.box-body -->
           </div>
@@ -277,65 +300,38 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.3 -->
-<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="../bootstrap/js/bootstrap.min.js"></script>
+<script src="../../bootstrap/js/bootstrap.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <!-- Slimscroll -->
-<script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="../plugins/fastclick/fastclick.js"></script>
+<script src="../../plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="../dist/js/app.min.js"></script>
+<script src="../../dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../dist/js/demo.js"></script>
+<script src="../../dist/js/demo.js"></script>
 <!-- Page specific script --> 
-<script src="../plugins/bootstrap-table/bootstrap-table.js"></script>
+<script src="../../plugins/bootstrap-table/bootstrap-table.js"></script>
 <!-- put your locale files after bootstrap-table.js -->
-<script src="../plugins/bootstrap-table/locale/bootstrap-table-en-US.js"></script>
+<script src="../../plugins/bootstrap-table/locale/bootstrap-table-en-US.js"></script>
+<!-- extensions for bootstrap-table -->
+<script src="../../plugins/bootstrap-table/extensions/tableExport-jquery/tableExport.js"></script>
+<script src="../../plugins/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
+<script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
+<script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
 <script>
-$('#table').bootstrapTable({
-    url: '../getItem',
-    sortable: true,
-    striped: true,
-    paginationLoop: false,
-    pagination: true,
-    search: true,
-    showToggle: true,
-    showRefresh: true,
-    pageSize: 25,
-    columns: [{
-        field: 'itemId',
-        title: 'Item Id',
-        width: '10%',
-        sortable: true
-    }, {
-        field: 'name',
-        title: 'Item',
-        sortable: true
-    }, {
-        field: 'price',
-        title: 'Price',
-        halign: true,
-        sortable: true
-    }, {
-        field: 'isAvailable',
-        title: 'Availability',
-        formatter: availableFormatter(), //does not work for now
-        sortable: true
-        
-    }], 
-    
-    onClickRow: function (row, $element, field) {
-        console.log(row, $element, field);
-    }
-});
+function availableFormatter(value, row) {
+    var icon = row.available === true ? 'fa-check' : 'fa-times';
+    return '<i class="fa ' + icon + '"></i>';
+}
 
-function availableFormatter(value, row, index) {
-	var icon = 'glyphicon-star';
-    //var icon = row.index % 2 === 0 ? 'glyphicon-star' : 'glyphicon-star-empty';
-    return '<i class="glyphicon ' + icon + '"></i> ' + value;
+function availableSorter(a, b) {
+    if (a === true) return 1;
+    if (a === false) return -1;
+    return 0;
 }
 </script>
 </body>
