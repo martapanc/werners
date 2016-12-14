@@ -80,13 +80,7 @@
   </div>
   <!-- /.content-wrapper -->
 
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.3.7
-    </div>
-    <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-    reserved.
-  </footer>
+<jsp:include page="footer.html" />
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -304,7 +298,17 @@
 <script src='https://fullcalendar.io/js/fullcalendar-scheduler-1.4.0/scheduler.min.js'></script>
 <script src='https://fullcalendar.io/js/fullcalendar-3.0.1/locale-all.js'></script>
 <script>
+
+
+
   $(function () {
+	  
+	  $( document ).ready(function() {
+			$(“#dashboard-menu").removeClass("active");
+			$(“#calendar-menu").removeClass("active");
+		    $(“#scheduler-menu").addClass("active");
+		    
+		});
 
     /* initialize the external events
      -----------------------------------------------------------------*/
