@@ -355,6 +355,9 @@ $(function () {
 	  $( document ).ready(function() {
 			$('#dashboard-menu').removeClass('active');
 		    $('#scheduler-menu').removeClass('active');
+		    $('#table-menu').removeClass('active');
+		    $('#chart-menu').removeClass('active');
+		    $('#customer-menu').removeClass('active');
 		    $('#calendar-menu').addClass('active');
 	  });
 });
