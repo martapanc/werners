@@ -1622,6 +1622,14 @@
 <script src="../../dist/js/demo.js"></script>
 <!-- page script -->
 <script>
+
+$('#dashboard-menu').removeClass('active');
+$('#scheduler-menu').removeClass('active');
+$('#table-menu').addClass('active');
+$('#chart-menu').removeClass('active');
+
+$('#calendar-menu').removeClass('active');
+
   $(function () {
     $("#example1").DataTable();
     $('#example2').DataTable({
