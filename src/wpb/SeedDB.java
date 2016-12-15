@@ -13,11 +13,14 @@ import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import wpb.item.Item;
 import wpb.item.ItemManager;
+import wpb.orderitem.OrderItem;
 import wpb.reservation.Reservation;
 import wpb.roomtable.RoomTable;
 import wpb.roomtable.RoomTable.CategoryType;
@@ -32,9 +35,14 @@ public class SeedDB {
 
 	private static Connection connection = null;
 	private static SessionFactory mySessionFactory = null;
+	private static SessionIdentifierGenerator idgen= new SessionIdentifierGenerator();
+	private static ItemManager itmManager = null;
+	private static TableOrderManager toManager = null;
 	
-	public static void setSessionFactory(SessionFactory sf) {
+	public static void initialize(SessionFactory sf) {
 		mySessionFactory = sf;
+		itmManager = new ItemManager(mySessionFactory);
+		toManager = new TableOrderManager(mySessionFactory);
 	}
 	
 	@Deprecated
@@ -65,8 +73,6 @@ public class SeedDB {
 
 	public static void seedItems(int count){
 		
-		ItemManager itmManager = new ItemManager(mySessionFactory);
-		SessionIdentifierGenerator idgen= new SessionIdentifierGenerator();
 		Random R = new Random();
 		
 		//creating random items
@@ -81,20 +87,44 @@ public class SeedDB {
 		System.out.println(itmManager.getTotalCount() + " new Items created");
 	}
 	
-public static void seedTableOrders(int count){
+	public static void seedTableOrders(int count){
 		
-		TableOrderManager itmManager = new TableOrderManager(mySessionFactory);
-		SessionIdentifierGenerator idgen= new SessionIdentifierGenerator();
-		Random R = new Random();
+		OrderItem ot = new OrderItem();
+		ot.setItem(itmManager.getItemById(5));
+		ot.setComment("this is item with id 5 and qty 10");
+		ot.setQuantity(10);
 		
+		TableOrder to = new TableOrder();
+		Set<OrderItem> items = new HashSet<OrderItem>();
+		items.add(ot);
+		to.setOrderItemList(items);
+		to.setStatus("PRONTO");
+		
+		Session session = mySessionFactory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.save(to);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		/*
 		//creating random items
 		for (int i = 1; i <= count; i++) {
 			TableOrder newItem = new TableOrder();
 			newItem.setStatus(idgen.nextSessionId());
-			itmManager.addTableOrder(newItem);
+			toManager.addTableOrder(newItem);
 		}
 		
-		System.out.println(itmManager.getTotalCount() + " new Items created");
+		System.out.println(toManager.getTotalCount() + " new Items created");
+		*/
 	}
 	
 	public static void seedRoomTables(int count){

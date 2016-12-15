@@ -25,9 +25,9 @@ public class Reservation {
     private Timestamp endDate;
 	
 	@ManyToMany(cascade=CascadeType.ALL)  
-    @JoinTable(name="table_reservation", 
+    @JoinTable(name="room_table__reservation", 
     joinColumns=@JoinColumn(name="reservation_id"), 
-    inverseJoinColumns=@JoinColumn(name="table_id"))  
+    inverseJoinColumns=@JoinColumn(name="room_table_id"))  
 	private Set<RoomTable> tableList;  
 	
 	@Column(name = "comment")
