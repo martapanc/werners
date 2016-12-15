@@ -28,8 +28,8 @@ public class User {
     @Column(name = "points") 	
 	private int points;
 	
-    @Column(name = "billing_adress")
-	private String billingAdress;
+    @Column(name = "billing_address")
+	private String billingAddress;
 	
     @Column(name = "phone_number")
 	private String phoneNumber;
@@ -69,12 +69,12 @@ public class User {
 		this.points = points;
 	}
 
-	public String getBillingAdress() {
-		return billingAdress;
+	public String getBillingAddress() {
+		return billingAddress;
 	}
 
-	public void setBillingAdress(String billingAdress) {
-		this.billingAdress = billingAdress;
+	public void setBillingAddress(String billingAddress) {
+		this.billingAddress = billingAddress;
 	}
 
 	public String getPhoneNumber() {

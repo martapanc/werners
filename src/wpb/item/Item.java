@@ -22,7 +22,6 @@ public class Item {
 	@Column(name = "available", nullable=false)
 	private boolean available;
 
-
 	public String getName() {
 		return name;
 	}

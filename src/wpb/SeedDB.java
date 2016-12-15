@@ -21,6 +21,8 @@ import wpb.item.ItemManager;
 import wpb.reservation.Reservation;
 import wpb.roomtable.RoomTable;
 import wpb.roomtable.RoomTable.CategoryType;
+import wpb.tableorder.TableOrder;
+import wpb.tableorder.TableOrderManager;
 
 /**
  *
@@ -74,6 +76,22 @@ public class SeedDB {
 			newItem.setPrice(Math.floor(ThreadLocalRandom.current().nextDouble(0.1, 12) * 100) / 100);
 			newItem.setName(idgen.nextSessionId());
 			itmManager.addItem(newItem);
+		}
+		
+		System.out.println(itmManager.getTotalCount() + " new Items created");
+	}
+	
+public static void seedTableOrders(int count){
+		
+		TableOrderManager itmManager = new TableOrderManager(mySessionFactory);
+		SessionIdentifierGenerator idgen= new SessionIdentifierGenerator();
+		Random R = new Random();
+		
+		//creating random items
+		for (int i = 1; i <= count; i++) {
+			TableOrder newItem = new TableOrder();
+			newItem.setStatus(idgen.nextSessionId());
+			itmManager.addTableOrder(newItem);
 		}
 		
 		System.out.println(itmManager.getTotalCount() + " new Items created");
