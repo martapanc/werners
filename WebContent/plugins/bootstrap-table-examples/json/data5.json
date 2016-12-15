@@ -1,12 +1,12 @@
 [
     {
-        "id": 0,
-        "name": "Item 0",
-        "price": "$0",
-        "column1": "C 10",
-        "column2": "C 20",
-        "column3": "C 30",
-        "column4": "C 40"
+        "order_id": 0,
+        "item_id": "a34hd2",
+        "item_name": "Pizza Margherita",
+        "quantity": "2",
+        "version_number": "1",
+        "price": "€ 5.50",
+        "comment": "Kowabunga!"
     },
     {
         "id": 1,

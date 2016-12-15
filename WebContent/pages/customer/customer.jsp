@@ -45,7 +45,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-red sidebar-mini">
 	<div class="wrapper">
 
 		<jsp:include page="../upper-navbar.html" />
@@ -60,9 +60,10 @@
 				Online Reservation <small>Customer View</small>
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-				<li class="active">Dashboard</li>
-			</ol>
+					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li><a href="#">Customer View</a></li>
+					<li class="active">Table Reservation</li>
+				</ol>
 			</section>
 
 			<!-- Main content -->

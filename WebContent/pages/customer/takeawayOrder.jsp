@@ -65,7 +65,8 @@
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-				<li class="active">Dashboard</li>
+				<li><a href="#">Customer View</a></li>
+				<li class="active">Take-Away Order</li>
 			</ol>
 			</section>
 
