@@ -76,7 +76,7 @@ public class HibernateUtil {
             
             //connection properties
             props.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
-            props.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/wpbdb");
+            props.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/wpb");
             props.put("hibernate.connection.username", "root");
             props.put("hibernate.connection.password", "1234");
             
@@ -103,7 +103,7 @@ public class HibernateUtil {
             configuration.addAnnotatedClass(wpb.reservation.Reservation.class);
             configuration.addAnnotatedClass(wpb.user.User.class);
             configuration.addAnnotatedClass(wpb.tableorder.TableOrder.class);
-            configuration.addAnnotatedClass(wpb.Restaurant.class);
+            //configuration.addAnnotatedClass(wpb.Restaurant.class);
             
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
             System.out.println("Hibernate Java Config serviceRegistry created");

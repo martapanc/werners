@@ -1,35 +1,26 @@
 package wpb;
 
 import java.lang.reflect.Field;
-import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.*;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "restaurant")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Restaurant {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.TABLE)
     @Column(name = "id")
     private Long itemId;
 	
-	@CreationTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "create_date")
-	private Date createDate;
 	
-	@UpdateTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "update_date")
-	private Date updateDate;
+	@Version
+	@Column(name="version_number")
+	private int versionNumber;
 	
-	 public String toString() {
+	public String toString() {
 	        StringBuilder result = new StringBuilder();
 	        String newLine = System.getProperty("line.separator");
 

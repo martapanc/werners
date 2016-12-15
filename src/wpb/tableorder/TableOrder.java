@@ -5,8 +5,9 @@ import javax.persistence.*;
 import wpb.*;
 
 @Entity
-@Table(name = "table_order")
+@Table(name = "orderoftable")
 public class TableOrder extends Restaurant {
+    
 	
 	@Column(name = "status", nullable = false)
 	private String status;
