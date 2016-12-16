@@ -29,7 +29,7 @@ import wpb.tableorder.TableOrderManager;
 
 /**
  *
- * @author Werner
+ * @author Werner Sperandio
  */
 public class SeedDB {
 
@@ -73,6 +73,7 @@ public class SeedDB {
 
 	public static void seedItems(int count){
 		
+		GenericManager<Item, Long> itmManager = new GenericManager<>(Item.class, mySessionFactory);
 		Random R = new Random();
 		
 		//creating random items
@@ -81,16 +82,17 @@ public class SeedDB {
 			newItem.setAvailable(R.nextBoolean());
 			newItem.setPrice(Math.floor(ThreadLocalRandom.current().nextDouble(0.1, 12) * 100) / 100);
 			newItem.setName(idgen.nextSessionId());
-			itmManager.addItem(newItem);
+			itmManager.add(newItem);
 		}
 		
 		System.out.println(itmManager.getTotalCount() + " new Items created");
+		System.out.println(itmManager.getAll());
 	}
 	
 	public static void seedTableOrders(int count){
 		
 		OrderItem ot = new OrderItem();
-		ot.setItem(itmManager.getItemById(5));
+		ot.setItem(itmManager.find(new Long(5), true));
 		ot.setComment("this is item with id 5 and qty 10");
 		ot.setQuantity(10);
 		

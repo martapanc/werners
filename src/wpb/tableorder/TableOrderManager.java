@@ -8,16 +8,19 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import wpb.GenericManager;
+import wpb.item.Item;
+
 import org.hibernate.SessionFactory;
 
-public class TableOrderManager implements TableDao {
+public class TableOrderManager extends GenericManager<Item, Long> implements TableDao {
 
-	SessionFactory sf;
 
 	public TableOrderManager(SessionFactory sf) {
-		this.sf = sf;
+		super(Item.class, sf);
 	}
-	
+
 	@Override
 	public long getTotalCount() {
 		long totalCount = 0;

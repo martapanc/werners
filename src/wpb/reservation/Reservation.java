@@ -6,17 +6,13 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import wpb.Restaurant;
 import wpb.roomtable.RoomTable;
 import wpb.user.User;
 
 @Entity
 @Table(name = "reservation")
-public class Reservation {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "reservation_id")
-    private Long reservationId;
+public class Reservation extends Restaurant {
 	
     @Column(name = "start_date")
 	private Timestamp startDate;
@@ -73,38 +69,7 @@ public class Reservation {
 	}
 
 	public void setGuest(User guest) {
-		guest = guest;
+		this.guest = guest;
 	}
-	
-	@Override
-    //<editor-fold defaultstate="collapsed" desc="toString override">
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        String newLine = System.getProperty("line.separator");
-
-        result.append(this.getClass().getName());
-        result.append(" {");
-        result.append(newLine);
-
-        //determine fields declared in this class only (no fields of superclass)
-        Field[] fields = this.getClass().getDeclaredFields();
-
-        //print field names paired with their values
-        for (Field field : fields) {
-            result.append("  ");
-            try {
-                result.append(field.getName());
-                result.append(": ");
-                //requires access to private field:
-                result.append(field.get(this));
-            } catch (IllegalAccessException ex) {
-                System.out.println(ex);
-            }
-            result.append(newLine);
-        }
-        result.append("}");
-
-        return result.toString();
-    }
 	
 }

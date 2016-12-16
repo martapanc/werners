@@ -28,16 +28,32 @@ public class Restaurant {
 	        result.append(" {");
 	        result.append(newLine);
 
-	        //determine fields declared in this class only (no fields of superclass)
+	        //determine fields declared in this class only
+	        Field[] superfields = this.getClass().getSuperclass().getDeclaredFields();
 	        Field[] fields = this.getClass().getDeclaredFields();
-
+	        
 	        //print field names paired with their values
+	        for (Field field : superfields) {
+	            result.append("  ");
+	            try {
+	                result.append(field.getName());
+	                result.append(": ");
+	                //requires access to private field:
+	                result.append(field.get(this));
+	            } catch (IllegalAccessException ex) {
+	                System.out.println(ex);
+	            }
+	            result.append(newLine);
+	        }
+	        
+	        
 	        for (Field field : fields) {
 	            result.append("  ");
 	            try {
 	                result.append(field.getName());
 	                result.append(": ");
 	                //requires access to private field:
+	            	field.setAccessible(true);
 	                result.append(field.get(this));
 	            } catch (IllegalAccessException ex) {
 	                System.out.println(ex);

@@ -4,18 +4,19 @@ import java.util.List;
 
 import javax.persistence.criteria.*;
 
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import wpb.GenericManager;
+
 import org.hibernate.SessionFactory;
 
-public class ItemManager implements ItemDao {
 
-	SessionFactory sf;
+public class ItemManager extends GenericManager<Item, Long> implements ItemDao {
 
 	public ItemManager(SessionFactory sf) {
-		this.sf = sf;
+		super(Item.class,sf);
 	}
 
 	@Override
@@ -170,6 +171,5 @@ public class ItemManager implements ItemDao {
 		}
 
 	}
-
 
 }

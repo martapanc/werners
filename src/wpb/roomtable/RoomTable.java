@@ -3,6 +3,8 @@ package wpb.roomtable;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import wpb.Restaurant;
+
 import java.lang.reflect.Field;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,12 +12,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "room_table")
-public class RoomTable {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "table_id")
-    private Long tableId;
+public class RoomTable extends Restaurant {
 	
     /*@NotEmpty @NotNull @NotBlank*/ //really needed this type of validation
     @Column(name = "number", unique = true, nullable = false)
@@ -75,35 +72,5 @@ public class RoomTable {
 		this.category = category;
 	}
 	
-	@Override
-    //<editor-fold defaultstate="collapsed" desc="toString override">
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        String newLine = System.getProperty("line.separator");
-
-        result.append(this.getClass().getName());
-        result.append(" {");
-        result.append(newLine);
-
-        //determine fields declared in this class only (no fields of superclass)
-        Field[] fields = this.getClass().getDeclaredFields();
-
-        //print field names paired with their values
-        for (Field field : fields) {
-            result.append("  ");
-            try {
-                result.append(field.getName());
-                result.append(": ");
-                //requires access to private field:
-                result.append(field.get(this));
-            } catch (IllegalAccessException ex) {
-                System.out.println(ex);
-            }
-            result.append(newLine);
-        }
-        result.append("}");
-
-        return result.toString();
-    }
 }
 

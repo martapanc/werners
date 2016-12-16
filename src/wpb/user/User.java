@@ -5,15 +5,12 @@ import java.lang.reflect.Field;
 import javax.persistence.*;
 import org.hibernate.validator.constraints.*;
 
+import wpb.Restaurant;
+
 @Entity
 @Table(name = "User")
-public class User {
-
-    @Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private Long userId;
-    
+public class User extends Restaurant {
+   
     @NotBlank
     @Column(name = "nick_name", unique = true, nullable = false)
 	private String nickName;
@@ -101,34 +98,4 @@ public class User {
 		this.nickName = nickname;
 	}
 
-	@Override
-    //<editor-fold defaultstate="collapsed" desc="toString override">
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        String newLine = System.getProperty("line.separator");
-
-        result.append(this.getClass().getName());
-        result.append(" {");
-        result.append(newLine);
-
-        //determine fields declared in this class only (no fields of superclass)
-        Field[] fields = this.getClass().getDeclaredFields();
-
-        //print field names paired with their values
-        for (Field field : fields) {
-            result.append("  ");
-            try {
-                result.append(field.getName());
-                result.append(": ");
-                //requires access to private field:
-                result.append(field.get(this));
-            } catch (IllegalAccessException ex) {
-                System.out.println(ex);
-            }
-            result.append(newLine);
-        }
-        result.append("}");
-
-		return result.toString();
-	}
 }
