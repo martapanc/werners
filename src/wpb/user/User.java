@@ -1,7 +1,5 @@
 package wpb.user;
 
-import java.lang.reflect.Field;
-
 import javax.persistence.*;
 import org.hibernate.validator.constraints.*;
 

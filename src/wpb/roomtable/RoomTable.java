@@ -5,7 +5,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import wpb.Restaurant;
 
-import java.lang.reflect.Field;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
