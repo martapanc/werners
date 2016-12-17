@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>WBP | Customer View</title>
-
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>WPB | Take-Away</title>
+<!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 	name="viewport">
@@ -17,26 +18,15 @@
 <!-- Ionicons -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-<!-- DataTables -->
+<!-- Bootstrap table -->
 <link rel="stylesheet"
-	href="../../plugins/datatables/dataTables.bootstrap.css">
+	href="../../plugins/bootstrap-table/bootstrap-table.css">
+
 <!-- Theme style -->
 <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
 <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
-<link rel="stylesheet" href="../../plugins/datepicker/datepicker3.css">
-<!-- iCheck for checkboxes and radio inputs -->
-<link rel="stylesheet" href="../../plugins/iCheck/all.css">
-<!-- Bootstrap Color Picker -->
-<link rel="stylesheet"
-	href="../../plugins/colorpicker/bootstrap-colorpicker.min.css">
-<!-- Bootstrap time Picker -->
-<link rel="stylesheet"
-	href="../../plugins/timepicker/bootstrap-timepicker.min.css">
-<!-- Select2 -->
-<link rel="stylesheet" href="../../plugins/select2/select2.min.css">
-
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -45,7 +35,15 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
+
 <style>
+.box-body {
+	min-height: 270px;
+}
+
+.red {
+	background-color: red
+}
 </style>
 
 </head>
@@ -60,220 +58,132 @@
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-			<h1>
-				Take-Away Order <small>Customer View</small>
-			</h1>
-			<ol class="breadcrumb">
-				<li><a href="/restaurantProject/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
-				<li><a href="#">Customer View</a></li>
-				<li class="active">Take-Away Order</li>
-			</ol>
+				<h1>
+					Take-Away Order <small>Customer View</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="/restaurantProject/pages/dashboard.jsp"><i
+							class="fa fa-dashboard"></i> Home</a></li>
+					<li><a href="#">Customer View</a></li>
+					<li class="active">Take-Away Order</li>
+				</ol>
 			</section>
 
 			<!-- Main content -->
 			<section class="content">
 
-			<div class="row">
-				<div class="col-md-9">
-					<div class="box box-info">
-						<div class="box-header with-border">
-							<h3 class="box-title">Take-Away Order</h3>
-						</div>
-
-						<form>
-							<div class="box-body">
-								<div class="col-md-1">
-									<!--  -->
-									<div class="form-group">
-										<label>Choose:</label> <select class="form-group select2">
-											<option selected="selected">Mr</option>
-											<option>Mrs</option>
-											<option>Ms</option>
-										</select>
-									</div>
-									<!-- /.form group -->
-								</div>
-
-								<div class="col-md-5">
-									<!-- First name -->
-									<div class="form-group">
-										<label>First name:</label> <input type="text"
-											class="form-control" placeholder="John">
-									</div>
-									<!-- /.form group -->
-								</div>
-
-								<div class="col-md-6">
-									<!-- Last name -->
-									<div class="bootstrap-timepicker">
-										<div class="form-group">
-											<label>Last name:</label> <input type="text"
-												class="form-control" placeholder="Snow">
-										</div>
-										<!-- /.form group -->
-									</div>
-								</div>
-
-								
-
-							</div>
-							<!-- /. box body -->
-							<div class="box-footer">
-								<button type="submit" class="btn btn-primary">Submit</button>
-								<button type="reset" class="btn btn-warning">Reset</button>
+				<div class="row">
+					<div class="col-md-9">
+						<div class="box box-info">
+							<div class="box-header with-border">
+								<h3 class="box-title">Take-Away Order</h3>
 							</div>
 
-						</form>
-
-					</div>
-					<!-- /.box-body -->
-				</div>
-				<!-- /.box -->
-				
-				
-				<div class="col-md-3">
-					<div class="box box-info">
-						<div class="box-header with-border">
-							<h3 class="box-title"><span class="fa fa-shopping-cart"></span> &nbsp; My Order</h3>
-						</div>
-
-						<form>
-							<div class="box-body">
-								<div class="col-md-1">
-									<!-- First name -->
-									<div class="form-group">
-										<label>Choose:</label> <select class="form-group select2">
-											<option selected="selected">Mr</option>
-											<option>Mrs</option>
-											<option>Ms</option>
-										</select>
-									</div>
-									<!-- /.form group -->
-								</div>
-
-								<div class="col-md-5">
-									<!-- First name -->
-									<div class="form-group">
-										<label>First name:</label> <input type="text"
-											class="form-control" placeholder="John">
-									</div>
-									<!-- /.form group -->
-								</div>
-
-								<div class="col-md-6">
-									<!-- Last name -->
-									<div class="bootstrap-timepicker">
-										<div class="form-group">
-											<label>Last name:</label> <input type="text"
-												class="form-control" placeholder="Snow">
+							<form>
+								<div class="box-body">
+									<div class="food-menu col-md-4">
+										<div class="btn-group btn-block btn-group-vertical">
+											<a href="#" id="salad-btn"
+												class="btn btn-lg btn-primary active"> <img width="30"
+												src="../../dist/img/flat-icon-gastronomy/salad.svg">
+												&emsp;Salads
+											</a> <a href="#" id="burger-btn" class="btn btn-lg btn-primary">
+												<img width="30"
+												src="../../dist/img/flat-icon-gastronomy/burger.svg">
+												&emsp;Burgers
+											</a> <a href="#" id="pizza-btn" class="btn btn-lg btn-primary">
+												<img width="30"
+												src="../../dist/img/flat-icon-gastronomy/pizza-2.svg">
+												&emsp;Pizza
+											</a> <a href="#" id="chinese-btn" class="btn btn-lg btn-primary">
+												<img width="30"
+												src="../../dist/img/flat-icon-gastronomy/noodles.svg">
+												&emsp;Chinese
+											</a> <a href="#" id="dessert-btn" class="btn btn-lg btn-primary">
+												<img width="30"
+												src="../../dist/img/flat-icon-gastronomy/cupcake.svg">
+												&emsp;Desserts
+											</a> <a href="#" id="drink-btn" class="btn btn-lg btn-primary">
+												<img width="30"
+												src="../../dist/img/flat-icon-gastronomy/glass-3.svg">
+												&emsp;Drinks
+											</a>
 										</div>
-										<!-- /.form group -->
+
 									</div>
-								</div>
+									<!-- /. food-menu -->
 
-								<div class="col-md-5">
-									<!-- Date dd/mm/yyyy -->
-									<div class="form-group">
-										<label>Date:</label>
-
-										<div class="input-group date">
-											<div class="input-group-addon">
-												<i class="fa fa-calendar"></i>
-											</div>
-											<input type="text" class="form-control pull-right"
-												id="datepicker">
+									<div class="food-offers col-md-8">
+										<div class="thmenu-header with-border">
+											<h3>SALADS</h3>
 										</div>
-										<!-- /.input group -->
-									</div>
-									<!-- /.form group -->
-								</div>
+										<div class="col-md-12">
+											<div class="box box-primary">
+												<div class="box-body table-responsive">
 
-								<div class="col-md-5">
-									<!-- time Picker -->
-									<div class="bootstrap-timepicker">
-										<div class="form-group">
-											<label>Time:</label>
-
-											<div class="input-group">
-												<div class="input-group-addon">
-													<i class="fa fa-clock-o"></i>
+													<table id="item-table" data-toggle="table"
+														data-url="../../listItem" data-method="post"
+														data-striped="true" data-pagination="true"
+														data-pagination-loop="false" data-page-size="10"
+														data-show-refresh="true" data-search="true"
+														data-show-toggle="true" data-show-export="true">
+														<thead>
+															<tr>
+																<th data-field="name" data-sortable="true">Name</th>
+																<th data-field="price" data-sortable="true"
+																	data-align="right">Price</th>
+																<!-- Should show only available items -->
+																<th data-field="action" data-formatter="actionFormatter"
+																	data-events="actionEvents">Add to Cart</th>
+															</tr>
+														</thead>
+													</table>
 												</div>
-												<input type="text" class="form-control timepicker"
-													data-date-container="tp">
+												<!-- /.box-body -->
 											</div>
-											<!-- /.input group -->
+											<!-- /. box -->
 										</div>
-										<!-- /.form group -->
+										<!-- /.col -->
 									</div>
+									<!-- /. food-offers -->
 								</div>
-
-								<div class="col-md-2">
-									<!-- Guest number -->
-									<div class="bootstrap-timepicker">
-										<div class="form-group">
-											<label>Number of guests:</label>
-
-											<div class="input-group">
-												<div class="input-group-addon">
-													<i class="fa fa-users"></i>
-												</div>
-												<input type="number" class="form-control" placeholder="2"
-													min="1" max="40">
-											</div>
-
-										</div>
-										<!-- /.form group -->
-									</div>
-								</div>
-
-								<!-- phone mask -->
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>Telephone number:</label>
-
-										<div class="input-group">
-											<div class="input-group-addon">
-												<i class="fa fa-phone"></i>
-											</div>
-											<input type="text" class="form-control"
-												data-inputmask='"mask": "9999999999"' data-mask>
-										</div>
-										<!-- /.input group -->
-									</div>
-									<!-- /.form group -->
-								</div>
-
-								<!-- email mask -->
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>Email:</label>
-
-										<div class="input-group">
-											<div class="input-group-addon">
-												<i class="fa fa-at"></i>
-											</div>
-											<input type="email" class="form-control"
-												placeholder="email@example.com">
-										</div>
-										<!-- /.input group -->
-									</div>
-									<!-- /.form group -->
-								</div>
-
-							</div>
-							<!-- /. box body -->
-							<div class="box-footer">
-								<button type="submit" class="btn btn-primary">Submit</button>
-								<button type="reset" class="btn btn-warning">Reset</button>
-							</div>
-
-						</form>
-
+								<!-- /. box body -->
+							</form>
+						</div>
+						<!-- /.box-body -->
 					</div>
-					<!-- /.box-body -->
-				</div>
+					<!-- /.box -->
 
-			</div>
+					<div class="col-md-3">
+						<div class="box box-info">
+							<div class="box-header with-border">
+								<h3 class="box-title">
+									<span class="fa fa-shopping-cart"></span> &nbsp; My Order
+								</h3>
+							</div>
+
+							<form>
+								<div class="box-body order-list"></div>
+								<!-- /. box body -->
+
+								<div id="total-price-box" class="box-footer">
+									<h4>
+										<span class="pull-right total-price">Total price: €
+											0.00</span>
+									</h4>
+								</div>
+								<div class="box-footer">
+									<button type="submit" class="btn btn-primary">Checkout</button>
+									<button type="reset" class="btn btn-warning">Cancel</button>
+								</div>
+
+							</form>
+
+						</div>
+						<!-- /.box-body -->
+					</div>
+
+				</div>
 		</div>
 
 
@@ -289,107 +199,110 @@
 	<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<!-- Bootstrap 3.3.6 -->
 	<script src="../../bootstrap/js/bootstrap.min.js"></script>
-	<!-- Select2 -->
-	<script src="../../plugins/select2/select2.full.min.js"></script>
-	<!-- InputMask -->
-	<script src="../../plugins/input-mask/jquery.inputmask.js"></script>
-	<script
-		src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-	<script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
-	<!-- date-range-picker -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-	<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
-	<!-- bootstrap datepicker -->
-	<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
-	<!-- bootstrap color picker -->
-	<script src="../../plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
-	<!-- bootstrap time picker -->
-	<script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
-	<!-- SlimScroll 1.3.0 -->
+	<!-- jQuery UI 1.11.4 -->
+	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	<!-- Slimscroll -->
 	<script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
-	<!-- iCheck 1.0.1 -->
-	<script src="../../plugins/iCheck/icheck.min.js"></script>
 	<!-- FastClick -->
 	<script src="../../plugins/fastclick/fastclick.js"></script>
 	<!-- AdminLTE App -->
 	<script src="../../dist/js/app.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="../../dist/js/demo.js"></script>
+	<!-- Page specific script -->
+	<script src="../../plugins/bootstrap-table/bootstrap-table.js"></script>
+	<!-- put your locale files after bootstrap-table.js -->
+	<script
+		src="../../plugins/bootstrap-table/locale/bootstrap-table-en-US.js"></script>
+	<!-- extensions for bootstrap-table -->
+	<script
+		src="../../plugins/bootstrap-table/extensions/tableExport-jquery/tableExport.js"></script>
+	<script
+		src="../../plugins/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
+	<script
+		src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
+	<script
+		src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
 	<script>
-		$(function() {
+		// Table functions
+		function availableSorter(a, b) {
+			if (a === true)
+				return 1;
+			if (a === false)
+				return -1;
+			return 0;
+		};
 
+		function actionFormatter(value, row, index) {
+			return [
+					'<a class="add" href="javascript:void(0)" title="Remove">',
+					'<span class="glyphicon glyphicon-plus"></span>', '</a>' ]
+					.join('');
+		}
+		var price = 0;
+		window.actionEvents = {
+			'click .add' : function(e, value, row, index) {
+				//alert('You click like icon, row: ' + JSON.stringify(row));
+				console.log(value, row, index);
+				//Improve with array and table of results + add/remove items
+				$(".order-list").append(
+						"<h4>" + row.name + "&emsp; € " + row.price + "</h4>");
+				price += row.price;
+				$("#total-price-box").html(
+						'<h4><span class="pull-right total-price">Total price: € '
+								+ price.toFixed(2) + '</span></h4>');
+			}
+		};
+
+		$(function() {
 			$(document).ready(function() {
 				$('#customer-menu').addClass('active');
 			});
 
-			//Initialize Select2 Elements
-			$(".select2").select2();
-
-			//Datemask dd/mm/yyyy
-			$("#datemask").inputmask("dd/mm/yyyy", {
-				"placeholder" : "dd/mm/yyyy"
-			});
-			//Money Euro
-			$("[data-mask]").inputmask();
-
-			//Date range picker
-			$('#reservation').daterangepicker();
-			//Date range picker with time picker
-			$('#reservationtime').daterangepicker({
-				timePicker : true,
-				timePickerIncrement : 30,
-				format : 'MM/DD/YYYY h:mm A'
-			});
-			//Date range as a button
-			$('#daterange-btn').daterangepicker(
-					{
-						ranges : {
-							'Today' : [ moment(), moment() ],
-							'Yesterday' : [ moment().subtract(1, 'days'),
-									moment().subtract(1, 'days') ],
-							'Last 7 Days' : [ moment().subtract(6, 'days'),
-									moment() ],
-							'Last 30 Days' : [ moment().subtract(29, 'days'),
-									moment() ],
-							'This Month' : [ moment().startOf('month'),
-									moment().endOf('month') ],
-							'Last Month' : [
-									moment().subtract(1, 'month').startOf(
-											'month'),
-									moment().subtract(1, 'month')
-											.endOf('month') ]
-						},
-						startDate : moment().subtract(29, 'days'),
-						endDate : moment()
-					},
-					function(start, end) {
-						$('#daterange-btn span').html(
-								start.format('MMMM D, YYYY') + ' - '
-										+ end.format('MMMM D, YYYY'));
-					});
-
-			//Date picker
-
-			var d = new Date();
-			$('#datepicker').datepicker({
-				autoclose : true,
-				daysOfWeekDisabled : "1",
-				format : 'D, dd M yyyy',
-				startDate : d,
-				todayBtn : true,
-				todayHighlight : true,
-				weekStart : 1
+			//Button menu functions
+			$("#salad-btn").click(function() {
+				removeActive();
+				$(this).addClass("active");
+				$('.thmenu-header').html("<h3>SALADS</h3>");
+				$(".thmenu-body").load("salad.jsp");
 			});
 
-			//Timepicker
-			$(".timepicker").timepicker({
-				showInputs : false,
-				container : "#tp",
-				defaultTime : 'current',
-				showMeridian : false
+			$("#burger-btn").click(function() {
+				removeActive();
+				$(this).addClass("active");
+				$('.thmenu-header').html("<h3>BURGERS</h3>");
 			});
 
+			$("#pizza-btn").click(function() {
+				removeActive();
+				$(this).addClass("active");
+				$('.thmenu-header').html("<h3>PIZZAS</h3>");
+			});
+			$("#chinese-btn").click(function() {
+				removeActive();
+				$(this).addClass("active");
+				$('.thmenu-header').html("<h3>CHINESE</h3>");
+			});
+			$("#dessert-btn").click(function() {
+				removeActive();
+				$(this).addClass("active");
+				$('.thmenu-header').html("<h3>DESSERTS</h3>");
+			});
+			$("#drink-btn").click(function() {
+				removeActive();
+				$(this).addClass("active");
+				$('.thmenu-header').html("<h3>DRINKS</h3>");
+			});
+
+			function removeActive() {
+				$("#salad-btn").removeClass("active");
+				$("#burger-btn").removeClass("active");
+				$("#pizza-btn").removeClass("active");
+				$("#chinese-btn").removeClass("active");
+				$("#dessert-btn").removeClass("active");
+				$("#drink-btn").removeClass("active");
+			}
+			;
 		});
 	</script>
 
