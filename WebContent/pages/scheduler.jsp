@@ -15,11 +15,15 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   
-  <!-- fullCalendar 2.2.5-->
+  <!-- FullCalendar 2.2.5-->
    <!--
   <link rel="stylesheet" href="../plugins/fullcalendar/fullcalendar.min.css">
   <link rel="stylesheet" href="../plugins/fullcalendar/fullcalendar.print.css" media="print"> 
   --!> 
+  
+  <!-- FullCalendar & Scheduler 3.1.0-->
+  <link rel="stylesheet" href="../plugins/fullcalendar/fullcalendar.min.css">
+  <link rel="stylesheet" href="../plugins/scheduler/scheduler.min.css">
   
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
@@ -27,9 +31,6 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
   
-  <link rel="stylesheet" href="https://fullcalendar.io/js/fullcalendar-3.0.1/fullcalendar.min.css">
-  <link rel="stylesheet" href="https://fullcalendar.io/js/fullcalendar-scheduler-1.4.0/scheduler.min.css">
-
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -80,7 +81,7 @@
   </div>
   <!-- /.content-wrapper -->
 
-<jsp:include page="footer.html" />
+  <jsp:include page="footer.html" />
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -293,12 +294,12 @@
 <!-- AdminLTE for demo purposes -->
 <script src="../dist/js/demo.js"></script>
 <!-- Page specific script --> 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
-<script src='https://fullcalendar.io/js/fullcalendar-3.0.1/fullcalendar.min.js'></script>
-<script src='https://fullcalendar.io/js/fullcalendar-scheduler-1.4.0/scheduler.min.js'></script>
-<script src='https://fullcalendar.io/js/fullcalendar-3.0.1/locale-all.js'></script>
-<!-- bootstrap time picker -->
-<script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<!-- Scheduler 1.5.0 -->
+<script src="../plugins/moment/moment.min.js"></script>
+<script src="../plugins/fullcalendar/fullcalendar.min.js"></script>
+<script src="../plugins/fullcalendar/locale-all.js"></script>
+<script src="../plugins/scheduler/scheduler.min.js"></script>
+
 <script>
 
 
