@@ -16,7 +16,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Bootstrap table --> 
   <link rel="stylesheet" href="../../plugins/bootstrap-table/bootstrap-table.css">
-    
+  <link rel="stylesheet" href="../../plugins/bootstrap-table/extensions/group-by-v2/bootstrap-table-group-by.css">
+  
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -36,6 +37,7 @@
  <jsp:include page="../upper-navbar.html" />
   
  <jsp:include page="../left-sidebar.html" />
+ 
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -62,23 +64,25 @@
               <table id="item-table"
               data-toggle="table"
               data-url="../../listItem"
+              data-show-columns="true"
               data-method="post"
               data-striped="true"
               data-pagination="true"
               data-pagination-loop="false"
-              data-page-size="25"
               data-show-refresh="true"
               data-search="true"
               data-resizable="true"
               data-show-toggle="true"
               data-show-export="true"
-              >
+              data-group-by="false"
+              data-group-by-field="foodClass">
               	<thead>
     				<tr>
         				<th data-field="itemId" data-sortable="true">Id</th>
         				<th data-field="name" data-sortable="true">Name</th>
-        				<th data-field="price" data-sortable="true" data-align="right">Price</th>
-        				<th data-field="isAvailable" data-sortable="true" data-sorter="availableSorter" data-formatter="availableFormatter">Availability</th>
+        				<th data-field="foodClass" data-sortable="true">Food class</th>
+        				<th data-field="price" data-sortable="true" data-sorter="availableSorter" data-align="right">Price</th>
+        				<th data-field="available" data-sortable="true" data-sorter="availableSorter" data-formatter="availableFormatter">Availability</th>
     				</tr>
     			</thead>             
               </table>
@@ -95,14 +99,8 @@
   </div>
   <!-- /.content-wrapper -->
 
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.3.7
-    </div>
-    <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-    reserved.
-  </footer>
-
+  <jsp:include page="../footer.html" />
+  
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Create the tabs -->
@@ -314,24 +312,30 @@
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
 <!-- Page specific script --> 
-<script src="../../plugins/bootstrap-table/bootstrap-table.js"></script>
+<script src="../../plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <!-- put your locale files after bootstrap-table.js -->
 <script src="../../plugins/bootstrap-table/locale/bootstrap-table-en-US.js"></script>
 <!-- extensions for bootstrap-table -->
-<script src="../../plugins/bootstrap-table/extensions/tableExport-jquery/tableExport.js"></script>
-<script src="../../plugins/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
-<script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
-<script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
+<script src="../../plugins/bootstrap-table/extensions/tableExport-jquery/tableExport.min.js"></script>
+<script src="../../plugins/bootstrap-table/extensions/export/bootstrap-table-export.min.js"></script>
+<script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.min.js"></script>
+<script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.min.js"></script>
+<script src="../../plugins/bootstrap-table/extensions/group-by-v2/bootstrap-table-group-by.min.js"></script>
+
 <script>
 function availableFormatter(value, row) {
     var icon = row.available === true ? 'fa-check' : 'fa-times';
-    return '<i class="fa ' + icon + '"></i>';
+    return '<i class="fa ' + icon + '"></i> ';
 }
 
 function availableSorter(a, b) {
-    if (a === true) return 1;
-    if (a === false) return -1;
-    return 0;
+	return (a === b)? 0 : a? -1 : 1;
+	/*
+	var a = $(a).text();
+	  var b = $(b).text();
+	  if (a < b) return -1;
+	  if (a > b) return 1;
+	  return 0;*/
 }
 </script>
 </body>

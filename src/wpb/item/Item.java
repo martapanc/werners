@@ -1,7 +1,5 @@
 package wpb.item;
 
-import java.lang.reflect.Field;
-
 import javax.persistence.*;
 
 import wpb.Restaurant;
@@ -13,6 +11,9 @@ public class Item extends Restaurant {
 	@Column(name = "name", nullable = false)
 	private String name;
 	
+	@Column(name = "food_class")
+	private String foodClass;
+	
 	@Column(name = "price")
 	private double price;
 	
@@ -21,6 +22,14 @@ public class Item extends Restaurant {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getFoodClass() {
+		return foodClass;
+	}
+
+	public void setFoodClass(String foodClass) {
+		this.foodClass = foodClass;
 	}
 
 	public void setName(String name) {
