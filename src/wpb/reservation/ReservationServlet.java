@@ -14,7 +14,7 @@ import javax.servlet.http.*;
 @WebServlet("/ReservationServlet")
 public class ReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	SimpleDateFormat FMT = new SimpleDateFormat("EEE, dd MMM yyyy");   
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -29,8 +29,6 @@ public class ReservationServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		response.getWriter().append(request.getParameter("firstname"));
-		
 		
 	}
 
@@ -46,6 +44,7 @@ public class ReservationServlet extends HttpServlet {
 		analyzeParameters(paramMap, request, pMap, errList);
 		
 		request.setAttribute("map", pMap);
+		request.setAttribute("todayDate", FMT.format(new Date()));
 		
 		System.out.println(pMap);
 		request.getRequestDispatcher("pages/customer/reservationInvoice.jsp").forward(request, response);
@@ -55,13 +54,9 @@ public class ReservationServlet extends HttpServlet {
 	}
 	
 	
-	private void analyzeParameters(Map<String, String[]> paramMap, HttpServletRequest request, Map<String, Object> extrMap, List<HashMap<String, String>> errList) {
-
-    	// in this method we should also create a structure with the errors
-    	// and then check if the error-structure is not empty send back the
-    	// first error message (or maybe all?) to the ajax function 	
-        
-		//SimpleDateFormat format = new SimpleDateFormat("EEEE, dd MMMM yyyy");
+	private void analyzeParameters(Map<String, String[]> paramMap, HttpServletRequest request, 
+			Map<String, Object> extrMap, List<HashMap<String, String>> errList) {
+        		
     	// try to parse dates
         if (paramMap.containsKey("date")) {
             String d = (String) request.getParameter("date");
@@ -91,6 +86,26 @@ public class ReservationServlet extends HttpServlet {
             } else {
             	//addError("email", "Missing or invalid email", errList);
             }
+        }
+        
+        if (paramMap.containsKey("title")) {
+        	String t = (String) request.getParameter("title");
+        	extrMap.put("title", t);
+        }
+        
+        if (paramMap.containsKey("time")) {
+        	String time = (String) request.getParameter("time");
+        	extrMap.put("time", time);
+        }
+        
+        if (paramMap.containsKey("guests")) {
+        	String guests = (String) request.getParameter("guests");
+        	extrMap.put("guests", guests);
+        }
+        
+        if (paramMap.containsKey("telephone")) {
+        	String tel = (String) request.getParameter("telephone");
+        	extrMap.put("telephone", tel);
         }
 
     }

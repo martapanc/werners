@@ -156,7 +156,7 @@
 												<div class="input-group-addon">
 													<i class="fa fa-users"></i>
 												</div>
-												<input name="guests" type="number" class="form-control" placeholder="2"
+												<input name="guests" type="number" class="form-control" value="2"
 													min="1" max="40">
 											</div>
 
