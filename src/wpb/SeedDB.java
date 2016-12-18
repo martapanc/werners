@@ -34,6 +34,7 @@ public class SeedDB {
 	private static SessionIdentifierGenerator idgen= new SessionIdentifierGenerator();
 	private static GenericManager<Item, Long> itmManager = null;
 	private static GenericManager<RoomTable, Long> toManager = null;
+
 	
 	public static void initialize(SessionFactory sf) {
 		mySessionFactory = sf;
@@ -92,7 +93,7 @@ public class SeedDB {
 	public static void seedTableOrders(int count){
 		
 		OrderItem ot = new OrderItem();
-		ot.setItem(itmManager.find(new Long(5), true));
+		//ot.setItem(itmManager.find(new Long(5), true));
 		ot.setComment("this is item with id 5 and qty 10");
 		ot.setQuantity(10);
 		

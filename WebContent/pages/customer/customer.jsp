@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>WBP | Customer View</title>
+<title>WBP | Table Reservation</title>
 
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -76,15 +76,16 @@
 							<h3 class="box-title">Online Table Reservation</h3>
 						</div>
 
-						<form>
+						<form name="reservation-form" method="post" action="/restaurantProject/ReservationServlet">
 							<div class="box-body">
 								<div class="col-md-1">
 									<!-- First name -->
 									<div class="form-group">
-										<label>Choose:</label> <select class="form-group select2">
-											<option selected="selected">Mr</option>
-											<option>Mrs</option>
-											<option>Ms</option>
+										<label for="title">Title: &ensp;</label> 
+										<select name="title" class="form-group select2">
+											<option value="Mr" selected="selected">Mr</option>
+											<option value="Mrs">Mrs</option>
+											<option value="Ms">Ms</option>
 										</select>
 									</div>
 									<!-- /.form group -->
@@ -93,8 +94,8 @@
 								<div class="col-md-5">
 									<!-- First name -->
 									<div class="form-group">
-										<label>First name:</label> <input type="text"
-											class="form-control" placeholder="John">
+										<label>First name:</label> 
+										<input name="firstname" type="text" class="form-control" placeholder="John">
 									</div>
 									<!-- /.form group -->
 								</div>
@@ -103,8 +104,8 @@
 									<!-- Last name -->
 									<div class="bootstrap-timepicker">
 										<div class="form-group">
-											<label>Last name:</label> <input type="text"
-												class="form-control" placeholder="Snow">
+											<label>Last name:</label>
+											<input name="lastname" type="text" class="form-control" placeholder="Watson">
 										</div>
 										<!-- /.form group -->
 									</div>
@@ -119,7 +120,7 @@
 											<div class="input-group-addon">
 												<i class="fa fa-calendar"></i>
 											</div>
-											<input type="text" class="form-control pull-right" id="datepicker">
+											<input name="date" type="text" class="form-control pull-right" id="datepicker">
 										</div>
 										<!-- /.input group -->
 									</div>
@@ -136,8 +137,8 @@
 												<div class="input-group-addon">
 													<i class="fa fa-clock-o"></i>
 												</div>
-												<input type="text" class="form-control timepicker"
-													data-date-container="tp">
+												<input name="time" type="text" class="form-control timepicker" 
+												data-date-container="tp">
 											</div>
 											<!-- /.input group -->
 										</div>
@@ -149,13 +150,13 @@
 									<!-- Guest number -->
 									<div class="bootstrap-timepicker">
 										<div class="form-group">
-											<label>Number of guests:</label>
+											<label>N.of guests:</label>
 
 											<div class="input-group">
 												<div class="input-group-addon">
 													<i class="fa fa-users"></i>
 												</div>
-												<input type="number" class="form-control" placeholder="2"
+												<input name="guests" type="number" class="form-control" placeholder="2"
 													min="1" max="40">
 											</div>
 
@@ -173,7 +174,7 @@
 											<div class="input-group-addon">
 												<i class="fa fa-phone"></i>
 											</div>
-											<input type="text" class="form-control"
+											<input name="telephone" type="text" class="form-control"
 												data-inputmask='"mask": "9999999999"' data-mask>
 										</div>
 										<!-- /.input group -->
@@ -190,7 +191,7 @@
 											<div class="input-group-addon">
 												<i class="fa fa-at"></i>
 											</div>
-											<input type="email" class="form-control"
+											<input name="email" type="email" class="form-control"
 												placeholder="email@example.com">
 										</div>
 										<!-- /.input group -->
