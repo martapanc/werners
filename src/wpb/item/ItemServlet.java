@@ -2,6 +2,7 @@ package wpb.item;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -95,6 +96,10 @@ public class ItemServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		Map<String, String[]> paramMap = request.getParameterMap();
+		if (paramMap.containsKey("create")) {
+			System.out.println("create");
+		}
 		String json = gson.toJson(itmManager.getAll());
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");

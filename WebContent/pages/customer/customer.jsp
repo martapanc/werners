@@ -76,7 +76,7 @@
 							<h3 class="box-title">Online Table Reservation</h3>
 						</div>
 
-						<form name="reservation-form" method="post" action="/restaurantProject/ReservationServlet">
+						<form id="reservation-form" method="post" action="/restaurantProject/ReservationServlet">
 							<div class="box-body">
 								<div class="col-md-1">
 									<!-- First name -->
@@ -95,7 +95,7 @@
 									<!-- First name -->
 									<div class="form-group">
 										<label>First name:</label> 
-										<input name="firstname" type="text" class="form-control" placeholder="John">
+										<input id="fn" name="firstname" type="text" class="form-control" placeholder="John" required>
 									</div>
 									<!-- /.form group -->
 								</div>
@@ -105,7 +105,7 @@
 									<div class="bootstrap-timepicker">
 										<div class="form-group">
 											<label>Last name:</label>
-											<input name="lastname" type="text" class="form-control" placeholder="Watson">
+											<input name="lastname" type="text" class="form-control" placeholder="Watson" required>
 										</div>
 										<!-- /.form group -->
 									</div>
@@ -120,7 +120,7 @@
 											<div class="input-group-addon">
 												<i class="fa fa-calendar"></i>
 											</div>
-											<input name="date" type="text" class="form-control pull-right" id="datepicker">
+											<input name="date" type="text" class="form-control pull-right" id="datepicker" required>
 										</div>
 										<!-- /.input group -->
 									</div>
@@ -175,7 +175,7 @@
 												<i class="fa fa-phone"></i>
 											</div>
 											<input name="telephone" type="text" class="form-control"
-												data-inputmask='"mask": "9999999999"' data-mask>
+												data-inputmask='"mask": "9999999999"' data-mask required>
 										</div>
 										<!-- /.input group -->
 									</div>
@@ -191,7 +191,7 @@
 											<div class="input-group-addon">
 												<i class="fa fa-at"></i>
 											</div>
-											<input name="email" type="email" class="form-control"
+											<input name="email" type="email" required class="form-control"
 												placeholder="email@example.com">
 										</div>
 										<!-- /.input group -->
@@ -260,15 +260,10 @@
 		$(function() {
 
 			$(document).ready(function() {
-				$('#dashboard-menu').removeClass('active');
-				$('#scheduler-menu').removeClass('active');
-				$('#table-menu').removeClass('active');
-				$('#chart-menu').removeClass('active');
 
-				$('#calendar-menu').removeClass('active');
 				$('#customer-menu').addClass('active');
 			});
-
+			
 			//Initialize Select2 Elements
 			$(".select2").select2();
 

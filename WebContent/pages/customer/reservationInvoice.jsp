@@ -100,8 +100,6 @@
 						<strong>Tel: </strong> &ensp; ${map.get("telephone")}<br> 
 						<strong>Email:</strong> &ensp; ${map.get("email")}<br>
 					</h4>
-						
-
 				</div>
 				<!-- /.col -->
 				<div class="col-sm-4 invoice-col">
@@ -126,18 +124,21 @@
 			<div class="row no-print">
 				<div class="col-xs-12">
 					<h2 class="page-footer">
-						<a href="invoice-print.html" target="_blank"
-						class="btn btn-default pull-right"><i class="fa fa-print"></i> Print</a>
+					<!-- 	<a target="_blank"
+						class="btn btn-default pull-right"><i class="fa fa-print"></i> Print</a>-->
 					<button type="button" class="btn btn-primary pull-right"
 						style="margin-right: 5px;">
 						<i class="fa fa-download"></i> Generate PDF
+					</button>
+					<button type="button" class="btn btn-default pull-right"
+						style="margin-right: 5px;">
+						<i class="fa fa-print"></i> Print
 					</button>
 					</h2>
 				</div>
 				<!-- /.col -->
 			</div>
 
-			
 			</section>
 			<!-- /.content -->
 			<div class="clearfix"></div>
@@ -189,82 +190,8 @@
 		$(function() {
 
 			$(document).ready(function() {
-				$('#dashboard-menu').removeClass('active');
-				$('#scheduler-menu').removeClass('active');
-				$('#table-menu').removeClass('active');
-				$('#chart-menu').removeClass('active');
-
-				$('#calendar-menu').removeClass('active');
 				$('#customer-menu').addClass('active');
 			});
-
-			//Initialize Select2 Elements
-			$(".select2").select2();
-
-			//Datemask dd/mm/yyyy
-			$("#datemask").inputmask("dd/mm/yyyy", {
-				"placeholder" : "dd/mm/yyyy"
-			});
-			//Money Euro
-			$("[data-mask]").inputmask();
-
-			//Date range picker
-			$('#reservation').daterangepicker();
-			//Date range picker with time picker
-			$('#reservationtime').daterangepicker({
-				timePicker : true,
-				timePickerIncrement : 30,
-				format : 'MM/DD/YYYY h:mm A'
-			});
-			//Date range as a button
-			$('#daterange-btn').daterangepicker(
-					{
-						ranges : {
-							'Today' : [ moment(), moment() ],
-							'Yesterday' : [ moment().subtract(1, 'days'),
-									moment().subtract(1, 'days') ],
-							'Last 7 Days' : [ moment().subtract(6, 'days'),
-									moment() ],
-							'Last 30 Days' : [ moment().subtract(29, 'days'),
-									moment() ],
-							'This Month' : [ moment().startOf('month'),
-									moment().endOf('month') ],
-							'Last Month' : [
-									moment().subtract(1, 'month').startOf(
-											'month'),
-									moment().subtract(1, 'month')
-											.endOf('month') ]
-						},
-						startDate : moment().subtract(29, 'days'),
-						endDate : moment()
-					},
-					function(start, end) {
-						$('#daterange-btn span').html(
-								start.format('MMMM D, YYYY') + ' - '
-										+ end.format('MMMM D, YYYY'));
-					});
-
-			//Date picker
-
-			var d = new Date();
-			$('#datepicker').datepicker({
-				autoclose : true,
-				daysOfWeekDisabled : "1",
-				format : 'D, dd M yyyy',
-				startDate : d,
-				todayBtn : true,
-				todayHighlight : true,
-				weekStart : 1
-			});
-
-			//Timepicker
-			$(".timepicker").timepicker({
-				showInputs : false,
-				container : "#tp",
-				defaultTime : 'current',
-				showMeridian : false
-			});
-
 		});
 	</script>
 

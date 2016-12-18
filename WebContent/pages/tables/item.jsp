@@ -83,6 +83,7 @@
     				<tr>
     					<th data-field="state" data-checkbox="true"></th>
         				<th data-field="id" data-sortable="true">Id</th>
+        				<th data-field="version_number" data-hidden="true">Id</th>
         				<th data-field="name" data-sortable="true">Name</th>
         				<th data-field="foodClass" data-sortable="true">Food class</th>
         				<th data-field="price" data-sortable="true" data-align="right">Price</th>
@@ -117,7 +118,7 @@
  						<form>
   							<div class="form-group">
     							<label for="id">Item ID</label>
-    							<input type="text" class="form-control has-warning" name="id">
+    							<input type="text" class="form-control has-warning" name="id" readonly>
   							</div>
   							<div class="form-group">
     						<label for="name">Name</label>
@@ -365,7 +366,7 @@
 <script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.min.js"></script>
 <script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.min.js"></script>
 <script src="../../plugins/bootstrap-table/extensions/group-by-v2/bootstrap-table-group-by.min.js"></script>
-
+<script src="crud.js"></script>
 <script>
 	
 	var API_URL = 'http://' + location.host + '/restaurantProject/listItem';
@@ -380,118 +381,9 @@
     
 	//registering event handlers on document ready
     $(function () {
-        
-    	//create button
-        $create.click(function () {
-            showModal($(this).text());
-        });
-        
-    	//checkboxes in table (enable delete button)
-        $table.on('check.bs.table uncheck.bs.table ' +
-                'check-all.bs.table uncheck-all.bs.table', function () {
-            		$delete.prop('disabled', !$table.bootstrapTable('getSelections').length);
-            		// save your data, here just save the current page
-            		selections = getIdSelections();
-            		// push or splice the selections if you want to save all data selections
-        });
-       	
-    	//delete button
-        $delete.click(function () {
-            var ids = getIdSelections();
-            if (confirm('Are you sure to delete this item?')) {
-                $.ajax({
-                    url: API_URL + ids,
-                    type: 'delete',
-                    success: function () {
-                        $table.bootstrapTable('refresh');
-                        alert('Delete item successful!', 'success');
-                        $delete.prop('disabled', true);
-                    },
-                    error: function () {
-                        alert('Delete item error!', 'danger');
-                    }
-                });
-            };
-        });
-        
-    	
-        //submit button of modal
-        $submit.click(function () {
-            var row = {};
-
-            $modal.find('input[name]').each(function () {
-                row[$(this).attr('name')] = $(this).val();
-            });
-
-            $.ajax({
-                url: API_URL + ($modal.data('id') || ''),
-                type: $modal.data('id') ? 'put' : 'post', //prefer always post
-                contentType: 'application/json',
-                data: JSON.stringify(row),
-                success: function () {
-                    $modal.modal('hide');
-                    $table.bootstrapTable('refresh');
-                    showAlert(($modal.data('id') ? 'Update' : 'Create') + ' item successful!', 'success');
-                },
-                error: function () {
-                    $modal.modal('hide');
-                    showAlert(($modal.data('id') ? 'Update' : 'Create') + ' item error!', 'danger');
-                }
-            });
-        });
-        
-        // edit button 
-        $edit.click(function (e, value, row) {
-            showModal($(this).attr('title'), row);
-        });
-        
+    	initCrud();
     });
-    
-    /**
-     * Shows the modal for CRUD operations.
-     *
-     * @param {string} title The title text of the modal.
-     * @param {number} row The row number for populating the fields.
-     */
-    function showModal(title, row) {
-    	
-    	$modal.find('.modal-title').text(title);
-    	
-    	/* if called as create Modal row is undefined
-    	   so set input field to readonly and placeholder
-    	   to "auto-assigned"
-    	*/
-    	if (row == null) {
-    		 $modal.find('input[name="id"]').attr("readonly","");
-    		 $modal.find('input[name="id"]').attr("placeholder","auto-assigned");
-    		 row = {
-    			id: ""
-    		 }
-    	}
-		        
-        $modal.data('id', row.id);
-        
-        // populate input fields with values from row data of table
-        // and finally show
-        for (var name in row) {
-            $modal.find('input[name="' + name + '"]').val(row[name]);
-        }
-        $modal.modal('show');
-    }
-    
-    
-    function actionFormatter(value) {
-         return [
-             '<a class="edit" href="javascript:" title="Edit Item"><i class="fa fa-pencil"></i></a>',
-         ].join('');
-    }
-     
-    function getIdSelections() {
-         return $.map($table.bootstrapTable('getSelections'), function (row) {
-             return row.id
-         });
-    }
-     
+         
 	function availableFormatter(value, row) {
     	var icon = value === true ? 'fa-check' : 'fa-times';
     	return '<i class="fa ' + icon + '"></i> ';
