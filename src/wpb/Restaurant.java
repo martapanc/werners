@@ -13,7 +13,7 @@ public class Restaurant {
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE)
     @Column(name = "id")
-    private Long itemId;
+    private Long id;
 	
 	
 	@Version
