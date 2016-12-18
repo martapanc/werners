@@ -79,7 +79,7 @@
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
-            <img src="/restaurantProject/dist/img/burger-160x160.jpg" width="40"> Werner's Panini & Burgers
+            <img src="/restaurantProject/dist/img/burger-160x160.jpg" width="40"> &ensp;Werner's Panini & Burgers
             <small class="pull-right">Date: ${map.get("date")} </small>
           </h2>
         </div>
@@ -173,15 +173,11 @@
         <!-- accepted payments column -->
         <div class="col-xs-6">
           <p class="lead">Payment Methods:</p>
-          <img src="../../dist/img/credit/visa.png" alt="Visa">
-          <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-          <img src="../../dist/img/credit/american-express.png" alt="American Express">
-          <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
+          <img src="/restaurantProject/dist/img/credit/visa.png" alt="Visa">
+          <img src="/restaurantProject/dist/img/credit/mastercard.png" alt="Mastercard">
+          <img src="/restaurantProject/dist/img/credit/american-express.png" alt="American Express">
+          <img src="/restaurantProject/dist/img/credit/paypal2.png" alt="Paypal">
 
-          <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg
-            dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-          </p>
         </div>
         <!-- /.col -->
         <div class="col-xs-6">
