@@ -19,13 +19,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import wpb.item.Item;
-import wpb.item.ItemManager;
 import wpb.orderitem.OrderItem;
-import wpb.reservation.Reservation;
 import wpb.roomtable.RoomTable;
-import wpb.roomtable.RoomTable.CategoryType;
 import wpb.tableorder.TableOrder;
-import wpb.tableorder.TableOrderManager;
 
 /**
  *
@@ -36,13 +32,13 @@ public class SeedDB {
 	private static Connection connection = null;
 	private static SessionFactory mySessionFactory = null;
 	private static SessionIdentifierGenerator idgen= new SessionIdentifierGenerator();
-	private static ItemManager itmManager = null;
-	private static TableOrderManager toManager = null;
+	private static GenericManager<Item, Long> itmManager = null;
+	private static GenericManager<RoomTable, Long> toManager = null;
 	
 	public static void initialize(SessionFactory sf) {
 		mySessionFactory = sf;
-		itmManager = new ItemManager(mySessionFactory);
-		toManager = new TableOrderManager(mySessionFactory);
+		itmManager = new GenericManager<Item, Long>(Item.class, mySessionFactory);
+		toManager = new GenericManager<RoomTable, Long>(RoomTable.class, mySessionFactory);
 	}
 	
 	@Deprecated
@@ -82,11 +78,15 @@ public class SeedDB {
 			newItem.setAvailable(R.nextBoolean());
 			newItem.setPrice(Math.floor(ThreadLocalRandom.current().nextDouble(0.1, 12) * 100) / 100);
 			newItem.setName(idgen.nextSessionId());
+			newItem.setFoodClass("Beverage");
 			itmManager.add(newItem);
 		}
 		
 		System.out.println(itmManager.getTotalCount() + " new Items created");
 		System.out.println(itmManager.getAll());
+		Item x = itmManager.find((long) 5, true);
+		x.setName("new Item name");
+		itmManager.update(x);
 	}
 	
 	public static void seedTableOrders(int count){
