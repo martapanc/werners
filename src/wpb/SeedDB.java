@@ -19,13 +19,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import wpb.item.Item;
-import wpb.item.ItemManager;
+//import wpb.item.ItemManager;
 import wpb.orderitem.OrderItem;
 import wpb.reservation.Reservation;
 import wpb.roomtable.RoomTable;
 import wpb.roomtable.RoomTable.CategoryType;
 import wpb.tableorder.TableOrder;
-import wpb.tableorder.TableOrderManager;
+//import wpb.tableorder.TableOrderManager;
 
 /**
  *
@@ -36,13 +36,13 @@ public class SeedDB {
 	private static Connection connection = null;
 	private static SessionFactory mySessionFactory = null;
 	private static SessionIdentifierGenerator idgen= new SessionIdentifierGenerator();
-	private static ItemManager itmManager = null;
-	private static TableOrderManager toManager = null;
+	//private static ItemManager itmManager = null;
+	//private static TableOrderManager toManager = null;
 	
 	public static void initialize(SessionFactory sf) {
 		mySessionFactory = sf;
-		itmManager = new ItemManager(mySessionFactory);
-		toManager = new TableOrderManager(mySessionFactory);
+		//itmManager = new ItemManager(mySessionFactory);
+		//toManager = new TableOrderManager(mySessionFactory);
 	}
 	
 	@Deprecated
@@ -92,7 +92,7 @@ public class SeedDB {
 	public static void seedTableOrders(int count){
 		
 		OrderItem ot = new OrderItem();
-		ot.setItem(itmManager.find(new Long(5), true));
+		//ot.setItem(itmManager.find(new Long(5), true));
 		ot.setComment("this is item with id 5 and qty 10");
 		ot.setQuantity(10);
 		
