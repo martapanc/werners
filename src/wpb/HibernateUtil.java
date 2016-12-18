@@ -7,6 +7,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+
 /**
  * Hibernate Utility class with convenient methods to get Session Factory
  * object.
@@ -117,9 +118,9 @@ public class HibernateUtil {
             //addClass(Employee1.class) will look for resource
             // com/journaldev/hibernate/model/Employee1.hbm.xml (not good)
             configuration.addAnnotatedClass(wpb.Restaurant.class);
-            configuration.addAnnotatedClass(FoodClass.item.Item.class);
+            configuration.addAnnotatedClass(wpb.foodclass.FoodClass.class);
             configuration.addAnnotatedClass(wpb.orderitem.OrderItem.class);
-            configuration.addAnnotatedClass(TakeawayOrder.tableorder.TableOrder.class);
+            configuration.addAnnotatedClass(wpb.takeawayorder.TakeawayOrder.class);
             configuration.addAnnotatedClass(wpb.roomtable.RoomTable.class);
             configuration.addAnnotatedClass(wpb.reservation.Reservation.class);
             configuration.addAnnotatedClass(wpb.user.User.class);

@@ -26,7 +26,7 @@ import wpb.HibernateUtil;
 @WebServlet(name = "listItem", urlPatterns = "/listItem", loadOnStartup = 1)
 public class ItemServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static GenericManager<FoodClass, Long> itmManager = null;
+	private static GenericManager<Item, Long> itmManager = null;
 	private static Gson gson = null;
 	/*
 	private static final TypeAdapter<Boolean> booleanAsIntAdapter = new TypeAdapter<Boolean>() {
@@ -68,7 +68,7 @@ public class ItemServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 
-		itmManager = new GenericManager<FoodClass, Long>(FoodClass.class, HibernateUtil.getSessionJavaConfigFactory());
+		itmManager = new GenericManager<Item, Long>(Item.class, HibernateUtil.getSessionJavaConfigFactory());
 		gson = new GsonBuilder().create();
 		/*.registerTypeAdapter(Boolean.class, booleanAsIntAdapter)
 				.registerTypeAdapter(boolean.class, booleanAsIntAdapter).create();*/

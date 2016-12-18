@@ -18,8 +18,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import src.wpb.foodclass.FoodClass;
-import src.wpb.takeawayorder.TakeawayOrder;
+import wpb.foodclass.FoodClass;
+import wpb.takeawayorder.TakeawayOrder;
 import wpb.item.Item;
 import wpb.orderitem.OrderItem;
 import wpb.roomtable.RoomTable;
@@ -36,11 +36,15 @@ public class SeedDB {
 	private static SessionIdentifierGenerator idgen = new SessionIdentifierGenerator();
 	private static GenericManager<Item, Long> itmManager = null;
 	private static GenericManager<RoomTable, Long> toManager = null;
+	private static GenericManager<FoodClass,Long> fcManager = null;
+	private static GenericManager<TakeawayOrder,Long> taManager = null;
 
 	public static void initialize(SessionFactory sf) {
 		mySessionFactory = sf;
 		itmManager = new GenericManager<Item, Long>(Item.class, mySessionFactory);
 		toManager = new GenericManager<RoomTable, Long>(RoomTable.class, mySessionFactory);
+		fcManager = new GenericManager<FoodClass, Long>(FoodClass.class, mySessionFactory);
+		taManager = new GenericManager<TakeawayOrder, Long>(TakeawayOrder.class, mySessionFactory);
 	}
 
 	@Deprecated
@@ -75,24 +79,8 @@ public class SeedDB {
 		
 		for (int i = 1; i <= count; i++) {
 			FoodClass fc = new FoodClass();
-			Set<OrderItem> items = new HashSet<OrderItem>();
-			items.add(fc);
 			fc.setName(name + i);
-
-			Session session = mySessionFactory.openSession();
-			Transaction tx = null;
-			try {
-				tx = session.beginTransaction();
-				session.save(fc);
-				tx.commit();
-			} catch (HibernateException e) {
-				if (tx != null) {
-					tx.rollback();
-				}
-				e.printStackTrace();
-			} finally {
-				session.close();
-			}
+			fcManager.add(fc);
 		}
 	}
 	
@@ -167,21 +155,7 @@ public class SeedDB {
 		to.setStatus("PRONTO");
 		to.setAddress("Piazza Domenicani, Design Faculty");
 		to.setCost(3.50);
-
-		Session session = mySessionFactory.openSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			session.save(to);
-			tx.commit();
-		} catch (HibernateException e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
+		taManager.add(to);
 	}
 
 	public static void seedRoomTables(int count) {

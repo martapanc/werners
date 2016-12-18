@@ -1,9 +1,9 @@
-package src.wpb.item;
+package wpb.item;
 
 import javax.persistence.*;
 
-import src.wpb.foodclass.FoodClass;
-import src.wpb.reservation.ManyToOne;
+import wpb.foodclass.FoodClass;
+import wpb.Restaurant;
 
 @Entity
 @Table(name = "item")

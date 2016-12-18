@@ -1,4 +1,4 @@
-package src.wpb.foodclass;
+package wpb.foodclass;
 
 import javax.persistence.*;
 
