@@ -76,7 +76,7 @@
 							<h3 class="box-title">Online Table Reservation</h3>
 						</div>
 
-						<form>
+						<form name="reservation-form" method="post" action="/restaurantProject/ReservationServlet">
 							<div class="box-body">
 								<div class="col-md-1">
 									<!-- First name -->
