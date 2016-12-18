@@ -34,8 +34,6 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-
-
 <style>
 .box-body {
 	min-height: 270px;
@@ -163,7 +161,10 @@
 							</div>
 
 							<form>
-								<div class="box-body order-list"></div>
+								<div class="box-body order-list">
+								
+								
+								</div>
 								<!-- /. box body -->
 
 								<div id="total-price-box" class="box-footer">
@@ -240,19 +241,38 @@
 					.join('');
 		}
 		var price = 0;
+		var cart = new Array();
 		window.actionEvents = {
 			'click .add' : function(e, value, row, index) {
 				//alert('You click like icon, row: ' + JSON.stringify(row));
 				console.log(value, row, index);
 				//Improve with array and table of results + add/remove items
-				$(".order-list").append(
-						"<h4>" + row.name + "&emsp; € " + row.price + "</h4>");
+				var qnt = 1;
+				cart.push([row.name, qnt, row.price]);
+					$(".order-list").html("");
+				cart.forEach(function(entry) {
+					$(".order-list").append(entry[0] + " " + entry[1] + " " + entry[2] + "</br>");
+				});
+				//$(".order-list").append(
+						//"<tr><td>" + row.name + "&emsp;</td>" 
+						//+ "<td><i class='fa fa-plus-square order-plus'></i>&ensp;" +qnt+ "&ensp;<i class='fa fa-minus-square order-minus'></i></td>"
+						//+ "<td>&ensp;€ " + row.price + "</td></tr>");
 				price += row.price;
 				$("#total-price-box").html(
 						'<h4><span class="pull-right total-price">Total price: € '
 								+ price.toFixed(2) + '</span></h4>');
+			
+				$(".order-plus").click(function() {
+					console.log("+1");
+				});		
+				
+				$(".order-minus").click(function() {
+					console.log("-1");
+				});
 			}
 		};
+		
+		
 
 		$(function() {
 			$(document).ready(function() {

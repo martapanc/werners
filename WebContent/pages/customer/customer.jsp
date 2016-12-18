@@ -175,7 +175,8 @@
 												<i class="fa fa-phone"></i>
 											</div>
 											<input name="telephone" type="text" class="form-control"
-												data-inputmask='"mask": "9999999999"' data-mask required>
+												data-inputmask='"mask": "9999999999"' min-length="10" 
+												data-mask required>
 										</div>
 										<!-- /.input group -->
 									</div>
@@ -256,6 +257,7 @@
 	<script src="../../dist/js/app.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="../../dist/js/demo.js"></script>
+	<script src="../../plugins/bootstrap-validator/dist/validator.min.js"></script>
 	<script>
 		$(function() {
 
@@ -263,6 +265,8 @@
 
 				$('#customer-menu').addClass('active');
 			});
+			
+			$('#reservation-form').validator();
 			
 			//Initialize Select2 Elements
 			$(".select2").select2();
