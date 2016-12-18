@@ -61,7 +61,11 @@
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-body table-responsive">
-              <table id="item-table"
+                    <div class="toolbar">
+            			<button id="create" class="create btn btn-default">Create Item</button>
+            			<button id="delete" class="remove btn btn-danger" disabled>Delete</button>
+        			</div>
+              <table id="table"
               data-toggle="table"
               data-url="../../listItem"
               data-show-columns="true"
@@ -73,16 +77,17 @@
               data-search="true"
               data-resizable="true"
               data-show-toggle="true"
-              data-show-export="true"
-              data-group-by="false"
-              data-group-by-field="foodClass">
+              data-toolbar=".toolbar"
+              data-show-export="true">
               	<thead>
     				<tr>
-        				<th data-field="itemId" data-sortable="true">Id</th>
+    					<th data-field="state" data-checkbox="true"></th>
+        				<th data-field="id" data-sortable="true">Id</th>
         				<th data-field="name" data-sortable="true">Name</th>
         				<th data-field="foodClass" data-sortable="true">Food class</th>
-        				<th data-field="price" data-sortable="true" data-sorter="availableSorter" data-align="right">Price</th>
-        				<th data-field="available" data-sortable="true" data-sorter="availableSorter" data-formatter="availableFormatter">Availability</th>
+        				<th data-field="price" data-sortable="true" data-align="right">Price</th>
+        				<th data-field="available" data-sortable="true" data-sorter="availableSorter" data-formatter="availableFormatter" data-align="center">Availability</th>
+    					<th data-field="action" data-align="center" data-formatter="actionFormatter" data-events="actionEvents">Edit</th>
     				</tr>
     			</thead>             
               </table>
@@ -100,6 +105,45 @@
   <!-- /.content-wrapper -->
 
   <jsp:include page="../footer.html" />
+  
+  
+  <!--CRUD modal -->
+  <div id="modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
+ 						<form>
+  							<div class="form-group">
+    							<label for="id">Item ID</label>
+    							<input type="text" class="form-control has-warning" name="id">
+  							</div>
+  							<div class="form-group">
+    						<label for="name">Name</label>
+    						<input type="text" class="form-control" name="name">
+  							</div>
+  							<div class="form-group">
+    							<label for="foodClass">Food Class</label>
+  								<select class="form-control" name="foodClass">
+    								<option>1</option>
+    								<option>2</option>
+    								<option>3</option>
+    								<option>4</option>
+    							</select>
+  							</div>
+  							<div class="form-group">
+    							<label for="price">Price</label>
+    							<input type="text" class="form-control" name="price">
+  							</div>
+						</form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary submit">Submit</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
   
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -323,20 +367,139 @@
 <script src="../../plugins/bootstrap-table/extensions/group-by-v2/bootstrap-table-group-by.min.js"></script>
 
 <script>
-function availableFormatter(value, row) {
-    var icon = row.available === true ? 'fa-check' : 'fa-times';
-    return '<i class="fa ' + icon + '"></i> ';
-}
+	
+	var API_URL = 'http://' + location.host + '/restaurantProject/listItem';
+	var $modal = $('#modal').modal({show: false});
+	var $table = $('#table');
+	var $create = $('#create');
+	var $edit = $('.edit');
+	var $delete = $('#delete');
+	var $submit = $modal.find('.submit');
+	var selection = [];
+	
+    
+	//registering event handlers on document ready
+    $(function () {
+        
+    	//create button
+        $create.click(function () {
+            showModal($(this).text());
+        });
+        
+    	//checkboxes in table (enable delete button)
+        $table.on('check.bs.table uncheck.bs.table ' +
+                'check-all.bs.table uncheck-all.bs.table', function () {
+            		$delete.prop('disabled', !$table.bootstrapTable('getSelections').length);
+            		// save your data, here just save the current page
+            		selections = getIdSelections();
+            		// push or splice the selections if you want to save all data selections
+        });
+       	
+    	//delete button
+        $delete.click(function () {
+            var ids = getIdSelections();
+            if (confirm('Are you sure to delete this item?')) {
+                $.ajax({
+                    url: API_URL + ids,
+                    type: 'delete',
+                    success: function () {
+                        $table.bootstrapTable('refresh');
+                        alert('Delete item successful!', 'success');
+                        $delete.prop('disabled', true);
+                    },
+                    error: function () {
+                        alert('Delete item error!', 'danger');
+                    }
+                });
+            };
+        });
+        
+    	
+        //submit button of modal
+        $submit.click(function () {
+            var row = {};
 
-function availableSorter(a, b) {
-	return (a === b)? 0 : a? -1 : 1;
-	/*
-	var a = $(a).text();
-	  var b = $(b).text();
-	  if (a < b) return -1;
-	  if (a > b) return 1;
-	  return 0;*/
-}
+            $modal.find('input[name]').each(function () {
+                row[$(this).attr('name')] = $(this).val();
+            });
+
+            $.ajax({
+                url: API_URL + ($modal.data('id') || ''),
+                type: $modal.data('id') ? 'put' : 'post', //prefer always post
+                contentType: 'application/json',
+                data: JSON.stringify(row),
+                success: function () {
+                    $modal.modal('hide');
+                    $table.bootstrapTable('refresh');
+                    showAlert(($modal.data('id') ? 'Update' : 'Create') + ' item successful!', 'success');
+                },
+                error: function () {
+                    $modal.modal('hide');
+                    showAlert(($modal.data('id') ? 'Update' : 'Create') + ' item error!', 'danger');
+                }
+            });
+        });
+        
+        // edit button 
+        $edit.click(function (e, value, row) {
+            showModal($(this).attr('title'), row);
+        });
+        
+    });
+    
+    /**
+     * Shows the modal for CRUD operations.
+     *
+     * @param {string} title The title text of the modal.
+     * @param {number} row The row number for populating the fields.
+     */
+    function showModal(title, row) {
+    	
+    	$modal.find('.modal-title').text(title);
+    	
+    	/* if called as create Modal row is undefined
+    	   so set input field to readonly and placeholder
+    	   to "auto-assigned"
+    	*/
+    	if (row == null) {
+    		 $modal.find('input[name="id"]').attr("readonly","");
+    		 $modal.find('input[name="id"]').attr("placeholder","auto-assigned");
+    		 row = {
+    			id: ""
+    		 }
+    	}
+		        
+        $modal.data('id', row.id);
+        
+        // populate input fields with values from row data of table
+        // and finally show
+        for (var name in row) {
+            $modal.find('input[name="' + name + '"]').val(row[name]);
+        }
+        $modal.modal('show');
+    }
+    
+    
+    function actionFormatter(value) {
+         return [
+             '<a class="edit" href="javascript:" title="Edit Item"><i class="fa fa-pencil"></i></a>',
+         ].join('');
+    }
+     
+    function getIdSelections() {
+         return $.map($table.bootstrapTable('getSelections'), function (row) {
+             return row.id
+         });
+    }
+     
+	function availableFormatter(value, row) {
+    	var icon = value === true ? 'fa-check' : 'fa-times';
+    	return '<i class="fa ' + icon + '"></i> ';
+	}
+
+	function availableSorter(a, b) {
+		return (a === b)? 0 : a? -1 : 1;
+	}
 </script>
 </body>
 </html>

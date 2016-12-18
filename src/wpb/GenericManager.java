@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -180,11 +181,28 @@ public class GenericManager<T, PK extends Serializable> implements GenericDao<T,
 	 */
 	@SuppressWarnings("unchecked")
 	protected List<T> findByCriteria(Criterion... criterion) {
-		Criteria crit = sf.getCurrentSession().createCriteria(getPersistentClass());
+		Session session = sf.openSession();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<T> criteria = builder.createQuery(getPersistentClass());
+		//List<Predicate> predicates = new ArrayList<Predicate>();
+		//predicates.add(arg0)
+		//Predicate p = new Predicate();
+		//Restriction.like("name", "Fritz%");
+		
+		//criteria.select(builder.count((criteria.from((getPersistentClass())))));
+		//Criteria crit = sf.getCurrentSession().createCriteria(getPersistentClass());
 		for (Criterion c : criterion) {
-			crit.add(c);
+			((Criteria) criteria).add(c);
 		}
-		return crit.list();
-	}
+		return (List<T>) criteria.getGroupList();
+		
+		/*
+        Criteria crit = getSession().createCriteria(getPersistentClass());
+        for (Criterion c : criterion) {
+            crit.add(c);
+        }
+        return crit.list();
+        */
+   }
 
 }
