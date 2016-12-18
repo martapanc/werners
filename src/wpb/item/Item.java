@@ -1,8 +1,9 @@
-package wpb.item;
+package src.wpb.item;
 
 import javax.persistence.*;
 
-import wpb.Restaurant;
+import src.wpb.foodclass.FoodClass;
+import src.wpb.reservation.ManyToOne;
 
 @Entity
 @Table(name = "item")
@@ -11,8 +12,8 @@ public class Item extends Restaurant {
 	@Column(name = "name", nullable = false)
 	private String name;
 	
-	@Column(name = "food_class")
-	private String foodClass;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private FoodClass foodClass;
 	
 	@Column(name = "price")
 	private double price;
@@ -24,11 +25,11 @@ public class Item extends Restaurant {
 		return name;
 	}
 
-	public String getFoodClass() {
+	public FoodClass getFoodClass() {
 		return foodClass;
 	}
 
-	public void setFoodClass(String foodClass) {
+	public void setFoodClass(FoodClass foodClass) {
 		this.foodClass = foodClass;
 	}
 

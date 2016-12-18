@@ -18,6 +18,8 @@ public class WebAppListener implements ServletContextListener {
 	        SeedDB.initialize(mySessionFactory);
 	        SeedDB.seedItems(50);
 	        SeedDB.seedTableOrders(1);
+	        SeedDB.seedFoodClass(5);
+	        SeedDB.seedTakeawayOrders(10);
 	    }
 
 	    @Override
