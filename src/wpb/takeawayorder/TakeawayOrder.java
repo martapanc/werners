@@ -1,17 +1,12 @@
-package src.wpb.takeawayorder;
+package wpb.takeawayorder;
 
 import java.util.Set;
 
 import javax.persistence.*;
 
-import src.wpb.reservation.Column;
-import src.wpb.reservation.ManyToOne;
-import src.wpb.reservation.User;
-import src.wpb.tableorder.JoinColumn;
-import src.wpb.tableorder.JoinTable;
-import src.wpb.tableorder.ManyToMany;
-import wpb.*;
+import wpb.Restaurant;
 import wpb.orderitem.OrderItem;
+import wpb.user.User;
 
 @Entity
 @Table(name = "takeaway_order")
