@@ -71,15 +71,15 @@
 			<section class="content">
 
 				<div class="row">
-					<div class="col-md-9">
+					<div class="col-md-8">
 						<div class="box box-info">
 							<div class="box-header with-border">
-								<h3 class="box-title">Take-Away Order</h3>
+								<h3 class="box-title order-minus">Take-Away Order</h3>
 							</div>
 
 							<form>
 								<div class="box-body">
-									<div class="food-menu col-md-4">
+									<div class="food-menu col-md-3">
 										<div class="btn-group btn-block btn-group-vertical">
 											<a href="#" id="salad-btn"
 												class="btn btn-lg btn-primary active"> <img width="30"
@@ -111,7 +111,7 @@
 									</div>
 									<!-- /. food-menu -->
 
-									<div class="food-offers col-md-8">
+									<div class="food-offers col-md-9">
 										<div class="thmenu-header with-border">
 											<h3>SALADS</h3>
 										</div>
@@ -132,7 +132,7 @@
 																	data-align="right">Price</th>
 																<!-- Should show only available items -->
 																<th data-field="action" data-formatter="actionFormatter"
-																	data-events="actionEvents">Add to Cart</th>
+																	data-events="actionEvent">Add to Cart</th>
 															</tr>
 														</thead>
 													</table>
@@ -152,7 +152,7 @@
 					</div>
 					<!-- /.box -->
 
-					<div class="col-md-3">
+					<div class="col-md-4 ">
 						<div class="box box-info">
 							<div class="box-header with-border">
 								<h3 class="box-title">
@@ -160,10 +160,21 @@
 								</h3>
 							</div>
 
-							<form>
-								<div class="box-body order-list">
-								
-								
+							<form class="cart-form">
+								<div class="box-body">
+									<table class="table table-striped order-list">
+										<!-- <thead>
+											<tr>
+												<th></th>
+												<th data-field="action" data-formatter="pmFormatter"
+													data-events="pmEvents"></th> 
+												<th></th> 
+												<th></th> 
+											</tr>							
+										</thead> 
+										<tbody class="order-list">
+										</tbody>-->
+									</table>
 								</div>
 								<!-- /. box body -->
 
@@ -236,42 +247,74 @@
 
 		function actionFormatter(value, row, index) {
 			return [
-					'<a class="add" href="javascript:void(0)" title="Remove">',
+					'<a class="add" href="javascript:void(0)" title="Add to Cart">',
 					'<span class="glyphicon glyphicon-plus"></span>', '</a>' ]
 					.join('');
 		}
 		var price = 0;
 		var cart = new Array();
-		window.actionEvents = {
+		window.actionEvent = {
 			'click .add' : function(e, value, row, index) {
-				//alert('You click like icon, row: ' + JSON.stringify(row));
 				console.log(value, row, index);
-				//Improve with array and table of results + add/remove items
 				var qnt = 1;
-				cart.push([row.name, qnt, row.price]);
-					$(".order-list").html("");
+				cart.push([row.name, qnt, row.price, row.price]); //store item price to be used for incrementing/decrementing
+				$(".order-list").html("");
 				cart.forEach(function(entry) {
-					$(".order-list").append(entry[0] + " " + entry[1] + " " + entry[2] + "</br>");
+					$(".order-list").append("<tr><td>" + entry[0] + "&emsp;</td>"
+						+ "<td><i class='fa fa-plus-square'></i>&ensp;" + entry[1] + "&ensp;<i class='fa fa-minus-square'></i></td>"
+						+ "<td>&ensp;€ " + entry[2].toFixed(2) + "</td></tr>");
 				});
-				//$(".order-list").append(
-						//"<tr><td>" + row.name + "&emsp;</td>" 
-						//+ "<td><i class='fa fa-plus-square order-plus'></i>&ensp;" +qnt+ "&ensp;<i class='fa fa-minus-square order-minus'></i></td>"
-						//+ "<td>&ensp;€ " + row.price + "</td></tr>");
+				
 				price += row.price;
 				$("#total-price-box").html(
 						'<h4><span class="pull-right total-price">Total price: € '
-								+ price.toFixed(2) + '</span></h4>');
-			
-				$(".order-plus").click(function() {
-					console.log("+1");
-				});		
-				
-				$(".order-minus").click(function() {
-					console.log("-1");
-				});
+								+ price.toFixed(2) + '</span></h4>');	
 			}
 		};
 		
+		$(".cart-form").on("click", "i.fa-plus-square", function() {
+			var i = $(this).parent().parent().index(); //store index of selected row
+			cart[i][1] +=1; //increase quantity by 1
+			cart[i][2] += cart[i][3]; //increase price by the price of a single item
+			price = 0;
+			cart.forEach(function(entry) { //update cart				
+				price += entry[2];
+				console.log(entry);
+			});
+			$(".order-list").html("");
+			cart.forEach(function(entry) {
+				$(".order-list").append("<tr><td>" + entry[0] + "&emsp;</td>"
+					+ "<td><i class='fa fa-plus-square'></i>&ensp;" + entry[1] + "&ensp;<i class='fa fa-minus-square'></i></td>"
+					+ "<td>&ensp;€ " + entry[2].toFixed(2) + "</td></tr>");
+			});
+			$("#total-price-box").html(
+					'<h4><span class="pull-right total-price">Total price: € '
+							+ price.toFixed(2) + '</span></h4>');	
+			
+		});
+		
+		$(".cart-form").on("click", "i.fa-minus-square", function() {
+			var i = $(this).parent().parent().index();
+			cart[i][1] -= 1;
+			if (cart[i][1] != 0) {
+				cart[i][2] -= cart[i][3]; //decrease price by the price of a single item
+			} else {
+				cart.splice(i, 1); //remove item from array when quantity reaches 0
+			}	
+			price = 0;
+			cart.forEach(function(entry) { //update cart				
+				price += entry[2];
+			});	
+			$(".order-list").html("");
+			cart.forEach(function(entry) {
+				$(".order-list").append("<tr><td>" + entry[0] + "&emsp;</td>"
+					+ "<td><i class='fa fa-plus-square'></i>&ensp;" + entry[1] + "&ensp;<i class='fa fa-minus-square'></i></td>"
+					+ "<td>&ensp;€ " + entry[2].toFixed(2) + "</td></tr>");
+			});
+			$("#total-price-box").html(
+					'<h4><span class="pull-right total-price">Total price: € '
+							+ price.toFixed(2) + '</span></h4>');	
+		});
 		
 
 		$(function() {
