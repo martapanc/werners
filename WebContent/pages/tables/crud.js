@@ -7,6 +7,7 @@ function initCrud() {
 
 	// create button
 	$create.on('click', function() {
+		var row = {}; //there is a bug with id 
 		showModal($(this).text());
 	});
 
@@ -94,21 +95,20 @@ function showModal(title, row) {
 
 	$modal.find('.modal-title').text(title);
 
-	// if called as create Modal row is undefined so set name to "auto-assigned"
+	// if called as create Modal row is undefined so set name to "auto-assigned"#
+	// else populate input fields with values from row data of table
 	if (row == null) {
 		$modal.find('input[name="id"]').attr("placeholder", "auto-assigned");
 		row = {
 			id : "0"
 		}
 	}
-
-	$modal.data('id', row.id);
-
-	// populate input fields with values from row data of table
-	// and finally show
-	for ( var name in row) {
-		$modal.find('input[name="' + name + '"]').val(row[name]);
+	else {
+		for ( var name in row) {
+			$modal.find('input[name="' + name + '"]').val(row[name]);
+		}
 	}
+	$modal.data('id', row.id);
 	$modal.modal('show');
 }
 

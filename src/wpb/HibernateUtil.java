@@ -77,12 +77,12 @@ public class HibernateUtil {
             
             //connection properties
             /*GearHost DB*/
-            
+            /*
             props.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
             props.put("hibernate.connection.url", "jdbc:mysql://mysql2.gear.host/wpbdb");
             props.put("hibernate.connection.username", "giuliaburgio");
             props.put("hibernate.connection.password", "NpoS&45af");
-            
+            */
             
             /*Marta's localhost*/
             /*
@@ -93,11 +93,11 @@ public class HibernateUtil {
             */
             
             /*Werner's localhost*/
-//            props.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
-//            props.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/wpbdb");
-//            props.put("hibernate.connection.username", "root");
-//            props.put("hibernate.connection.password", "1234");
-//            
+            props.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
+            props.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/wpbdb");
+            props.put("hibernate.connection.username", "root");
+            props.put("hibernate.connection.password", "1234");
+            
             
             //advanced and debug settings
             props.put("hibernate.show_sql", "true");
@@ -119,8 +119,10 @@ public class HibernateUtil {
             // com/journaldev/hibernate/model/Employee1.hbm.xml (not good)
             configuration.addAnnotatedClass(wpb.Restaurant.class);
             configuration.addAnnotatedClass(wpb.foodclass.FoodClass.class);
+            configuration.addAnnotatedClass(wpb.item.Item.class);
             configuration.addAnnotatedClass(wpb.orderitem.OrderItem.class);
             configuration.addAnnotatedClass(wpb.takeawayorder.TakeawayOrder.class);
+            configuration.addAnnotatedClass(wpb.tableorder.TableOrder.class);
             configuration.addAnnotatedClass(wpb.roomtable.RoomTable.class);
             configuration.addAnnotatedClass(wpb.reservation.Reservation.class);
             configuration.addAnnotatedClass(wpb.user.User.class);

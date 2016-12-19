@@ -82,13 +82,13 @@
               	<thead>
     				<tr>
     					<th data-field="state" data-checkbox="true"></th>
-        				<th data-field="id" data-sortable="true">Id</th>
-        				<th data-field="version_number" data-hidden="true">Id</th>
+        				<th data-field="id" data-sortable="true" data-width="5%">Id</th>
+        				<th data-field="version_number" data-visible="false"></th>
         				<th data-field="name" data-sortable="true">Name</th>
-        				<th data-field="foodClass" data-sortable="true">Food class</th>
+        				<th data-field="foodClass.name" data-sortable="true">Food class</th>
         				<th data-field="price" data-sortable="true" data-align="right">Price</th>
         				<th data-field="available" data-sortable="true" data-sorter="availableSorter" data-formatter="availableFormatter" data-align="center">Availability</th>
-    					<th data-field="action" data-align="center" data-formatter="actionFormatter" data-events="actionEvents">Edit</th>
+    					<th data-field="action" data-align="center" data-formatter="actionFormatter" data-events="actionEvents" data-width="8%">Edit</th>
     				</tr>
     			</thead>             
               </table>

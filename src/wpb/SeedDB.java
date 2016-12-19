@@ -86,7 +86,6 @@ public class SeedDB {
 	
 	public static void seedItems(int count) {
 
-		GenericManager<Item, Long> itmManager = new GenericManager<>(Item.class, mySessionFactory);
 		Random R = new Random();
 
 		// creating random items
@@ -94,13 +93,16 @@ public class SeedDB {
 			Item newItem = new Item();
 			newItem.setAvailable(R.nextBoolean());
 			newItem.setPrice(Math.floor(ThreadLocalRandom.current().nextDouble(0.1, 12) * 100) / 100);
+			FoodClass fc = new FoodClass();
+			fc.setName("Test");
+			newItem.setFoodClass(fc);
 			newItem.setName(idgen.nextSessionId());
 			itmManager.add(newItem);
 		}
 
 		System.out.println(itmManager.getTotalCount() + " new Items created");
 		System.out.println(itmManager.getAll());
-		Item x = itmManager.find((long) 5, true);
+		Item x = itmManager.find((long) 20, true);
 		x.setName("new Item name");
 		itmManager.update(x);
 	}
