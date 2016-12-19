@@ -7,8 +7,7 @@ function initCrud() {
 
 	// create button
 	$create.on('click', function() {
-		var row = {}; //there is a bug with id 
-		showModal($(this).text());
+		showModal($(this).text(), null);
 	});
 
 	// checkboxes in table (enable delete button)
@@ -43,18 +42,32 @@ function initCrud() {
 	// submit button of modal
 	$submit.on('click', function() {
 		var row = {};
-
-		$modal.find('input[name]').each(function() {
+		var postdata = {};
+		$modal.find('input[name], select[name]').each(function() {
 			row[$(this).attr('name')] = $(this).val();
 		});
-
+		
+		row.versionNumber = Number($modal.data('versionNumber'));
+		row.id = Number($modal.data('id'));
+		//row.foodClass = $modal.data('foodClass');
+		postdata.data = JSON.stringify(row); 
+		postdata.action = row.id == 0 ? "create" : "update";
+		/*
+		if(row.id== 0) {
+			postdata = { action: "create", data: JSON.stringify(row) };
+		}
+		else{
+			postdata = { action: "update", data: JSON.stringify(row) };
+		}*/
+		
 		$.ajax({
 			url : API_URL, /*+ ($modal.data('id') || ''),*/
-			type : 'post', // prefer always post
-			contentType: 'application/json; charset=utf-8',
+			type : 'post', 
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8', //what we send
+			/*dataType: 'html',*/ //what we expect
 			cache: false,
-			dataType: 'json',
-			data : { action: "update", data : "werner"/*JSON.stringify(row)*/},
+			data : postdata,
+			processData: true,
 			success : function() {
 				$modal.modal('hide');
 				$table.bootstrapTable('refresh');
@@ -84,6 +97,18 @@ function initCrud() {
 }
 
 /**
+ * RE
+ * @returns
+ */
+/*
+function replacer() {
+	if (typeof value === "string") {
+	    return undefined;
+	  }
+	  return value;
+}*/
+
+/**
  * Shows the modal for CRUD operations.
  * 
  * @param {string}
@@ -95,12 +120,14 @@ function showModal(title, row) {
 
 	$modal.find('.modal-title').text(title);
 
-	// if called as create Modal row is undefined so set name to "auto-assigned"#
-	// else populate input fields with values from row data of table
+	// if called as create Modal row is undefined so set name to "auto-assigned"
+	// and id to 0 = create. Otherwise populate input fields with values 
+	// from row object of table
 	if (row == null) {
 		$modal.find('input[name="id"]').attr("placeholder", "auto-assigned");
+		$modal.find('input').val("");
 		row = {
-			id : "0"
+			id : 0
 		}
 	}
 	else {
@@ -109,6 +136,8 @@ function showModal(title, row) {
 		}
 	}
 	$modal.data('id', row.id);
+	$modal.data('foodClass', row.foodClass);
+	$modal.data('versionNumber', row.versionNumber);
 	$modal.modal('show');
 }
 
@@ -125,7 +154,12 @@ function actionFormatter(value) {
 			.join('');
 }
 
-
+/**
+ * Formats the action column of the table by adding a pencil icon to every row.
+ * 
+ * @param {number}
+ *            value The row number.
+ */
 function getIdSelections() {
 	return $.map($table.bootstrapTable('getSelections'), function(row) {
 		return row.id

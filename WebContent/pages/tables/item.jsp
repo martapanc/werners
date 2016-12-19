@@ -68,9 +68,11 @@
               <table id="table"
               data-toggle="table"
               data-url="../../listItem"
-              data-show-columns="true"
               data-method="post"
+              data-content-type="application/x-www-form-urlencoded"
+              data-query-params='action=list'
               data-striped="true"
+              data-show-columns="true"
               data-pagination="true"
               data-pagination-loop="false"
               data-show-refresh="true"
@@ -82,9 +84,9 @@
               	<thead>
     				<tr>
     					<th data-field="state" data-checkbox="true"></th>
-        				<th data-field="id" data-sortable="true" data-width="5%">Id</th>
-        				<th data-field="version_number" data-visible="false"></th>
-        				<th data-field="name" data-sortable="true">Name</th>
+        				<th data-field="id" data-sortable="true" data-width="8%">Id</th>
+        				<th data-field="version_number" data-visible="false" ></th>
+        				<th data-field="name" data-sortable="true" data-width="30%">Name</th>
         				<th data-field="foodClass.name" data-sortable="true">Food class</th>
         				<th data-field="price" data-sortable="true" data-align="right">Price</th>
         				<th data-field="available" data-sortable="true" data-sorter="availableSorter" data-formatter="availableFormatter" data-align="center">Availability</th>
@@ -127,10 +129,7 @@
   							<div class="form-group">
     							<label for="foodClass">Food Class</label>
   								<select class="form-control" name="foodClass">
-    								<option>1</option>
-    								<option>2</option>
-    								<option>3</option>
-    								<option>4</option>
+								<!-- is populated via jquery --> 
     							</select>
   							</div>
   							<div class="form-group">
@@ -369,7 +368,8 @@
 <script src="crud.js"></script>
 <script>
 	
-	var API_URL = 'http://' + location.host + '/restaurantProject/listItem';
+	const API_URL = 'http://' + location.host + '/restaurantProject/listItem';
+	const FOODCLASS_URL = 'http://' + location.host + '/restaurantProject/listFoodClass';
 	var $modal = $('#modal').modal({show: false});
 	var $table = $('#table');
 	var $create = $('#create');
@@ -378,12 +378,19 @@
 	var $submit = $modal.find('.submit');
 	var selection = [];
 	
-    
-	//registering event handlers on document ready
     $(function () {
     	initCrud();
+    	
+    	//populate select box for food class
+    	$.post(FOODCLASS_URL, {action: "list"}, function(response){
+  	      var options = '<option value="" selected disabled>Select a food class</option>';
+	      for (var i = 0; i < response.length; i++) {
+	        options += '<option value="' + response[i].id + '">' + response[i].name + '</option>';
+	      }
+	      $modal.find('select[name="foodClass"]').html(options);
+		});
     });
-         
+	
 	function availableFormatter(value, row) {
     	var icon = value === true ? 'fa-check' : 'fa-times';
     	return '<i class="fa ' + icon + '"></i> ';

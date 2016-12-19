@@ -1,4 +1,4 @@
-package wpb.item;
+package wpb.foodclass;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,10 +20,9 @@ import wpb.foodclass.FoodClass;
 /**
  * Servlet implementation class ItemServlet
  */
-@WebServlet(name = "listItem", urlPatterns = "/listItem", loadOnStartup = 1)
-public class ItemServlet extends HttpServlet {
+@WebServlet(name = "foodClass", urlPatterns = "/listFoodClass", loadOnStartup = 1)
+public class FoodClassServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static GenericManager<Item, Long> itmManager = null;
 	private static GenericManager<FoodClass, Long> fcManager = null;
 	private static Gson gson = null;
 	/*
@@ -66,7 +65,6 @@ public class ItemServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 
-		itmManager = new GenericManager<Item, Long>(Item.class, HibernateUtil.getSessionJavaConfigFactory());
 		fcManager = new GenericManager<FoodClass, Long>(FoodClass.class, HibernateUtil.getSessionJavaConfigFactory());
 		gson = new GsonBuilder().create();
 	}
@@ -78,7 +76,7 @@ public class ItemServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String json = gson.toJson(itmManager.getAll());
+		String json = gson.toJson(fcManager.getAll());
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		try (PrintWriter out = response.getWriter()) {
@@ -102,7 +100,7 @@ public class ItemServlet extends HttpServlet {
 			switch (action) {
 
 			case "list": {
-				String json = gson.toJson(itmManager.getAll());
+				String json = gson.toJson(fcManager.getAll());
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				try (PrintWriter out = response.getWriter()) {
@@ -112,29 +110,24 @@ public class ItemServlet extends HttpServlet {
 			}
 
 			case "create": {
+				FoodClass fc = new FoodClass();
 				JsonObject obj = gson.fromJson(data, JsonObject.class);
-				Item itm = new Item();
-				itm.setName(obj.get("name").getAsString());
-				itm.setPrice(obj.get("price").getAsDouble());
-				itm.setFoodClass(fcManager.find(obj.get("foodClass").getAsLong(), true));
-				itmManager.add(itm);
+				fc.setName(obj.get("name").getAsString());
+				fcManager.add(fc);
 				break;
 				}
 
 			case "update": {
+				FoodClass itm = new FoodClass();
 				JsonObject obj = gson.fromJson(data, JsonObject.class);
-				Item itm = itmManager.find(obj.get("id").getAsLong(), true);
 				itm.setName(obj.get("name").getAsString());
-				itm.setPrice(obj.get("price").getAsDouble());
-				itm.setFoodClass(fcManager.find(obj.get("foodClass").getAsLong(), true));
-				itmManager.update(itm);
+				fcManager.update(itm);
 				break;
 				}
 			
 			case "delete": {
-				Item itm = new Item();
-				itm = gson.fromJson(data, Item.class);
-				itmManager.update(itm);
+				//JsonObject obj = gson.fromJson(data, JsonObject.class);
+				//itmManager.update(itm);
 				break;
 				}
 			}

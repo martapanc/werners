@@ -123,7 +123,7 @@ public class GenericManager<T, PK extends Serializable> implements GenericDao<T,
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			session.saveOrUpdate(transientObject);
+			session.update(transientObject);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null) {
