@@ -29,7 +29,7 @@ public class ReservationServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
+		doPost(request,response);
 	}
 
 	/**
@@ -37,6 +37,7 @@ public class ReservationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		doGet(request, response);
 		Map<String, String[]> paramMap = request.getParameterMap();
 		Map<String, Object> pMap = new HashMap<String, Object>();
 		List<HashMap<String, String>> errList = new ArrayList<HashMap<String, String>>();
@@ -49,7 +50,7 @@ public class ReservationServlet extends HttpServlet {
 		System.out.println(pMap);
 		request.getRequestDispatcher("pages/customer/reservationInvoice.jsp").forward(request, response);
 		
-		doGet(request, response);
+		
 
 	}
 	
@@ -60,12 +61,7 @@ public class ReservationServlet extends HttpServlet {
     	// try to parse dates
         if (paramMap.containsKey("date")) {
             String d = (String) request.getParameter("date");
-            //Date date = Validator.parseDate(d);
-            //if (date != null) {
-                extrMap.put("date", d);
-            //} else	{
-            	//addError("dep", "Missing or unparseable departure date", errList);
-        	//}
+            extrMap.put("date", d);
         }
         
         // parse flight info

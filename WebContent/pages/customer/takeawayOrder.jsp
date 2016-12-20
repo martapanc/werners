@@ -121,6 +121,8 @@
 
 													<table id="item-table" data-toggle="table"
 														data-url="../../listItem" data-method="post"
+														data-content-type="application/x-www-form-urlencoded"
+														data-query-params='action=list'
 														data-striped="true" data-pagination="true"
 														data-pagination-loop="false" data-page-size="10"
 														data-show-refresh="true" data-search="true"
@@ -136,7 +138,10 @@
 															</tr>
 														</thead>
 													</table>
+													
 												</div>
+												
+												<div class="result"></div>
 												<!-- /.box-body -->
 											</div>
 											<!-- /. box -->
@@ -160,7 +165,7 @@
 								</h3>
 							</div>
 
-							<form class="cart-form">
+							<div class="cart-form" >
 								<div class="box-body">
 									<table class="table table-striped order-list">
 										<!-- <thead>
@@ -185,11 +190,11 @@
 									</h4>
 								</div>
 								<div class="box-footer">
-									<button type="submit" class="btn btn-primary">Checkout</button>
+									<button class="btn btn-primary "  id="checkout-btn" disabled>Checkout</button>
 									<button type="reset" class="btn btn-warning">Cancel</button>
 								</div>
-
-							</form>
+							
+							</div>
 
 						</div>
 						<!-- /.box-body -->
@@ -255,7 +260,7 @@
 		var cart = new Array();
 		window.actionEvent = {
 			'click .add' : function(e, value, row, index) {
-				console.log(value, row, index);
+				$("#checkout-btn").prop("disabled", false); //enable Checkout button when at least one item is in the cart
 				var qnt = 1;
 				cart.push([row.name, qnt, row.price, row.price]); //store item price to be used for incrementing/decrementing
 				$(".order-list").html("");
@@ -272,6 +277,7 @@
 			}
 		};
 		
+		//Increase quantity on "plus" click
 		$(".cart-form").on("click", "i.fa-plus-square", function() {
 			var i = $(this).parent().parent().index(); //store index of selected row
 			cart[i][1] +=1; //increase quantity by 1
@@ -293,6 +299,7 @@
 			
 		});
 		
+		//Decrease quantity on "minus" click. Remove when qnt reaches 0
 		$(".cart-form").on("click", "i.fa-minus-square", function() {
 			var i = $(this).parent().parent().index();
 			cart[i][1] -= 1;
@@ -300,6 +307,7 @@
 				cart[i][2] -= cart[i][3]; //decrease price by the price of a single item
 			} else {
 				cart.splice(i, 1); //remove item from array when quantity reaches 0
+				if (cart[0] == null) $("#checkout-btn").prop("disabled", true);
 			}	
 			price = 0;
 			cart.forEach(function(entry) { //update cart				
@@ -314,6 +322,46 @@
 			$("#total-price-box").html(
 					'<h4><span class="pull-right total-price">Total price: € '
 							+ price.toFixed(2) + '</span></h4>');	
+		});
+		
+		//Checkout button functions
+		$("#checkout-btn").on("click", function(){
+			var jsoncart = {jcart: []};
+			cart.forEach(function(entry) {
+				jsoncart.jcart.push({
+					"name" : entry[0],
+					"qnt"  : entry[1],
+					"totPrice" : entry[2],
+					"uPrice" : entry[3]
+				});
+			});
+			
+			//json.cart = cart;
+			var cartToSend = JSON.stringify(jsoncart);
+			//console.log(cartToSend + typeof(cartToSend));
+			
+			$.post({
+				url: "/restaurantProject/TakeawayServlet",
+				//url: "/restaurantProject/pages/customer/takeawayInvoice.jsp",
+				data: {
+					loadProds: 1,
+					cart: cartToSend
+				}
+			}).done(function(response) {
+				if (typeof(Storage) != "undefined") {
+					localStorage.setItem("data", response);
+					console.log("saved " + response);
+					
+				} else {console.log("Local storage non supported.")}
+				
+				//var d = window.opener.$("body").data("d");
+				//var w = window.open("takeawayInvoice.jsp")
+				//$('.result').html(response);
+				//window.myData = response;
+				window.location.href = "takeawayInvoice.jsp";
+			}).error(function(error) {
+				console.log(error);
+			});	
 		});
 		
 
