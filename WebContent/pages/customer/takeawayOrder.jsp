@@ -81,29 +81,26 @@
 								<div class="box-body">
 									<div class="food-menu col-md-3">
 										<div class="btn-group btn-block btn-group-vertical">
-											<a href="#" id="salad-btn"
-												class="btn btn-lg btn-primary active"> <img width="30"
-												src="../../dist/img/flat-icon-gastronomy/salad.svg">
-												&emsp;Salads
-											</a> <a href="#" id="burger-btn" class="btn btn-lg btn-primary">
-												<img width="30"
-												src="../../dist/img/flat-icon-gastronomy/burger.svg">
-												&emsp;Burgers
-											</a> <a href="#" id="pizza-btn" class="btn btn-lg btn-primary">
-												<img width="30"
-												src="../../dist/img/flat-icon-gastronomy/pizza-2.svg">
+											<a href="#" id="salad-btn" class="btn btn-lg btn-primary active">
+												<img width="30" src="../../dist/img/flat-icon-gastronomy/salad.svg">
+													&emsp;Salads
+											</a>
+											<a href="#" id="burger-btn" class="btn btn-lg btn-primary">
+												<img width="30" src="../../dist/img/flat-icon-gastronomy/burger.svg">
+													&emsp;Burgers
+											</a>
+											<a href="#" id="pizza-btn" class="btn btn-lg btn-primary">
+												<img width="30" src="../../dist/img/flat-icon-gastronomy/pizza-2.svg">
 												&emsp;Pizza
-											</a> <a href="#" id="chinese-btn" class="btn btn-lg btn-primary">
-												<img width="30"
-												src="../../dist/img/flat-icon-gastronomy/noodles.svg">
+											</a>
+											<a href="#" id="chinese-btn" class="btn btn-lg btn-primary">
+												<img width="30" src="../../dist/img/flat-icon-gastronomy/noodles.svg">
 												&emsp;Chinese
 											</a> <a href="#" id="dessert-btn" class="btn btn-lg btn-primary">
-												<img width="30"
-												src="../../dist/img/flat-icon-gastronomy/cupcake.svg">
+												<img width="30" src="../../dist/img/flat-icon-gastronomy/cupcake.svg">
 												&emsp;Desserts
 											</a> <a href="#" id="drink-btn" class="btn btn-lg btn-primary">
-												<img width="30"
-												src="../../dist/img/flat-icon-gastronomy/glass-3.svg">
+												<img width="30" src="../../dist/img/flat-icon-gastronomy/glass-3.svg">
 												&emsp;Drinks
 											</a>
 										</div>
@@ -122,11 +119,11 @@
 													<table id="item-table" data-toggle="table"
 														data-url="../../listItem" data-method="post"
 														data-content-type="application/x-www-form-urlencoded"
-														data-query-params='action=list'
-														data-striped="true" data-pagination="true"
-														data-pagination-loop="false" data-page-size="10"
-														data-show-refresh="true" data-search="true"
-														data-show-toggle="true" data-show-export="true">
+														data-query-params='action=list' data-striped="true"
+														data-pagination="true" data-pagination-loop="false"
+														data-page-size="10" data-show-refresh="true"
+														data-search="true" data-show-toggle="true"
+														data-show-export="true">
 														<thead>
 															<tr>
 																<th data-field="name" data-sortable="true">Name</th>
@@ -138,9 +135,9 @@
 															</tr>
 														</thead>
 													</table>
-													
+
 												</div>
-												
+
 												<div class="result"></div>
 												<!-- /.box-body -->
 											</div>
@@ -165,7 +162,7 @@
 								</h3>
 							</div>
 
-							<div class="cart-form" >
+							<div class="cart-form">
 								<div class="box-body">
 									<table class="table table-striped order-list">
 										<!-- <thead>
@@ -190,10 +187,10 @@
 									</h4>
 								</div>
 								<div class="box-footer">
-									<button class="btn btn-primary"  id="checkout-btn" disabled>Checkout</button>
+									<button class="btn btn-primary" id="checkout-btn" disabled>Checkout</button>
 									<button class="btn btn-warning" id="reset-btn">Cancel</button>
 								</div>
-							
+
 							</div>
 
 						</div>
@@ -261,108 +258,160 @@
 		window.actionEvent = {
 			'click .add' : function(e, value, row, index) {
 				$("#checkout-btn").prop("disabled", false); //enable Checkout button when at least one item is in the cart
-				
+
 				//Check if the cart already includes the selected item
-				var dupCheck = -1; 
+				var dupCheck = -1;
 				cart.forEach(function(entry, i) {
-					if (row.name == entry[0]) 
+					if (row.name == entry[0])
 						dupCheck = i; //Store the index of the duplicate item
 				});
-				if (dupCheck == -1)	//If the cart has no duplicates (=the loop found no match and the index did not change) push a new item
-					cart.push([row.name, 1, row.price, row.price]); 
+				if (dupCheck == -1) //If the cart has no duplicates (=the loop found no match and the index did not change) push a new item
+					cart.push([ row.name, 1, row.price, row.price ]);
 				else {
-					cart[dupCheck][1] +=1; //Else update quantity and price of the item already in cart
+					cart[dupCheck][1] += 1; //Else update quantity and price of the item already in cart
 					cart[dupCheck][2] += cart[dupCheck][3];
-				}	
-				
+				}
+
 				$(".order-list").html(""); //Display the cart
-				cart.forEach(function(entry) {
-					$(".order-list").append("<tr><td>" + entry[0] + "&emsp;</td>"
-						+ "<td><i class='fa fa-plus-square fa-lg'></i>&ensp;" + entry[1] + "&ensp;<i class='fa fa-minus-square fa-lg'></i></td>"
-						+ "<td>&ensp;€ " + entry[2].toFixed(2) + "</td></tr>");
-				});
-				
+				cart
+						.forEach(function(entry) {
+							$(".order-list")
+									.append(
+											"<tr><td>"
+													+ entry[0]
+													+ "&emsp;</td>"
+													+ "<td><i class='fa fa-plus-square fa-lg'></i>&ensp;"
+													+ entry[1]
+													+ "&ensp;<i class='fa fa-minus-square fa-lg'></i></td>"
+													+ "<td>&ensp;€ "
+													+ entry[2].toFixed(2)
+													+ "</td></tr>");
+						});
+
 				price += row.price;
-				$("#total-price-box").html( //Display the total price
+				$("#total-price-box").html(
+						//Display the total price
 						'<h4><span class="pull-right total-price">Total price: € '
-								+ price.toFixed(2) + '</span></h4>');	
+								+ price.toFixed(2) + '</span></h4>');
 			}
 		};
-		
+
 		//Increase quantity on "plus" click
-		$(".cart-form").on("click", "i.fa-plus-square", function() {
-			var i = $(this).parent().parent().index(); //store index of selected row
-			cart[i][1] +=1; //increase quantity by 1
-			cart[i][2] += cart[i][3]; //increase price by the price of a single item
-			price = 0;
-			cart.forEach(function(entry) { //update cart				
-				price += entry[2];
-			});
-			$(".order-list").html("");
-			cart.forEach(function(entry) {	//display changes
-				$(".order-list").append("<tr><td>" + entry[0] + "&emsp;</td>"
-					+ "<td><i class='fa fa-plus-square fa-lg'></i>&ensp;" + entry[1] + "&ensp;<i class='fa fa-minus-square fa-lg'></i></td>"
-					+ "<td>&ensp;€ " + entry[2].toFixed(2) + "</td></tr>");
-			});
-			$("#total-price-box").html(	//update and display total price
-					'<h4><span class="pull-right total-price">Total price: € '
-							+ price.toFixed(2) + '</span></h4>');	
-			
-		});
-		
+		$(".cart-form")
+				.on(
+						"click",
+						"i.fa-plus-square",
+						function() {
+							var i = $(this).parent().parent().index(); //store index of selected row
+							cart[i][1] += 1; //increase quantity by 1
+							cart[i][2] += cart[i][3]; //increase price by the price of a single item
+							price = 0;
+							cart.forEach(function(entry) { //update cart				
+								price += entry[2];
+							});
+							$(".order-list").html("");
+							cart
+									.forEach(function(entry) { //display changes
+										$(".order-list")
+												.append(
+														"<tr><td>"
+																+ entry[0]
+																+ "&emsp;</td>"
+																+ "<td><i class='fa fa-plus-square fa-lg'></i>&ensp;"
+																+ entry[1]
+																+ "&ensp;<i class='fa fa-minus-square fa-lg'></i></td>"
+																+ "<td>&ensp;€ "
+																+ entry[2]
+																		.toFixed(2)
+																+ "</td></tr>");
+									});
+							$("#total-price-box")
+									.html(
+											//update and display total price
+											'<h4><span class="pull-right total-price">Total price: € '
+													+ price.toFixed(2)
+													+ '</span></h4>');
+
+						});
+
 		//Decrease quantity on "minus" click. Remove when qnt reaches 0
-		$(".cart-form").on("click", "i.fa-minus-square", function() {
-			var i = $(this).parent().parent().index();
-			cart[i][1] -= 1;
-			if (cart[i][1] != 0) {
-				cart[i][2] -= cart[i][3]; //decrease price by the price of a single item
-			} else {
-				cart.splice(i, 1); //remove item from array when quantity reaches 0
-				if (cart[0] == null) $("#checkout-btn").prop("disabled", true);
-			}	
-			price = 0;
-			cart.forEach(function(entry) { //update cart				
-				price += entry[2];
-			});	
-			$(".order-list").html("");
-			cart.forEach(function(entry) {
-				$(".order-list").append("<tr><td>" + entry[0] + "&emsp;</td>"
-					+ "<td><i class='fa fa-plus-square fa-lg'></i>&ensp;" + entry[1] + "&ensp;<i class='fa fa-minus-square fa-lg'></i></td>"
-					+ "<td>&ensp;€ " + entry[2].toFixed(2) + "</td></tr>");
-			});
-			$("#total-price-box").html(
-					'<h4><span class="pull-right total-price">Total price: € '
-							+ price.toFixed(2) + '</span></h4>');	
-		});
-		
+		$(".cart-form")
+				.on(
+						"click",
+						"i.fa-minus-square",
+						function() {
+							var i = $(this).parent().parent().index();
+							cart[i][1] -= 1;
+							if (cart[i][1] != 0) {
+								cart[i][2] -= cart[i][3]; //decrease price by the price of a single item
+							} else {
+								cart.splice(i, 1); //remove item from array when quantity reaches 0
+								if (cart[0] == null)
+									$("#checkout-btn").prop("disabled", true);
+							}
+							price = 0;
+							cart.forEach(function(entry) { //update cart				
+								price += entry[2];
+							});
+							$(".order-list").html("");
+							cart
+									.forEach(function(entry) {
+										$(".order-list")
+												.append(
+														"<tr><td>"
+																+ entry[0]
+																+ "&emsp;</td>"
+																+ "<td><i class='fa fa-plus-square fa-lg'></i>&ensp;"
+																+ entry[1]
+																+ "&ensp;<i class='fa fa-minus-square fa-lg'></i></td>"
+																+ "<td>&ensp;€ "
+																+ entry[2]
+																		.toFixed(2)
+																+ "</td></tr>");
+									});
+							$("#total-price-box")
+									.html(
+											'<h4><span class="pull-right total-price">Total price: € '
+													+ price.toFixed(2)
+													+ '</span></h4>');
+						});
+
 		//Checkout button functions
-		$("#checkout-btn").on("click", function(){
-			var jsoncart = {jcart: []};
+		$("#checkout-btn").on("click", function() {
+			var jsoncart = {
+				jcart : []
+			};
 			cart.forEach(function(entry) {
 				jsoncart.jcart.push({
 					"name" : entry[0],
-					"qnt"  : entry[1],
+					"qnt" : entry[1],
 					"totPrice" : entry[2],
 					"uPrice" : entry[3]
 				});
 			});
 			var cartToSend = JSON.stringify(jsoncart.jcart);
-			if (typeof(Storage) != "undefined") {
+			if (typeof (Storage) != "undefined") {
 				localStorage.setItem("cart", cartToSend);
 				localStorage.setItem("totPrice", price)
-				console.log("Saved: " + cartToSend + "\nPrice: " + price);	
-			} else {console.log("Local storage non supported.")}
+				console.log("Saved: " + cartToSend + "\nPrice: " + price);
+			} else {
+				console.log("Local storage non supported.")
+			}
 			window.location.href = "takeawayCheckout.jsp";
 		});
-		
+
 		//Reset button functions
-		$("#reset-btn").on("click", function() {
-			cart = new Array();
-			price = 0;
-			$(".order-list").html("");
-			$("#total-price-box").html('<h4><span class="pull-right total-price">Total price: € '+ price.toFixed(2) + '</span></h4>');
-			$("#checkout-btn").prop("disabled", true);
-		});
+		$("#reset-btn").on(
+				"click",
+				function() {
+					cart = new Array();
+					price = 0;
+					$(".order-list").html("");
+					$("#total-price-box").html(
+							'<h4><span class="pull-right total-price">Total price: € '
+									+ price.toFixed(2) + '</span></h4>');
+					$("#checkout-btn").prop("disabled", true);
+				});
 
 		$(function() {
 			$(document).ready(function() {

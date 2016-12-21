@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>WPB | Item</title>
+  <title>WPB | Tables</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -44,13 +44,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Items
-        <small>here we have a list of all items</small>
+        Restaurant Tables
+        <small>here we have a list of all  tables</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/restaurantProject/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Tables</a></li>
-        <li class="active">Items</li>
+        <li class="active">Restaurant Table</li>
       </ol>
     </section>
         
@@ -62,7 +62,7 @@
           <div class="box box-primary">
             <div class="box-body table-responsive">
                     <div class="toolbar">
-            			<button id="create" class="create btn btn-default">Create Item</button>
+            			<button id="create" class="create btn btn-default">Create table</button>
             			<button id="delete" class="remove btn btn-danger" disabled>Delete</button>
         			</div>
               <table id="table"
