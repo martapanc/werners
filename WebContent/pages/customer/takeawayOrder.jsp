@@ -39,8 +39,8 @@
 	min-height: 270px;
 }
 
-.red {
-	background-color: red
+.fa-plus-square, .fa-minus-square {
+	color: #3C8DBC;
 }
 </style>
 
@@ -278,7 +278,7 @@
 				$(".order-list").html(""); //Display the cart
 				cart.forEach(function(entry) {
 					$(".order-list").append("<tr><td>" + entry[0] + "&emsp;</td>"
-						+ "<td><i class='fa fa-plus-square'></i>&ensp;" + entry[1] + "&ensp;<i class='fa fa-minus-square'></i></td>"
+						+ "<td><i class='fa fa-plus-square fa-lg'></i>&ensp;" + entry[1] + "&ensp;<i class='fa fa-minus-square fa-lg'></i></td>"
 						+ "<td>&ensp;€ " + entry[2].toFixed(2) + "</td></tr>");
 				});
 				
@@ -301,7 +301,7 @@
 			$(".order-list").html("");
 			cart.forEach(function(entry) {	//display changes
 				$(".order-list").append("<tr><td>" + entry[0] + "&emsp;</td>"
-					+ "<td><i class='fa fa-plus-square'></i>&ensp;" + entry[1] + "&ensp;<i class='fa fa-minus-square'></i></td>"
+					+ "<td><i class='fa fa-plus-square fa-lg'></i>&ensp;" + entry[1] + "&ensp;<i class='fa fa-minus-square fa-lg'></i></td>"
 					+ "<td>&ensp;€ " + entry[2].toFixed(2) + "</td></tr>");
 			});
 			$("#total-price-box").html(	//update and display total price
@@ -327,7 +327,7 @@
 			$(".order-list").html("");
 			cart.forEach(function(entry) {
 				$(".order-list").append("<tr><td>" + entry[0] + "&emsp;</td>"
-					+ "<td><i class='fa fa-plus-square'></i>&ensp;" + entry[1] + "&ensp;<i class='fa fa-minus-square'></i></td>"
+					+ "<td><i class='fa fa-plus-square fa-lg'></i>&ensp;" + entry[1] + "&ensp;<i class='fa fa-minus-square fa-lg'></i></td>"
 					+ "<td>&ensp;€ " + entry[2].toFixed(2) + "</td></tr>");
 			});
 			$("#total-price-box").html(
