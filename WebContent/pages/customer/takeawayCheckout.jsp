@@ -100,8 +100,7 @@
 							<h3 class="box-title">Take-Away Checkout</h3>
 						</div>
 
-						<form id="reservation-form" method="post"
-							action="/restaurantProject/ReservationServlet">
+						<form id="reservation-form" method="post" action="/restaurantProject/TakeawayServlet">
 							<div class="box-body">
 								<div class="col-md-1">
 									<!-- Title -->
@@ -184,7 +183,7 @@
 											<div class="input-group-addon">
 												<i class="fa fa-home"></i>
 											</div>
-											<input name="delAddress" type="text" class="form-control"
+											<input name="address" type="text" class="form-control"
 												placeholder="221B Baker St, London, UK">
 										</div>
 										<!-- /.input group -->
