@@ -190,8 +190,8 @@
 									</h4>
 								</div>
 								<div class="box-footer">
-									<button class="btn btn-primary "  id="checkout-btn" disabled>Checkout</button>
-									<button type="reset" class="btn btn-warning">Cancel</button>
+									<button class="btn btn-primary"  id="checkout-btn" disabled>Checkout</button>
+									<button class="btn btn-warning" id="reset-btn">Cancel</button>
 								</div>
 							
 							</div>
@@ -355,6 +355,14 @@
 			window.location.href = "takeawayCheckout.jsp";
 		});
 		
+		//Reset button functions
+		$("#reset-btn").on("click", function() {
+			cart = new Array();
+			price = 0;
+			$(".order-list").html("");
+			$("#total-price-box").html('<h4><span class="pull-right total-price">Total price: € '+ price.toFixed(2) + '</span></h4>');
+			$("#checkout-btn").prop("disabled", true);
+		});
 
 		$(function() {
 			$(document).ready(function() {

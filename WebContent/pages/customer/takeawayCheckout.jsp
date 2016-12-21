@@ -286,9 +286,11 @@
 	<script src="/restaurantProject/dist/js/app.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="/restaurantProject/dist/js/demo.js"></script>
-	<script src="/restaurantProject/bootstrap/js/angular.min.js"></script>
+	<script src="/restaurantProject/bootstrap/js/date.format.js"></script>
 	<script>
-		$(".date").html("Date: &ensp;<strong>" + new Date() + "</strong>");
+	
+		var today = new Date();
+		$(".date").html("Date: &ensp;<strong>" + today.format("ddd, dd mmm yyyy, h:MM TT") + "</strong>");
 
 		$(function() { //Display items in cart
 			var cart = JSON.parse(localStorage.getItem("cart"));
