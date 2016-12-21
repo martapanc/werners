@@ -17,9 +17,9 @@ public class WebAppListener implements ServletContextListener {
 	    	SessionFactory mySessionFactory = HibernateUtil.getSessionJavaConfigFactory();
 	        SeedDB.initialize(mySessionFactory);
 	        SeedDB.seedFoodClass(5);
-	        SeedDB.seedItems(50);
-	        SeedDB.seedTableOrders(1);
-	        SeedDB.seedTakeawayOrders(10);
+	        SeedDB.seedItems(10);
+	        //SeedDB.seedTableOrders(1);
+	        //SeedDB.seedTakeawayOrders(10);
 	    }
 
 	    @Override

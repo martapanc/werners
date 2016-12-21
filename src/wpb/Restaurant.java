@@ -13,13 +13,16 @@ public class Restaurant {
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE)
     @Column(name = "id")
-    private Long id;
+    private long id;
 	
 	
 	@Version
 	@Column(name="version_number")
 	private int versionNumber;
 	
+	public long getId() {
+		return id;
+	}
 	public String toString() {
 	        StringBuilder result = new StringBuilder();
 	        String newLine = System.getProperty("line.separator");
@@ -64,4 +67,6 @@ public class Restaurant {
 
 	        return result.toString();
 	    }
+
+	
 }

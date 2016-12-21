@@ -90,13 +90,15 @@ public class SeedDB {
 
 		// creating random items
 		for (int i = 1; i <= count; i++) {
+			String itemname = idgen.nextSessionId();
+			String fcname = itemname.substring(0,4);
+			FoodClass fc = new FoodClass();
+			fc.setName(fcname);
 			Item newItem = new Item();
 			newItem.setAvailable(R.nextBoolean());
 			newItem.setPrice(Math.floor(ThreadLocalRandom.current().nextDouble(0.1, 12) * 100) / 100);
-			FoodClass fc = new FoodClass();
-			fc.setName("Test");
-			newItem.setFoodClass(fc);
 			newItem.setName(idgen.nextSessionId());
+			newItem.setFoodClass(fc);
 			itmManager.add(newItem);
 		}
 

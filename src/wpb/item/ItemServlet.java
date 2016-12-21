@@ -3,6 +3,7 @@ package wpb.item;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import com.google.gson.*;
 
 import wpb.GenericManager;
 import wpb.HibernateUtil;
+import wpb.Restaurant;
 import wpb.foodclass.FoodClass;
 
 /**
@@ -71,20 +73,6 @@ public class ItemServlet extends HttpServlet {
 		gson = new GsonBuilder().create();
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		String json = gson.toJson(itmManager.getAll());
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		try (PrintWriter out = response.getWriter()) {
-			out.println(json);
-		}
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -101,6 +89,17 @@ public class ItemServlet extends HttpServlet {
 			String data = (String) request.getParameter("data");
 			switch (action) {
 
+			case "get": {
+				Restaurant item = itmManager.find(Long.parseLong(data), true);
+				if(item==null){
+					item = new Item();
+				}
+				List<FoodClass> fcList = fcManager.getAll();
+				request.setAttribute("fc", fcList);
+				request.setAttribute("itm", item);
+				request.getRequestDispatcher("/WEB-INF/editItem.jsp").forward(request, response);
+			}
+		
 			case "list": {
 				String json = gson.toJson(itmManager.getAll());
 				response.setContentType("application/json");
@@ -122,11 +121,8 @@ public class ItemServlet extends HttpServlet {
 				}
 
 			case "update": {
-				JsonObject obj = gson.fromJson(data, JsonObject.class);
-				Item itm = itmManager.find(obj.get("id").getAsLong(), true);
-				itm.setName(obj.get("name").getAsString());
-				itm.setPrice(obj.get("price").getAsDouble());
-				itm.setFoodClass(fcManager.find(obj.get("foodClass").getAsLong(), true));
+				//JsonObject obj = gson.fromJson(data, JsonObject.class);
+				Item itm = itmManager.find(Long.parseLong(data), true);
 				itmManager.update(itm);
 				break;
 				}
