@@ -79,23 +79,21 @@
 						<form id="reservation-form" method="post" action="/restaurantProject/ReservationServlet">
 							<div class="box-body">
 								<div class="col-md-1">
-									<!-- First name -->
-									<div class="form-group">
-										<label for="title">Title: &ensp;</label> 
-										<select name="title" class="form-group select2">
-											<option value="Mr" selected="selected">Mr</option>
-											<option value="Mrs">Mrs</option>
-											<option value="Ms">Ms</option>
-										</select>
-									</div>
+									<!-- Title -->
+									<label for="title">Title:</label>
+									<select name="title" class="form-control">
+										<option value="Mr" selected="selected">Mr</option>
+										<option value="Mrs">Mrs</option>
+										<option value="Ms">Ms</option>
+									</select>
 									<!-- /.form group -->
 								</div>
-
+								
 								<div class="col-md-5">
 									<!-- First name -->
 									<div class="form-group">
 										<label>First name:</label> 
-										<input id="fn" name="firstname" type="text" class="form-control" placeholder="John" required>
+										<input id="fn" name="firstname" type="text" class="form-control" placeholder="Walter" required>
 									</div>
 									<!-- /.form group -->
 								</div>
@@ -105,7 +103,7 @@
 									<div class="bootstrap-timepicker">
 										<div class="form-group">
 											<label>Last name:</label>
-											<input name="lastname" type="text" class="form-control" placeholder="Watson" required>
+											<input name="lastname" type="text" class="form-control" placeholder="White" required>
 										</div>
 										<!-- /.form group -->
 									</div>

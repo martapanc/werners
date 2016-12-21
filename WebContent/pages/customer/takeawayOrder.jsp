@@ -261,9 +261,21 @@
 		window.actionEvent = {
 			'click .add' : function(e, value, row, index) {
 				$("#checkout-btn").prop("disabled", false); //enable Checkout button when at least one item is in the cart
-				var qnt = 1;
-				cart.push([row.name, qnt, row.price, row.price]); //store item price to be used for incrementing/decrementing
-				$(".order-list").html("");
+				
+				//Check if the cart already includes the selected item
+				var dupCheck = -1; 
+				cart.forEach(function(entry, i) {
+					if (row.name == entry[0]) 
+						dupCheck = i; //Store the index of the duplicate item
+				});
+				if (dupCheck == -1)	//If the cart has no duplicates (=the loop found no match and the index did not change) push a new item
+					cart.push([row.name, 1, row.price, row.price]); 
+				else {
+					cart[dupCheck][1] +=1; //Else update quantity and price of the item already in cart
+					cart[dupCheck][2] += cart[dupCheck][3];
+				}	
+				
+				$(".order-list").html(""); //Display the cart
 				cart.forEach(function(entry) {
 					$(".order-list").append("<tr><td>" + entry[0] + "&emsp;</td>"
 						+ "<td><i class='fa fa-plus-square'></i>&ensp;" + entry[1] + "&ensp;<i class='fa fa-minus-square'></i></td>"
@@ -271,7 +283,7 @@
 				});
 				
 				price += row.price;
-				$("#total-price-box").html(
+				$("#total-price-box").html( //Display the total price
 						'<h4><span class="pull-right total-price">Total price: € '
 								+ price.toFixed(2) + '</span></h4>');	
 			}
@@ -285,15 +297,14 @@
 			price = 0;
 			cart.forEach(function(entry) { //update cart				
 				price += entry[2];
-				console.log(entry);
 			});
 			$(".order-list").html("");
-			cart.forEach(function(entry) {
+			cart.forEach(function(entry) {	//display changes
 				$(".order-list").append("<tr><td>" + entry[0] + "&emsp;</td>"
 					+ "<td><i class='fa fa-plus-square'></i>&ensp;" + entry[1] + "&ensp;<i class='fa fa-minus-square'></i></td>"
 					+ "<td>&ensp;€ " + entry[2].toFixed(2) + "</td></tr>");
 			});
-			$("#total-price-box").html(
+			$("#total-price-box").html(	//update and display total price
 					'<h4><span class="pull-right total-price">Total price: € '
 							+ price.toFixed(2) + '</span></h4>');	
 			
@@ -335,33 +346,13 @@
 					"uPrice" : entry[3]
 				});
 			});
-			
-			//json.cart = cart;
-			var cartToSend = JSON.stringify(jsoncart);
-			//console.log(cartToSend + typeof(cartToSend));
-			
-			$.post({
-				url: "/restaurantProject/TakeawayServlet",
-				//url: "/restaurantProject/pages/customer/takeawayInvoice.jsp",
-				data: {
-					loadProds: 1,
-					cart: cartToSend
-				}
-			}).done(function(response) {
-				if (typeof(Storage) != "undefined") {
-					localStorage.setItem("data", response);
-					console.log("saved " + response);
-					
-				} else {console.log("Local storage non supported.")}
-				
-				//var d = window.opener.$("body").data("d");
-				//var w = window.open("takeawayInvoice.jsp")
-				//$('.result').html(response);
-				//window.myData = response;
-				window.location.href = "takeawayInvoice.jsp";
-			}).error(function(error) {
-				console.log(error);
-			});	
+			var cartToSend = JSON.stringify(jsoncart.jcart);
+			if (typeof(Storage) != "undefined") {
+				localStorage.setItem("cart", cartToSend);
+				localStorage.setItem("totPrice", price)
+				console.log("Saved: " + cartToSend + "\nPrice: " + price);	
+			} else {console.log("Local storage non supported.")}
+			window.location.href = "takeawayCheckout.jsp";
 		});
 		
 

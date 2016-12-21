@@ -85,115 +85,159 @@
 						<img src="/restaurantProject/dist/img/burger-160x160.jpg"
 							width="40"> &ensp;Werner's Panini & Burgers <span
 							class="pull-right">
-							<h4 class="date">
-								
-							</h4> </span>
+							<h4 class="date"></h4>
+						</span>
 					</h2>
 				</div>
 				<!-- /.col -->
 			</div>
 			<!-- info row -->
-			<div class="row invoice-info">
-				<div class="col-sm-4 invoice-col">
-					From
-					<address>
-						<strong>Admin, Inc.</strong><br> 795 Folsom Ave, Suite 600<br>
-						San Francisco, CA 94107<br> Phone: (804) 123-5432<br>
-						Email: info@almasaeedstudio.com
-					</address>
-				</div>
-				<!-- /.col -->
-				<div class="col-sm-4 invoice-col">
-					To
-					<address>
-						<strong>John Doe</strong><br> 795 Folsom Ave, Suite 600<br>
-						San Francisco, CA 94107<br> Phone: (555) 539-1037<br>
-						Email: john.doe@example.com
-					</address>
-				</div>
-				<!-- /.col -->
-				<div class="col-sm-4 invoice-col">
-					<b>Invoice #007612</b><br> <br> <b>Order ID:</b> 4F3S8J<br>
-					<b>Payment Due:</b> 2/22/2014<br> <b>Account:</b> 968-34567
-				</div>
-				<!-- /.col -->
-			</div>
-			<!-- /.row -->			
-			<!-- Table row -->
-			<div class="row">
-				<div class="col-xs-6 table-responsive">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>Item</th>
-								<th>Quantity</th>
-								<th>Cost</th>
-							</tr>
-						</thead>
-						<tbody class="cart">
-							
-						</tbody>
-					</table>
-				</div>
-				<!-- /.col -->
-			</div>
-			<!-- /.row -->
 
 			<div class="row">
-				<!-- accepted payments column -->
-				<div class="col-xs-6">
-					<p class="lead">Payment Methods:</p>
-					<img src="../../dist/img/credit/visa.png" alt="Visa"> <img
-						src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-					<img src="../../dist/img/credit/american-express.png"
-						alt="American Express"> <img
-						src="../../dist/img/credit/paypal2.png" alt="Paypal">
+				<div class="col-md-12">
+					<div class="box box-info">
+						<div class="box-header with-border">
+							<h3 class="box-title">Take-Away Checkout</h3>
+						</div>
 
-					<p class="text-muted well well-sm no-shadow"
-						style="margin-top: 10px;">Etsy doostang zoodles disqus groupon
-						greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg
-						dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.</p>
-				</div>
-				<!-- /.col -->
-				<div class="col-xs-6">
-					<p class="lead">Amount Due 2/22/2014</p>
+						<form id="reservation-form" method="post"
+							action="/restaurantProject/ReservationServlet">
+							<div class="box-body">
+								<div class="col-md-1">
+									<!-- Title -->
+									<label for="title">Title:</label> <select name="title"
+										class="form-control">
+										<option value="Mr" selected>Mr</option>
+										<option value="Mrs">Mrs</option>
+										<option value="Ms">Ms</option>
+										<option value="Dr">Dr</option>
+										<option value="Madam">Madam</option>
+										<option value="Prince">Prince</option>
+										<option value="Princess">Princess</option>
+										<option value="Lord">Lord</option>
+										<option value="Lady">Lady</option>
+									</select>
+									<!-- /.form group -->
+								</div>
 
-					<div class="table-responsive">
-						<table class="table">
-							<tr>
-								<th style="width: 50%">Subtotal:</th>
-								<td>$250.30</td>
-							</tr>
-							<tr>
-								<th>Tax (9.3%)</th>
-								<td>$10.34</td>
-							</tr>
-							<tr>
-								<th>Shipping:</th>
-								<td>$5.80</td>
-							</tr>
-							<tr>
-								<th>Total:</th>
-								<td>$265.24</td>
-							</tr>
-						</table>
+								<div class="col-md-5">
+									<!-- First name -->
+									<div class="form-group">
+										<label>First name:</label> <input id="fn" name="firstname"
+											type="text" class="form-control" placeholder="John" required>
+									</div>
+									<!-- /.form group -->
+								</div>
+
+								<div class="col-md-6">
+									<!-- Last name -->
+									<div class="bootstrap-timepicker">
+										<div class="form-group">
+											<label>Last name:</label> <input name="lastname" type="text"
+												class="form-control" placeholder="Watson" required>
+										</div>
+										<!-- /.form group -->
+									</div>
+								</div>
+
+								<!-- phone mask -->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Telephone number:</label>
+
+										<div class="input-group">
+											<div class="input-group-addon">
+												<i class="fa fa-phone"></i>
+											</div>
+											<input name="telephone" type="text" class="form-control"
+												data-inputmask='"mask": "9999999999"' min-length="10"
+												data-mask required>
+										</div>
+										<!-- /.input group -->
+									</div>
+									<!-- /.form group -->
+								</div>
+
+								<!-- email mask -->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Email (optional):</label>
+
+										<div class="input-group">
+											<div class="input-group-addon">
+												<i class="fa fa-at"></i>
+											</div>
+											<input name="email" type="email" class="form-control"
+												placeholder="email@example.com">
+										</div>
+										<!-- /.input group -->
+									</div>
+									<!-- /.form group -->
+								</div>
+
+								<!-- Home address -->
+								<div class="col-md-12">
+									<div class="form-group">
+										<label>Delivery Address:</label>
+
+										<div class="input-group">
+											<div class="input-group-addon">
+												<i class="fa fa-home"></i>
+											</div>
+											<input name="delAddress" type="text" class="form-control"
+												placeholder="221B Baker St, London, UK">
+										</div>
+										<!-- /.input group -->
+									</div>
+									<!-- /.form group -->
+								</div>
+
+								<div class="col-xs-6 table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>Item</th>
+												<th>Quantity</th>
+												<th>Cost</th>
+											</tr>
+										</thead>
+										<tbody class="cart">
+
+										</tbody>
+									</table>
+								</div>
+								<!-- /.col -->
+								<div class="col-sm-1"></div>
+								
+								<div class="col-sm-4">
+									<p class="lead">Payment Methods we accept:</p>
+										<img src="/restaurantProject/dist/img/credit/cash.ico" height="45" alt="Cash"> 
+										<img src="/restaurantProject/dist/img/credit/visa.png" alt="Visa">
+										<img src="/restaurantProject/dist/img/credit/mastercard.png" alt="Mastercard"> 
+										<img src="/restaurantProject/dist/img/credit/mestro.png" alt="Maestro">
+										<img src="/restaurantProject/dist/img/credit/american-express.png" alt="American Express">
+										<img src="/restaurantProject/dist/img/credit/paypal2.png" alt="PayPal">		
+								</div>
+
+							</div>
+							<!-- /. box body -->
+							<div class="box-footer">
+								<button type="submit" class="btn btn-primary">Submit</button>
+								<button type="reset" class="btn btn-warning">Reset</button>
+								<button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
+									<i class="fa fa-download"></i> Generate PDF
+								</button>
+								<button type="button" class="btn btn-default pull-right" style="margin-right: 5px;">
+									<i class="fa fa-print"></i> Print
+								</button>
+							</div>
+
+						</form>
+
 					</div>
+					<!-- /.box-body -->
 				</div>
-				<!-- /.col -->
-			</div>
-			<!-- /.row --> <!-- this row will not appear when printing -->
-			<div class="row no-print">
-				<div class="col-xs-12">
-					<a href="invoice-print.html" target="_blank"
-						class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-					<button type="button" class="btn btn-success pull-right">
-						<i class="fa fa-credit-card"></i> Submit Payment
-					</button>
-					<button type="button" class="btn btn-primary pull-right"
-						style="margin-right: 5px;">
-						<i class="fa fa-download"></i> Generate PDF
-					</button>
-				</div>
+				<!-- /.box -->
 			</div>
 			</section>
 			<!-- /.content -->
@@ -244,27 +288,29 @@
 	<script src="/restaurantProject/dist/js/demo.js"></script>
 	<script src="/restaurantProject/bootstrap/js/angular.min.js"></script>
 	<script>
-		
 		$(".date").html("Date: &ensp;<strong>" + new Date() + "</strong>");
-		
-		$(function(){ //Display items in cart
+
+		$(function() { //Display items in cart
 			var cart = JSON.parse(localStorage.getItem("cart"));
 			var totPrice = JSON.parse(localStorage.getItem("totPrice"));
 			cart.forEach(function(entry) {
-				$(".cart").append("<tr><td>" + entry.name + "</td><td>" + entry.qnt + "</td><td>€ " + entry.totPrice.toFixed(2) + "</td></tr>");
+				$(".cart").append(
+						"<tr><td>" + entry.name + "</td><td>" + entry.qnt
+								+ "</td><td>€ " + entry.totPrice.toFixed(2)
+								+ "</td></tr>");
 			});
-			$(".cart").append("<tr><td></td><th>Total: </th><td>€ " + totPrice.toFixed(2) + "</td></tr>");
+			$(".cart").append(
+					"<tr><td></td><th>Total: </th><td>€ " + totPrice.toFixed(2)
+							+ "</td></tr>");
 			localStorage.clear();
 		});
-		
+
 		$(function() {
 
 			$(document).ready(function() {
 				$('#customer-menu').addClass('active');
 			});
 		});
-		
-		
 	</script>
 
 </body>
