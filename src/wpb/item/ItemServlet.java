@@ -3,6 +3,7 @@ package wpb.item;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import com.google.gson.*;
 
 import wpb.GenericManager;
 import wpb.HibernateUtil;
+import wpb.Restaurant;
 import wpb.foodclass.FoodClass;
 
 /**
@@ -71,20 +73,6 @@ public class ItemServlet extends HttpServlet {
 		gson = new GsonBuilder().create();
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		String json = gson.toJson(itmManager.getAll());
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		try (PrintWriter out = response.getWriter()) {
-			out.println(json);
-		}
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -98,9 +86,27 @@ public class ItemServlet extends HttpServlet {
 
 		if (paramMap.containsKey("action")) {
 			String action = (String) request.getParameter("action");
-			String data = (String) request.getParameter("data");
+			String[] ids = request.getParameterValues("id");
+			long id = (request.getParameter("id") == null) ? 0 : Long.parseLong(request.getParameter("id"));
 			switch (action) {
 
+			case "get": {
+				Restaurant item = itmManager.find(id, true);
+				String formAction = null;
+				if(item==null){
+					item = new Item();
+					formAction = "create";
+				}
+				else {
+					formAction = "update";
+				}
+				List<FoodClass> fcList = fcManager.getAll();
+				request.setAttribute("fc", fcList);
+				request.setAttribute("itm", item);
+				request.setAttribute("formaction", formAction);
+				request.getRequestDispatcher("/WEB-INF/editItem.jsp").forward(request, response);
+			}
+		
 			case "list": {
 				String json = gson.toJson(itmManager.getAll());
 				response.setContentType("application/json");
@@ -112,32 +118,59 @@ public class ItemServlet extends HttpServlet {
 			}
 
 			case "create": {
-				JsonObject obj = gson.fromJson(data, JsonObject.class);
-				Item itm = new Item();
-				itm.setName(obj.get("name").getAsString());
-				itm.setPrice(obj.get("price").getAsDouble());
-				itm.setFoodClass(fcManager.find(obj.get("foodClass").getAsLong(), true));
-				itmManager.add(itm);
+				try {
+					Item itm = new Item();
+					itm.setName(request.getParameter("name"));
+					itm.setPrice(Double.parseDouble(request.getParameter("price")));
+					FoodClass fc = fcManager.find(Long.parseLong(request.getParameter("foodClass")), true);
+					itm.setFoodClass(fc);
+					boolean available = (request.getParameter("available") == null) ? false : true;
+					itm.setAvailable(available);
+					itmManager.add(itm);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+
 				break;
 				}
 
 			case "update": {
-				JsonObject obj = gson.fromJson(data, JsonObject.class);
-				Item itm = itmManager.find(obj.get("id").getAsLong(), true);
-				itm.setName(obj.get("name").getAsString());
-				itm.setPrice(obj.get("price").getAsDouble());
-				itm.setFoodClass(fcManager.find(obj.get("foodClass").getAsLong(), true));
-				itmManager.update(itm);
+				try {
+					Item itm = itmManager.find(id, true);
+					itm.setName(request.getParameter("name"));
+					itm.setPrice(Double.parseDouble(request.getParameter("price")));
+					FoodClass fc = fcManager.find(Long.parseLong(request.getParameter("foodClass")), true);
+					itm.setFoodClass(fc);
+					boolean available = (request.getParameter("available") == null) ? false : true;
+					itm.setAvailable(available);
+					itmManager.update(itm);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+
 				break;
 				}
 			
 			case "delete": {
-				Item itm = new Item();
-				itm = gson.fromJson(data, Item.class);
-				itmManager.update(itm);
-				break;
+				try {
+					//
+					// itm = gson.fromJson(id, Item.class);
+					for (String idString : ids) {
+						itmManager.delete(itmManager.find(Long.parseLong(idString), true));
+					}
+					break;
+				} catch (Exception e) {
+					// TODO: handle exception
 				}
 			}
+			
+			default: {
+				response.sendError(500);
+				break;
+				}
+			
+			}
+			
 		}
 	}
 }
