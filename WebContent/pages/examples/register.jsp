@@ -5,17 +5,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>WPB | Registration Page</title>
 <!-- Tell the browser to be responsive to screen width -->
-<meta
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-	name="viewport">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!-- Bootstrap 3.3.6 -->
 <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
 <!-- Font Awesome -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 <!-- Ionicons -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
 <!-- iCheck -->
@@ -39,26 +35,25 @@
 
 			<form action="/restaurantProject" method="post">
 				<div class="form-group has-feedback">
-					<input type="text" class="form-control" placeholder="Full name">
-					<span class="glyphicon glyphicon-user form-control-feedback"></span>
+					<input type="text" class="form-control" placeholder="Full name"> <span
+						class="glyphicon glyphicon-user form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="email" class="form-control" placeholder="Email">
-					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+					<input type="email" class="form-control" placeholder="Email"> <span
+						class="glyphicon glyphicon-envelope form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="password" id="password" class="form-control" placeholder="Password">
-					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+					<input type="password" id="password" class="form-control" placeholder="Password"> <span
+						class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="password" id="confirm_password" class="form-control" placeholder="Retype password"> 
-					<span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+					<input type="password" id="confirm_password" class="form-control" placeholder="Retype password"> <span
+						class="glyphicon glyphicon-log-in form-control-feedback"></span>
 				</div>
 				<div class="row">
 					<div class="col-xs-8">
 						<div class="checkbox icheck">
-							<label> <input type="checkbox"> I agree to the <a
-								href="#">terms</a>
+							<label> <input type="checkbox"> I agree to the <a href="#">terms</a>
 							</label>
 						</div>
 					</div>
@@ -92,7 +87,8 @@
 		});
 
 		$(function() { //Password matching
-			var password = document.getElementById("password"), confirm_password = document.getElementById("confirm_password");
+			var password = document.getElementById("password"), confirm_password = document
+					.getElementById("confirm_password");
 			function validatePassword() {
 				if (password.value != confirm_password.value) {
 					confirm_password.setCustomValidity("Passwords Don't Match");
@@ -103,7 +99,6 @@
 			password.onchange = validatePassword;
 			confirm_password.onkeyup = validatePassword;
 		});
-
 	</script>
 </body>
 </html>

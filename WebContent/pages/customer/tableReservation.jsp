@@ -1,25 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>WBP | Table Reservation</title>
 
-<meta
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-	name="viewport">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!-- Bootstrap 3.3.6 -->
 <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
 <!-- Font Awesome -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 <!-- Ionicons -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 <!-- DataTables -->
-<link rel="stylesheet"
-	href="../../plugins/datatables/dataTables.bootstrap.css">
+<link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
 <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -29,11 +23,9 @@
 <!-- iCheck for checkboxes and radio inputs -->
 <link rel="stylesheet" href="../../plugins/iCheck/all.css">
 <!-- Bootstrap Color Picker -->
-<link rel="stylesheet"
-	href="../../plugins/colorpicker/bootstrap-colorpicker.min.css">
+<link rel="stylesheet" href="../../plugins/colorpicker/bootstrap-colorpicker.min.css">
 <!-- Bootstrap time Picker -->
-<link rel="stylesheet"
-	href="../../plugins/timepicker/bootstrap-timepicker.min.css">
+<link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
 <!-- Select2 -->
 <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
 
@@ -60,10 +52,10 @@
 				Online Reservation <small>Customer View</small>
 			</h1>
 			<ol class="breadcrumb">
-					<li><a href="/restaurantProject/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
-					<li><a href="#">Customer View</a></li>
-					<li class="active">Table Reservation</li>
-				</ol>
+				<li><a href="/restaurantProject/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
+				<li><a href="#">Customer View</a></li>
+				<li class="active">Table Reservation</li>
+			</ol>
 			</section>
 
 			<!-- Main content -->
@@ -80,20 +72,19 @@
 							<div class="box-body">
 								<div class="col-md-1">
 									<!-- Title -->
-									<label for="title">Title:</label>
-									<select name="title" class="form-control">
+									<label for="title">Title:</label> <select name="title" class="form-control">
 										<option value="Mr" selected="selected">Mr</option>
 										<option value="Mrs">Mrs</option>
 										<option value="Ms">Ms</option>
 									</select>
 									<!-- /.form group -->
 								</div>
-								
+
 								<div class="col-md-5">
 									<!-- First name -->
 									<div class="form-group">
-										<label>First name:</label> 
-										<input id="fn" name="firstname" type="text" class="form-control" placeholder="Walter" required>
+										<label>First name:</label> <input id="fn" name="firstname" type="text" class="form-control" placeholder="Walter"
+											required>
 									</div>
 									<!-- /.form group -->
 								</div>
@@ -102,8 +93,7 @@
 									<!-- Last name -->
 									<div class="bootstrap-timepicker">
 										<div class="form-group">
-											<label>Last name:</label>
-											<input name="lastname" type="text" class="form-control" placeholder="White" required>
+											<label>Last name:</label> <input name="lastname" type="text" class="form-control" placeholder="White" required>
 										</div>
 										<!-- /.form group -->
 									</div>
@@ -135,8 +125,7 @@
 												<div class="input-group-addon">
 													<i class="fa fa-clock-o"></i>
 												</div>
-												<input name="time" type="text" class="form-control timepicker" 
-												data-date-container="tp">
+												<input name="time" type="text" class="form-control timepicker" data-date-container="tp">
 											</div>
 											<!-- /.input group -->
 										</div>
@@ -154,8 +143,7 @@
 												<div class="input-group-addon">
 													<i class="fa fa-users"></i>
 												</div>
-												<input name="guests" type="number" class="form-control" value="2"
-													min="1" max="40">
+												<input name="guests" type="number" class="form-control" value="2" min="1" max="40">
 											</div>
 
 										</div>
@@ -172,8 +160,7 @@
 											<div class="input-group-addon">
 												<i class="fa fa-phone"></i>
 											</div>
-											<input name="telephone" type="text" class="form-control"
-												data-inputmask='"mask": "9999999999"' min-length="10" 
+											<input name="telephone" type="text" class="form-control" data-inputmask='"mask": "9999999999"' min-length="10"
 												data-mask required>
 										</div>
 										<!-- /.input group -->
@@ -190,8 +177,7 @@
 											<div class="input-group-addon">
 												<i class="fa fa-at"></i>
 											</div>
-											<input name="email" type="email" required class="form-control"
-												placeholder="email@example.com">
+											<input name="email" type="email" required class="form-control" placeholder="email@example.com">
 										</div>
 										<!-- /.input group -->
 									</div>
@@ -232,12 +218,10 @@
 	<script src="../../plugins/select2/select2.full.min.js"></script>
 	<!-- InputMask -->
 	<script src="../../plugins/input-mask/jquery.inputmask.js"></script>
-	<script
-		src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+	<script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
 	<script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
 	<!-- date-range-picker -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 	<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
 	<!-- bootstrap datepicker -->
 	<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
@@ -263,9 +247,9 @@
 
 				$('#customer-menu').addClass('active');
 			});
-			
+
 			$('#reservation-form').validator();
-			
+
 			//Initialize Select2 Elements
 			$(".select2").select2();
 
@@ -313,24 +297,24 @@
 					});
 
 			//Date picker
-			
+
 			var d = new Date();
 			$('#datepicker').datepicker({
 				autoclose : true,
-				daysOfWeekDisabled: "1",
-				format: 'D, dd M yyyy',
-				startDate: d,
-				todayBtn: true,
-				todayHighlight: true,
-				weekStart: 1
+				daysOfWeekDisabled : "1",
+				format : 'D, dd M yyyy',
+				startDate : d,
+				todayBtn : true,
+				todayHighlight : true,
+				weekStart : 1
 			});
 
 			//Timepicker
 			$(".timepicker").timepicker({
 				showInputs : false,
 				container : "#tp",
-				defaultTime: 'current',
-				showMeridian: false
+				defaultTime : 'current',
+				showMeridian : false
 			});
 
 		});

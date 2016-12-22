@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,20 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>WPB | Take-Away</title>
 <!-- Tell the browser to be responsive to screen width -->
-<meta
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-	name="viewport">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!-- Bootstrap 3.3.6 -->
 <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
 <!-- Font Awesome -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 <!-- Ionicons -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 <!-- Bootstrap table -->
-<link rel="stylesheet"
-	href="../../plugins/bootstrap-table/bootstrap-table.css">
+<link rel="stylesheet" href="../../plugins/bootstrap-table/bootstrap-table.css">
 
 <!-- Theme style -->
 <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
@@ -60,8 +54,7 @@
 					Take-Away Order <small>Customer View</small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="/restaurantProject/pages/dashboard.jsp"><i
-							class="fa fa-dashboard"></i> Home</a></li>
+					<li><a href="/restaurantProject/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
 					<li><a href="#">Customer View</a></li>
 					<li class="active">Take-Away Order</li>
 				</ol>
@@ -81,27 +74,18 @@
 								<div class="box-body">
 									<div class="food-menu col-md-3">
 										<div class="btn-group btn-block btn-group-vertical">
-											<a href="#" id="salad-btn" class="btn btn-lg btn-primary active">
-												<img width="30" src="../../dist/img/flat-icon-gastronomy/salad.svg">
-													&emsp;Salads
-											</a>
-											<a href="#" id="burger-btn" class="btn btn-lg btn-primary">
-												<img width="30" src="../../dist/img/flat-icon-gastronomy/burger.svg">
-													&emsp;Burgers
-											</a>
-											<a href="#" id="pizza-btn" class="btn btn-lg btn-primary">
-												<img width="30" src="../../dist/img/flat-icon-gastronomy/pizza-2.svg">
-												&emsp;Pizza
-											</a>
-											<a href="#" id="chinese-btn" class="btn btn-lg btn-primary">
-												<img width="30" src="../../dist/img/flat-icon-gastronomy/noodles.svg">
-												&emsp;Chinese
-											</a> <a href="#" id="dessert-btn" class="btn btn-lg btn-primary">
-												<img width="30" src="../../dist/img/flat-icon-gastronomy/cupcake.svg">
-												&emsp;Desserts
-											</a> <a href="#" id="drink-btn" class="btn btn-lg btn-primary">
-												<img width="30" src="../../dist/img/flat-icon-gastronomy/glass-3.svg">
-												&emsp;Drinks
+											<a href="#" id="salad-btn" class="btn btn-lg btn-primary active"> <img width="30"
+												src="../../dist/img/flat-icon-gastronomy/salad.svg"> &emsp;Salads
+											</a> <a href="#" id="burger-btn" class="btn btn-lg btn-primary"> <img width="30"
+												src="../../dist/img/flat-icon-gastronomy/burger.svg"> &emsp;Burgers
+											</a> <a href="#" id="pizza-btn" class="btn btn-lg btn-primary"> <img width="30"
+												src="../../dist/img/flat-icon-gastronomy/pizza-2.svg"> &emsp;Pizza
+											</a> <a href="#" id="chinese-btn" class="btn btn-lg btn-primary"> <img width="30"
+												src="../../dist/img/flat-icon-gastronomy/noodles.svg"> &emsp;Chinese
+											</a> <a href="#" id="dessert-btn" class="btn btn-lg btn-primary"> <img width="30"
+												src="../../dist/img/flat-icon-gastronomy/cupcake.svg"> &emsp;Desserts
+											</a> <a href="#" id="drink-btn" class="btn btn-lg btn-primary"> <img width="30"
+												src="../../dist/img/flat-icon-gastronomy/glass-3.svg"> &emsp;Drinks
 											</a>
 										</div>
 
@@ -116,22 +100,16 @@
 											<div class="box box-primary">
 												<div class="box-body table-responsive">
 
-													<table id="item-table" data-toggle="table"
-														data-url="../../listItem" data-method="post"
-														data-content-type="application/x-www-form-urlencoded"
-														data-query-params='action=list' data-striped="true"
-														data-pagination="true" data-pagination-loop="false"
-														data-page-size="10" data-show-refresh="true"
-														data-search="true" data-show-toggle="true"
-														data-show-export="true">
+													<table id="item-table" data-toggle="table" data-url="../../listItem" data-method="post"
+														data-content-type="application/x-www-form-urlencoded" data-query-params='action=list' data-striped="true"
+														data-pagination="true" data-pagination-loop="false" data-page-size="10" data-show-refresh="true" data-search="true"
+														data-show-toggle="true" data-show-export="true">
 														<thead>
 															<tr>
 																<th data-field="name" data-sortable="true">Name</th>
-																<th data-field="price" data-sortable="true"
-																	data-align="right">Price</th>
+																<th data-field="price" data-sortable="true" data-align="right">Price</th>
 																<!-- Should show only available items -->
-																<th data-field="action" data-formatter="actionFormatter"
-																	data-events="actionEvent">Add to Cart</th>
+																<th data-field="action" data-formatter="actionFormatter" data-events="actionEvent">Add to Cart</th>
 															</tr>
 														</thead>
 													</table>
@@ -182,8 +160,7 @@
 
 								<div id="total-price-box" class="box-footer">
 									<h4>
-										<span class="pull-right total-price">Total price: €
-											0.00</span>
+										<span class="pull-right total-price">Total price: € 0.00</span>
 									</h4>
 								</div>
 								<div class="box-footer">
@@ -226,17 +203,12 @@
 	<!-- Page specific script -->
 	<script src="../../plugins/bootstrap-table/bootstrap-table.js"></script>
 	<!-- put your locale files after bootstrap-table.js -->
-	<script
-		src="../../plugins/bootstrap-table/locale/bootstrap-table-en-US.js"></script>
+	<script src="../../plugins/bootstrap-table/locale/bootstrap-table-en-US.js"></script>
 	<!-- extensions for bootstrap-table -->
-	<script
-		src="../../plugins/bootstrap-table/extensions/tableExport-jquery/tableExport.js"></script>
-	<script
-		src="../../plugins/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
-	<script
-		src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
-	<script
-		src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
+	<script src="../../plugins/bootstrap-table/extensions/tableExport-jquery/tableExport.js"></script>
+	<script src="../../plugins/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
+	<script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
+	<script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
 	<script>
 		// Table functions
 		function availableSorter(a, b) {
