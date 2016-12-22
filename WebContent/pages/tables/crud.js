@@ -54,24 +54,33 @@ function initCRUD() {
 		      .then(callback, callbackCancel);
 	});
 }
-
-function sendRequest(action) {
+/**
+ * Sends an AJAX call based on the action parameter in order
+ * to add/update the database 
+ * 
+ * @param {String} 
+ * 				action String that defines the CRUD action
+ */
+function sendCRUDRequest(action) {
+	
+	/*
+	var formData = $form.serializeArray().reduce(function(m,o){ m[o.name] = o.value; return m;}, {});
 	
 	var postData = {
 		action: action,
-		data: JSON.stringify($('#myform').data)
-	};
-	
+		data: JSON.stringify(formData)
+	};*/
+	console.log($('#crud-form').serialize());
 	$.ajax({
 		url : API_URL,
 		type : 'post',
-		data: postData,
+		data: $('#crud-form').serialize(),
 		success : function() {
-			$modal.hide();
+			$modal.modal('hide');
 			$table.bootstrapTable('refresh');
 		},
 		error : function() {
-			alert('Error while sending update/save request!', 'danger');
+			alert('Error while sending update/save/delete request!', 'danger');
 			$modal.modal('hide');
 		}
 	});

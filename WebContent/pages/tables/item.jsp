@@ -368,6 +368,7 @@
 	var $modalTitle = $('.modal-title');
 	var editText = ['Edit Item', 'Edit'];
 	var createText = ['Create new Item', 'Create'];
+	var deleteText = ["Are you sure to delete the entries with the following id's?", 'Create'];
 	var selection = [];
 
 	$(document).ready(function() {

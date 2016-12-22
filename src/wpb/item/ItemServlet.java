@@ -91,12 +91,18 @@ public class ItemServlet extends HttpServlet {
 
 			case "get": {
 				Restaurant item = itmManager.find(Long.parseLong(data), true);
+				String formAction = null;
 				if(item==null){
 					item = new Item();
+					formAction = "create";
+				}
+				else {
+					formAction = "update";
 				}
 				List<FoodClass> fcList = fcManager.getAll();
 				request.setAttribute("fc", fcList);
 				request.setAttribute("itm", item);
+				request.setAttribute("formaction", formAction);
 				request.getRequestDispatcher("/WEB-INF/editItem.jsp").forward(request, response);
 			}
 		
@@ -111,19 +117,36 @@ public class ItemServlet extends HttpServlet {
 			}
 
 			case "create": {
-				JsonObject obj = gson.fromJson(data, JsonObject.class);
-				Item itm = new Item();
-				itm.setName(obj.get("name").getAsString());
-				itm.setPrice(obj.get("price").getAsDouble());
-				itm.setFoodClass(fcManager.find(obj.get("foodClass").getAsLong(), true));
-				itmManager.add(itm);
+				try {
+					Item itm = new Item();
+					itm.setName(request.getParameter("name"));
+					itm.setPrice(Double.parseDouble(request.getParameter("price")));
+					FoodClass fc = fcManager.find(Long.parseLong(request.getParameter("foodClass")), true);
+					itm.setFoodClass(fc);
+					boolean available = (request.getParameter("available") == null) ? false : true;
+					itm.setAvailable(available);
+					itmManager.add(itm);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+
 				break;
 				}
 
 			case "update": {
-				//JsonObject obj = gson.fromJson(data, JsonObject.class);
-				Item itm = itmManager.find(Long.parseLong(data), true);
-				itmManager.update(itm);
+				try {
+					Item itm = itmManager.find(Long.parseLong(request.getParameter("id")), true);
+					itm.setName(request.getParameter("name"));
+					itm.setPrice(Double.parseDouble(request.getParameter("price")));
+					FoodClass fc = fcManager.find(Long.parseLong(request.getParameter("foodClass")), true);
+					itm.setFoodClass(fc);
+					boolean available = (request.getParameter("available") == null) ? false : true;
+					itm.setAvailable(available);
+					itmManager.update(itm);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+
 				break;
 				}
 			
@@ -133,7 +156,14 @@ public class ItemServlet extends HttpServlet {
 				itmManager.update(itm);
 				break;
 				}
+			
+			default: {
+				response.sendError(500);
+				break;
+				}
+			
 			}
+			
 		}
 	}
 }

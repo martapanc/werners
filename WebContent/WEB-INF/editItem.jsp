@@ -17,10 +17,10 @@
 			<c:forEach items="${fc}" var="entry">
 				<c:choose>
 				<c:when test="${entry.name == itm.foodClass.name}">
-    				<option selected>${entry.name}</option>
+    				<option value="${entry.id}" selected>${entry.name}</option>
   				</c:when>
   				<c:otherwise>
-    				<option>${entry.name}</option>
+    				<option value="${entry.id}">${entry.name}</option>
   				</c:otherwise>
   				</c:choose>
     		</c:forEach>
@@ -28,8 +28,12 @@
 	</div>
 	<div class="form-group">
 		<label for="price">Price</label> 
-		<input type="text" class="form-control" name="price" placeholder="Insert Price" value="${itm.price}" pattern="0|(0.|[1-9]+[.])[0-9]+"  required>
+		<input type="number" class="form-control" name="price" placeholder="Insert Price" value="${itm.price}" min="0" max="99.9" step="0.01"  required>
+	</div>	
+	<div class="checkbox form-group">
+  		<label><input type="checkbox" value="true" name="available" <c:if test="${itm.available == true}">checked="checked"</c:if>>Available</label>
 	</div>
+	<input type="hidden" id="action" name="action" value="${formaction}"> 
 </form>
 <script>
 	
@@ -43,8 +47,7 @@
 			    console.log("form is invalid");
 			  } else {
 				e.preventDefault();
-				// if hidden data field is create then =>
-				sendRequest('create');
+				sendCRUDRequest($('#action').val());
 			  }
 		});
 	});
