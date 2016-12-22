@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
@@ -73,13 +74,13 @@ public class SeedDB {
 		}
 	}
 
-	public static void seedFoodClass(int count) {
+	public static void seedFoodClass() {
 		
-		String name = "class";
+		String[] foodClasses = {"Pizza", "Burger", "Chinese", "Salad", "Dessert", "Drink"};
 		
-		for (int i = 1; i <= count; i++) {
+		for (String fcName : foodClasses) {
 			FoodClass fc = new FoodClass();
-			fc.setName(name + i);
+			fc.setName(fcName);
 			fcManager.add(fc);
 		}
 	}
@@ -90,23 +91,21 @@ public class SeedDB {
 
 		// creating random items
 		for (int i = 1; i <= count; i++) {
-			String itemname = idgen.nextSessionId();
-			String fcname = itemname.substring(0,4);
-			FoodClass fc = new FoodClass();
-			fc.setName(fcname);
+			List<FoodClass> fcList = fcManager.getAll();
+			FoodClass fc = fcList.get((int) Math.floor(Math.random()*fcList.size()));
 			Item newItem = new Item();
+			newItem.setFoodClass(fc);
 			newItem.setAvailable(R.nextBoolean());
 			newItem.setPrice(Math.floor(ThreadLocalRandom.current().nextDouble(0.1, 12) * 100) / 100);
 			newItem.setName(idgen.nextSessionId());
-			newItem.setFoodClass(fc);
 			itmManager.add(newItem);
 		}
 
-		System.out.println(itmManager.getTotalCount() + " new Items created");
-		System.out.println(itmManager.getAll());
-		Item x = itmManager.find((long) 20, true);
-		x.setName("new Item name");
-		itmManager.update(x);
+		//System.out.println(itmManager.getTotalCount() + " new Items created");
+		//System.out.println(itmManager.getAll());
+		//Item x = itmManager.find((long) 20, true);
+		//x.setName("new Item name");
+		//itmManager.update(x);
 	}
 
 	public static void seedTableOrders(int count) {
