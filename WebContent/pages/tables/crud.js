@@ -7,7 +7,7 @@ function initCRUD() {
 
 	// create button
 	$create.on('click', function() {
-		$modalBody.load(API_URL, {action: 'get', data: 0}, function (responseText, textStatus, req) {
+		$modalBody.load(API_URL, {action: 'get', id: 0}, function (responseText, textStatus, req) {
 		        if (textStatus == "error") {
 		          alert('Server error while requesting a create action');
 		        } 
@@ -22,7 +22,7 @@ function initCRUD() {
 	// edit button (window is needed because of async table creation)
 	window.actionEvents = {
 		'click .edit' : function(e, value, row) {
-		  	$modalBody.load(API_URL, {action: 'get', data: row.id}, function (responseText, textStatus, req) {
+		  	$modalBody.load(API_URL, {action: 'get', id: row.id}, function (responseText, textStatus, req) {
 		        if (textStatus == "error") {
 			          alert('Server error while requesting an edit action');
 			        } 
@@ -47,13 +47,13 @@ function initCRUD() {
 	
 	// delete button
 	$delete.on('click', function() {
+		$('#del-modal').modal();
 		var ids = getIdSelections();
 		var message = "Are you sure to delete this item(s)?";
 		alert("must be implemented");
-		eModal.confirm(message, null)
-		      .then(callback, callbackCancel);
 	});
 }
+
 /**
  * Sends an AJAX call based on the action parameter in order
  * to add/update the database 
@@ -63,58 +63,16 @@ function initCRUD() {
  */
 function sendCRUDRequest(action) {
 	
-	/*
-	var formData = $form.serializeArray().reduce(function(m,o){ m[o.name] = o.value; return m;}, {});
-	
-	var postData = {
-		action: action,
-		data: JSON.stringify(formData)
-	};*/
-	console.log($('#crud-form').serialize());
 	$.ajax({
 		url : API_URL,
 		type : 'post',
 		data: $('#crud-form').serialize(),
 		success : function() {
-			$modal.modal('hide');
 			$table.bootstrapTable('refresh');
 		},
 		error : function() {
 			alert('Error while sending update/save/delete request!', 'danger');
-			$modal.modal('hide');
 		}
 	});
-	
-}
-/**
- * Shows the modal for CRUD operations.
- * 
- * @param {string}
- *            title The title text of the modal.
- * @param {number}
- *            row The row number for populating the fields.
- */
-function showModal(title, row) {
-
-	$modal.find('.modal-title').text(title);
-
-	// if called as create Modal row is undefined so set name to "auto-assigned"
-	// and id to 0 = create. Otherwise populate input fields with values 
-	// from row object of table
-	if (row == null) {
-		$modal.find('input[name="id"]').attr("placeholder", "auto-assigned");
-		$modal.find('input').val("");
-		row = {
-			id : 0
-		}
-	}
-	else {
-		for ( var name in row) {
-			$modal.find('input[name="' + name + '"]').val(row[name]);
-		}
-	}
-	$modal.data('id', row.id);
-	$modal.data('foodClass', row.foodClass);
-	$modal.data('versionNumber', row.versionNumber);
-	$modal.modal('show');
+	$modal.modal('hide');
 }

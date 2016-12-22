@@ -86,11 +86,12 @@ public class ItemServlet extends HttpServlet {
 
 		if (paramMap.containsKey("action")) {
 			String action = (String) request.getParameter("action");
-			String data = (String) request.getParameter("data");
+			String[] ids = request.getParameterValues("id");
+			long id = (request.getParameter("id") == null) ? 0 : Long.parseLong(request.getParameter("id"));
 			switch (action) {
 
 			case "get": {
-				Restaurant item = itmManager.find(Long.parseLong(data), true);
+				Restaurant item = itmManager.find(id, true);
 				String formAction = null;
 				if(item==null){
 					item = new Item();
@@ -135,7 +136,7 @@ public class ItemServlet extends HttpServlet {
 
 			case "update": {
 				try {
-					Item itm = itmManager.find(Long.parseLong(request.getParameter("id")), true);
+					Item itm = itmManager.find(id, true);
 					itm.setName(request.getParameter("name"));
 					itm.setPrice(Double.parseDouble(request.getParameter("price")));
 					FoodClass fc = fcManager.find(Long.parseLong(request.getParameter("foodClass")), true);
@@ -151,11 +152,17 @@ public class ItemServlet extends HttpServlet {
 				}
 			
 			case "delete": {
-				Item itm = new Item();
-				itm = gson.fromJson(data, Item.class);
-				itmManager.update(itm);
-				break;
+				try {
+					//
+					// itm = gson.fromJson(id, Item.class);
+					for (String idString : ids) {
+						itmManager.delete(itmManager.find(Long.parseLong(idString), true));
+					}
+					break;
+				} catch (Exception e) {
+					// TODO: handle exception
 				}
+			}
 			
 			default: {
 				response.sendError(500);
