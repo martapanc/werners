@@ -52,7 +52,7 @@ function initCRUD() {
 		var message = "Are you sure to delete this item(s)?";
 		alert("must be implemented");
 	});
-}
+};
 
 /**
  * Sends an AJAX call based on the action parameter in order
@@ -75,4 +75,4 @@ function sendCRUDRequest(action) {
 		}
 	});
 	$modal.modal('hide');
-}
+};
