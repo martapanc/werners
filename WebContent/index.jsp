@@ -32,13 +32,13 @@
 <body class="hold-transition skin-red sidebar-mini">
 	<div class="wrapper">
 
-		<jsp:include page="pages/upper-navbar.html" />
+		<jsp:include page="WEB-INF/upper-navbar.html" />
 
-		<jsp:include page="pages/left-sidebar.html" />
+		<jsp:include page="WEB-INF/left-sidebar.html" />
 
-		<jsp:include page="pages/content-wrapper.jsp" />
+		<jsp:include page="WEB-INF/content-wrapper.jsp" />
 
-		<jsp:include page="pages/footer.html" />
+		<jsp:include page="WEB-INF/footer.html" />
 
 		
 

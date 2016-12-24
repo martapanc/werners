@@ -32,9 +32,9 @@
 <body class="hold-transition skin-red sidebar-mini">
 	<div class="wrapper">
 
-		<jsp:include page="../upper-navbar.html" />
+		<jsp:include page="../../WEB-INF/upper-navbar.html" />
 
-		<jsp:include page="../left-sidebar.html" />
+		<jsp:include page="../../WEB-INF/left-sidebar.html" />
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
@@ -83,7 +83,7 @@
 		</div>
 		<!-- /.content-wrapper -->
 
-		<jsp:include page="../footer.html" />
+		<jsp:include page="../../WEB-INF/footer.html" />
 
 
 		<!-- Add the sidebar's background. This div must be placed
