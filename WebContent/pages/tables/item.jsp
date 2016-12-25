@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Item</title>
+  <title>WPB | Item</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -23,7 +22,10 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
-
+  
+  <!-- Bootstrap notifications --> 
+  <link rel="stylesheet" href="../../plugins/notify/bootstrap-notify.css">
+  
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -92,7 +94,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button onclick="sendCRUDRequest('delete')" form="crud-form" class="btn btn-danger" id="modal-button">Delete</button>
+        <button type="button" class="btn btn-danger" id="delete-button">Delete</button>
       </div>
     </div> <!-- /.modal-content -->
   </div> <!-- /.modal-dialog -->
@@ -104,7 +106,7 @@
     <section class="content-header">
       <h1>
         Items
-        <small>here we have a list of all items</small>
+        <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/restaurantProject/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -364,6 +366,8 @@
 </div>
 <!-- ./wrapper -->
 
+<div id="notify" class="notifications bottom-right"></div>
+
 <!-- jQuery 2.2.3 -->
 <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
@@ -388,14 +392,15 @@
 <script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.min.js"></script>
 <script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.min.js"></script>
 <script src="../../plugins/bootstrap-table/extensions/group-by-v2/bootstrap-table-group-by.min.js"></script>
-<!-- scripts for modal and its validation -->
-<script src="../../plugins/eModal/eModal.js"></script>
+<!-- scripts for form validation ad notifications -->
+<script src="/restaurantProject/plugins/notify/bootstrap-notify.js"></script>
 <script src="/restaurantProject/plugins/validator/validator.min.js"></script>
 <!-- custom scripts -->
 <script src="tableutil.js"></script>
 <script src="crud.js"></script>
 <script>
 	
+	/*
 	const API_URL = '/restaurantProject/listItem';
 	var $table = $('#table');
 	var $create = $('#create');
@@ -411,9 +416,12 @@
 	var createText = ['Create new Item', 'Create'];
 	var deleteText = ["Are you sure to delete the entries with the following id's?", 'Delete'];
 	var selection = [];
-
+	*/
+	
+	const URL = '/restaurantProject/listItem';
+	
 	$(document).ready(function() {
-		initCRUD();
+		 initCRUD(URL);
 	});
 	
 	

@@ -1,27 +1,52 @@
 /**
- * Initializes the webpage for CRUD operations. Add eventhandlers 
- * to create, edit and delete button of bootstrap table
+ * This js file handles the CRUD actions of the bootstrap table by adding event
+ * handlers to the buttons, controling modal visualization, notifications for
+ * feedback and handling error situations.
  * 
  */
-function initCRUD() {
+
+var $table = $('#table');
+
+var $cButton = $('#create');
+var $cModal = $('#create-modal');
+var $cBody = $('#create-modal-body');
+
+var $eButton = $('.edit');
+var $eModal = $('#edit-modal');
+var $eBody = $('#edit-modal-body');
+
+var $delete = $('#delete');
+var $modals = $('.modal');
+
+var $notifier = $('#notify');
+
+/**
+ * Initializes the webpage for CRUD operations. Add eventhandlers to create,
+ * edit and delete button of bootstrap table
+ * 
+ */
+function initCRUD(API_URL) {
 	
-	// add create handler to its button
-	$create.on('click', function(){
-	    $('#create-modal-body').load(API_URL + " #create-form", {action: 'find', id: 0}, function (responseText, textStatus, req) {
+	// create button 
+	$cButton.on('click', function(){
+	    $cBody.load(API_URL + ' #create-form', {action: 'find', id: 0}, function (responseText, textStatus, req) {
 	    	if(textStatus == 'error') {
-	    		alert('Server error while sending a find request!', 'danger'); 
+	    		$notifier.notify({
+				    message: { text: 'Server error while sending a find request!' },
+				    type: 'danger',
+				    closable: false,
+				  }).show(); 
 	    	} else {
-	    		console.log("Successfully loaded create-form");
+	    		console.log('Successfully loaded create-form');
 	    		$('#create-form').validator().on('submit', function(e) {
 	    			if (e.isDefaultPrevented()) {
-	    			    console.log("Edit form validation has failed");
+	    			    console.log('Create form validation has failed');
 	    			  } else {
 	    				e.preventDefault();
-						sendCRUDRequest($(this).serialize());
+						sendCRUDRequest(API_URL, $(this).serialize());
 	    			  }
 	    		});
-			    	$('#create-modal').modal();
-					$('#create-form').validator('update');
+			    	$cModal.modal();
 	    	}
 		});
 	});
@@ -29,21 +54,24 @@ function initCRUD() {
 	// edit button (window.action events is needed because of async table creation)
 	window.actionEvents = {
 		'click .edit' : function(e, value, row) {
-		    $('#edit-modal-body').load(API_URL + " #edit-form", {action: 'find', id: row.id}, function (responseText, textStatus, req) {
+		    $eBody.load(API_URL + ' #edit-form', {action: 'find', id: row.id}, function (responseText, textStatus, req) {
 		    	if(textStatus == 'error') {
-		    		alert('Server error while sending a find request!', 'danger'); 
+		    		$notifier.notify({
+					    message: { text: 'Server error while sending a find request!' },
+					    type: 'danger',
+					    closable: false,
+					  }).show();
 		    	} else {
-		    		console.log("Successfully loaded edit-form");
+		    		console.log('Successfully loaded edit-form');
 		    		$('#edit-form').validator().on('submit', function(e) {
 		    			if (e.isDefaultPrevented()) {
-		    			    console.log("Edit form validation has failed");
+		    			    console.log('Edit form validation has failed');
 		    			  } else {
 		    				e.preventDefault();
-							sendCRUDRequest($(this).serialize());
+							sendCRUDRequest(API_URL, $(this).serialize());
 		    			  }
 		    		});
-			    	$('#edit-modal').modal();
-					$('#edit-form').validator('update');
+			    	$eModal.modal();
 	            }
 			});
 		}
@@ -52,18 +80,22 @@ function initCRUD() {
 	// checkboxes in table (to enable delete button)
 	$table.on('check.bs.table uncheck.bs.table '
 			+ 'check-all.bs.table uncheck-all.bs.table', function() {
-		$delete.prop('disabled', !$table.bootstrapTable('getSelections').length);
+					$delete.prop('disabled', !$table.bootstrapTable('getSelections').length);
 		// save your data, here just save the current page
-		selections = getIdSelections();
+		// selections = getIdSelections();
 		// push or splice the selections if you want to save all data selections
 	});
 
 	
 	// delete button
 	$delete.on('click', function() {
+		var idArray = getIdSelections();
+		var formData = 'action=delete&id=' + idArray.join('&id=');
+		$('#delete-modal-body').html('<p>Are you sure to delete ' + idArray.length + ' entries?<p>');
 		$('#delete-modal').modal();
-		$delModalBody.html("<p>Are you sure to delete the entries with the following id's?<br>"+ getIdSelections() +"<p>");
-		//sendCRUDRequest('delete', getIdSelections());
+		$('#delete-button').on('click', function() {
+				sendCRUDRequest(API_URL, formData);
+			  });
 	});
 }
 
@@ -76,20 +108,32 @@ function initCRUD() {
  * @param {String} 
  * 				action String that defines the CRUD action
  */
-function sendCRUDRequest(formdata) {
+function sendCRUDRequest(URL, formdata) {
 	
-	
+	var regex_id = /id=([a-z]+)/g;
+	var regex_action = /action=([a-z]+)/g;
+	var action = regex_action.exec(formdata);
+	var id = regex_id.exec(formdata);
 	$.ajax({
-		url : API_URL,
+		url : URL,
 		type : 'post',
 		data: formdata,
 		success : function() {
+			$('#notify').notify({
+			    message: { text: action[1].toUpperCase() + ' executed!' },
+			    type: 'success',
+			    closable: false,
+			  }).show();
 			$table.bootstrapTable('refresh');
 		},
 		error : function() {
-			alert('Server error while sending a create/edit/delete request!', 'danger');
+			$notifier.notify({
+			    message: { text: 'Server error while executing ' + action[1] + ' request!' },
+			    type: 'danger',
+			    closable: false,
+			  }).show();
 		}
 	});
 	
-	$('.modal').modal('hide');
+	$modals.modal('hide');
 }

@@ -46,12 +46,11 @@ public class ItemServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		Map<String, String[]> paramMap = request.getParameterMap();
-		// Enumeration paramNames = request.getParameterNames();
 
 		if (paramMap.containsKey("action")) {
 			String action = (String) request.getParameter("action");
 			String[] ids = request.getParameterValues("id");
-			long id = (request.getParameter("id") == null) ? 0 : Long.parseLong(request.getParameter("id"));
+			long id = (ids == null || ids.length > 1) ? 0 : Long.parseLong(request.getParameter("id"));
 			switch (action) {
 
 			case "find": {
@@ -111,8 +110,6 @@ public class ItemServlet extends HttpServlet {
 			
 			case "delete": {
 				try {
-					//
-					// itm = gson.fromJson(id, Item.class);
 					for (String idString : ids) {
 						itmManager.delete(itmManager.find(Long.parseLong(idString), true));
 					}
@@ -122,10 +119,6 @@ public class ItemServlet extends HttpServlet {
 				}
 			}
 					
-			case "refresh": {
-				request.getRequestDispatcher("/WEB-INF/crudItem.jsp").forward(request, response);
-				break;
-				}
 			}
 
 		}
