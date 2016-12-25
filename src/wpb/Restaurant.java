@@ -23,6 +23,15 @@ public class Restaurant {
 	public long getId() {
 		return id;
 	}
+	
+	public int getVersionNumber() {
+		return versionNumber;
+	}
+	
+	public void setVersionNumber(int versionNumber) {
+		this.versionNumber = versionNumber;
+	}
+	
 	public String toString() {
 	        StringBuilder result = new StringBuilder();
 	        String newLine = System.getProperty("line.separator");
@@ -67,6 +76,8 @@ public class Restaurant {
 
 	        return result.toString();
 	    }
+	
+
 
 	
 }

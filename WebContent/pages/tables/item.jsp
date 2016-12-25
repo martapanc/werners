@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Calendar</title>
+  <title>AdminLTE 2 | Item</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -38,7 +38,10 @@
   
  <jsp:include page="../left-sidebar.html" />
  
-
+ <div id="crud">
+ 	<jsp:include page="../../WEB-INF/crudItem.jsp"/>
+ </div>
+ 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -109,36 +112,6 @@
 
   <jsp:include page="../footer.html" />
   
-    
-  
-  
-  <div class="modal fade" tabindex="-1" role="dialog" id="crud-modal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Modal title</h4>
-      </div>
-      <div class="modal-body">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="submit" form="crud-form" class="btn btn-primary" id="modal-button">Submit</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
- </div><!-- /.modal -->
- 
- <div class="modal hide fade" tabindex="-1" role="dialog" id="del-modal">
-  <div class="modal-body">
-    Are you sure?
-  </div>
-  <div class="modal-footer">
-    <button type="button" data-dismiss="modal" class="btn btn-primary" id="delete">Delete</button>
-    <button type="button" data-dismiss="modal" class="btn">Cancel</button>
-  </div>
-</div>
- 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Create the tabs -->
@@ -376,14 +349,18 @@
 	var $modalBody = $('.modal-body');
 	var $modalButton = $('#modal-button');
 	var $modalTitle = $('.modal-title');
+	var $delModalTitle = $('#del-modal-title');
+	var $delModalBody = $('#del-modal-body');
 	var editText = ['Edit Item', 'Edit'];
 	var createText = ['Create new Item', 'Create'];
-	var deleteText = ["Are you sure to delete the entries with the following id's?", 'Create'];
+	var deleteText = ["Are you sure to delete the entries with the following id's?", 'Delete'];
 	var selection = [];
 
 	$(document).ready(function() {
+		
 		initCRUD();
-    });
+	});
+	
 	
 </script>
 </body>

@@ -34,6 +34,7 @@
   		<label><input type="checkbox" value="true" name="available" <c:if test="${itm.available == true}">checked="checked"</c:if>>Available</label>
 	</div>
 	<input type="hidden" id="action" name="action" value="${formaction}"> 
+	<input type="hidden" name="version-number" value="${itm.versionNumber}">
 </form>
 <script>
 	
@@ -44,7 +45,7 @@
 		// submit button (create/edit) of form modal
 		$('#crud-form').validator().on('submit', function (e) {
 			  if (e.isDefaultPrevented()) {
-			    console.log("form is invalid");
+			    console.log("form validation has failed");
 			  } else {
 				e.preventDefault();
 				sendCRUDRequest($('#action').val());
