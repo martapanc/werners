@@ -5,31 +5,47 @@
  */
 function initCRUD() {
 	
-	var modalUniqueClass = ".modal";
-	
 	// add create handler to its button
-	$create.on('click', createRequest);
+	$create.on('click', function(){
+	    $('#create-modal-body').load(API_URL + " #create-form", {action: 'find', id: 0}, function (responseText, textStatus, req) {
+	    	if(textStatus == 'error') {
+	    		alert('Server error while sending a find request!', 'danger'); 
+	    	} else {
+	    		console.log("Successfully loaded create-form");
+	    		$('#create-form').validator().on('submit', function(e) {
+	    			if (e.isDefaultPrevented()) {
+	    			    console.log("Edit form validation has failed");
+	    			  } else {
+	    				e.preventDefault();
+						sendCRUDRequest($(this).serialize());
+	    			  }
+	    		});
+			    	$('#create-modal').modal();
+					$('#create-form').validator('update');
+	    	}
+		});
+	});
 	
-	// edit button (window is needed because of async table creation)
+	// edit button (window.action events is needed because of async table creation)
 	window.actionEvents = {
 		'click .edit' : function(e, value, row) {
-			/*
-			$.ajax({
-				url : API_URL,
-				type : 'post',
-				data: {action: 'find', id: row.id},
-				success : function() {
-						console.log("Succesfully made a find request of id : " + row.id);
-						$('#crud').load(API_URL, {action: 'refresh'}, function (responseText, textStatus, req) {
-							//error handling missing
-							$('#edit-form').validator('update');
-							$('#edit-modal').modal();
-						});
-				},
-				error : function() {
-					alert('Error while sending a find request!', 'danger'); 
-				}
-			});*/
+		    $('#edit-modal-body').load(API_URL + " #edit-form", {action: 'find', id: row.id}, function (responseText, textStatus, req) {
+		    	if(textStatus == 'error') {
+		    		alert('Server error while sending a find request!', 'danger'); 
+		    	} else {
+		    		console.log("Successfully loaded edit-form");
+		    		$('#edit-form').validator().on('submit', function(e) {
+		    			if (e.isDefaultPrevented()) {
+		    			    console.log("Edit form validation has failed");
+		    			  } else {
+		    				e.preventDefault();
+							sendCRUDRequest($(this).serialize());
+		    			  }
+		    		});
+			    	$('#edit-modal').modal();
+					$('#edit-form').validator('update');
+	            }
+			});
 		}
 	};
 			
@@ -48,55 +64,32 @@ function initCRUD() {
 		$('#delete-modal').modal();
 		$delModalBody.html("<p>Are you sure to delete the entries with the following id's?<br>"+ getIdSelections() +"<p>");
 		//sendCRUDRequest('delete', getIdSelections());
-		var message = "Are you sure to delete this item(s)?";
 	});
 }
 
-
-function createRequest() {
-	
-	$('#create-modal').modal();
-	/*
-	$.ajax({
-		url : API_URL,
-		type : 'post',
-		data: {action: 'find', id: 0},
-		success : function() {
-				console.log("Succesfully made a find request of id: 0");
-				$('#crud').load(API_URL, {action: 'refresh'}, function (responseText, textStatus, req) {
-					// error handling missing
-					$('#create-form').validator('update');
-					//$('#create-modal').modal();
-				});
-		},
-		error : function() {
-			alert('Error while sending a find request!', 'danger'); 
-		}
-	});*/
-	
-	//$create.on('click', createRequest);
-}
-
-
 /**
- * Sends an AJAX call based on the action parameter in order
- * to add/update the database 
+ * Sends an AJAX call based on the action parameter (which can be 
+ * either create, edit or delete), in order to interact with the
+ * database. After the call (no matter if succesful) all open modals 
+ * (in theory only one is open) are closed.
  * 
  * @param {String} 
  * 				action String that defines the CRUD action
  */
-function sendCRUDRequest(action) {
+function sendCRUDRequest(formdata) {
+	
 	
 	$.ajax({
 		url : API_URL,
 		type : 'post',
-		data: $('.form').serialize(),
+		data: formdata,
 		success : function() {
 			$table.bootstrapTable('refresh');
 		},
 		error : function() {
-			alert('Error while sending update/save/delete request!', 'danger');
+			alert('Server error while sending a create/edit/delete request!', 'danger');
 		}
 	});
-	$modal.modal('hide');
+	
+	$('.modal').modal('hide');
 }

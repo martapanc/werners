@@ -38,9 +38,65 @@
   
  <jsp:include page="../left-sidebar.html" />
  
- <div id="crud">
- 	<jsp:include page="../../WEB-INF/crudItem.jsp"/>
- </div>
+<!-- Create modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="create-modal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Create new Item</h4>
+			</div>
+			<div class="modal-body" id="create-modal-body">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="submit" form="create-form" class="btn btn-primary" id="modal-button">Create</button>
+			</div>
+		</div> <!-- /.modal-content -->
+	</div> <!-- /.modal-dialog -->
+</div> <!-- /.modal -->
+
+<!-- Edit modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="edit-modal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Edit Item</h4>
+			</div>
+			<div class="modal-body" id="edit-modal-body">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="submit" form="edit-form" class="btn btn-primary" id="modal-button">Edit</button>
+			</div>
+		</div> <!-- /.modal-content -->
+	</div> <!-- /.modal-dialog -->
+</div> <!-- /.modal -->
+
+<!-- Delete Modal (confirm dialog) -->
+  
+<div class="modal fade" tabindex="-1" role="dialog" id="delete-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Delete Item(s)</h4>
+      </div>
+      <div class="modal-body" id="delete-modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button onclick="sendCRUDRequest('delete')" form="crud-form" class="btn btn-danger" id="modal-button">Delete</button>
+      </div>
+    </div> <!-- /.modal-content -->
+  </div> <!-- /.modal-dialog -->
+ </div> <!-- /.modal -->
  
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -357,7 +413,6 @@
 	var selection = [];
 
 	$(document).ready(function() {
-		
 		initCRUD();
 	});
 	

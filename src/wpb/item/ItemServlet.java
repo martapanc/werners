@@ -57,10 +57,11 @@ public class ItemServlet extends HttpServlet {
 			case "find": {
 				Item item = (id == 0) ? new Item() : itmManager.find(id, true);
 				List<FoodClass> fcList = fcManager.getAll();
-				request.getSession().setAttribute("fc", fcList);
-				request.getSession().setAttribute("itm", item);
+				//request.getSession().setAttribute("fc", fcList);
+				//request.getSession().setAttribute("itm", item);
 				request.setAttribute("fc", fcList);
 				request.setAttribute("itm", item);
+				request.getRequestDispatcher("/WEB-INF/crudItem.jsp").forward(request, response);
 			}
 		
 			case "list": {
@@ -90,7 +91,7 @@ public class ItemServlet extends HttpServlet {
 				break;
 				}
 
-			case "update": {
+			case "edit": {
 				try {
 					Item itm = itmManager.find(id, true);
 					itm.setName(request.getParameter("name"));
