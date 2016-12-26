@@ -2,7 +2,6 @@ package wpb.foodclass;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -16,7 +15,6 @@ import com.google.gson.*;
 import wpb.GenericManager;
 import wpb.HibernateUtil;
 import wpb.foodclass.FoodClass;
-import wpb.item.Item;
 
 /**
  * Servlet implementation class ItemServlet

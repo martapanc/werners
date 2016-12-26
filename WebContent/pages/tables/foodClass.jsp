@@ -148,7 +148,6 @@
     				<tr>
     					<th data-field="state" data-checkbox="true"></th>
         				<th data-field="id" data-sortable="true" data-width="10%">Id</th>
-        				<th data-field="version_number" data-visible="false" ></th>
         				<th data-field="name" data-sortable="true">Name</th>
         				<th data-field="action" data-align="center" data-formatter="actionFormatter" data-events="actionEvents">Edit</th>
     				</tr>

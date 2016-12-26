@@ -20,8 +20,8 @@ import wpb.foodclass.FoodClass;
 /**
  * Servlet implementation class ItemServlet
  */
-@WebServlet(name = "listItem", urlPatterns = "/listItem", loadOnStartup = 1)
-public class ItemServlet extends HttpServlet {
+@WebServlet(name = "itemCtrl", urlPatterns = "/item", loadOnStartup = 1)
+public class ItemCtrl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static GenericManager<Item, Long> itmManager = null;
 	private static GenericManager<FoodClass, Long> fcManager = null;

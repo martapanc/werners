@@ -129,7 +129,7 @@
         			</div>
               <table id="table"
               data-toggle="table"
-              data-url="../../listItem"
+              data-url="../../item"
               data-method="post"
               data-content-type="application/x-www-form-urlencoded"
               data-query-params='action=list'
@@ -147,12 +147,11 @@
     				<tr>
     					<th data-field="state" data-checkbox="true"></th>
         				<th data-field="id" data-sortable="true" data-width="8%">Id</th>
-        				<th data-field="version_number" data-visible="false" ></th>
         				<th data-field="name" data-sortable="true" data-width="30%">Name</th>
         				<th data-field="foodClass.name" data-sortable="true">Food class</th>
         				<th data-field="price" data-sortable="true" data-align="right" data-formatter="priceFormatter">Price</th>
         				<th data-field="available" data-sortable="true" data-sorter="boolSorter" data-formatter="boolFormatter" data-align="center">Availability</th>
-    					<th data-field="action" data-align="center" data-formatter="actionFormatter" data-events="actionEvents" data-width="8%">Edit</th>
+    					<th data-field="action" data-align="center" data-formatter="actionFormatter" data-events="actionEvents">Edit</th>
     				</tr>
     			</thead>             
               </table>
@@ -208,7 +207,7 @@
 <script src="/restaurantProject/pages/tables/crud.js"></script>
 <script>
 	
-	const URL = '/restaurantProject/listItem';
+	const URL = '/restaurantProject/item';
 	
 	$(document).ready(function() {
 		 initCRUD(URL);
