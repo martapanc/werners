@@ -28,42 +28,6 @@ public class ItemServlet extends HttpServlet {
 	private static GenericManager<Item, Long> itmManager = null;
 	private static GenericManager<FoodClass, Long> fcManager = null;
 	private static Gson gson = null;
-	/*
-	private static final TypeAdapter<Item> itemAdapter = new TypeAdapter<Item>() {
-
-		@Override
-		public Item read(JsonReader in) throws IOException {
-			JsonToken peek = in.peek();
-			switch (peek) {
-			case BOOLEAN:
-				return in.nextBoolean();
-			case NULL:
-				in.nextNull();
-				return null;
-			case NUMBER:
-				return in.nextInt() != 0;
-			case STRING:
-				return Boolean.parseBoolean(in.nextString());
-			default:
-				throw new IllegalStateException("Expected BOOLEAN or NUMBER but was " + peek);
-			}
-		}
-
-		@Override
-		public void write(JsonWriter out, Item value) throws IOException {
-			if (value == null) {
-				out.nullValue();
-			} else {
-				if (value == true) {
-					out.value(1);
-				}
-				// out.nullValue();
-				else {
-					out.value(0);
-				}
-			}
-		}
-	};*/
 
 	@Override
 	public void init() throws ServletException {
@@ -82,29 +46,21 @@ public class ItemServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		Map<String, String[]> paramMap = request.getParameterMap();
-		// Enumeration paramNames = request.getParameterNames();
 
 		if (paramMap.containsKey("action")) {
 			String action = (String) request.getParameter("action");
 			String[] ids = request.getParameterValues("id");
-			long id = (request.getParameter("id") == null) ? 0 : Long.parseLong(request.getParameter("id"));
+			long id = (ids == null || ids.length > 1) ? 0 : Long.parseLong(request.getParameter("id"));
 			switch (action) {
 
-			case "get": {
-				Restaurant item = itmManager.find(id, true);
-				String formAction = null;
-				if(item==null){
-					item = new Item();
-					formAction = "create";
-				}
-				else {
-					formAction = "update";
-				}
+			case "find": {
+				Item item = (id == 0) ? new Item() : itmManager.find(id, true);
 				List<FoodClass> fcList = fcManager.getAll();
+				//request.getSession().setAttribute("fc", fcList);
+				//request.getSession().setAttribute("itm", item);
 				request.setAttribute("fc", fcList);
 				request.setAttribute("itm", item);
-				request.setAttribute("formaction", formAction);
-				request.getRequestDispatcher("/WEB-INF/editItem.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/crudItem.jsp").forward(request, response);
 			}
 		
 			case "list": {
@@ -141,11 +97,12 @@ public class ItemServlet extends HttpServlet {
 				break;
 				}
 
-			case "update": {
+			case "edit": {
 				try {
 					Item itm = itmManager.find(id, true);
 					itm.setName(request.getParameter("name"));
 					itm.setPrice(Double.parseDouble(request.getParameter("price")));
+					itm.setVersionNumber(Integer.parseInt(request.getParameter("version-number")));
 					FoodClass fc = fcManager.find(Long.parseLong(request.getParameter("foodClass")), true);
 					itm.setFoodClass(fc);
 					boolean available = (request.getParameter("available") == null) ? false : true;
@@ -160,8 +117,6 @@ public class ItemServlet extends HttpServlet {
 			
 			case "delete": {
 				try {
-					//
-					// itm = gson.fromJson(id, Item.class);
 					for (String idString : ids) {
 						itmManager.delete(itmManager.find(Long.parseLong(idString), true));
 					}
@@ -170,14 +125,9 @@ public class ItemServlet extends HttpServlet {
 					// TODO: handle exception
 				}
 			}
-			
-			default: {
-				response.sendError(500);
-				break;
-				}
-			
+					
 			}
-			
+
 		}
 	}
 }

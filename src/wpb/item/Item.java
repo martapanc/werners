@@ -3,6 +3,7 @@ package wpb.item;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import wpb.foodclass.FoodClass;
@@ -16,7 +17,7 @@ public class Item extends Restaurant {
 	@NotEmpty
 	private String name;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	private FoodClass foodClass;
 	
 	@Column(name = "price")
