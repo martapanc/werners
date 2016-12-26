@@ -212,10 +212,7 @@
 	$(document).ready(function() {
 		 initCRUD(URL);
 	});
-	
-	
-	
-	
+
 </script>
 </body>
 </html>

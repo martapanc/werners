@@ -45,7 +45,7 @@
     <section class="content-header">
       <h1>
         Restaurant Tables
-        <small>here we have a list of all  tables</small>
+        <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/restaurantProject/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -67,7 +67,7 @@
         			</div>
               <table id="table"
               data-toggle="table"
-              data-url="../../listItem"
+              data-url="../../roomTable"
               data-method="post"
               data-content-type="application/x-www-form-urlencoded"
               data-query-params='action=list'
@@ -85,11 +85,9 @@
     				<tr>
     					<th data-field="state" data-checkbox="true"></th>
         				<th data-field="id" data-sortable="true" data-width="8%">Id</th>
-        				<th data-field="version_number" data-visible="false" ></th>
         				<th data-field="name" data-sortable="true" data-width="30%">Name</th>
-        				<th data-field="foodClass.name" data-sortable="true">Food class</th>
-        				<th data-field="price" data-sortable="true" data-align="right">Price</th>
-        				<th data-field="available" data-sortable="true" data-sorter="availableSorter" data-formatter="availableFormatter" data-align="center">Availability</th>
+        				<th data-field="seats" data-sortable="true">Seats</th>
+        				<th data-field="room" data-sortable="true">Room</th>
     					<th data-field="action" data-align="center" data-formatter="actionFormatter" data-events="actionEvents" data-width="8%">Edit</th>
     				</tr>
     			</thead>             
@@ -109,42 +107,7 @@
 
   <jsp:include page="../../WEB-INF/footer.html" />
   
-  
-  <!--CRUD modal -->
-  <div id="modal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"></h4>
- 						<form>
-  							<div class="form-group">
-    							<label for="id">Item ID</label>
-    							<input type="text" class="form-control has-warning" name="id" readonly>
-  							</div>
-  							<div class="form-group">
-    						<label for="name">Name</label>
-    						<input type="text" class="form-control" name="name">
-  							</div>
-  							<div class="form-group">
-    							<label for="foodClass">Food Class</label>
-  								<select class="form-control" name="foodClass">
-								<!-- is populated via jquery --> 
-    							</select>
-  							</div>
-  							<div class="form-group">
-    							<label for="price">Price</label>
-    							<input type="text" class="form-control" name="price">
-  							</div>
-						</form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary submit">Submit</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-  
+   
 </div>
 <!-- ./wrapper -->
 
@@ -172,40 +135,20 @@
 <script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.min.js"></script>
 <script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.min.js"></script>
 <script src="../../plugins/bootstrap-table/extensions/group-by-v2/bootstrap-table-group-by.min.js"></script>
-<script src="crud.js"></script>
+<!-- scripts for form validation ad notifications -->
+<script src="/restaurantProject/plugins/notify/bootstrap-notify.js"></script>
+<script src="/restaurantProject/plugins/validator/validator.min.js"></script>
+<!-- custom scripts -->
+<script src="/restaurantProject/pages/tables/tableutil.js"></script>
+<script src="/restaurantProject/pages/tables/crud.js"></script>
 <script>
 	
-	const API_URL = 'http://' + location.host + '/restaurantProject/listItem';
-	const FOODCLASS_URL = 'http://' + location.host + '/restaurantProject/listFoodClass';
-	var $modal = $('#modal').modal({show: false});
-	var $table = $('#table');
-	var $create = $('#create');
-	var $edit = $('.edit');
-	var $delete = $('#delete');
-	var $submit = $modal.find('.submit');
-	var selection = [];
+	const URL = '/restaurantProject/roomTable';
 	
-    $(function () {
-    	initCrud();
-    	
-    	//populate select box for food class
-    	$.post(FOODCLASS_URL, {action: "list"}, function(response){
-  	      var options = '<option value="" selected disabled>Select a food class</option>';
-	      for (var i = 0; i < response.length; i++) {
-	        options += '<option value="' + response[i].id + '">' + response[i].name + '</option>';
-	      }
-	      $modal.find('select[name="foodClass"]').html(options);
-		});
-    });
+	$(document).ready(function() {
+		 initCRUD(URL);
+	});
 	
-	function availableFormatter(value, row) {
-    	var icon = value === true ? 'fa-check' : 'fa-times';
-    	return '<i class="fa ' + icon + '"></i> ';
-	}
-
-	function availableSorter(a, b) {
-		return (a === b)? 0 : a? -1 : 1;
-	}
 </script>
 </body>
 </html>

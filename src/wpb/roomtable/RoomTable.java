@@ -17,10 +17,13 @@ public class RoomTable extends Restaurant {
     @Column(name = "number", unique = true, nullable = false)
 	private int number;
 	
+    @Column(name = "name", nullable=false)
+    private String name;
+    
     @Column(name = "room") 
     private String room;
 	
-    @Column(name = "seats")
+    @Column(name = "seats", nullable=false)
     private int seats;
 	
 	@Enumerated(EnumType.STRING)
@@ -31,6 +34,14 @@ public class RoomTable extends Restaurant {
 		lowcost, medium, highend
 	};
 	
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public int getNumber() {
 		return number;

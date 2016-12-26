@@ -111,7 +111,7 @@
         <small></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="/restaurantProject/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="/restaurantProject/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Tables</a></li>
         <li class="active">Food Categories</li>
       </ol>
