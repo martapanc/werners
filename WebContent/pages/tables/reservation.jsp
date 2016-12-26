@@ -57,9 +57,10 @@
 					<div class="col-md-12">
 						<div class="box box-primary">
 							<div class="box-body table-responsive">
-								<table id="item-table" data-toggle="table" data-url="../../listItem" data-method="post" data-striped="true"
-									data-pagination="true" data-pagination-loop="false" data-page-size="25" data-show-refresh="true" data-search="true"
-									data-resizable="true" data-show-toggle="true" data-show-export="true">
+								<table id="item-table" data-toggle="table" data-url="../../ReservationServlet" data-method="post"
+									data-content-type="application/x-www-form-urlencoded" data-striped="true" data-pagination="true"
+									data-pagination-loop="false" data-page-size="25" data-show-refresh="true" data-search="true" data-resizable="true"
+									data-show-toggle="true" data-show-export="true">
 									<thead>
 										<tr>
 											<th data-field="reservationId" data-sortable="true">Id</th>

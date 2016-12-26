@@ -62,12 +62,12 @@
           <div class="box box-primary">
             <div class="box-body table-responsive">
                     <div class="toolbar">
-            			<button id="create" class="create btn btn-default">Create Item</button>
+            			<button id="create" class="create btn btn-default">Create Food Class</button>
             			<button id="delete" class="remove btn btn-danger" disabled>Delete</button>
         			</div>
               <table id="table"
               data-toggle="table"
-              data-url="../../listItem"
+              data-url="../../listFoodClass"
               data-method="post"
               data-content-type="application/x-www-form-urlencoded"
               data-query-params='action=list'
@@ -85,11 +85,8 @@
     				<tr>
     					<th data-field="state" data-checkbox="true"></th>
         				<th data-field="id" data-sortable="true" data-width="8%">Id</th>
-        				<th data-field="version_number" data-visible="false" ></th>
+        				<th data-field="version_number" data-visible="false" >Version Number</th>
         				<th data-field="name" data-sortable="true" data-width="30%">Name</th>
-        				<th data-field="foodClass.name" data-sortable="true">Food class</th>
-        				<th data-field="price" data-sortable="true" data-align="right">Price</th>
-        				<th data-field="available" data-sortable="true" data-sorter="availableSorter" data-formatter="availableFormatter" data-align="center">Availability</th>
     					<th data-field="action" data-align="center" data-formatter="actionFormatter" data-events="actionEvents" data-width="8%">Edit</th>
     				</tr>
     			</thead>             
@@ -172,7 +169,9 @@
 <script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.min.js"></script>
 <script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.min.js"></script>
 <script src="../../plugins/bootstrap-table/extensions/group-by-v2/bootstrap-table-group-by.min.js"></script>
-<script src="crud.js"></script>
+<!-- custom scripts -->
+<script src="/restaurantProject/pages/tables/tableutil.js"></script>
+<script src="/restaurantProject/pages/tables/crud.js"></script>
 <script>
 	
 	const API_URL = 'http://' + location.host + '/restaurantProject/listItem';

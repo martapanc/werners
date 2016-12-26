@@ -82,6 +82,7 @@ public class FoodClassServlet extends HttpServlet {
 		try (PrintWriter out = response.getWriter()) {
 			out.println(json);
 		}
+		System.out.println(json);
 	}
 
 	/**

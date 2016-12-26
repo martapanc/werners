@@ -134,11 +134,7 @@ function sendCRUDRequest(URL, formdata) {
 			  }).show();
 		}
 	});
-<<<<<<< HEAD
-	$modal.modal('hide');
-};
-=======
-	
 	$modals.modal('hide');
-}
->>>>>>> crud
+};
+
+

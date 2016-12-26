@@ -54,7 +54,7 @@
 				<ol class="breadcrumb">
 					<li><a href="/restaurantProject/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
 					<li><a href="#">Tables</a></li>
-					<li class="active">Orders</li>
+					<li class="active">Take-Away Orders</li>
 				</ol>
 			</section>
 

@@ -37,10 +37,7 @@ public class TakeawayServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at:
-		// ").append(request.getContextPath());
-
+		
 	}
 
 	/**
@@ -51,22 +48,20 @@ public class TakeawayServlet extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 		//Map<String, String[]> paramMap = request.getParameterMap();
-		String cart = (String) request.getParameter("cart");
-		String data = (String) request.getParameter("data");
 		//Map<String, Object> pMap = new HashMap<String, Object>();
 		//List<HashMap<String, String>> errList = new ArrayList<HashMap<String, String>>();
-		
-		//JsonArray jdata = (JsonArray) new Gson().toJsonTree(data);
-		
-		//formValidation(paramMap, request, pMap, errList);
-		
+		String cartStr = (String) request.getParameter("cart");
+		String dataStr = (String) request.getParameter("data");
+		JsonParser parser = new JsonParser();
+		JsonObject data = parser.parse(dataStr).getAsJsonObject();		
+		JsonArray cart = parser.parse(cartStr).getAsJsonArray();		
 		
 		//if (!errList.isEmpty()) {
 			//String json = new Gson().toJson(errList);
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
-			System.out.println(data + " - " + cart);
-			response.getWriter().write(data);
+			System.out.println(data.get("title") + " - " + cart.get(0));
+			response.getWriter().write(dataStr);
 			
 			PrintWriter out = response.getWriter();
 			//out.println(paramMap);
@@ -76,7 +71,7 @@ public class TakeawayServlet extends HttpServlet {
 		}*/
 	}
 
-	private void formValidation(Map<String, String[]> paramMap, HttpServletRequest request, Map<String, Object> extrMap,
+	/*private void formValidation(Map<String, String[]> paramMap, HttpServletRequest request, Map<String, Object> extrMap,
 			List<HashMap<String, String>> errList) {
 
 		if (paramMap.containsKey("title")) {
@@ -141,6 +136,6 @@ public class TakeawayServlet extends HttpServlet {
 		errors.put("pName", pName);
 		errors.put("msg", errMsg);
 		errList.add(errors);
-	}
+	}*/
 
 }
