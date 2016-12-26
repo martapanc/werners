@@ -50,22 +50,30 @@ public class TakeawayServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
-		Map<String, String[]> paramMap = request.getParameterMap();
-		Map<String, Object> pMap = new HashMap<String, Object>();
-		List<HashMap<String, String>> errList = new ArrayList<HashMap<String, String>>();
-
-		formValidation(paramMap, request, pMap, errList);
-
-		if (!errList.isEmpty()) {
-			String json = new Gson().toJson(errList);
+		//Map<String, String[]> paramMap = request.getParameterMap();
+		String cart = (String) request.getParameter("cart");
+		String data = (String) request.getParameter("data");
+		//Map<String, Object> pMap = new HashMap<String, Object>();
+		//List<HashMap<String, String>> errList = new ArrayList<HashMap<String, String>>();
+		
+		//JsonArray jdata = (JsonArray) new Gson().toJsonTree(data);
+		
+		//formValidation(paramMap, request, pMap, errList);
+		
+		
+		//if (!errList.isEmpty()) {
+			//String json = new Gson().toJson(errList);
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
-			System.out.println(json);
-			response.getWriter().write(json);
-		} else {
+			System.out.println(data + " - " + cart);
+			response.getWriter().write(data);
+			
+			PrintWriter out = response.getWriter();
+			//out.println(paramMap);
+		/*} else {
 			request.setAttribute("map", pMap);
 			request.getRequestDispatcher("pages/customer/takeawayInvoice.jsp").forward(request, response);
-		}
+		}*/
 	}
 
 	private void formValidation(Map<String, String[]> paramMap, HttpServletRequest request, Map<String, Object> extrMap,
@@ -73,6 +81,7 @@ public class TakeawayServlet extends HttpServlet {
 
 		if (paramMap.containsKey("title")) {
 			String title = (String) request.getParameter("title");
+			System.out.println(request.getParameter("title"));
 			extrMap.put("title", title);
 		}
 

@@ -74,10 +74,10 @@
 								<div class="box-body">
 									<div class="food-menu col-md-3">
 										<div class="btn-group btn-block btn-group-vertical">
-											<a href="#" id="salad-btn" class="btn btn-lg btn-primary active"> <img width="30"
-												src="../../dist/img/flat-icon-gastronomy/salad.svg"> &emsp;Salads
-											</a> <a href="#" id="burger-btn" class="btn btn-lg btn-primary"> <img width="30"
+											<a href="#" id="burger-btn" class="btn btn-lg btn-primary  active"> <img width="30"
 												src="../../dist/img/flat-icon-gastronomy/burger.svg"> &emsp;Burgers
+											</a> <a href="#" id="salad-btn" class="btn btn-lg btn-primary"> <img width="30"
+												src="../../dist/img/flat-icon-gastronomy/salad.svg"> &emsp;Salads
 											</a> <a href="#" id="pizza-btn" class="btn btn-lg btn-primary"> <img width="30"
 												src="../../dist/img/flat-icon-gastronomy/pizza-2.svg"> &emsp;Pizza
 											</a> <a href="#" id="chinese-btn" class="btn btn-lg btn-primary"> <img width="30"
@@ -94,7 +94,7 @@
 
 									<div class="food-offers col-md-9">
 										<div class="thmenu-header with-border">
-											<h3>SALADS</h3>
+											<h3>BURGERS</h3>
 										</div>
 										<div class="col-md-12">
 											<div class="box box-primary">
@@ -109,7 +109,7 @@
 																<th data-field="name" data-sortable="true">Name</th>
 																<th data-field="price" data-sortable="true" data-align="right">Price</th>
 																<!-- Should show only available items -->
-																<th data-field="foodClassName"> Class</th>
+																<th data-field="foodClassName">Class</th>
 																<th data-field="action" data-formatter="actionFormatter" data-events="actionEvent">Add to Cart</th>
 															</tr>
 														</thead>
@@ -127,7 +127,7 @@
 								</div>
 								<!-- /. box body -->
 							</form>
-							
+
 						</div>
 						<!-- /.box-body -->
 					</div>
@@ -213,10 +213,12 @@
 	<script src="../../plugins/bootstrap-table/extensions/filter-control/bootstrap-table-filter-control.js"></script>
 	<script>
 		//Show "salad" item as default view
-		$(document).ready(function(){
-			$("#item-table").bootstrapTable('filterBy', {"foodClassName" : "Salad"}); 
+		$(document).ready(function() {
+			$("#item-table").bootstrapTable('filterBy', {
+				"foodClassName" : "Burger"
+			});
 		});
-		
+
 		// Table functions
 		function availableSorter(a, b) {
 			if (a === true)
@@ -252,12 +254,20 @@
 				}
 
 				$(".order-list").html(""); //Display the cart
-				cart.forEach(function(entry) {
-					$(".order-list").append("<tr><td>" + entry[0] + "&emsp;</td>"
-							+ "<td><i class='fa fa-plus-square fa-lg'></i>&ensp;" + entry[1] 
-							+ "&ensp;<i class='fa fa-minus-square fa-lg'></i></td>"
-							+ "<td>&ensp;€ "+ entry[2].toFixed(2) + "</td></tr>");
-					});
+				cart
+						.forEach(function(entry) {
+							$(".order-list")
+									.append(
+											"<tr><td>"
+													+ entry[0]
+													+ "&emsp;</td>"
+													+ "<td><i class='fa fa-plus-square fa-lg'></i>&ensp;"
+													+ entry[1]
+													+ "&ensp;<i class='fa fa-minus-square fa-lg'></i></td>"
+													+ "<td>&ensp;€ "
+													+ entry[2].toFixed(2)
+													+ "</td></tr>");
+						});
 				price += row.price;
 				$("#total-price-box").html(
 						//Display the total price
@@ -268,7 +278,9 @@
 
 		//Increase quantity on "plus" click
 		$(".cart-form")
-				.on("click", "i.fa-plus-square",
+				.on(
+						"click",
+						"i.fa-plus-square",
 						function() {
 							var i = $(this).parent().parent().index(); //store index of selected row
 							cart[i][1] += 1; //increase quantity by 1
@@ -278,21 +290,27 @@
 								price += entry[2];
 							});
 							$(".order-list").html("");
-							cart.forEach(function(entry) { //display changes
-										$(".order-list").append(
+							cart
+									.forEach(function(entry) { //display changes
+										$(".order-list")
+												.append(
 														"<tr><td>"
-																+ entry[0] + "&emsp;</td>"
+																+ entry[0]
+																+ "&emsp;</td>"
 																+ "<td><i class='fa fa-plus-square fa-lg'></i>&ensp;"
 																+ entry[1]
 																+ "&ensp;<i class='fa fa-minus-square fa-lg'></i></td>"
 																+ "<td>&ensp;€ "
-																+ entry[2].toFixed(2)
+																+ entry[2]
+																		.toFixed(2)
 																+ "</td></tr>");
-							});
-							$("#total-price-box").html(
-								//update and display total price
-								'<h4><span class="pull-right total-price">Total price: € '
-								+ price.toFixed(2)+ '</span></h4>');
+									});
+							$("#total-price-box")
+									.html(
+											//update and display total price
+											'<h4><span class="pull-right total-price">Total price: € '
+													+ price.toFixed(2)
+													+ '</span></h4>');
 
 						});
 
@@ -385,42 +403,54 @@
 				removeActive();
 				$(this).addClass("active");
 				$('.thmenu-header').html("<h3>SALADS</h3>");
-				$("#item-table").bootstrapTable('filterBy', {"foodClassName" : "Salad"});	
+				$("#item-table").bootstrapTable('filterBy', {
+					"foodClassName" : "Salad"
+				});
 			});
 
 			$("#burger-btn").on("click", function() {
 				removeActive();
 				$(this).addClass("active");
 				$('.thmenu-header').html("<h3>BURGERS</h3>");
-				$("#item-table").bootstrapTable('filterBy', {"foodClassName" : "Burger"});
+				$("#item-table").bootstrapTable('filterBy', {
+					"foodClassName" : "Burger"
+				});
 			});
 
 			$("#pizza-btn").click(function() {
 				removeActive();
 				$(this).addClass("active");
 				$('.thmenu-header').html("<h3>PIZZAS</h3>");
-				$("#item-table").bootstrapTable('filterBy', {"foodClassName" : "Pizza"});
+				$("#item-table").bootstrapTable('filterBy', {
+					"foodClassName" : "Pizza"
+				});
 			});
-			
+
 			$("#chinese-btn").click(function() {
 				removeActive();
 				$(this).addClass("active");
 				$('.thmenu-header').html("<h3>CHINESE</h3>");
-				$("#item-table").bootstrapTable('filterBy', {"foodClassName" : "Chinese"});
+				$("#item-table").bootstrapTable('filterBy', {
+					"foodClassName" : "Chinese"
+				});
 			});
-			
+
 			$("#dessert-btn").click(function() {
 				removeActive();
 				$(this).addClass("active");
 				$('.thmenu-header').html("<h3>DESSERTS</h3>");
-				$("#item-table").bootstrapTable('filterBy', {"foodClassName" : "Dessert"});
+				$("#item-table").bootstrapTable('filterBy', {
+					"foodClassName" : "Dessert"
+				});
 			});
-			
+
 			$("#drink-btn").click(function() {
 				removeActive();
 				$(this).addClass("active");
 				$('.thmenu-header').html("<h3>DRINKS</h3>");
-				$("#item-table").bootstrapTable('filterBy', {"foodClassName" : "Drink"});
+				$("#item-table").bootstrapTable('filterBy', {
+					"foodClassName" : "Drink"
+				});
 			});
 
 			function removeActive() {
@@ -430,7 +460,8 @@
 				$("#chinese-btn").removeClass("active");
 				$("#dessert-btn").removeClass("active");
 				$("#drink-btn").removeClass("active");
-			};
+			}
+			;
 		});
 	</script>
 
