@@ -2,7 +2,6 @@ package wpb.item;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +15,6 @@ import com.google.gson.*;
 
 import wpb.GenericManager;
 import wpb.HibernateUtil;
-import wpb.Restaurant;
 import wpb.foodclass.FoodClass;
 
 /**
@@ -64,14 +62,7 @@ public class ItemServlet extends HttpServlet {
 			}
 		
 			case "list": {
-				//Added "foodClassName" attribute to each item array for better visualizaiton in takeawayOrder.jsp
-				JsonArray result = (JsonArray) new Gson().toJsonTree(itmManager.getAll());
-				for (int i = 0; i<result.size(); i++) {
-					JsonObject obj = result.get(i).getAsJsonObject();
-					JsonObject foodCl = obj.get("foodClass").getAsJsonObject();
-					obj.add("foodClassName", foodCl.get("name"));
-					result.get(i).getAsJsonObject().add("foodClassName", foodCl.get("name"));
-				}
+				JsonArray result = (JsonArray) gson.toJsonTree(itmManager.getAll());
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				try (PrintWriter out = response.getWriter()) {
