@@ -1,12 +1,14 @@
 package wpb.roomtable;
 
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import wpb.Restaurant;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -14,8 +16,8 @@ import javax.validation.constraints.NotNull;
 public class RoomTable extends Restaurant {
 	
     /*@NotEmpty @NotNull @NotBlank*/ //really needed this type of validation
-    @Column(name = "number", unique = true, nullable = false)
-	private int number;
+    //@Column(name = "number", unique = true, nullable = false)
+	//private int number;
 	
     @Column(name = "name", nullable=false)
     private String name;
@@ -24,7 +26,9 @@ public class RoomTable extends Restaurant {
     private String room;
 	
     @Column(name = "seats", nullable=false)
-    private int seats;
+    @Min(1)
+    @Max(12)
+    private int seats = 1;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "category", nullable = false)
@@ -42,16 +46,6 @@ public class RoomTable extends Restaurant {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public int getNumber() {
-		return number;
-	}
-
-	
-	public void setNumber(int number) {
-		this.number = number;
-	}
-
 	
 	public String getRoom() {
 		return room;

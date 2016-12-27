@@ -2,6 +2,8 @@ package wpb.roomtable;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -15,6 +17,7 @@ import com.google.gson.*;
 import wpb.GenericManager;
 import wpb.HibernateUtil;
 import wpb.foodclass.FoodClass;
+import wpb.roomtable.RoomTable.CategoryType;
 
 /**
  * Servlet implementation class ItemServlet
@@ -49,9 +52,14 @@ public class RoomTableCtrl extends HttpServlet {
 				switch (action) {
 
 				case "find": {
-					RoomTable rt = (id == 0) ? new RoomTable() : rtManager.find(id, true);
+					RoomTable rt = (id == 0) ? new RoomTable() : rtManager.find(id, true); 
+					List<String> categories = new ArrayList<String>(); 
+					for(CategoryType s : RoomTable.CategoryType.values()){
+						categories.add(s.toString());
+					}
 					request.setAttribute("rt", rt);
-					request.getRequestDispatcher("/WEB-INF/crudRoomTable.jsp").forward(request, response);
+					request.setAttribute("categories", categories);
+					request.getRequestDispatcher("/WEB-INF/crudTable.jsp").forward(request, response);
 				}
 			
 				case "list": {
@@ -68,6 +76,9 @@ public class RoomTableCtrl extends HttpServlet {
 					try {
 						RoomTable rt = new RoomTable();
 						rt.setName(request.getParameter("name"));
+						rt.setSeats(Integer.parseInt(request.getParameter("seats")));
+						rt.setRoom(request.getParameter("room"));
+						rt.setCategory(RoomTable.CategoryType.valueOf(request.getParameter("category")));
 						rtManager.add(rt);
 					} catch (Exception e) {
 						// TODO: handle exception
@@ -80,6 +91,9 @@ public class RoomTableCtrl extends HttpServlet {
 					try {
 						RoomTable rt = rtManager.find(id, true);
 						rt.setName(request.getParameter("name"));
+						rt.setSeats(Integer.parseInt(request.getParameter("seats")));
+						rt.setRoom(request.getParameter("room"));
+						rt.setCategory(RoomTable.CategoryType.valueOf(request.getParameter("category")));
 						rtManager.update(rt);
 					} catch (Exception e) {
 						// TODO: handle exception

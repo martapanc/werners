@@ -23,6 +23,9 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+  
+  <!-- Bootstrap notifications --> 
+  <link rel="stylesheet" href="../../plugins/notify/bootstrap-notify.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,6 +41,65 @@
   
  <jsp:include page="../../WEB-INF/left-sidebar.html" />
  
+ <!-- Create modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="create-modal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Create new Restaurant Table</h4>
+			</div>
+			<div class="modal-body" id="create-modal-body">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="submit" form="create-form" class="btn btn-primary" id="modal-button">Create</button>
+			</div>
+		</div> <!-- /.modal-content -->
+	</div> <!-- /.modal-dialog -->
+</div> <!-- /.modal -->
+
+
+<!-- Edit modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="edit-modal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Edit Restaurant Table</h4>
+			</div>
+			<div class="modal-body" id="edit-modal-body">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="submit" form="edit-form" class="btn btn-primary" id="modal-button">Edit</button>
+			</div>
+		</div> <!-- /.modal-content -->
+	</div> <!-- /.modal-dialog -->
+</div> <!-- /.modal -->
+
+
+<!-- Delete Modal (confirm dialog) --> 
+<div class="modal fade" tabindex="-1" role="dialog" id="delete-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Delete Item(s)</h4>
+      </div>
+      <div class="modal-body" id="delete-modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" id="delete-button">Delete</button>
+      </div>
+    </div> <!-- /.modal-content -->
+  </div> <!-- /.modal-dialog -->
+ </div> <!-- /.modal -->
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -88,6 +150,7 @@
         				<th data-field="name" data-sortable="true" data-width="30%">Name</th>
         				<th data-field="seats" data-sortable="true">Seats</th>
         				<th data-field="room" data-sortable="true">Room</th>
+        				<th data-field="category" data-sortable="true">Category</th>
     					<th data-field="action" data-align="center" data-formatter="actionFormatter" data-events="actionEvents" data-width="8%">Edit</th>
     				</tr>
     			</thead>             
@@ -110,6 +173,8 @@
    
 </div>
 <!-- ./wrapper -->
+
+<div id="notify" class="notifications bottom-right"></div>
 
 <!-- jQuery 2.2.3 -->
 <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>

@@ -36,16 +36,15 @@ public class SeedDB {
 	private static SessionFactory mySessionFactory = null;
 	private static SessionIdentifierGenerator idgen = new SessionIdentifierGenerator();
 	private static GenericManager<Item, Long> itmManager = null;
-	private static GenericManager<RoomTable, Long> toManager = null;
+	private static GenericManager<RoomTable, Long> rtManager = null;
 	private static GenericManager<FoodClass,Long> fcManager = null;
 	private static GenericManager<TakeawayOrder,Long> taManager = null;
 
 	public static void initialize(SessionFactory sf) {
-		mySessionFactory = sf;
-		itmManager = new GenericManager<Item, Long>(Item.class, mySessionFactory);
-		toManager = new GenericManager<RoomTable, Long>(RoomTable.class, mySessionFactory);
-		fcManager = new GenericManager<FoodClass, Long>(FoodClass.class, mySessionFactory);
-		taManager = new GenericManager<TakeawayOrder, Long>(TakeawayOrder.class, mySessionFactory);
+		itmManager = new GenericManager<Item, Long>(Item.class, sf);
+		fcManager = new GenericManager<FoodClass, Long>(FoodClass.class, sf);
+		rtManager = new GenericManager<>(RoomTable.class, sf);
+		taManager = new GenericManager<TakeawayOrder, Long>(TakeawayOrder.class, sf);
 	}
 
 	@Deprecated
@@ -100,18 +99,25 @@ public class SeedDB {
 			newItem.setName(idgen.nextSessionId());
 			itmManager.add(newItem);
 		}
+	}
+	
+	public static void seedRoomTables(int count) {
 
-		//System.out.println(itmManager.getTotalCount() + " new Items created");
-		//System.out.println(itmManager.getAll());
-		//Item x = itmManager.find((long) 20, true);
-		//x.setName("new Item name");
-		//itmManager.update(x);
+		for (int i = 1; i <= count; i++) {
+			RoomTable rt = new RoomTable();
+			rt.setName("Table " + i);
+			//rt.setNumber(i);
+			rt.setRoom("Room " + (int) Math.floor(Math.random() * 3));
+			rt.setCategory(RoomTable.CategoryType.highend);
+			rt.setSeats(1 + (int) Math.floor(Math.random() * 11));
+			rtManager.add(rt);
+		}
+
 	}
 
 	public static void seedTableOrders(int count) {
 
 		OrderItem ot = new OrderItem();
-		// ot.setItem(itmManager.find(new Long(5), true));
 		ot.setComment("this is item with id 5 and qty 10");
 		ot.setQuantity(10);
 
@@ -159,23 +165,6 @@ public class SeedDB {
 		to.setAddress("Piazza Domenicani, Design Faculty");
 		to.setCost(3.50);
 		taManager.add(to);
-	}
-
-	public static void seedRoomTables(int count) {
-
-		/*
-		 * TabManager tableManager = new ItemManager(mySessionFactory);
-		 * SessionIdentifierGenerator idgen= new SessionIdentifierGenerator();
-		 * 
-		 * //creating random Tables for (int i = 1; i <= count; i++) { RoomTable
-		 * newTable = new RoomTable(); newItem.setAvailable(true);
-		 * newItem.setPrice(Math.floor(ThreadLocalRandom.current().nextDouble(0.
-		 * 1, 12) * 100) / 100); newItem.setName(idgen.nextSessionId());
-		 * itmManager.addItem(newItem); }
-		 * 
-		 * System.out.println(itmManager.getTotalCount() + " new Items created"
-		 * );
-		 */
 	}
 
 }
