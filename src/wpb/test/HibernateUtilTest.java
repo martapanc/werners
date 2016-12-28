@@ -2,7 +2,8 @@ package wpb.test;
 
 
 import org.junit.Test;
-import wpb.HibernateUtil;
+
+import wpb.util.HibernateUtil;
 
 public class HibernateUtilTest {
 

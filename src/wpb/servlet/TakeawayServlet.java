@@ -1,4 +1,4 @@
-package wpb.reservation;
+package wpb.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;

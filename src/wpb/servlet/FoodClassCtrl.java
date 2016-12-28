@@ -1,9 +1,7 @@
-package wpb.roomtable;
+package wpb.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -14,24 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.*;
 
-import wpb.GenericManager;
-import wpb.HibernateUtil;
-import wpb.foodclass.FoodClass;
-import wpb.roomtable.RoomTable.CategoryType;
+import wpb.entity.FoodClass;
+import wpb.manager.GenericManager;
+import wpb.util.HibernateUtil;
 
 /**
  * Servlet implementation class ItemServlet
  */
-@WebServlet(name = "roomTableCtrl", urlPatterns = "/roomTable", loadOnStartup = 1)
-public class RoomTableCtrl extends HttpServlet {
+@WebServlet(name = "foodClassCtrl", urlPatterns = "/foodClass", loadOnStartup = 1)
+public class FoodClassCtrl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static GenericManager<RoomTable, Long> rtManager = null;
+	private static GenericManager<FoodClass, Long> fcManager = null;
 	private static Gson gson = null;
 	
 	@Override
 	public void init() throws ServletException {
 
-		rtManager = new GenericManager<RoomTable, Long>(RoomTable.class, HibernateUtil.getSessionJavaConfigFactory());
+		fcManager = new GenericManager<FoodClass, Long>(FoodClass.class, HibernateUtil.getSessionJavaConfigFactory());
 		gson = new GsonBuilder().create();
 	}
 
@@ -52,18 +49,13 @@ public class RoomTableCtrl extends HttpServlet {
 				switch (action) {
 
 				case "find": {
-					RoomTable rt = (id == 0) ? new RoomTable() : rtManager.find(id, true); 
-					List<String> categories = new ArrayList<String>(); 
-					for(CategoryType s : RoomTable.CategoryType.values()){
-						categories.add(s.toString());
-					}
-					request.setAttribute("rt", rt);
-					request.setAttribute("categories", categories);
-					request.getRequestDispatcher("/WEB-INF/crudTable.jsp").forward(request, response);
+					FoodClass fc = (id == 0) ? new FoodClass() : fcManager.find(id, true);
+					request.setAttribute("fc", fc);
+					request.getRequestDispatcher("/WEB-INF/crudFoodClass.jsp").forward(request, response);
 				}
 			
 				case "list": {
-					JsonArray result = (JsonArray) gson.toJsonTree(rtManager.getAll());
+					JsonArray result = (JsonArray) gson.toJsonTree(fcManager.getAll());
 					response.setContentType("application/json");
 					response.setCharacterEncoding("UTF-8");
 					try (PrintWriter out = response.getWriter()) {
@@ -74,12 +66,9 @@ public class RoomTableCtrl extends HttpServlet {
 
 				case "create": {
 					try {
-						RoomTable rt = new RoomTable();
-						rt.setName(request.getParameter("name"));
-						rt.setSeats(Integer.parseInt(request.getParameter("seats")));
-						rt.setRoom(request.getParameter("room"));
-						rt.setCategory(RoomTable.CategoryType.valueOf(request.getParameter("category")));
-						rtManager.add(rt);
+						FoodClass fc = new FoodClass();
+						fc.setName(request.getParameter("name"));
+						fcManager.add(fc);
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
@@ -89,12 +78,9 @@ public class RoomTableCtrl extends HttpServlet {
 
 				case "edit": {
 					try {
-						RoomTable rt = rtManager.find(id, true);
-						rt.setName(request.getParameter("name"));
-						rt.setSeats(Integer.parseInt(request.getParameter("seats")));
-						rt.setRoom(request.getParameter("room"));
-						rt.setCategory(RoomTable.CategoryType.valueOf(request.getParameter("category")));
-						rtManager.update(rt);
+						FoodClass fc = fcManager.find(id, true);
+						fc.setName(request.getParameter("name"));
+						fcManager.update(fc);
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
@@ -105,7 +91,7 @@ public class RoomTableCtrl extends HttpServlet {
 				case "delete": {
 					try {
 						for (String idString : ids) {
-							rtManager.delete(rtManager.find(Long.parseLong(idString), true));
+							fcManager.delete(fcManager.find(Long.parseLong(idString), true));
 						}
 						break;
 					} catch (Exception e) {

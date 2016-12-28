@@ -1,4 +1,4 @@
-package wpb;
+package wpb.entity;
 
 import java.lang.reflect.Field;
 

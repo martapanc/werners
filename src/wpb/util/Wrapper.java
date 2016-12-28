@@ -1,4 +1,4 @@
-package wpb.reservation;
+package wpb.util;
 
 import com.google.gson.*;
 
