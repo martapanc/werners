@@ -1,4 +1,4 @@
-package wpb;
+package wpb.util;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -19,12 +19,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import wpb.foodclass.FoodClass;
-import wpb.takeawayorder.TakeawayOrder;
-import wpb.item.Item;
-import wpb.orderitem.OrderItem;
-import wpb.roomtable.RoomTable;
-import wpb.tableorder.TableOrder;
+import wpb.entity.FoodClass;
+import wpb.entity.Item;
+import wpb.entity.OrderItem;
+import wpb.entity.RoomTable;
+import wpb.entity.TableOrder;
+import wpb.entity.TakeawayOrder;
+import wpb.manager.GenericManager;
 
 /**
  *

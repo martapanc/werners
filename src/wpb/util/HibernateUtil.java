@@ -1,4 +1,4 @@
-package wpb;
+package wpb.util;
 
 import java.util.Properties;
 
@@ -117,15 +117,15 @@ public class HibernateUtil {
             //we can set mapping file or class with annotation
             //addClass(Employee1.class) will look for resource
             // com/journaldev/hibernate/model/Employee1.hbm.xml (not good)
-            configuration.addAnnotatedClass(wpb.Restaurant.class);
-            configuration.addAnnotatedClass(wpb.foodclass.FoodClass.class);
-            configuration.addAnnotatedClass(wpb.item.Item.class);
-            configuration.addAnnotatedClass(wpb.orderitem.OrderItem.class);
-            configuration.addAnnotatedClass(wpb.takeawayorder.TakeawayOrder.class);
-            configuration.addAnnotatedClass(wpb.tableorder.TableOrder.class);
-            configuration.addAnnotatedClass(wpb.roomtable.RoomTable.class);
-            configuration.addAnnotatedClass(wpb.reservation.Reservation.class);
-            configuration.addAnnotatedClass(wpb.user.User.class);
+            configuration.addAnnotatedClass(wpb.entity.Restaurant.class);
+            configuration.addAnnotatedClass(wpb.entity.FoodClass.class);
+            configuration.addAnnotatedClass(wpb.entity.Item.class);
+            configuration.addAnnotatedClass(wpb.entity.OrderItem.class);
+            configuration.addAnnotatedClass(wpb.entity.TakeawayOrder.class);
+            configuration.addAnnotatedClass(wpb.entity.TableOrder.class);
+            configuration.addAnnotatedClass(wpb.entity.RoomTable.class);
+            configuration.addAnnotatedClass(wpb.entity.Reservation.class);
+            configuration.addAnnotatedClass(wpb.entity.User.class);
 
 
             

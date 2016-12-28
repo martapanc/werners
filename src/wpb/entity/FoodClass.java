@@ -1,8 +1,6 @@
-package wpb.foodclass;
+package wpb.entity;
 
 import javax.persistence.*;
-
-import wpb.Restaurant;
 
 @Entity
 @Table(name = "food_class")

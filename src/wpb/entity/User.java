@@ -1,9 +1,7 @@
-package wpb.user;
+package wpb.entity;
 
 import javax.persistence.*;
 import org.hibernate.validator.constraints.*;
-
-import wpb.Restaurant;
 
 @Entity
 @Table(name = "User")

@@ -1,11 +1,10 @@
-package wpb.tableorder;
+package wpb.entity;
 
 import java.util.Set;
 
 import javax.persistence.*;
 
 import wpb.*;
-import wpb.orderitem.OrderItem;
 
 @Entity
 @Table(name = "table_order")
