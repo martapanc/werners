@@ -53,7 +53,7 @@ public class TestServlet extends HttpServlet {
 
 			case "get": {
 			}
-				Restaurant beanItm = itmManager.find(Long.parseLong(data), true);
+				Restaurant beanItm = itmManager.get(Long.parseLong(data), true);
 				request.setAttribute("itm", beanItm);
 				request.getRequestDispatcher("/WEB-INF/test.jsp").forward(request, response);
 			}

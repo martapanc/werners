@@ -21,8 +21,8 @@ import wpb.util.HibernateUtil;
 /**
  * Servlet implementation class ItemServlet
  */
-@WebServlet(name = "itemCtrl", urlPatterns = "/item", loadOnStartup = 1)
-public class ItemCtrl extends HttpServlet {
+@WebServlet(name = "itemServlet", urlPatterns = "/item")
+public class ItemServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static GenericManager<Item, Long> itmManager = null;
 	private static GenericManager<FoodClass, Long> fcManager = null;
@@ -53,7 +53,7 @@ public class ItemCtrl extends HttpServlet {
 			switch (action) {
 
 			case "find": {
-				Item item = (id == 0) ? new Item() : itmManager.find(id, true);
+				Item item = (id == 0) ? new Item() : itmManager.get(id, true);
 				List<FoodClass> fcList = fcManager.getAll();
 				//request.getSession().setAttribute("fc", fcList);
 				//request.getSession().setAttribute("itm", item);
@@ -77,7 +77,7 @@ public class ItemCtrl extends HttpServlet {
 					Item itm = new Item();
 					itm.setName(request.getParameter("name"));
 					itm.setPrice(Double.parseDouble(request.getParameter("price")));
-					FoodClass fc = fcManager.find(Long.parseLong(request.getParameter("foodClass")), true);
+					FoodClass fc = fcManager.get(Long.parseLong(request.getParameter("foodClass")), true);
 					itm.setFoodClass(fc);
 					boolean available = (request.getParameter("available") == null) ? false : true;
 					itm.setAvailable(available);
@@ -91,11 +91,11 @@ public class ItemCtrl extends HttpServlet {
 
 			case "edit": {
 				try {
-					Item itm = itmManager.find(id, true);
+					Item itm = itmManager.get(id, true);
 					itm.setName(request.getParameter("name"));
 					itm.setPrice(Double.parseDouble(request.getParameter("price")));
 					itm.setVersionNumber(Integer.parseInt(request.getParameter("version-number")));
-					FoodClass fc = fcManager.find(Long.parseLong(request.getParameter("foodClass")), true);
+					FoodClass fc = fcManager.get(Long.parseLong(request.getParameter("foodClass")), true);
 					itm.setFoodClass(fc);
 					boolean available = (request.getParameter("available") == null) ? false : true;
 					itm.setAvailable(available);
@@ -110,7 +110,7 @@ public class ItemCtrl extends HttpServlet {
 			case "delete": {
 				try {
 					for (String idString : ids) {
-						itmManager.delete(itmManager.find(Long.parseLong(idString), true));
+						itmManager.delete(itmManager.get(Long.parseLong(idString), true));
 					}
 					break;
 				} catch (Exception e) {

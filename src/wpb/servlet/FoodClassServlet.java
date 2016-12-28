@@ -19,8 +19,8 @@ import wpb.util.HibernateUtil;
 /**
  * Servlet implementation class ItemServlet
  */
-@WebServlet(name = "foodClassCtrl", urlPatterns = "/foodClass", loadOnStartup = 1)
-public class FoodClassCtrl extends HttpServlet {
+@WebServlet(name = "foodClassServlet", urlPatterns = "/foodClass")
+public class FoodClassServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static GenericManager<FoodClass, Long> fcManager = null;
 	private static Gson gson = null;
@@ -49,7 +49,7 @@ public class FoodClassCtrl extends HttpServlet {
 				switch (action) {
 
 				case "find": {
-					FoodClass fc = (id == 0) ? new FoodClass() : fcManager.find(id, true);
+					FoodClass fc = (id == 0) ? new FoodClass() : fcManager.get(id, true);
 					request.setAttribute("fc", fc);
 					request.getRequestDispatcher("/WEB-INF/crudFoodClass.jsp").forward(request, response);
 				}
@@ -78,7 +78,7 @@ public class FoodClassCtrl extends HttpServlet {
 
 				case "edit": {
 					try {
-						FoodClass fc = fcManager.find(id, true);
+						FoodClass fc = fcManager.get(id, true);
 						fc.setName(request.getParameter("name"));
 						fcManager.update(fc);
 					} catch (Exception e) {
@@ -91,7 +91,7 @@ public class FoodClassCtrl extends HttpServlet {
 				case "delete": {
 					try {
 						for (String idString : ids) {
-							fcManager.delete(fcManager.find(Long.parseLong(idString), true));
+							fcManager.delete(fcManager.get(Long.parseLong(idString), true));
 						}
 						break;
 					} catch (Exception e) {

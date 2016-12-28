@@ -11,7 +11,7 @@ public interface GenericDao <T, PK extends Serializable> {
     /** Retrieve an object that was previously persisted to the database using
      *   the indicated id as primary key
      */
-    T find(PK id, boolean lock);
+    T get(PK id, boolean lock);
     
     /** Get a list of all objects from persistent storage in the database */
     List<T> getAll();

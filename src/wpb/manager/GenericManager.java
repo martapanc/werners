@@ -52,7 +52,7 @@ public class GenericManager<T, PK extends Serializable> implements GenericDao<T,
 	}
 
 	@Override
-	public T find(PK id, boolean lock) {
+	public T get(PK id, boolean lock) {
 		Session session = sf.openSession();
 		Transaction tx = null;
 		T foundObject = null;

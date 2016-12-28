@@ -14,14 +14,14 @@ public class User extends Restaurant {
     @JoinColumn(name = "user_type_id")
     private UserType userType;
     
-    //@Email
-    @Column(name = "email")
+	// @Email
+	@Column(name = "email", nullable = false, unique=true)
 	private String email;
-    
-    @Column(name = "password") 	
+
+	@Column(name = "password", nullable = false)
 	private String password;
-	
-    @Column(name = "points") 	
+
+	@Column(name = "points")
 	private int points;
 	
     @Column(name = "billing_address")

@@ -23,8 +23,8 @@ import wpb.util.HibernateUtil;
 /**
  * Servlet implementation class ItemServlet
  */
-@WebServlet(name = "roomTableCtrl", urlPatterns = "/roomTable", loadOnStartup = 1)
-public class RoomTableCtrl extends HttpServlet {
+@WebServlet(name = "roomTableServlet", urlPatterns = "/roomTable", loadOnStartup = 1)
+public class RoomTableServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static GenericManager<RoomTable, Long> rtManager = null;
 	private static Gson gson = null;
@@ -53,7 +53,7 @@ public class RoomTableCtrl extends HttpServlet {
 				switch (action) {
 
 				case "find": {
-					RoomTable rt = (id == 0) ? new RoomTable() : rtManager.find(id, true); 
+					RoomTable rt = (id == 0) ? new RoomTable() : rtManager.get(id, true); 
 					List<String> categories = new ArrayList<String>(); 
 					for(CategoryType s : RoomTable.CategoryType.values()){
 						categories.add(s.toString());
@@ -90,7 +90,7 @@ public class RoomTableCtrl extends HttpServlet {
 
 				case "edit": {
 					try {
-						RoomTable rt = rtManager.find(id, true);
+						RoomTable rt = rtManager.get(id, true);
 						rt.setName(request.getParameter("name"));
 						rt.setSeats(Integer.parseInt(request.getParameter("seats")));
 						rt.setRoom(request.getParameter("room"));
@@ -106,7 +106,7 @@ public class RoomTableCtrl extends HttpServlet {
 				case "delete": {
 					try {
 						for (String idString : ids) {
-							rtManager.delete(rtManager.find(Long.parseLong(idString), true));
+							rtManager.delete(rtManager.get(Long.parseLong(idString), true));
 						}
 						break;
 					} catch (Exception e) {

@@ -5,9 +5,6 @@ package wpb.util;
  * and open the template in the editor.
  */
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -162,10 +159,10 @@ public class SeedDB {
 	}
     
 	public static void seedUsers() {
-        saveUser("admin", userTypeSA, "admin");
-        saveUser("marta", userTypeAdmin, "marta");
-        saveUser("werner", userTypeDE, "werner");
-        saveUser("giulia", userTypeAdmin, "giulia");
+        saveUser("admin@wpb.it", userTypeSA, "admin");
+        saveUser("marta@wpb.it", userTypeAdmin, "marta");
+        saveUser("werner@wpb.it", userTypeDE, "werner");
+        saveUser("giulia@wpb.it", userTypeAdmin, "giulia");
     }
 	
     private static UserType saveUserType(String type) {
@@ -181,7 +178,7 @@ public class SeedDB {
         User user = new User();
         user.setEmail(email);
         user.setUserType(userType);
-        user.setPassword(DigestUtils.md5Hex(password));
+        user.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
 
         userManager.add(user);
     }
