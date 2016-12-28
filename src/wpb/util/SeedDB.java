@@ -14,17 +14,13 @@ import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import wpb.entity.FoodClass;
-import wpb.entity.Item;
-import wpb.entity.OrderItem;
-import wpb.entity.RoomTable;
-import wpb.entity.TableOrder;
-import wpb.entity.TakeawayOrder;
+import wpb.entity.*;
 import wpb.manager.GenericManager;
 
 /**
@@ -33,48 +29,39 @@ import wpb.manager.GenericManager;
  */
 public class SeedDB {
 
-	private static Connection connection = null;
 	private static SessionFactory mySessionFactory = null;
 	private static SessionIdentifierGenerator idgen = new SessionIdentifierGenerator();
-	private static GenericManager<Item, Long> itmManager = null;
-	private static GenericManager<RoomTable, Long> rtManager = null;
-	private static GenericManager<FoodClass,Long> fcManager = null;
-	private static GenericManager<TakeawayOrder,Long> taManager = null;
+	private static GenericManager<Item, Long> itmManager;
+	private static GenericManager<RoomTable, Long> rtManager;
+	private static GenericManager<FoodClass,Long> fcManager;
+	private static GenericManager<TakeawayOrder,Long> taManager;
+    private static UserType userTypeSA, userTypeAdmin, userTypeDE;
+    private static GenericManager<User,Long> userManager;
+    private static GenericManager<UserType,Long> userTypeManager;
+    //private static final AccessControlListManager accessControlListManager;
 
+	public static void main(String[] args) {
+		SeedDB.initialize(HibernateUtil.getSessionJavaConfigFactory());
+		SeedDB.seedUserTypes();
+		SeedDB.seedUsers();
+        SeedDB.seedRoomTables(30);
+        SeedDB.seedFoodClasses();
+        SeedDB.seedItems(40);
+        SeedDB.seedTableOrders(1);
+        SeedDB.seedTakeawayOrders(10);
+	}
+	
 	public static void initialize(SessionFactory sf) {
-		itmManager = new GenericManager<Item, Long>(Item.class, sf);
-		fcManager = new GenericManager<FoodClass, Long>(FoodClass.class, sf);
-		rtManager = new GenericManager<>(RoomTable.class, sf);
-		taManager = new GenericManager<TakeawayOrder, Long>(TakeawayOrder.class, sf);
+		mySessionFactory = sf;
+		itmManager = new GenericManager<Item, Long>(Item.class, mySessionFactory);
+		fcManager = new GenericManager<FoodClass, Long>(FoodClass.class, mySessionFactory);
+		rtManager = new GenericManager<>(RoomTable.class, mySessionFactory);
+		taManager = new GenericManager<TakeawayOrder, Long>(TakeawayOrder.class, mySessionFactory);
+		userManager = new GenericManager<User, Long>(User.class, mySessionFactory);
+		userTypeManager = new GenericManager<UserType, Long>(UserType.class, mySessionFactory);
 	}
 
-	@Deprecated
-	public static void testDBConnection() {
-		try {
-			if (connection == null) {
-				// jdbc:postgresql://qdjjtnkv.db.elephantsql.com:5432/nqjahvby
-				String host = "localhost";
-				String database = "RAIBZ";
-				String username = "raitest";
-				String password = "raitest";
-				String url = "jdbc:postgresql://" + host + "/" + database;
-				String driverJDBC = "org.postgresql.Driver";
-				Class.forName(driverJDBC);
-				connection = DriverManager.getConnection(url, username, password);
-				// line firing the class not found exception
-
-			} else if (connection.isClosed()) {
-				connection = null;
-				// connect();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace(System.err);
-		} catch (Exception e) {
-			e.printStackTrace(System.err);
-		}
-	}
-
-	public static void seedFoodClass() {
+	public static void seedFoodClasses() {
 		
 		String[] foodClasses = {"Pizza", "Burger", "Chinese", "Salad", "Dessert", "Drink"};
 		
@@ -168,4 +155,35 @@ public class SeedDB {
 		taManager.add(to);
 	}
 
+	public static void seedUserTypes() {
+		userTypeSA = saveUserType("SuperAdministrator");
+		userTypeAdmin = saveUserType("Administrator");
+		userTypeDE = saveUserType("DataEntry");
+	}
+    
+	public static void seedUsers() {
+        saveUser("admin", userTypeSA, "admin");
+        saveUser("marta", userTypeAdmin, "marta");
+        saveUser("werner", userTypeDE, "werner");
+        saveUser("giulia", userTypeAdmin, "giulia");
+    }
+	
+    private static UserType saveUserType(String type) {
+        UserType userType = new UserType();
+        userType.setType(type);
+
+        userTypeManager.add(userType);
+
+        return userType;
+    }
+
+    private static void saveUser(String email, UserType userType, String password) {
+        User user = new User();
+        user.setEmail(email);
+        user.setUserType(userType);
+        user.setPassword(DigestUtils.md5Hex(password));
+
+        userManager.add(user);
+    }
+   
 }

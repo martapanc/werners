@@ -7,11 +7,14 @@ import org.hibernate.validator.constraints.*;
 @Table(name = "User")
 public class User extends Restaurant {
    
-    @NotBlank
-    @Column(name = "nick_name", unique = true, nullable = false)
+    @Column(name = "nick_name", nullable = false)
 	private String nickName;
-	
-    @Email
+    
+    @ManyToOne(targetEntity = UserType.class)
+    @JoinColumn(name = "user_type_id")
+    private UserType userType;
+    
+    //@Email
     @Column(name = "email")
 	private String email;
     
@@ -31,7 +34,7 @@ public class User extends Restaurant {
 	private boolean vipStatus;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "gender", nullable = false)
+	@Column(name = "gender")
 	private GenderType gender;
 
 	public enum GenderType {
@@ -92,6 +95,22 @@ public class User extends Restaurant {
 
 	public void setNickName(String nickname) {
 		this.nickName = nickname;
+	}
+
+	public UserType getUserType() {
+		return userType;
+	}
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
+	}
+
+	public GenderType getGender() {
+		return gender;
+	}
+
+	public void setGender(GenderType gender) {
+		this.gender = gender;
 	}
 
 }

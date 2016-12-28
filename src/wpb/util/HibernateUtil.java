@@ -1,5 +1,8 @@
 package wpb.util;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
 
 import org.hibernate.SessionFactory;
@@ -17,6 +20,8 @@ import org.hibernate.service.ServiceRegistry;
 
 public class HibernateUtil {
 
+	private static Connection connection = null;
+	
     //XML based configuration
     private static SessionFactory sessionFactory;
 
@@ -126,7 +131,7 @@ public class HibernateUtil {
             configuration.addAnnotatedClass(wpb.entity.RoomTable.class);
             configuration.addAnnotatedClass(wpb.entity.Reservation.class);
             configuration.addAnnotatedClass(wpb.entity.User.class);
-
+            configuration.addAnnotatedClass(wpb.entity.UserType.class);
 
             
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
@@ -168,5 +173,31 @@ public class HibernateUtil {
         if(sessionJavaConfigFactory == null) sessionJavaConfigFactory = buildSessionJavaConfigFactory();
         return sessionJavaConfigFactory;
     }
+    
+	@Deprecated
+	public static void testDBConnection() {
+		try {
+			if (connection == null) {
+				// jdbc:postgresql://qdjjtnkv.db.elephantsql.com:5432/nqjahvby
+				String host = "localhost";
+				String database = "RAIBZ";
+				String username = "raitest";
+				String password = "raitest";
+				String url = "jdbc:postgresql://" + host + "/" + database;
+				String driverJDBC = "org.postgresql.Driver";
+				Class.forName(driverJDBC);
+				connection = DriverManager.getConnection(url, username, password);
+				// line firing the class not found exception
+
+			} else if (connection.isClosed()) {
+				connection = null;
+				// connect();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace(System.err);
+		} catch (Exception e) {
+			e.printStackTrace(System.err);
+		}
+	}
 
 }
