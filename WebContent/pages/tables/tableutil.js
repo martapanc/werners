@@ -41,6 +41,32 @@
 				'<a class="edit" href="javascript:" title="Edit Item"><i class="fa fa-pencil"></i></a>', ]
 				.join('');
 	}
+	
+	/**
+	 * Formats the table category column of the table by adding star icons.
+	 * 
+	 * @param {number}
+	 *            value The row number.
+	 */
+	function categoryFormatter(value) {
+		var retvalue = '';
+		switch(value){
+		
+		case 'lowcost':
+			retvalue = '<i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>';
+			break;
+			
+		case 'medium':
+			retvalue = '<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>';
+			break;
+		
+		case 'highend':
+			retvalue = '<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>';
+			break;
+		}
+		
+		return retvalue;
+	}
 	 
 	/**
 	* Formats the price column of the table by adding a Euro sign.
@@ -53,10 +79,10 @@
 	}
 
 	/**
-	 * Formats the action column of the table by adding a pencil icon to every row.
+	 * Returns the number of selected rows (its id's).
 	 * 
-	 * @param {number}
-	 *            value The row number.
+	 * @return {number}
+	 *            value The selected row numbers.
 	 */
 	function getIdSelections() {
 		return $.map($table.bootstrapTable('getSelections'), function(row) {

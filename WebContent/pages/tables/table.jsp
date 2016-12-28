@@ -150,7 +150,7 @@
         				<th data-field="name" data-sortable="true" data-width="30%">Name</th>
         				<th data-field="seats" data-sortable="true">Seats</th>
         				<th data-field="room" data-sortable="true">Room</th>
-        				<th data-field="category" data-sortable="true">Category</th>
+        				<th data-field="category" data-formatter="categoryFormatter" data-sortable="true">Category</th>
     					<th data-field="action" data-align="center" data-formatter="actionFormatter" data-events="actionEvents" data-width="8%">Edit</th>
     				</tr>
     			</thead>             
