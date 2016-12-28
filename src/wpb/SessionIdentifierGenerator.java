@@ -1,4 +1,4 @@
-package wpb.util;
+package wpb;
 
 import java.security.SecureRandom;
 import java.math.BigInteger;

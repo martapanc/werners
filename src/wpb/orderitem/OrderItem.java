@@ -1,6 +1,9 @@
-package wpb.entity;
+package wpb.orderitem;
 
 import javax.persistence.*;
+
+import wpb.Restaurant;
+import wpb.item.Item;
 
 @Entity
 @Table(name="order_item")

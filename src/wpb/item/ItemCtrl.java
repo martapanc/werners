@@ -1,4 +1,4 @@
-package wpb.servlet;
+package wpb.item;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,10 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.*;
 
-import wpb.entity.FoodClass;
-import wpb.entity.Item;
-import wpb.manager.GenericManager;
-import wpb.util.HibernateUtil;
+import wpb.GenericManager;
+import wpb.HibernateUtil;
+import wpb.foodclass.FoodClass;
 
 /**
  * Servlet implementation class ItemServlet

@@ -1,4 +1,4 @@
-package wpb.util;
+package wpb;
 
 import javax.servlet.ServletContextEvent;  
 import javax.servlet.ServletContextListener;

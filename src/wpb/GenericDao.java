@@ -1,4 +1,4 @@
-package wpb.manager;
+package wpb;
 
 import java.io.Serializable;
 import java.util.List;

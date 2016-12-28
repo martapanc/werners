@@ -1,4 +1,4 @@
-package wpb.servlet;
+package wpb.reservation;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -7,8 +7,6 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-
-import wpb.util.Validator;
 
 /**
  * Servlet implementation class ReservationServlet

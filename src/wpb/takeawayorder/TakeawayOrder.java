@@ -1,8 +1,12 @@
-package wpb.entity;
+package wpb.takeawayorder;
 
 import java.util.Set;
 
 import javax.persistence.*;
+
+import wpb.Restaurant;
+import wpb.orderitem.OrderItem;
+import wpb.user.User;
 
 @Entity
 @Table(name = "takeaway_order")

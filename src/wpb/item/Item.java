@@ -1,8 +1,11 @@
-package wpb.entity;
+package wpb.item;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import wpb.foodclass.FoodClass;
+import wpb.Restaurant;
 
 @Entity
 @Table(name = "item")

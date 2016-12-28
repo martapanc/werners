@@ -1,9 +1,13 @@
-package wpb.entity;
+package wpb.reservation;
 
 import java.sql.Timestamp;
 import java.util.Set;
 
 import javax.persistence.*;
+
+import wpb.Restaurant;
+import wpb.roomtable.RoomTable;
+import wpb.user.User;
 
 @Entity
 @Table(name = "reservation")
