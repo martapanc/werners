@@ -37,12 +37,12 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-  
- <style>
- 	.reservation-area.col-md-12 {
- 		font-size: 20px;
- 	}
- </style> 
+
+<style>
+.reservation-area.col-md-12 {
+	font-size: 20px;
+}
+</style>
 </head>
 <body class="hold-transition skin-red sidebar-mini">
 	<div class="wrapper">
@@ -85,100 +85,105 @@
 						<div class="box-header with-border">
 							<h3 class="box-title">Take-Away Checkout</h3>
 						</div>
-							<div class="reservation-area">
-								<form id="reservation-form" data-toggle="validator" role="form">
+						<div class="reservation-area">
+							<form id="reservation-form" data-toggle="validator" role="form">
 								<div class="box-body">
-									<div class="col-md-1">
-										<!-- Title -->
-										<label for="title">Title:</label> <select id="title" name="title" class="form-control">
-											<option value="Mr" selected>Mr</option>
-											<option value="Mrs">Mrs</option>
-											<option value="Ms">Ms</option>
-											<option value="Dr">Dr</option>
-											<option value="Madam">Madam</option>
-											<option value="Prince">Prince</option>
-											<option value="Princess">Princess</option>
-											<option value="Lord">Lord</option>
-											<option value="Lady">Lady</option>
-										</select>
-										<!-- /.form group -->
-									</div>
-	
-									<div class="col-md-5">
-										<!-- First name -->
-										<div class="form-group">
-											<label>First name:</label> <input id="firstname" name="firstname" type="text" class="form-control" placeholder="John"
-												value="">
+									<div class="col-md-12">
+										<div class="col-md-1">
+											<!-- Title -->
+											<label for="title">Title:</label> <select id="title" name="title" class="form-control">
+												<option value="Mr" selected>Mr</option>
+												<option value="Mrs">Mrs</option>
+												<option value="Ms">Ms</option>
+												<option value="Dr">Dr</option>
+												<option value="Madam">Madam</option>
+												<option value="Prince">Prince</option>
+												<option value="Princess">Princess</option>
+												<option value="Lord">Lord</option>
+												<option value="Lady">Lady</option>
+											</select>
+											<!-- /.form group -->
 										</div>
-										<!-- /.form group -->
-									</div>
-	
-									<div class="col-md-6">
-										<!-- Last name -->
-										<div class="bootstrap-timepicker">
+
+										<div class="col-md-5">
+											<!-- First name -->
 											<div class="form-group">
-												<label>Last name:</label> <input id="lastname" name="lastname" type="text" class="form-control" placeholder="Watson"
+												<label>First name:</label> <input id="firstname" name="firstname" type="text" class="form-control" placeholder="John"
 													value="">
 											</div>
 											<!-- /.form group -->
 										</div>
-									</div>
-	
-									<!-- phone mask -->
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Telephone number:</label>
-	
-											<div class="input-group">
-												<div class="input-group-addon">
-													<i class="fa fa-phone"></i>
+
+										<div class="col-md-6">
+											<!-- Last name -->
+											<div class="bootstrap-timepicker">
+												<div class="form-group">
+													<label>Last name:</label> <input id="lastname" name="lastname" type="text" class="form-control" placeholder="Watson"
+														value="">
 												</div>
-												<input id="telephone" name="telephone" type="text" class="form-control" data-inputmask='"mask": "9999999999"' min-length="10" data-mask>
+												<!-- /.form group -->
 											</div>
-											<!-- /.input group -->
 										</div>
-										<!-- /.form group -->
 									</div>
-	
-									<!-- email mask -->
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Email (optional):</label>
-	
-											<div class="input-group">
-												<div class="input-group-addon">
-													<i class="fa fa-at"></i>
+									<div class="col-md-12">
+										<!-- phone mask -->
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Telephone number:</label>
+
+												<div class="input-group">
+													<div class="input-group-addon">
+														<i class="fa fa-phone"></i>
+													</div>
+													<input id="telephone" name="telephone" type="text" class="form-control" data-inputmask='"mask": "9999999999"'
+														min-length="10" data-mask>
 												</div>
-												<input id="email" name="email" type="text" class="form-control" placeholder="email@example.com">
+												<!-- /.input group -->
 											</div>
-											<!-- /.input group -->
+											<!-- /.form group -->
 										</div>
-										<!-- /.form group -->
+
+										<!-- email mask -->
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Email (optional):</label>
+
+												<div class="input-group">
+													<div class="input-group-addon">
+														<i class="fa fa-at"></i>
+													</div>
+													<input id="email" name="email" type="text" class="form-control" placeholder="email@example.com">
+												</div>
+												<!-- /.input group -->
+											</div>
+											<!-- /.form group -->
+										</div>
+
 									</div>
-	
 									<!-- Home address -->
 									<div class="col-md-12">
-										<div class="form-group">
-											<label>Delivery Address:</label>
-	
-											<div class="input-group">
-												<div class="input-group-addon">
-													<i class="fa fa-home"></i>
+										<div class="col-md-12">
+											<div class="form-group">
+												<label>Delivery Address:</label>
+
+												<div class="input-group">
+													<div class="input-group-addon">
+														<i class="fa fa-home"></i>
+													</div>
+													<input id="address" name="address" type="text" class="form-control" placeholder="221B Baker St, London, UK">
 												</div>
-												<input id="address" name="address" type="text" class="form-control" placeholder="221B Baker St, London, UK">
+												<!-- /.input group -->
 											</div>
-											<!-- /.input group -->
+											<!-- /.form group -->
 										</div>
-										<!-- /.form group -->
 									</div>
-	
-									
-	
+
+
 								</div>
 								<!-- /. box body -->
 								<div class="box-footer">
-									<input type="submit" class="btn btn-success" id="confirm-btn" value="Confirm" />
-									<input type="reset" class="btn btn-danger" value="Reset"/>
+									<button type="submit" id="submit-btn" class="btn btn-primary">Confirm</button>
+									<input type="reset" class="btn btn-danger" value="Reset" />
 								</div>
 							</form>
 						</div>
@@ -268,7 +273,7 @@
 		<script src="/restaurantProject/dist/js/demo.js"></script>
 		<script src="/restaurantProject/bootstrap/js/date.format.js"></script>
 		<script src="/restaurantProject/plugins/bootstrapvalidator/dist/js/bootstrapValidator.min.js"></script>
-		<script src="/restaurantProject/plugins/jQueryUI/jquery-ui.min.js"></script>
+
 	</div>
 	<script>
 		var today = new Date();
@@ -293,8 +298,9 @@
 			//localStorage.clear();
 		});
 
-		
-		$('#reservation-form').bootstrapValidator({
+		$('#reservation-form')
+				.bootstrapValidator(
+						{
 							trigger : 'blur',
 							fields : {
 								firstname : {
@@ -365,7 +371,7 @@
 									data.bv.getOptions());
 						});
 
-		$("#confirm-btn")
+		$("#submit-btn")
 				.click(
 						function() {
 							var data = new Object();
@@ -380,16 +386,26 @@
 							//var data = new Array();
 							console.log(data);
 
-							$(".reservation-area").addClass("col-md-12").html("</br><strong>Reservation name:</strong>")
-							.append("&emsp;" + data.title + " " + data.firstname + " " + data.lastname + "</br>")
-							.append("<strong>Telephone number: </strong>&emsp;" + data.telephone + "</br>")
-							.append("<strong>Delivery address: </strong>&emsp;" + data.address + "</br>");
-							if (data.mail != "") 
-								$(".reservation-area").append("<strong>Email address: </strong>&emsp;" + data.mail);
+							$(".reservation-area").addClass("col-md-12").html(
+									"</br><strong>Reservation name:</strong>")
+									.append(
+											"&emsp;" + data.title + " "
+													+ data.firstname + " "
+													+ data.lastname + "</br>")
+									.append(
+											"<strong>Telephone number: </strong>&emsp;"
+													+ data.telephone + "</br>")
+									.append(
+											"<strong>Delivery address: </strong>&emsp;"
+													+ data.address + "</br>");
+							if (data.mail != "")
+								$(".reservation-area").append(
+										"<strong>Email address: </strong>&emsp;"
+												+ data.mail);
 							$(".reservation-area").append("</br>&emsp;");
-							
+
 							alert("We are currently working on your reservation! You will receive a phone call as soon as we are ready to deliver it.");
-							
+
 							$.post({
 								type : "POST",
 								url : "/restaurantProject/TakeawayServlet",

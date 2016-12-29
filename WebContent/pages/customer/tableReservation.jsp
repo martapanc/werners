@@ -70,6 +70,7 @@
 
 						<form id="reservation-form" method="post" action="/restaurantProject/ReservationServlet">
 							<div class="box-body">
+							<div class="col-md-12">
 								<div class="col-md-1">
 									<!-- Title -->
 									<label for="title">Title:</label> <select name="title" class="form-control">
@@ -83,8 +84,7 @@
 								<div class="col-md-5">
 									<!-- First name -->
 									<div class="form-group">
-										<label>First name:</label> <input id="fn" name="firstname" type="text" class="form-control" placeholder="Walter"
-											required>
+										<label>First name:</label> <input id="fn" name="firstname" type="text" class="form-control" placeholder="Walter">
 									</div>
 									<!-- /.form group -->
 								</div>
@@ -93,12 +93,14 @@
 									<!-- Last name -->
 									<div class="bootstrap-timepicker">
 										<div class="form-group">
-											<label>Last name:</label> <input name="lastname" type="text" class="form-control" placeholder="White" required>
+											<label>Last name:</label> <input name="lastname" type="text" class="form-control" placeholder="White">
 										</div>
 										<!-- /.form group -->
 									</div>
 								</div>
-
+								</div>
+								
+								<div class="col-md-12">
 								<div class="col-md-5">
 									<!-- Date dd/mm/yyyy -->
 									<div class="form-group">
@@ -108,7 +110,7 @@
 											<div class="input-group-addon">
 												<i class="fa fa-calendar"></i>
 											</div>
-											<input name="date" type="text" class="form-control pull-right" id="datepicker" required>
+											<input name="date" type="text" class="form-control pull-right" id="datepicker">
 										</div>
 										<!-- /.input group -->
 									</div>
@@ -150,6 +152,9 @@
 										<!-- /.form group -->
 									</div>
 								</div>
+								</div>
+								
+								<div class="col-md-12">
 
 								<!-- phone mask -->
 								<div class="col-md-6">
@@ -160,8 +165,7 @@
 											<div class="input-group-addon">
 												<i class="fa fa-phone"></i>
 											</div>
-											<input name="telephone" type="text" class="form-control" data-inputmask='"mask": "9999999999"' min-length="10"
-												data-mask required>
+											<input name="telephone" type="text" class="form-control">
 										</div>
 										<!-- /.input group -->
 									</div>
@@ -182,6 +186,7 @@
 										<!-- /.input group -->
 									</div>
 									<!-- /.form group -->
+								</div>
 								</div>
 
 							</div>
@@ -240,6 +245,7 @@
 	<!-- AdminLTE for demo purposes -->
 	<script src="../../dist/js/demo.js"></script>
 	<script src="../../plugins/bootstrap-validator/dist/validator.min.js"></script>
+	<script src="/restaurantProject/plugins/bootstrapvalidator/dist/js/bootstrapValidator.min.js"></script>
 	<script>
 		$(function() {
 
@@ -248,7 +254,78 @@
 				$('#customer-menu').addClass('active');
 			});
 
-			$('#reservation-form').validator();
+			//$('#reservation-form').validator();
+			$('#reservation-form').bootstrapValidator({
+							trigger : 'blur',
+							fields : {
+								firstname : {
+									validators : {
+										notEmpty : {
+											message : 'Your first name is required'
+										},
+										regexp : {
+											regexp : /^[a-zA-Z ]+$/,
+											message : 'Your first name cannot have numbers or symbols'
+										}
+									}
+								},
+								lastname : {
+									validators : {
+										notEmpty : {
+											message : 'Your last name is required'
+										},
+										regexp : {
+											regexp : /^[a-zA-Z ]+$/,
+											message : 'Your last name cannot have numbers or symbols'
+										}
+									}
+								},
+								email : {
+									validators : {
+										regexp : {
+											regexp : /^(([^<>()\[\]\\.,;:\s@]+(\.[^<>()\[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+											message : 'The input is not a valid email address'
+										}
+									}
+								},
+								telephone : {
+									validators : {
+										notEmpty : {
+											message : 'The phone number is required'
+										},
+										regexp : {
+											regexp : /^[0-9]{10}$/,
+											message : 'The input is not a valid phone number (ex: 0123456789)'
+										}
+									}
+								},
+								date : {
+									validators : {
+										regexp: {
+											regexp: /^[A-Z][a-z]{2}, [0-9]{2} [A-Z][a-z]{2} [0-9]{4}$/,
+											message : "Please insert a valid date."
+										}
+										//notEmpty : {
+										//	message : 'The reservation date is required'
+										//}
+									}
+								}
+								
+							}
+						}).on(
+						'error.field.bv',
+						'[name="phone"]',
+						function(e, data) {
+							// change the data-bv-trigger value to keydown
+							$(e.target).attr('data-bv-trigger', 'keydown');
+							// destroy the plugin
+							// console.info(data.bv.getOptions());
+							data.bv.destroy();
+							// console.info(data.bv.getOptions());
+							// initialize the plugin
+							$('#reservation-form').bootstrapValidator(
+									data.bv.getOptions());
+						});
 
 			//Initialize Select2 Elements
 			$(".select2").select2();

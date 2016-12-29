@@ -1,6 +1,6 @@
 package wpb.reservation;
 
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -8,22 +8,25 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import com.google.gson.*;
+import wpb.*;
+
 /**
  * Servlet implementation class ReservationServlet
  */
-@WebServlet("/ReservationServlet")
+@WebServlet(name="reservation", urlPatterns= "/ReservationServlet", loadOnStartup = 1)
 public class ReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static GenericManager<Reservation, Long> resMng = null;
+	private static Gson gson = null;
 	SimpleDateFormat FMT = new SimpleDateFormat("EEE, dd MMM yyyy");
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public ReservationServlet() {
-		super();
-		// TODO Auto-generated constructor stub
+	
+	@Override
+	public void init() throws ServletException {
+		resMng = new GenericManager<Reservation, Long>(Reservation.class, HibernateUtil.getSessionJavaConfigFactory());
+		gson = new GsonBuilder().create();
 	}
-
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -44,13 +47,29 @@ public class ReservationServlet extends HttpServlet {
 		Map<String, Object> pMap = new HashMap<String, Object>();
 		List<HashMap<String, String>> errList = new ArrayList<HashMap<String, String>>();
 
-		analyzeParameters(paramMap, request, pMap, errList);
+		if (paramMap.containsKey("action")) {
+			String action = (String) request.getParameter("action");
+			if (action.equals("list")) {
+				String json = gson.toJson(resMng.getAll());
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				System.out.println("List: " + json);
+				try (PrintWriter out = response.getWriter()) {
+					out.println(json);
+				}
+			} 
+		} else {
+			
+			analyzeParameters(paramMap, request, pMap, errList);
 
-		request.setAttribute("map", pMap);
-		request.setAttribute("todayDate", FMT.format(new Date()));
+			request.setAttribute("map", pMap);
+			request.setAttribute("todayDate", FMT.format(new Date()));
 
-		System.out.println(pMap);
-		request.getRequestDispatcher("pages/customer/reservationInvoice.jsp").forward(request, response);
+			System.out.println(pMap);
+			request.getRequestDispatcher("pages/customer/reservationInvoice.jsp").forward(request, response);
+		}
+		
+		
 	}
 
 	private void analyzeParameters(Map<String, String[]> paramMap, HttpServletRequest request,
