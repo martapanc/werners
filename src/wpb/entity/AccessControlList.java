@@ -21,9 +21,9 @@ public class AccessControlList {
     @Column(name = "permission")
     private Permission permission;
     
-    @ManyToOne(targetEntity = UserType.class)
+    @ManyToOne(targetEntity = Role.class)
     @JoinColumn(name = "user_type_id")
-    private UserType userType;
+    private Role userType;
     
     @Column(name = "can_view")
     private boolean canView;
@@ -45,11 +45,11 @@ public class AccessControlList {
         this.permission = permission;
     }
 
-    public UserType getUserType() {
+    public Role getUserType() {
         return userType;
     }
 
-    public void setUserType(UserType userType) {
+    public void setUserType(Role userType) {
         this.userType = userType;
     }
 

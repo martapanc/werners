@@ -5,22 +5,22 @@ import java.util.List;
 import java.util.ArrayList;
 
 @Entity
-@Table(name = "user_type")
-public class UserType extends Restaurant {
+@Table(name = "role")
+public class Role extends Restaurant {
     
 	@Basic
-    @Column(name = "type")
-    private String type;
+    @Column(name = "role")
+    private String role;
     
-    @OneToMany(targetEntity = User.class, mappedBy = "userType")
+    @OneToMany(targetEntity = User.class, mappedBy = "role")
 	private List<User> users = new ArrayList<User>();
 
-    public String getType() {
-        return type;
+    public String getRole() {
+        return role;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setRole(String type) {
+        this.role = type;
     }
 
 

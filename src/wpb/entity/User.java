@@ -10,9 +10,9 @@ public class User extends Restaurant {
     @Column(name = "nick_name", nullable = false)
 	private String nickName;
     
-    @ManyToOne(targetEntity = UserType.class)
-    @JoinColumn(name = "user_type_id")
-    private UserType userType;
+    @ManyToOne(targetEntity = Role.class)
+    @JoinColumn(name = "role_id")
+    private Role role;
     
 	// @Email
 	@Column(name = "email", nullable = false, unique=true)
@@ -97,12 +97,12 @@ public class User extends Restaurant {
 		this.nickName = nickname;
 	}
 
-	public UserType getUserType() {
-		return userType;
+	public Role getUserType() {
+		return role;
 	}
 
-	public void setUserType(UserType userType) {
-		this.userType = userType;
+	public void setUserType(Role userType) {
+		this.role = userType;
 	}
 
 	public GenderType getGender() {
