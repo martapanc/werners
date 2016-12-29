@@ -376,11 +376,9 @@
 						function() {
 							var data = new Object();
 							data.title = document.getElementById("title").value;
-							data.firstname = document
-									.getElementById("firstname").value;
+							data.firstname = document.getElementById("firstname").value;
 							data.lastname = document.getElementById("lastname").value;
-							data.telephone = document
-									.getElementById("telephone").value;
+							data.telephone = document.getElementById("telephone").value;
 							data.mail = document.getElementById("email").value;
 							data.address = document.getElementById("address").value;
 							//var data = new Array();
@@ -414,10 +412,10 @@
 									"cart" : localStorage.getItem("cart")
 								},
 								complete : function(response) {
-									console.log(JSON.stringify(response));
+									console.log("Ok" + JSON.stringify(response));
 								},
 								error : function(error) {
-									console.log(error);
+									console.log("error" + error);
 								}
 							});
 							return false;
