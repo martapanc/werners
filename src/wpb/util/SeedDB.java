@@ -32,14 +32,14 @@ public class SeedDB {
 	private static GenericManager<RoomTable, Long> rtManager;
 	private static GenericManager<FoodClass,Long> fcManager;
 	private static GenericManager<TakeawayOrder,Long> taManager;
-    private static UserType userTypeSA, userTypeAdmin, userTypeDE;
+    private static Role userTypeSA, userTypeAdmin, userTypeDE;
     private static GenericManager<User,Long> userManager;
-    private static GenericManager<UserType,Long> userTypeManager;
+    private static GenericManager<Role,Long> userTypeManager;
     //private static final AccessControlListManager accessControlListManager;
 
 	public static void main(String[] args) {
 		SeedDB.initialize(HibernateUtil.getSessionJavaConfigFactory());
-		SeedDB.seedUserTypes();
+		SeedDB.seedRoles();
 		SeedDB.seedUsers();
         SeedDB.seedRoomTables(30);
         SeedDB.seedFoodClasses();
@@ -55,7 +55,7 @@ public class SeedDB {
 		rtManager = new GenericManager<>(RoomTable.class, mySessionFactory);
 		taManager = new GenericManager<TakeawayOrder, Long>(TakeawayOrder.class, mySessionFactory);
 		userManager = new GenericManager<User, Long>(User.class, mySessionFactory);
-		userTypeManager = new GenericManager<UserType, Long>(UserType.class, mySessionFactory);
+		userTypeManager = new GenericManager<Role, Long>(Role.class, mySessionFactory);
 	}
 
 	public static void seedFoodClasses() {
@@ -152,10 +152,10 @@ public class SeedDB {
 		taManager.add(to);
 	}
 
-	public static void seedUserTypes() {
-		userTypeSA = saveUserType("SuperAdministrator");
-		userTypeAdmin = saveUserType("Administrator");
-		userTypeDE = saveUserType("DataEntry");
+	public static void seedRoles() {
+		userTypeSA = saveRole("SuperAdministrator");
+		userTypeAdmin = saveRole("Administrator");
+		userTypeDE = saveRole("DataEntry");
 	}
     
 	public static void seedUsers() {
@@ -165,16 +165,16 @@ public class SeedDB {
         saveUser("giulia@wpb.it", userTypeAdmin, "giulia");
     }
 	
-    private static UserType saveUserType(String type) {
-        UserType userType = new UserType();
-        userType.setType(type);
+    private static Role saveRole(String type) {
+        Role userType = new Role();
+        userType.setRole(type);
 
         userTypeManager.add(userType);
 
         return userType;
     }
 
-    private static void saveUser(String email, UserType userType, String password) {
+    private static void saveUser(String email, Role userType, String password) {
         User user = new User();
         user.setEmail(email);
         user.setUserType(userType);

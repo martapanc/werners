@@ -3,9 +3,9 @@
     <!-- Logo -->
     <a href="/restaurantProject/index.jsp" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>W</b>B&P</span>
+      <span class="logo-mini"><b>W</b>B&amp;P</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Werner's </b><small style="font-size: 15px">Panini&Burgers</small></span>
+      <span class="logo-lg"><b>Werner's </b><small style="font-size: 15px">Panini&amp;Burgers</small></span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
@@ -214,32 +214,16 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="/restaurantProject/dist/img/burger-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Auguste Gusteau</span>
+              <span class="hidden-xs">${sessionScope.userSession.user.email}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
                 <img src="/restaurantProject/dist/img/burger-160x160.jpg" class="img-circle" alt="User Image">
 
-                <p>
-                  Auguste Gusteau - Le meilleur chef du monde
-                  <small>Member since Oct. 2016</small>
+                <p>${sessionScope.userSession.user.email}
+                  <small>${sessionScope.userSession.loginTime}</small>
                 </p>
-              </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
@@ -247,7 +231,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="/restaurantProject/logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>

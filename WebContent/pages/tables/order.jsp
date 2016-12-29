@@ -40,7 +40,7 @@
 <body class="hold-transition skin-red sidebar-mini">
 	<div class="wrapper">
 
-		<jsp:include page="../../WEB-INF/upper-navbar.html" />
+		<jsp:include page="../../WEB-INF/upper-navbar.jsp" />
 
 		<jsp:include page="../../WEB-INF/left-sidebar.html" />
 

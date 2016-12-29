@@ -41,7 +41,7 @@
 <body class="hold-transition skin-red sidebar-mini">
 <div class="wrapper">
 
- <jsp:include page="../WEB-INF/upper-navbar.html" />
+ <jsp:include page="../WEB-INF/upper-navbar.jsp" />
   
  <jsp:include page="../WEB-INF/left-sidebar.html" />
 
@@ -179,56 +179,20 @@
 			center: 'title',
 			right: 'timelineDay,timelineThreeDays,agendaWeek,month'
 		},
-		customButtons: {
-			promptResource: {
-				text: '+ room',
-				click: function() {
-					var title = prompt('Room name');
-					if (title) {
-						$('#calendar').fullCalendar(
-							'addResource',
-							{ title: title },
-							true // scroll to the new resource?
-						);
-					}
-				}
-			}
-		},
 		defaultView: 'timelineDay',
 		views: {
-			timelineThreeDays: {
-				type: 'timeline',
-				duration: { days: 3 }
-			}
 		},
 		resourceLabelText: 'Tables',
-		resources: [
-			{ id: 'a', title: 'Table A' },
-			{ id: 'b', title: 'Table B', eventColor: 'green' },
-			{ id: 'c', title: 'Table C', eventColor: 'orange' },
-			{ id: 'd', title: 'Room D', children: [
-				{ id: 'd1', title: 'Table 1' },
-				{ id: 'd2', title: 'Table 2' }
-			] },
-			{ id: 'e', title: 'Table E' },
-			{ id: 'f', title: 'Table F', eventColor: 'red' },
-			{ id: 'g', title: 'Table G' },
-			{ id: 'h', title: 'Table H' },
-			{ id: 'i', title: 'Table I' },
-			{ id: 'j', title: 'Table J' },
-			{ id: 'k', title: 'Table K' },
-			{ id: 'l', title: 'Table L' },
-			{ id: 'm', title: 'Table M' },
-			{ id: 'n', title: 'Table N' },
-			{ id: 'o', title: 'Table O' },
-			{ id: 'p', title: 'Table P' }
-		],
+		resources: {
+	        url: '../roomTable?action=list',
+	        type: 'POST'
+	    },
 		events: [
-			{ id: '1', resourceId: 'b', start: TODAY + 'T15:00:00', end: TODAY + 'T17:00:00', title: 'event 1' },
-			{ id: '2', resourceId: 'c', start: TODAY + 'T05:00:00', end: TODAY + 'T22:00:00', title: 'event 2' },
-			{ id: '3', resourceId: 'd', start: YESTERDAY, end: TOMORROW, title: 'event 3' },
-			{ id: '4', resourceId: 'e', start: TODAY + 'T03:00:00', end: TODAY + 'T08:00:00', title: 'event 4' },
-			{ id: '5', resourceId: 'f', start: TODAY + 'T00:30:00', end: TODAY + 'T02:30:00', title: 'event 5' }
+			{ id: '1', resourceId: '261', start: TODAY + 'T15:00:00', end: TODAY + 'T17:00:00', title: 'event 1' },
+			{ id: '2', resourceId: '261', start: TODAY + 'T05:00:00', end: TODAY + 'T22:00:00', title: 'event 2' },
+			{ id: '3', resourceId: '261', start: YESTERDAY, end: TOMORROW, title: 'event 3' },
+			{ id: '4', resourceId: '261', start: TODAY + 'T03:00:00', end: TODAY + 'T08:00:00', title: 'event 4' },
+			{ id: '5', resourceId: '261', start: TODAY + 'T00:30:00', end: TODAY + 'T02:30:00', title: 'event 5' }
 		],
       
 	

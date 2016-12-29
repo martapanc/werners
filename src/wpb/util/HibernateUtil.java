@@ -131,7 +131,7 @@ public class HibernateUtil {
             configuration.addAnnotatedClass(wpb.entity.RoomTable.class);
             configuration.addAnnotatedClass(wpb.entity.Reservation.class);
             configuration.addAnnotatedClass(wpb.entity.User.class);
-            configuration.addAnnotatedClass(wpb.entity.UserType.class);
+            configuration.addAnnotatedClass(wpb.entity.Role.class);
 
             
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();

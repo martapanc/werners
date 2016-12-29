@@ -12,9 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 
-import wpb.entity.FoodClass;
 import wpb.entity.RoomTable;
 import wpb.entity.RoomTable.CategoryType;
 import wpb.manager.GenericManager;
@@ -23,7 +24,7 @@ import wpb.util.HibernateUtil;
 /**
  * Servlet implementation class ItemServlet
  */
-@WebServlet(name = "roomTableServlet", urlPatterns = "/roomTable", loadOnStartup = 1)
+@WebServlet(name = "roomTableServlet", urlPatterns = "/roomTable")
 public class RoomTableServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static GenericManager<RoomTable, Long> rtManager = null;

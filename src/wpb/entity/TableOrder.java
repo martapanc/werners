@@ -4,8 +4,6 @@ import java.util.Set;
 
 import javax.persistence.*;
 
-import wpb.*;
-
 @Entity
 @Table(name = "table_order")
 public class TableOrder extends Restaurant {

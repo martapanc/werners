@@ -20,9 +20,19 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final UserManager userManager = new UserManager(HibernateUtil.getSessionJavaConfigFactory());
 
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		execute(request, response);
+	}
+	
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		execute(request, response);
+	}
 
+	private void execute(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String username = request.getParameter("email");
 		String password = request.getParameter("password");
 
@@ -53,4 +63,6 @@ public class LoginServlet extends HttpServlet {
 			request.getRequestDispatcher("/loginForm.jsp").forward(request, response);
 		}
 	}
+
+
 }
