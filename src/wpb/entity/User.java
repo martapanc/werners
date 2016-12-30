@@ -7,11 +7,12 @@ import org.hibernate.validator.constraints.*;
 @Table(name = "User")
 public class User extends Restaurant {
    
-    @Column(name = "nick_name", nullable = false)
-	private String nickName;
+    @Column(name = "full_name", nullable = false)
+	private String fullName;
     
     @ManyToOne(targetEntity = Role.class)
     @JoinColumn(name = "role_id")
+    //@ManyToOne(cascade = CascadeType.REFRESH)
     private Role role;
     
 	// @Email
@@ -32,14 +33,6 @@ public class User extends Restaurant {
 	
     @Column(name = "vip_status")
 	private boolean vipStatus;
-
-	@Enumerated(EnumType.STRING)
-	@Column(name = "gender")
-	private GenderType gender;
-
-	public enum GenderType {
-		female, male
-	};
 
 	public String getEmail() {
 		return email;
@@ -90,11 +83,11 @@ public class User extends Restaurant {
 	}
 
 	public String getNickName() {
-		return nickName;
+		return fullName;
 	}
 
 	public void setNickName(String nickname) {
-		this.nickName = nickname;
+		this.fullName = nickname;
 	}
 
 	public Role getUserType() {
@@ -103,14 +96,6 @@ public class User extends Restaurant {
 
 	public void setUserType(Role userType) {
 		this.role = userType;
-	}
-
-	public GenderType getGender() {
-		return gender;
-	}
-
-	public void setGender(GenderType gender) {
-		this.gender = gender;
 	}
 
 }

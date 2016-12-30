@@ -47,7 +47,7 @@
     <section class="content-header">
       <h1>
         Users
-        <small>here we have a list of all users</small>
+        <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/restaurantProject/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -63,28 +63,29 @@
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-body table-responsive">
-              <table id="item-table"
+              <table id="table"
               data-toggle="table"
-              data-url="../../listItem"
+              data-url="../../user"
               data-method="post"
+              data-content-type="application/x-www-form-urlencoded"
+              data-query-params='action=list'
               data-striped="true"
+              data-show-columns="true"
               data-pagination="true"
               data-pagination-loop="false"
-              data-page-size="25"
               data-show-refresh="true"
               data-search="true"
               data-resizable="true"
               data-show-toggle="true"
-              data-show-export="true"
-              >
+              data-show-export="true">
               	<thead>
     				<tr>
-        				<th data-field="userId" data-sortable="true">Id</th>
+        				<th data-field="id" data-sortable="true">Id</th>
         				<th data-field="name" data-sortable="true">Name</th>
         				<th data-field="email" data-sortable="true">E-Mail</th>
+        				<th data-field="password" data-sortable="true">Password</th>
         				<th data-field="billingAddress" data-sortable="true">Billing Address</th>
         				<th data-field="phoneNumber" data-sortable="true">Phone Number</th>
-        				<th data-field="password" data-sortable="true">Password</th>
         				<th data-field="points" data-sortable="true">Points</th>
         				<th data-field="vipStatus" data-sortable="true">Vip Status</th>
     				</tr>
@@ -136,17 +137,9 @@
 <script src="../../plugins/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
 <script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
 <script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
+<!-- custom scripts -->
+<script src="/restaurantProject/pages/tables/tableutil.js"></script>
 <script>
-function availableFormatter(value, row) {
-    var icon = row.available === true ? 'fa-check' : 'fa-times';
-    return '<i class="fa ' + icon + '"></i>';
-}
-
-function availableSorter(a, b) {
-    if (a === true) return 1;
-    if (a === false) return -1;
-    return 0;
-}
 </script>
 </body>
 </html>
