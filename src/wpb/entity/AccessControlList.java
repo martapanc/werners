@@ -12,7 +12,7 @@ import wpb.enums.Section;
 
 @Entity
 @Table(name = "access_control_list")
-public class AccessControlList {
+public class AccessControlList extends Restaurant {
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "section")

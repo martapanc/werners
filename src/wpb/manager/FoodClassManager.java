@@ -24,7 +24,7 @@ public class FoodClassManager extends GenericManager<FoodClass, Long> {
 		exampleEntity.setName(fcName);
 
 		tx = session.beginTransaction();
-		Criteria criteria = session.createCriteria(User.class).add(Example.create(exampleEntity));
+		Criteria criteria = session.createCriteria(FoodClass.class).add(Example.create(exampleEntity));
 		FoodClass fc = (FoodClass) criteria.uniqueResult();
 
 		tx.commit();

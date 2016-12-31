@@ -46,8 +46,8 @@ public class SeedDB {
         SeedDB.seedRoomTables(30);
         SeedDB.seedFoodClasses();
         SeedDB.seedItems();
-        SeedDB.seedTableOrders(1);
-        SeedDB.seedTakeawayOrders(10);
+        //SeedDB.seedTableOrders(1);
+        //SeedDB.seedTakeawayOrders(10);
 	}
 	
 	public static void initialize(SessionFactory sf) {
@@ -71,6 +71,7 @@ public class SeedDB {
 	}
 	
 	public static void seedItems() {
+		FoodClass c = fcManager.getByName(foodClasses[0]);
 		
 		saveItem("Margherita", fcManager.getByName(foodClasses[0]), 5.5, true);
 		saveItem("Marescialla", fcManager.getByName(foodClasses[0]), 5.5, true);
@@ -86,7 +87,7 @@ public class SeedDB {
 		saveItem("McChicken", fcManager.getByName(foodClasses[1]), 4.8, true);
 		saveItem("Burger Royal", fcManager.getByName(foodClasses[1]), 5.5, true);
 		saveItem("Hawaiian Toast", fcManager.getByName(foodClasses[1]), 5.0, false);
-		saveItem("BauernToast ©", fcManager.getByName(foodClasses[1]), 4.3, true);
+		saveItem("BauernToast", fcManager.getByName(foodClasses[1]), 4.3, true);
 		
 		saveItem("Chinese noodles", fcManager.getByName(foodClasses[2]), 5.5, true);
 		saveItem("Zhajiangmian", fcManager.getByName(foodClasses[2]), 6.7, false);
@@ -259,6 +260,8 @@ public class SeedDB {
     	itm.setFoodClass(fc);
     	itm.setPrice(price);
     	itm.setAvailable(available);
+    	
+    	itmManager.add(itm);
     }
     
 	private static void saveACL(Section section, Role role, boolean viewable, boolean insertable, boolean updateable, boolean deleteable) {

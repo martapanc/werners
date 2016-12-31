@@ -108,7 +108,7 @@ public class HibernateUtil {
             props.put("hibernate.show_sql", "true");
             props.put("hibernate.current_session_context_class", "thread");
             props.put("hibernate.query.factory_class", "org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory");
-            props.put("hibernate.hbm2ddl.auto", "update");
+            props.put("hibernate.hbm2ddl.auto", "create");
             
             //pool properties
             props.put("hibernate.c3p0.min_size", "5"); 
@@ -132,6 +132,7 @@ public class HibernateUtil {
             configuration.addAnnotatedClass(wpb.entity.Reservation.class);
             configuration.addAnnotatedClass(wpb.entity.User.class);
             configuration.addAnnotatedClass(wpb.entity.Role.class);
+            configuration.addAnnotatedClass(wpb.entity.AccessControlList.class);
 
             
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
