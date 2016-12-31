@@ -108,7 +108,7 @@ public class HibernateUtil {
             props.put("hibernate.show_sql", "true");
             props.put("hibernate.current_session_context_class", "thread");
             props.put("hibernate.query.factory_class", "org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory");
-            props.put("hibernate.hbm2ddl.auto", "create");
+            props.put("hibernate.hbm2ddl.auto", "update");
             
             //pool properties
             props.put("hibernate.c3p0.min_size", "5"); 

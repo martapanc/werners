@@ -13,6 +13,11 @@ public interface GenericDao <T, PK extends Serializable> {
      */
     T get(PK id, boolean lock);
     
+    /** Retrieve object based on an example object 
+     * 
+     */
+	T getByExample(T exampleEntity);
+    
     /** Get a list of all objects from persistent storage in the database */
     List<T> getAll();
     
@@ -27,5 +32,7 @@ public interface GenericDao <T, PK extends Serializable> {
     
     /** Remove an object from persistent storage in the database */
     public long getTotalCount();
+    
+
     
 }

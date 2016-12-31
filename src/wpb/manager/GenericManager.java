@@ -13,6 +13,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Example;
+
+import wpb.entity.User;
+import wpb.util.BCrypt;
 
 public class GenericManager<T, PK extends Serializable> implements GenericDao<T, PK> {
 
@@ -70,6 +74,28 @@ public class GenericManager<T, PK extends Serializable> implements GenericDao<T,
 		return foundObject;
 	}
 
+	@SuppressWarnings({ "deprecation", "unchecked" })
+	@Override
+	public T getByExample(T exampleEntity) {
+		Session session = sf.openSession();
+		Transaction tx = null;
+		T foundObject = null;
+		try {
+			tx = session.beginTransaction();
+			Criteria criteria = session.createCriteria(getPersistentClass()).add(Example.create(exampleEntity));
+			foundObject = (T) criteria.uniqueResult();
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return foundObject;
+	}
+	
 	@Override
 	public List<T> getAll() {
 		List<T> objList = null;

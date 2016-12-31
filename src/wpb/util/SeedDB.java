@@ -71,7 +71,6 @@ public class SeedDB {
 	}
 	
 	public static void seedItems() {
-		FoodClass c = fcManager.getByName(foodClasses[0]);
 		
 		saveItem("Margherita", fcManager.getByName(foodClasses[0]), 5.5, true);
 		saveItem("Marescialla", fcManager.getByName(foodClasses[0]), 5.5, true);

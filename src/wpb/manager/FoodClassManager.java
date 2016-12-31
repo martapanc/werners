@@ -18,10 +18,13 @@ public class FoodClassManager extends GenericManager<FoodClass, Long> {
 	
 	public FoodClass getByName(String fcName) {
 
-		Session session = sf.openSession();
-		Transaction tx = null;
 		FoodClass exampleEntity = new FoodClass();
 		exampleEntity.setName(fcName);
+		return this.getByExample(exampleEntity);
+		/*
+		Session session = sf.openSession();
+		Transaction tx = null;
+
 
 		tx = session.beginTransaction();
 		Criteria criteria = session.createCriteria(FoodClass.class).add(Example.create(exampleEntity));
@@ -29,7 +32,7 @@ public class FoodClassManager extends GenericManager<FoodClass, Long> {
 
 		tx.commit();
 		
-		return fc;
+		return fc;*/
 
 	}
 }
