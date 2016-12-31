@@ -16,11 +16,9 @@ import wpb.entity.FoodClass;
 import wpb.manager.GenericManager;
 import wpb.util.HibernateUtil;
 
-/**
- * Servlet implementation class ItemServlet
- */
-@WebServlet(name = "foodClassServlet", urlPatterns = "/foodClass")
+@WebServlet(name = "FoodClassServlet", urlPatterns = "/foodClass")
 public class FoodClassServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	private static GenericManager<FoodClass, Long> fcManager = null;
 	private static Gson gson = null;

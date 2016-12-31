@@ -25,7 +25,6 @@ public class GenericManager<T, PK extends Serializable> implements GenericDao<T,
 		this.persistentClass = persistentClass;
 	}
 
-	@SuppressWarnings("unchecked")
 	public Class<T> getPersistentClass() {
 		return persistentClass;
 	}

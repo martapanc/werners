@@ -1,88 +1,85 @@
 package wpb.entity;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import wpb.enums.Permission;
+import wpb.enums.Section;
 
 @Entity
 @Table(name = "access_control_list")
 public class AccessControlList {
 
     @Enumerated(value = EnumType.STRING)
-    @Column(name = "permission")
-    private Permission permission;
-    
+    @Column(name = "section")
+    private Section section;
+            
     @ManyToOne(targetEntity = Role.class)
     @JoinColumn(name = "user_type_id")
-    private Role userType;
+    private Role role;
     
-    @Column(name = "can_view")
-    private boolean canView;
+    @Column(name = "view_permission")
+    private boolean viewPermission;
     
-    @Column(name = "can_insert")
-    private boolean canInsert;
+    @Column(name = "insert_permission")
+    private boolean insertPermission;
     
-    @Column(name = "can_update")
-    private boolean canUpdate;
+    @Column(name = "update_permission")
+    private boolean updatePermission;
     
-    @Column(name = "can_delete")
-    private boolean canDelete;
+    @Column(name = "delete_Permission")
+    private boolean deletePermission;
 
-    public Permission getPermission() {
-        return permission;
+    public Section getSection() {
+        return section;
     }
 
-    public void setPermission(Permission permission) {
-        this.permission = permission;
+    public void setSection(Section section) {
+        this.section = section;
     }
 
-    public Role getUserType() {
-        return userType;
+    public Role getRole() {
+        return role;
     }
 
-    public void setUserType(Role userType) {
-        this.userType = userType;
+    public void setRole(Role userType) {
+        this.role = userType;
     }
 
-    public boolean isCanView() {
-        return canView;
+    public boolean hasViewPermission() {
+        return viewPermission;
     }
 
-    public void setCanView(boolean canView) {
-        this.canView = canView;
+    public void setViewPermission(boolean canView) {
+        this.viewPermission = canView;
     }
 
-    public boolean isCanInsert() {
-        return canInsert;
+    public boolean hasInsertPermission() {
+        return insertPermission;
     }
 
-    public void setCanInsert(boolean canInsert) {
-        this.canInsert = canInsert;
+    public void setInsertPermission(boolean canInsert) {
+        this.insertPermission = canInsert;
     }
 
-    public boolean isCanUpdate() {
-        return canUpdate;
+    public boolean hasUpdatePermission() {
+        return updatePermission;
     }
 
-    public void setCanUpdate(boolean canUpdate) {
-        this.canUpdate = canUpdate;
+    public void setUpdatePermission(boolean canUpdate) {
+        this.updatePermission = canUpdate;
     }
 
-    public boolean isCanDelete() {
-        return canDelete;
+    public boolean hasDeletePermission() {
+        return deletePermission;
     }
 
-    public void setCanDelete(boolean canDelete) {
-        this.canDelete = canDelete;
+    public void setDeletePermission(boolean canDelete) {
+        this.deletePermission = canDelete;
     }
 
 }

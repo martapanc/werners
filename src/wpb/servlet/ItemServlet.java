@@ -18,10 +18,7 @@ import wpb.entity.Item;
 import wpb.manager.GenericManager;
 import wpb.util.HibernateUtil;
 
-/**
- * Servlet implementation class ItemServlet
- */
-@WebServlet(name = "itemServlet", urlPatterns = "/item")
+@WebServlet(name = "ItemServlet", urlPatterns = "/item")
 public class ItemServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static GenericManager<Item, Long> itmManager = null;

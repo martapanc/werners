@@ -22,7 +22,6 @@ public class UserManager extends GenericManager<User, Long> {
 		Transaction tx = null;
 		User exampleEntity = new User();
 		exampleEntity.setEmail(email);
-		//exampleEntity.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
 		
 		tx = session.beginTransaction();
 		Criteria criteria = session.createCriteria(User.class).add(Example.create(exampleEntity));
@@ -35,34 +34,6 @@ public class UserManager extends GenericManager<User, Long> {
 	    }
 	    else return null;
 	    		
-	    //System.out.println("getCompanyEntityByExample: companyEntityList=" + user);
-
-	    //return user;
 	}
-	
-	/*
-	public User getByUsernamePassword(String username, String password) throws Exception {
-		
-		String tableName = "User";
-		String hql = "FROM :tablename WHERE :attribute = :string";
-		 
-		Query query = ((Session) sf).createQuery(hql);
-		query.setParameter("tablename", "User");
-		query.setParameter("attribute", "email");
-		query.setParameter("string", "username");
-		
-		 
-		//return  query.uniqueResult();
-		
-		/*
-		return null;
-		
-		StringBuffer query = new StringBuffer("from User u where ");
-        query.append("u.username = '" + username + "' and ");
-        query.append("u.password = '" + DigestUtils.md5Hex(password) + "'");
 
-        User user = (User) HibernateUtil.getSessionFactory()).createQuery(query.toString()).uniqueResult();
-
-        return user;
-    }*/
 }

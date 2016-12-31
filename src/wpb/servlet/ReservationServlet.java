@@ -10,11 +10,9 @@ import javax.servlet.http.*;
 
 import wpb.util.Validator;
 
-/**
- * Servlet implementation class ReservationServlet
- */
-@WebServlet("/ReservationServlet")
+@WebServlet(name = "ReservationServlet", urlPatterns = "/ReservationServlet")
 public class ReservationServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	SimpleDateFormat FMT = new SimpleDateFormat("EEE, dd MMM yyyy");
 
@@ -23,7 +21,7 @@ public class ReservationServlet extends HttpServlet {
 	 */
 	public ReservationServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+		// TODO Auto-generated constructor stub. Is this stub really needed?
 	}
 
 	/**

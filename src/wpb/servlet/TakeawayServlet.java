@@ -16,10 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.*;
 import org.apache.commons.validator.routines.EmailValidator;
 
-/**
- * Servlet implementation class TakeawayServlet
- */
-@WebServlet("/TakeawayServlet")
+@WebServlet(name = "TakeawayServlet", urlPatterns = "/TakeawayServlet")
 public class TakeawayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

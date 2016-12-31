@@ -21,10 +21,7 @@ import wpb.entity.RoomTable.CategoryType;
 import wpb.manager.GenericManager;
 import wpb.util.HibernateUtil;
 
-/**
- * Servlet implementation class ItemServlet
- */
-@WebServlet(name = "roomTableServlet", urlPatterns = "/roomTable")
+@WebServlet(name = "RoomTableServlet", urlPatterns = "/roomTable")
 public class RoomTableServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static GenericManager<RoomTable, Long> rtManager = null;

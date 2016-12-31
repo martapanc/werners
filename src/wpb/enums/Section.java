@@ -1,0 +1,3 @@
+package wpb.enums;
+
+public enum Section { FOODCLASS, SCHEDULER, CUSTOMER_TAKEAWAY, CUSTOMER_RESERVATION, USER, ACL }

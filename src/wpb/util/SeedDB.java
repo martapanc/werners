@@ -1,23 +1,24 @@
 package wpb.util;
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
 import java.util.Set;
-import java.util.concurrent.ThreadLocalRandom;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import wpb.entity.*;
+import wpb.entity.AccessControlList;
+import wpb.entity.FoodClass;
+import wpb.entity.Item;
+import wpb.entity.OrderItem;
+import wpb.entity.Role;
+import wpb.entity.RoomTable;
+import wpb.entity.TableOrder;
+import wpb.entity.TakeawayOrder;
+import wpb.entity.User;
+import wpb.enums.Section;
+import wpb.manager.FoodClassManager;
 import wpb.manager.GenericManager;
 
 /**
@@ -27,23 +28,24 @@ import wpb.manager.GenericManager;
 public class SeedDB {
 
 	private static SessionFactory mySessionFactory = null;
-	private static SessionIdentifierGenerator idgen = new SessionIdentifierGenerator();
 	private static GenericManager<Item, Long> itmManager;
 	private static GenericManager<RoomTable, Long> rtManager;
-	private static GenericManager<FoodClass,Long> fcManager;
+	private static FoodClassManager fcManager;
 	private static GenericManager<TakeawayOrder,Long> taManager;
-    private static Role userTypeSA, userTypeAdmin, userTypeDE;
+    private static Role roleWaiter, roleAdmin, roleDBManager, roleCustomer;
     private static GenericManager<User,Long> userManager;
-    private static GenericManager<Role,Long> userTypeManager;
-    //private static final AccessControlListManager accessControlListManager;
+    private static GenericManager<Role,Long> roleManager;
+	private static GenericManager<AccessControlList, Long> aclManager;
+	private static String[] foodClasses = {"Pizza", "Burger", "Chinese", "Salad", "Dessert", "Drink"};
 
 	public static void main(String[] args) {
 		SeedDB.initialize(HibernateUtil.getSessionJavaConfigFactory());
 		SeedDB.seedRoles();
 		SeedDB.seedUsers();
+		SeedDB.seedACL();
         SeedDB.seedRoomTables(30);
         SeedDB.seedFoodClasses();
-        SeedDB.seedItems(40);
+        SeedDB.seedItems();
         SeedDB.seedTableOrders(1);
         SeedDB.seedTakeawayOrders(10);
 	}
@@ -51,17 +53,16 @@ public class SeedDB {
 	public static void initialize(SessionFactory sf) {
 		mySessionFactory = sf;
 		itmManager = new GenericManager<Item, Long>(Item.class, mySessionFactory);
-		fcManager = new GenericManager<FoodClass, Long>(FoodClass.class, mySessionFactory);
+		fcManager = new FoodClassManager(mySessionFactory);
 		rtManager = new GenericManager<>(RoomTable.class, mySessionFactory);
 		taManager = new GenericManager<TakeawayOrder, Long>(TakeawayOrder.class, mySessionFactory);
 		userManager = new GenericManager<User, Long>(User.class, mySessionFactory);
-		userTypeManager = new GenericManager<Role, Long>(Role.class, mySessionFactory);
+		roleManager = new GenericManager<Role, Long>(Role.class, mySessionFactory);
+		aclManager = new GenericManager<AccessControlList, Long>(AccessControlList.class, mySessionFactory);
 	}
 
 	public static void seedFoodClasses() {
-		
-		String[] foodClasses = {"Pizza", "Burger", "Chinese", "Salad", "Dessert", "Drink"};
-		
+			
 		for (String fcName : foodClasses) {
 			FoodClass fc = new FoodClass();
 			fc.setName(fcName);
@@ -69,21 +70,56 @@ public class SeedDB {
 		}
 	}
 	
-	public static void seedItems(int count) {
-
-		Random R = new Random();
-
-		// creating random items
-		for (int i = 1; i <= count; i++) {
-			List<FoodClass> fcList = fcManager.getAll();
-			FoodClass fc = fcList.get((int) Math.floor(Math.random()*fcList.size()));
-			Item newItem = new Item();
-			newItem.setFoodClass(fc);
-			newItem.setAvailable(R.nextBoolean());
-			newItem.setPrice(Math.floor(ThreadLocalRandom.current().nextDouble(0.1, 12) * 100) / 100);
-			newItem.setName(idgen.nextSessionId());
-			itmManager.add(newItem);
-		}
+	public static void seedItems() {
+		
+		saveItem("Margherita", fcManager.getByName(foodClasses[0]), 5.5, true);
+		saveItem("Marescialla", fcManager.getByName(foodClasses[0]), 5.5, true);
+		saveItem("Quattro stagioni", fcManager.getByName(foodClasses[0]), 7, true);
+		saveItem("Tonno Cipolla", fcManager.getByName(foodClasses[0]), 6, false);
+		saveItem("San Daniele", fcManager.getByName(foodClasses[0]), 9, true);
+		saveItem("Primavera", fcManager.getByName(foodClasses[0]), 6.7, false);
+		saveItem("Capricciosa", fcManager.getByName(foodClasses[0]), 7.5, true);
+		
+		saveItem("Hot Dog", fcManager.getByName(foodClasses[1]), 3.5, true);
+		saveItem("Chicken Burger", fcManager.getByName(foodClasses[1]), 3.7, true);
+		saveItem("Double Cheeseburger", fcManager.getByName(foodClasses[1]), 5.5, false);
+		saveItem("McChicken", fcManager.getByName(foodClasses[1]), 4.8, true);
+		saveItem("Burger Royal", fcManager.getByName(foodClasses[1]), 5.5, true);
+		saveItem("Hawaiian Toast", fcManager.getByName(foodClasses[1]), 5.0, false);
+		saveItem("BauernToast ©", fcManager.getByName(foodClasses[1]), 4.3, true);
+		
+		saveItem("Chinese noodles", fcManager.getByName(foodClasses[2]), 5.5, true);
+		saveItem("Zhajiangmian", fcManager.getByName(foodClasses[2]), 6.7, false);
+		saveItem("Fried Rice", fcManager.getByName(foodClasses[2]), 3.5, false);
+		saveItem("Kung Pao chicken", fcManager.getByName(foodClasses[2]), 7.8, false);
+		saveItem("Wonton", fcManager.getByName(foodClasses[2]), 6, true);
+		saveItem("Zongzi", fcManager.getByName(foodClasses[2]), 6.7, false);
+		saveItem("Peking Duck", fcManager.getByName(foodClasses[2]), 8, true);
+		
+		saveItem("Cesar Salad", fcManager.getByName(foodClasses[3]), 4.5, true);
+		saveItem("Chicken Salad", fcManager.getByName(foodClasses[3]), 6.7, true);
+		saveItem("Russian Salad", fcManager.getByName(foodClasses[3]), 5.5, false);
+		saveItem("Tomato Salad", fcManager.getByName(foodClasses[3]), 6.8, false);
+		saveItem("Potatoe Salad", fcManager.getByName(foodClasses[3]), 4.4, true);
+		saveItem("Fresh Salad", fcManager.getByName(foodClasses[3]), 6.7, true);
+		saveItem("Rice Salad", fcManager.getByName(foodClasses[3]), 4.2, false);
+		
+		saveItem("Brownies", fcManager.getByName(foodClasses[4]), 4.5, true);
+		saveItem("Ice Cream", fcManager.getByName(foodClasses[4]), 6.7, true);
+		saveItem("Surprise", fcManager.getByName(foodClasses[4]), 12, false);
+		saveItem("Mousse", fcManager.getByName(foodClasses[4]), 6.8, false);
+		saveItem("Sacher", fcManager.getByName(foodClasses[4]), 4.4, true);
+		saveItem("Marshmallows", fcManager.getByName(foodClasses[4]), 6.7, true);
+		saveItem("Affogato", fcManager.getByName(foodClasses[4]), 4.2, false);
+		
+		saveItem("Green Tea", fcManager.getByName(foodClasses[5]), 1.5, true);
+		saveItem("Lemon Soda", fcManager.getByName(foodClasses[5]), 2.7, true);
+		saveItem("Fizzy Water", fcManager.getByName(foodClasses[5]), 1.5, false);
+		saveItem("Beer", fcManager.getByName(foodClasses[5]), 2.8, false);
+		saveItem("Red Wine", fcManager.getByName(foodClasses[5]), 4.4, true);
+		saveItem("White Wine", fcManager.getByName(foodClasses[5]), 3.7, true);
+		saveItem("Sprite", fcManager.getByName(foodClasses[5]), 1.2, true);
+		
 	}
 	
 	public static void seedRoomTables(int count) {
@@ -153,34 +189,89 @@ public class SeedDB {
 	}
 
 	public static void seedRoles() {
-		userTypeSA = saveRole("SuperAdministrator");
-		userTypeAdmin = saveRole("Administrator");
-		userTypeDE = saveRole("DataEntry");
+		roleAdmin = saveRole("Administrator");
+		roleWaiter = saveRole("Waiter");
+		roleDBManager = saveRole("DBManager");
+		roleCustomer = saveRole("Customer");
 	}
     
 	public static void seedUsers() {
-        saveUser("admin@wpb.it", userTypeSA, "admin");
-        saveUser("marta@wpb.it", userTypeAdmin, "marta");
-        saveUser("werner@wpb.it", userTypeDE, "werner");
-        saveUser("giulia@wpb.it", userTypeAdmin, "giulia");
+        saveUser("admin@wpb.it", roleAdmin, "admin", "I am God");
+        saveUser("marta@wpb.it", roleDBManager, "marta", "Marta Pancaldi");
+        saveUser("werner@wpb.it", roleWaiter, "werner", "Werner Sperandio");
+        saveUser("giulia@wpb.it", roleCustomer, "giulia", "Giulia");
     }
 	
-    private static Role saveRole(String type) {
-        Role userType = new Role();
-        userType.setRole(type);
+    private static Role saveRole(String role) {
+        Role newRole = new Role();
+        newRole.setRole(role);
 
-        userTypeManager.add(userType);
+        roleManager.add(newRole);
 
-        return userType;
+        return newRole;
     }
 
-    private static void saveUser(String email, Role userType, String password) {
+    private static void saveUser(String email, Role role, String password, String fullname) {
         User user = new User();
         user.setEmail(email);
-        user.setUserType(userType);
+        user.setRole(role);
+        user.setFullName(fullname);
         user.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
 
         userManager.add(user);
     }
+    
+	public static void seedACL() {
+
+		// List<Role> rolesList = roleManager.getAll();
+		Section[] sections = Section.values();
+		for (Section section : sections) {
+
+			// admin has no restrictions
+			saveACL(section, roleAdmin, true, true, true, true);
+
+			// waiter has access only to scheduler
+			if (section == Section.SCHEDULER) {
+				saveACL(section, roleWaiter, true, true, true, true);
+			} else {
+				saveACL(section, roleWaiter, false, false, false, false);
+			}
+
+			// customer has access only to takeaway order and online reservation
+			if (section == Section.CUSTOMER_TAKEAWAY || section == Section.CUSTOMER_TAKEAWAY ) {
+				saveACL(section, roleCustomer, true, true, true, true);
+			} else {
+				saveACL(section, roleCustomer, false, false, false, false);
+			}
+
+			// DBManager has no restrictions except cancelling DB entries and modifying itself
+			if (section == Section.ACL ) {
+				saveACL(section, roleDBManager, false, false, false, false);
+			} else {
+				saveACL(section, roleDBManager, true, true, true, false);
+			}
+		}
+	}		
+
+    private static void saveItem(String name, FoodClass fc, double price, boolean available) {
+    	Item itm = new Item();
+    	itm.setName(name);
+    	itm.setFoodClass(fc);
+    	itm.setPrice(price);
+    	itm.setAvailable(available);
+    }
+    
+	private static void saveACL(Section section, Role role, boolean viewable, boolean insertable, boolean updateable, boolean deleteable) {
+		
+		AccessControlList acl = new AccessControlList();
+		acl.setSection(section);
+		acl.setRole(role);
+		acl.setViewPermission(viewable);
+		acl.setInsertPermission(insertable);
+		acl.setUpdatePermission(updateable);
+		acl.setDeletePermission(deleteable);
+
+		aclManager.add(acl);
+	}
    
 }

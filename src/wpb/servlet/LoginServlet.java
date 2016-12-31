@@ -14,7 +14,7 @@ import wpb.entity.UserSession;
 import wpb.manager.UserManager;
 import wpb.util.HibernateUtil;
 
-@WebServlet(name = "LoginServlet", urlPatterns = "/login")
+@WebServlet(name = "LoginServlet", urlPatterns = "/login", loadOnStartup=1)
 public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

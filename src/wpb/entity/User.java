@@ -82,20 +82,20 @@ public class User extends Restaurant {
 		this.vipStatus = vipStatus;
 	}
 
-	public String getNickName() {
+	public String getFullName() {
 		return fullName;
 	}
 
-	public void setNickName(String nickname) {
-		this.fullName = nickname;
+	public void setFullName(String fullname) {
+		this.fullName = fullname;
 	}
 
-	public Role getUserType() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setUserType(Role userType) {
-		this.role = userType;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 }
