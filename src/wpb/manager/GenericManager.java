@@ -118,6 +118,28 @@ public class GenericManager<T, PK extends Serializable> implements GenericDao<T,
 		}
 		return objList;
 	}
+	
+	@SuppressWarnings({ "deprecation", "unchecked" })
+	@Override
+	public List<T> getAllByExample(T exampleEntity) {
+		Session session = sf.openSession();
+		Transaction tx = null;
+		List<T> foundObjectList = null;
+		try {
+			tx = session.beginTransaction();
+			Criteria criteria = session.createCriteria(getPersistentClass()).add(Example.create(exampleEntity));
+			foundObjectList = criteria.list();
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return foundObjectList;
+	}
 
 	@Override
 	public List<T> getPartial(int offset, int limit) {
@@ -229,5 +251,7 @@ public class GenericManager<T, PK extends Serializable> implements GenericDao<T,
         return crit.list();
         */
    }
+
+
 
 }
