@@ -42,7 +42,7 @@
 
  <jsp:include page="../../WEB-INF/upper-navbar.jsp" />
   
- <jsp:include page="../../WEB-INF/left-sidebar.html" />
+ <jsp:include page="../../WEB-INF/left-sidebar.jsp" />
  
  <!-- Create modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="create-modal">

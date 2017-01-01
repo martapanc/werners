@@ -214,14 +214,14 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="/restaurantProject/dist/img/burger-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">${sessionScope.userSession.user.email}</span>
+              <span class="hidden-xs">${sessionScope.userSession.user.fullName}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
                 <img src="/restaurantProject/dist/img/burger-160x160.jpg" class="img-circle" alt="User Image">
 
-                <p>${sessionScope.userSession.user.email}
+                <p>${sessionScope.userSession.user.fullName}
                   <small>${sessionScope.userSession.loginTime}</small>
                 </p>
               </li>

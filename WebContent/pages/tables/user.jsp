@@ -39,7 +39,7 @@
 
  <jsp:include page="../../WEB-INF/upper-navbar.jsp" />
   
- <jsp:include page="../../WEB-INF/left-sidebar.html" />
+ <jsp:include page="../../WEB-INF/left-sidebar.jsp" />
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -81,9 +81,9 @@
               	<thead>
     				<tr>
         				<th data-field="id" data-sortable="true">Id</th>
-        				<th data-field="name" data-sortable="true">Name</th>
         				<th data-field="email" data-sortable="true">E-Mail</th>
-        				<th data-field="password" data-sortable="true">Password</th>
+        				<th data-field="role.role" data-sortable="true">Role</th>
+        				<th data-field="fullName" data-sortable="true">Full Name</th>
         				<th data-field="billingAddress" data-sortable="true">Billing Address</th>
         				<th data-field="phoneNumber" data-sortable="true">Phone Number</th>
         				<th data-field="points" data-sortable="true">Points</th>

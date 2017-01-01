@@ -48,7 +48,7 @@
 	<div class="wrapper">
 
 		<jsp:include page="../../WEB-INF/upper-navbar.jsp" />
-		<jsp:include page="../../WEB-INF/left-sidebar.html" />
+		<jsp:include page="../../WEB-INF/left-sidebar.jsp" />
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">

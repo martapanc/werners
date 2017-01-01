@@ -35,7 +35,7 @@
 
 <jsp:include page="../WEB-INF/upper-navbar.jsp" />
   
-<jsp:include page="../WEB-INF/left-sidebar.html" />
+<jsp:include page="../WEB-INF/left-sidebar.jsp" />
 
 <jsp:include page="../WEB-INF/content-wrapper.jsp" />
 
