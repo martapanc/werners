@@ -61,6 +61,10 @@
         });
         return html.join('');
     }
+    
+    $(document).ready(function() {
+		$('#table-menu').addClass('active');
+	});
 </script>
 </body>
 </html>

@@ -129,6 +129,10 @@
 				return -1;
 			return 0;
 		}
+		
+		$(document).ready(function() {
+			$('#table-menu').addClass('active');
+		});
 	</script>
 </body>
 </html>

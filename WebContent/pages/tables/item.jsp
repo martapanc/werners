@@ -257,6 +257,10 @@
 	$(document).ready(function() {
 		 initCRUD(URL);
 	});
+	
+	$(document).ready(function() {
+		$('#table-menu').addClass('active');
+	});
 
 </script>
 </body>

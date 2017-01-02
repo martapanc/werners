@@ -174,6 +174,10 @@
 <script src="/restaurantProject/pages/tables/crud.js"></script>
 <script>
 	
+$(document).ready(function() {
+	$('#table-menu').addClass('active');
+});
+	
 	const API_URL = 'http://' + location.host + '/restaurantProject/listItem';
 	const FOODCLASS_URL = 'http://' + location.host + '/restaurantProject/listFoodClass';
 	var $modal = $('#modal').modal({show: false});
@@ -205,6 +209,8 @@
 	function availableSorter(a, b) {
 		return (a === b)? 0 : a? -1 : 1;
 	}
+	
+	
 </script>
 </body>
 </html>
