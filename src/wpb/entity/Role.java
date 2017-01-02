@@ -8,18 +8,19 @@ import javax.persistence.Table;
 @Table(name = "role")
 public class Role extends Restaurant {
     
-	@Column(name = "role", nullable = false, unique = true)
-	private String role;
+	public enum RoleEnum {
+		ADMIN, DBMANAGER, WAITER, CUSTOMER
+	}
+	
+	@Column(name = "name", nullable = false, unique = true)
+	private RoleEnum name;
+            
+    public RoleEnum getName() {
+        return name;
+    }
+
+    public void setName(RoleEnum name) {
+        this.name = name;
+    }
     
-    //@OneToMany(targetEntity = User.class, mappedBy = "role", fetch=FetchType.EAGER)
-	//private Set<User> users = new HashSet<User>();
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String type) {
-        this.role = type;
-    }
-
 }

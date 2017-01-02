@@ -13,6 +13,7 @@ import wpb.entity.FoodClass;
 import wpb.entity.Item;
 import wpb.entity.OrderItem;
 import wpb.entity.Role;
+import wpb.entity.Role.RoleEnum;
 import wpb.entity.RoomTable;
 import wpb.entity.TableOrder;
 import wpb.entity.TakeawayOrder;
@@ -42,7 +43,7 @@ public class SeedDB {
 		SeedDB.initialize(HibernateUtil.getSessionJavaConfigFactory());
 		SeedDB.seedRoles();
 		SeedDB.seedUsers();
-		SeedDB.seedACL();
+		//SeedDB.seedACL();
         SeedDB.seedRoomTables(30);
         SeedDB.seedFoodClasses();
         SeedDB.seedItems();
@@ -189,10 +190,10 @@ public class SeedDB {
 	}
 
 	public static void seedRoles() {
-		roleAdmin = saveRole("Administrator");
-		roleWaiter = saveRole("Waiter");
-		roleDBManager = saveRole("DBManager");
-		roleCustomer = saveRole("Customer");
+		roleAdmin = saveRole(Role.RoleEnum.ADMIN);
+		roleWaiter = saveRole(Role.RoleEnum.WAITER);
+		roleDBManager = saveRole(Role.RoleEnum.DBMANAGER);
+		roleCustomer = saveRole(Role.RoleEnum.CUSTOMER);
 	}
     
 	public static void seedUsers() {
@@ -202,13 +203,11 @@ public class SeedDB {
         saveUser("giulia@wpb.it", roleCustomer, "giulia", "Giulia");
     }
 	
-    private static Role saveRole(String role) {
-        Role newRole = new Role();
-        newRole.setRole(role);
-
-        roleManager.add(newRole);
-
-        return newRole;
+    private static Role saveRole(RoleEnum name) {
+        Role role = new Role();
+        role.setName(name);
+        roleManager.add(role);
+        return role;
     }
 
     private static void saveUser(String email, Role role, String password, String fullname) {
@@ -221,6 +220,7 @@ public class SeedDB {
         userManager.add(user);
     }
     
+    /*
 	public static void seedACL() {
 
 		// List<Role> rolesList = roleManager.getAll();
@@ -251,7 +251,7 @@ public class SeedDB {
 				saveACL(section, roleDBManager, true, true, true, false);
 			}
 		}
-	}		
+	}*/	
 
     private static void saveItem(String name, FoodClass fc, double price, boolean available) {
     	Item itm = new Item();

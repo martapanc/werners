@@ -1,13 +1,23 @@
 package wpb.util;
 
-public class RegexTest {
+import wpb.entity.FoodClass;
+import wpb.entity.User;
+import wpb.manager.FoodClassManager;
+import wpb.manager.UserManager;
+
+public class Test {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-	    String regex= ".*(css|jpg|png|gif|js)$";
-		//String regex= ".*\bcss\b";
 		
-		System.out.println(".css".matches(regex));
+		FoodClassManager fcManager = new FoodClassManager(HibernateUtil.getSessionJavaConfigFactory());
+		FoodClass c = fcManager.getByName("Pizza");
+		
+		System.out.println(c);
+		
+		UserManager userManager = new UserManager(HibernateUtil.getSessionJavaConfigFactory());
+		User user = userManager.getByEmailPassword("marta@wpb.it", "marta");
+		
+		System.out.println(user);
 	}
 
 }

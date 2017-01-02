@@ -82,7 +82,7 @@
     				<tr>
         				<th data-field="id" data-sortable="true">Id</th>
         				<th data-field="email" data-sortable="true">E-Mail</th>
-        				<th data-field="role.role" data-sortable="true">Role</th>
+        				<th data-field="role.name" data-sortable="true">Role</th>
         				<th data-field="fullName" data-sortable="true">Full Name</th>
         				<th data-field="billingAddress" data-sortable="true">Billing Address</th>
         				<th data-field="phoneNumber" data-sortable="true">Phone Number</th>

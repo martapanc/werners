@@ -1,12 +1,15 @@
 package wpb.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import wpb.enums.Section;
 
@@ -18,21 +21,22 @@ public class AccessControlList extends Restaurant {
     @Column(name = "section")
     private Section section;
             
-    @ManyToOne(targetEntity = Role.class)
-    @JoinColumn(name = "user_type_id")
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @JoinColumn(name = "USER_TYPE_ID")
+	@NotNull
     private Role role;
     
     @Column(name = "view_permission")
-    private boolean viewPermission;
+    private Boolean viewPermission;
     
     @Column(name = "insert_permission")
-    private boolean insertPermission;
+    private Boolean insertPermission;
     
     @Column(name = "update_permission")
-    private boolean updatePermission;
+    private Boolean updatePermission;
     
     @Column(name = "delete_Permission")
-    private boolean deletePermission;
+    private Boolean deletePermission;
 
     public Section getSection() {
         return section;
@@ -50,7 +54,7 @@ public class AccessControlList extends Restaurant {
         this.role = userType;
     }
 
-    public boolean hasViewPermission() {
+    public Boolean hasViewPermission() {
         return viewPermission;
     }
 
@@ -58,7 +62,7 @@ public class AccessControlList extends Restaurant {
         this.viewPermission = canView;
     }
 
-    public boolean hasInsertPermission() {
+    public Boolean hasInsertPermission() {
         return insertPermission;
     }
 
@@ -66,7 +70,7 @@ public class AccessControlList extends Restaurant {
         this.insertPermission = canInsert;
     }
 
-    public boolean hasUpdatePermission() {
+    public Boolean hasUpdatePermission() {
         return updatePermission;
     }
 
@@ -74,7 +78,7 @@ public class AccessControlList extends Restaurant {
         this.updatePermission = canUpdate;
     }
 
-    public boolean hasDeletePermission() {
+    public Boolean hasDeletePermission() {
         return deletePermission;
     }
 

@@ -1,7 +1,6 @@
 package wpb.entity;
 
 import javax.persistence.*;
-import org.hibernate.validator.constraints.*;
 
 @Entity
 @Table(name = "User")
@@ -10,9 +9,9 @@ public class User extends Restaurant {
     @Column(name = "full_name", nullable = false)
 	private String fullName;
     
-    @ManyToOne(targetEntity = Role.class)
-    @JoinColumn(name = "role_id")
-    //@ManyToOne(cascade = CascadeType.REFRESH)
+    //@ManyToOne(targetEntity = Role.class, fetch=FetchType.EAGER)
+    //@JoinColumn(name = "role_id")
+    @ManyToOne(cascade = CascadeType.REFRESH)
     private Role role;
     
 	// @Email
