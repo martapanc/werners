@@ -37,13 +37,6 @@
 					<span>Dashboard</span>
 			</a></li>
 			</c:if>
-			<c:if test="<%=accessManager.isAllowed(session, Section.CALENDAR)%>">
-			<li id="calendar-menu"><a href="/restaurantProject/pages/calendar.jsp"> <i class="fa fa-calendar"></i> <span>Calendar</span>
-					<span class="pull-right-container"> <small class="label pull-right bg-red">3</small> <small
-						class="label pull-right bg-blue">17</small>
-				</span>
-			</a></li>
-			</c:if>
 			<c:if test="<%=accessManager.isAllowed(session, Section.SCHEDULER)%>">
 			<li id="scheduler-menu"><a href="/restaurantProject/pages/scheduler.jsp"> <i class="fa fa-clock-o"></i> <span>Scheduler</span>
 					<span class="pull-right-container"> <small class="label pull-right bg-red">5</small> <small

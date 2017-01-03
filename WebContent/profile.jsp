@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -32,78 +32,89 @@
 <body class="hold-transition skin-red sidebar-mini">
 	<div class="wrapper">
 
-		<jsp:include page="../WEB-INF/upper-navbar.html" />
+		<jsp:include page="/WEB-INF/upper-navbar.jsp" />
 
-		<jsp:include page="../WEB-INF/left-sidebar.html" />
+		<jsp:include page="/WEB-INF/left-sidebar.jsp" />
 
+		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
+
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-			<h1>
-				Profile <small></small>
-			</h1>
-			<ol class="breadcrumb">
-				<li><a href="/restaurantProject/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
-				<li class="active">Profile</a></li>
+				<h1>
+					Profile <small></small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="/restaurantProject/pages/dashboard.jsp"><i
+							class="fa fa-dashboard"></i> Home</a></li>
+					<li class="active">Profile</li>
 
-			</ol>
+				</ol>
 			</section>
 
 			<!-- Main content -->
 			<section class="content">
-			<div class="row">
-				<div class="col-md-12">
+				<div class="row">
+					<!-- /.col -->
+					<div class="col-md-12">
+						<!-- Profile Image -->
+						<div class="box box-primary">
+							<div class="box-body box-profile">
+								<img class="profile-user-img img-responsive img-circle"
+									src="/restaurantProject/dist/img/burger-160x160.jpg"
+									alt="User profile picture">
 
-					<!-- Profile Image -->
-					<div class="box box-primary">
-						<div class="box-body box-profile">
-							<img class="profile-user-img img-responsive img-circle" src="/restaurantProject/dist/img/burger-160x160.jpg" alt="User profile picture">
+								<h3 class="profile-username text-center">${sessionScope.userSession.user.fullName}</h3>
 
-							<h3 class="profile-username text-center">Auguste Gusteau</h3>
+								<p class="text-muted text-center">${sessionScope.userSession.user.role.name}</p>
 
-							<p class="text-muted text-center">Software Engineer</p>
+								<div class="col-md-8 col-md-offset-2">
+									<table class="table table-striped">
+										<tbody>
+											<tr>
+												<td>Full name</td>
+												<td>${sessionScope.userSession.user.fullName}</td>
+											</tr>
+											<tr>
+												<td>Role</td>
+												<td>${sessionScope.userSession.user.role.name}</td>
+											</tr>
+											<tr>
+												<td>Profile Email</td>
+												<td>${sessionScope.userSession.user.email}</td>
+											</tr>
+											<tr>
+												<td>Password</td>
+												<td>***************</td>
+											</tr>
+											<tr>
+												<td>Logged in at</td>
+												<td>${sessionScope.userSession.loginTime}</td>
+											</tr>								
+											<tr>
+												<td>Member since</td>
+												<td>TODO</td>
+											</tr>
 
-							<div class="col-md-8">
-								<table class="table table-striped">
-									<tbody>
-										<tr>
-											<td>Profile name</td>
-											<td>Auguste Gusteau</td>
-										</tr>
-										<tr>
-											<td>Profile Email</td>
-											<td>auguste.gusteau@jaimelaratatouil.le</td>
-										</tr>
-										<tr>
-											<td>Password</td>
-											<td>***************</td>
-										</tr>
-										<tr>
-											<td>Member since</td>
-											<td>October 2016</td>
-										</tr>
-									</tbody>
-								</table>							
+										</tbody>
+									</table>
+								</div>
 							</div>
+							<!-- /.box-body -->
 						</div>
-						<!-- /.box-body -->
+						<!-- /. box -->
 					</div>
-					<!-- /.box -->	
+					<!-- /.col -->
 				</div>
-				<!-- /.box-body -->
-			</div>
-			<!-- /. box -->
+				<!-- /.row -->
+			</section>
+			<!-- /.content -->
 		</div>
-		<!-- /.col -->
+		<!-- /.content-wrapper -->
+
+		<jsp:include page="/WEB-INF/footer.html" />
+
 	</div>
-	<!-- /.row -->
-	</section>
-	<!-- /.content -->
-	
-	<!-- /.content-wrapper -->
-
-	<jsp:include page="../WEB-INF/footer.html" />
-
 	<!-- ./wrapper -->
 
 	<!-- jQuery 2.2.3 -->
@@ -123,9 +134,5 @@
 	<script src="/restaurantProject/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 	<!-- ChartJS 1.0.1 -->
 	<script src="/restaurantProject/plugins/chartjs/Chart.min.js"></script>
-	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-	<script src="/restaurantProject/dist/js/pages/dashboard2.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="/restaurantProject/dist/js/demo.js"></script>
 </body>
 </html>
