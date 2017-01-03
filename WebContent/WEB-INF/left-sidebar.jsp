@@ -50,17 +50,17 @@
 				</span>
 			</a>
 				<ul class="treeview-menu">
-					<li><a href="/restaurantProject/pages/tables/foodClass.jsp"> <i class="fa fa-apple"></i>Food Categories
+					<li id="table-menu-fc"><a href="/restaurantProject/pages/tables/foodClass.jsp"> <i class="fa fa-apple"></i>Food Categories
 					</a></li>
-					<li><a href="/restaurantProject/pages/tables/item.jsp"> <i class="fa fa-cube"></i>Items
+					<li id="table-menu-item"><a href="/restaurantProject/pages/tables/item.jsp"> <i class="fa fa-cube"></i>Items
 					</a></li>
-					<li><a href="/restaurantProject/pages/tables/order.jsp"> <i class="fa fa-archive"></i>Orders
+					<li id="table-menu-order"><a href="/restaurantProject/pages/tables/order.jsp"> <i class="fa fa-archive"></i>Orders
 					</a></li>
-					<li><a href="/restaurantProject/pages/tables/reservation.jsp"> <i class="fa fa-book"></i>Reservations
+					<li id="table-menu-reservation"><a href="/restaurantProject/pages/tables/reservation.jsp"> <i class="fa fa-book"></i>Reservations
 					</a></li>
-					<li><a href="/restaurantProject/pages/tables/table.jsp"> <i class="fa fa-cutlery"></i>Restaurant Tables
+					<li id="table-menu-table"><a href="/restaurantProject/pages/tables/restaurantTable.jsp"> <i class="fa fa-cutlery"></i>Restaurant Tables
 					</a></li>
-					<li><a href="/restaurantProject/pages/tables/user.jsp"> <i class="fa fa-user"></i>Users
+					<li id="table-menu-user"><a href="/restaurantProject/pages/tables/user.jsp"> <i class="fa fa-user"></i>Users
 					</a></li>
 				</ul>
 			</li>

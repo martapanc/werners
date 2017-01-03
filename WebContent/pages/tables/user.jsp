@@ -141,7 +141,8 @@
 <script src="/restaurantProject/pages/tables/tableutil.js"></script>
 <script>
 $(document).ready(function() {
-	$('#table-menu').addClass('active');
+	 $('#table-menu').addClass('active');
+	 $('#table-menu-user').addClass('active');
 });
 
 </script>

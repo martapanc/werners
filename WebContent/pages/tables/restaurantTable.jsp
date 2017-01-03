@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>WPB | Tables</title>
+  <title>WPB | Restaurant Tables</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -211,6 +211,8 @@
 	const URL = '/restaurantProject/roomTable';
 	
 	$(document).ready(function() {
+		 $('#table-menu').addClass('active');
+		 $('#table-menu-table').addClass('active');
 		 initCRUD(URL);
 	});
 	

@@ -121,22 +121,16 @@
 	<script src="../../plugins/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
 	<script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
 	<script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
+	<!-- scripts for form validation ad notifications -->
+	<script src="/restaurantProject/plugins/notify/bootstrap-notify.js"></script>
+	<script src="/restaurantProject/plugins/validator/validator.min.js"></script>
+	<!-- custom scripts -->
+	<script src="/restaurantProject/pages/tables/tableutil.js"></script>
+	<script src="/restaurantProject/pages/tables/crud.js"></script>
 	<script>
-		function availableFormatter(value, row) {
-			var icon = row.available === true ? 'fa-check' : 'fa-times';
-			return '<i class="fa ' + icon + '"></i>';
-		}
-
-		function availableSorter(a, b) {
-			if (a === true)
-				return 1;
-			if (a === false)
-				return -1;
-			return 0;
-		}
-		
 		$(document).ready(function() {
-			$('#table-menu').addClass('active');
+			 $('#table-menu').addClass('active');
+			 $('#table-menu-reservation').addClass('active');
 		});
 	</script>
 </body>

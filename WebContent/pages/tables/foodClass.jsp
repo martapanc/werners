@@ -211,11 +211,15 @@
 <script src="/restaurantProject/pages/tables/tableutil.js"></script>
 <script src="/restaurantProject/pages/tables/crud.js"></script>
 <script>
+
 	const URL = '/restaurantProject/foodClass';
 
 	$(document).ready(function() {
+		 $('#table-menu').addClass('active');
+		 $('#table-menu-fc').addClass('active');
 	 	initCRUD(URL);
 	});	
+	
 </script>
 </body>
 </html>

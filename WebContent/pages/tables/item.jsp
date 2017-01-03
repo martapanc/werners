@@ -216,6 +216,7 @@
 	
 	$(document).ready(function() {
 		 $('#table-menu').addClass('active');
+		 $('#table-menu-item').addClass('active');
 		 initCRUD(URL);
 
 	});
