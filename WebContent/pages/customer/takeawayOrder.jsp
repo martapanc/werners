@@ -100,8 +100,8 @@
 											<div class="box box-primary">
 												<div class="box-body table-responsive">
 
-													<table id="item-table" data-toggle="table" data-url="../../listItem" data-method="post"
-														data-content-type="application/x-www-form-urlencoded" data-query-params='action=list' data-striped="true"
+													<table id="item-table" data-toggle="table" data-url="../../item" data-method="post"
+														data-content-type="application/x-www-form-urlencoded"  data-query-params='action=list' data-striped="true"
 														data-pagination="true" data-pagination-loop="false" data-page-size="10" data-show-refresh="true" data-search="true"
 														data-show-toggle="true">
 														<thead>
@@ -216,7 +216,7 @@
 		$(document).ready(function() {
 			$("#item-table").bootstrapTable('filterBy', {
 				"foodClassName" : "Burger"
-			});
+			}); 
 		});
 
 		// Table functions
