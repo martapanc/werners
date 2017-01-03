@@ -17,14 +17,6 @@ public class ReservationServlet extends HttpServlet {
 	SimpleDateFormat FMT = new SimpleDateFormat("EEE, dd MMM yyyy");
 
 	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public ReservationServlet() {
-		super();
-		// TODO Auto-generated constructor stub. Is this stub really needed?
-	}
-
-	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -39,7 +31,7 @@ public class ReservationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
+
 		Map<String, String[]> paramMap = request.getParameterMap();
 		Map<String, Object> pMap = new HashMap<String, Object>();
 		List<HashMap<String, String>> errList = new ArrayList<HashMap<String, String>>();
@@ -62,7 +54,6 @@ public class ReservationServlet extends HttpServlet {
 			extrMap.put("date", d);
 		}
 
-		// parse flight info
 		if (paramMap.containsKey("firstname")) {
 			String fn = (String) request.getParameter("firstname");
 			extrMap.put("firstname", fn);
