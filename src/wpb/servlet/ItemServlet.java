@@ -2,8 +2,10 @@ package wpb.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -61,6 +63,25 @@ public class ItemServlet extends HttpServlet {
 		
 			case "list": {
 				JsonArray result = (JsonArray) gson.toJsonTree(itmManager.getAll());
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				try (PrintWriter out = response.getWriter()) {
+					out.println(result.toString());
+					}
+				break;
+			}
+			
+			case "listavailable": {
+				List<Item> itmList =  itmManager.getAll();
+				List<Item> availableItems = new ArrayList<Item>();
+				
+				// create new list of available items
+				for(Item itm : itmList){
+					if(itm.isAvailable()) {
+						availableItems.add(itm);
+						}
+				}
+				JsonArray result = (JsonArray) gson.toJsonTree(availableItems);
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				try (PrintWriter out = response.getWriter()) {
