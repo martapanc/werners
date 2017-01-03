@@ -215,7 +215,9 @@
 	const URL = '/restaurantProject/item';
 	
 	$(document).ready(function() {
+		 $('#table-menu').addClass('active');
 		 initCRUD(URL);
+
 	});
 
 </script>

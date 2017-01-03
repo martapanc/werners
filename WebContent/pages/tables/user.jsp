@@ -140,6 +140,10 @@
 <!-- custom scripts -->
 <script src="/restaurantProject/pages/tables/tableutil.js"></script>
 <script>
+$(document).ready(function() {
+	$('#table-menu').addClass('active');
+});
+
 </script>
 </body>
 </html>

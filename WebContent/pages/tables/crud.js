@@ -135,5 +135,6 @@ function sendCRUDRequest(URL, formdata) {
 		}
 	});
 	$modals.modal('hide');
-}
+};
+
 
