@@ -189,19 +189,22 @@
 		views: {
 		},
 		resourceLabelText: 'Tables',
-		resources: {
-	        url: '../roomTable?action=list',
-	        type: 'POST'
-	    },
-		events: [
-			{ id: '1', resourceId: '261', start: TODAY + 'T15:00:00', end: TODAY + 'T17:00:00', title: 'event 1' },
-			{ id: '2', resourceId: '261', start: TODAY + 'T05:00:00', end: TODAY + 'T22:00:00', title: 'event 2' },
-			{ id: '3', resourceId: '261', start: YESTERDAY, end: TOMORROW, title: 'event 3' },
-			{ id: '4', resourceId: '261', start: TODAY + 'T03:00:00', end: TODAY + 'T08:00:00', title: 'event 4' },
-			{ id: '5', resourceId: '261', start: TODAY + 'T00:30:00', end: TODAY + 'T02:30:00', title: 'event 5' }
-		],
+		//resources: {
+	        //url: '../roomTable?action=list',
+	        //type: 'POST'
+	    //},
+	    resources: 'resources.php',
+		eventSources: [
+		    {
+				url: 'eventfeed.php',
+				type: 'POST',
+				error: function() {
+	                alert('There was an error while fetching events.');
+	            }
+		    }
+		]
+			
       
-	
       /*windowResize: function(view) {
       alert('The scheduler has adjusted to a window resize');
       if ($(window).width() < 514){
