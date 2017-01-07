@@ -14,18 +14,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.gson.*;
+
+import wpb.entity.*;
+import wpb.manager.GenericManager;
+import wpb.util.HibernateUtil;
+
 import org.apache.commons.validator.routines.EmailValidator;
 
-@WebServlet(name = "TakeawayServlet", urlPatterns = "/TakeawayServlet")
+@WebServlet(name = "TakeawayServlet", urlPatterns = "/takeaway")
 public class TakeawayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public TakeawayServlet() {
-		super();
-		// TODO Auto-generated constructor stub
+	private static GenericManager<TakeawayOrder, Long> toManager = null;
+	private static GenericManager<Item, Long> itmManager = null;
+	User user = new User();
+	@Override
+	public void init() throws ServletException {
+		itmManager = new GenericManager<Item, Long>(Item.class, HibernateUtil.getSessionJavaConfigFactory());
+		toManager = new GenericManager<TakeawayOrder, Long>(TakeawayOrder.class, HibernateUtil.getSessionJavaConfigFactory());
 	}
 
 	/**
@@ -47,25 +52,45 @@ public class TakeawayServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
-		//Map<String, String[]> paramMap = request.getParameterMap();
+		Map<String, String[]> paramMap = request.getParameterMap();
 		String cart = (String) request.getParameter("cart");
 		String data = (String) request.getParameter("data");
+		
 		//Map<String, Object> pMap = new HashMap<String, Object>();
 		//List<HashMap<String, String>> errList = new ArrayList<HashMap<String, String>>();
-		
 		//JsonArray jdata = (JsonArray) new Gson().toJsonTree(data);
-		
 		//formValidation(paramMap, request, pMap, errList);
 		
-		
-		//if (!errList.isEmpty()) {
-			//String json = new Gson().toJson(errList);
+		if (paramMap.containsKey("action")) {
+			String action = (String) request.getAttribute("action");
+			if(action.equals("list")) {
+				System.out.println("list");
+			}
+			
+		} else {
+			
+			String title = request.getParameter("title");
+			String fn = request.getParameter("firstname");
+			String ln = request.getParameter("lastname");
+			user.setFullName(title + " " + fn + " " + ln);
+			user.setPhoneNumber(request.getParameter("telephone"));
+			if (paramMap.containsKey("email"))
+				user.setEmail(request.getParameter("email"));
+			user.setBillingAddress(request.getParameter("address"));
+			
+			
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			System.out.println(data + " - " + cart);
 			response.getWriter().write(data);
 			
 			PrintWriter out = response.getWriter();
+		}
+		
+		
+		//if (!errList.isEmpty()) {
+			//String json = new Gson().toJson(errList);
+			
 			//out.println(paramMap);
 		/*} else {
 			request.setAttribute("map", pMap);

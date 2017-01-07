@@ -406,7 +406,7 @@
 
 							$.post({
 								type : "POST",
-								url : "/restaurantProject/TakeawayServlet",
+								url : "/restaurantProject/takeaway",
 								data : {
 									"data" : JSON.stringify(data),
 									"cart" : localStorage.getItem("cart")

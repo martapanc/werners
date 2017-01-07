@@ -40,14 +40,7 @@ public class ReservationServlet extends HttpServlet {
 		rtManager = new GenericManager<RoomTable, Long>(RoomTable.class, HibernateUtil.getSessionJavaConfigFactory());
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -55,20 +48,23 @@ public class ReservationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//doGet(request, response);
+		
 		Map<String, String[]> paramMap = request.getParameterMap();
 		Map<String, Object> pMap = new HashMap<String, Object>();
 		List<HashMap<String, String>> errList = new ArrayList<HashMap<String, String>>();
-		
+		JsonArray result = (JsonArray) new Gson().toJsonTree(resManager.getAll());
 		
 		if (paramMap.containsKey("action")) {
 			String action = (String) request.getParameter("action");
 			
 			if (action.equals("list")) {
 				
-				JsonArray result = (JsonArray) new Gson().toJsonTree(rtManager.getAll());
+				
 				//JsonArray resu = (JsonArray) new Gson().toJsonTree(resManager.getAll());
+				
+				
 				System.out.println(result);
+				//System.out.println(resManager.get((long) 99, true));
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				try (PrintWriter out = response.getWriter()) {
