@@ -82,6 +82,7 @@ public class TakeawayServlet extends HttpServlet {
 			response.getWriter().write(data);
 			
 			PrintWriter out = response.getWriter();
+			out.println(data);
 		}
 		
 		
