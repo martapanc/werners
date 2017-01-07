@@ -66,10 +66,11 @@
 									data-show-toggle="true" data-show-export="true">
 									<thead>
 										<tr>
-											<th data-field="reservationId" data-sortable="true">Id</th>
+											<th data-field="id" data-sortable="true">Id</th>
 											<th data-field="startDate" data-sortable="true">Start Date</th>
 											<th data-field="endDate" data-sortable="true">End Date</th>
-											<th data-field="guestUserId" data-sortable="true">Guest User Id</th>
+											<th data-field="guest.id" data-sortable="true">Guest User Id</th>
+											<th data-field="guest.fullName" data-sortable="true">Customer Name</th>
 											<th data-field="comment" data-sortable="true">Comment</th>
 										</tr>
 									</thead>

@@ -34,10 +34,12 @@ public class ReservationServlet extends HttpServlet {
 	RoomTable table = new RoomTable();
 	private static GenericManager<Reservation, Long> resManager = null;
 	private static GenericManager<RoomTable, Long> rtManager = null;
+	private static GenericManager<User, Long> usrManager = null;
 
 	public void init() throws ServletException {
 		resManager = new GenericManager<Reservation, Long>(Reservation.class, HibernateUtil.getSessionJavaConfigFactory());
 		rtManager = new GenericManager<RoomTable, Long>(RoomTable.class, HibernateUtil.getSessionJavaConfigFactory());
+		usrManager = new GenericManager<User, Long>(User.class, HibernateUtil.getSessionJavaConfigFactory());
 	}
 
 	/**
@@ -85,7 +87,9 @@ public class ReservationServlet extends HttpServlet {
 			if (pMap.containsKey("telephone"))
 				user.setPhoneNumber(request.getParameter("telephone"));
 			user.setPassword("password");
-
+			
+			usrManager.add(user);
+			
 			res.setGuest(user);
 
 			// table.setSeats(Integer.parseInt(request.getParameter("guests")));
@@ -95,11 +99,12 @@ public class ReservationServlet extends HttpServlet {
 			String time = request.getParameter("time");
 
 			try {
-				SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm");
+				//SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm");
+				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 				Date parsedDate = dateFormat.parse(date + " " + time);
 				Timestamp start = new Timestamp(parsedDate.getTime());
 				res.setStartDate(start);
-				System.out.println(start);
+				System.out.println(parsedDate);
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(start);
 				cal.add(Calendar.HOUR_OF_DAY, 2);
@@ -113,7 +118,11 @@ public class ReservationServlet extends HttpServlet {
 				
 				rt.setRoom("Room " + (int) Math.floor(Math.random() * 3));
 				rt.setCategory(RoomTable.CategoryType.medium);
+				
+				rtManager.add(rt);
 				tableList.add(rt);
+				
+				
 				
 				res.setTableList(tableList);
 			} catch (Exception e) {
