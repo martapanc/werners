@@ -12,7 +12,7 @@ public class TakeawayOrder extends Restaurant {
 	@Column(name = "status", nullable = false)
 	private String status;
 	
-	@ManyToMany(cascade=CascadeType.ALL)  
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)  
     @JoinTable(name="order_item__takeaway_order", 
     joinColumns=@JoinColumn(name="takeaway_order_id"), 
     inverseJoinColumns=@JoinColumn(name="order_item_id"))  

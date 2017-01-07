@@ -56,13 +56,8 @@ public class ReservationServlet extends HttpServlet {
 			String action = (String) request.getParameter("action");
 			
 			if (action.equals("list")) {
-				
 				JsonArray result = (JsonArray) new Gson().toJsonTree(resManager.getAll());
-				//JsonArray resu = (JsonArray) new Gson().toJsonTree(resManager.getAll());
-				
-				
-				System.out.println(result);
-				//System.out.println(resManager.get((long) 99, true));
+				System.out.println(resManager.getAll());
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				try (PrintWriter out = response.getWriter()) {
@@ -94,16 +89,17 @@ public class ReservationServlet extends HttpServlet {
 			res.setGuest(user);
 
 			// table.setSeats(Integer.parseInt(request.getParameter("guests")));
-
+			
 			String date = request.getParameter("date");
+			System.out.println(date);
 			String time = request.getParameter("time");
 
 			try {
-				SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm");
+				SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm");
 				Date parsedDate = dateFormat.parse(date + " " + time);
 				Timestamp start = new Timestamp(parsedDate.getTime());
 				res.setStartDate(start);
-
+				System.out.println(start);
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(start);
 				cal.add(Calendar.HOUR_OF_DAY, 2);
@@ -124,7 +120,7 @@ public class ReservationServlet extends HttpServlet {
 				e.getMessage();
 			}
 			System.out.println(res.toString());
-			//resManager.add(res);
+			resManager.add(res);
 			request.getRequestDispatcher("pages/customer/reservationInvoice.jsp").forward(request, response);
 		}
 

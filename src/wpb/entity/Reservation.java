@@ -15,7 +15,7 @@ public class Reservation extends Restaurant {
     @Column(name = "end_date")
     private Timestamp endDate;
 	
-	@ManyToMany(cascade=CascadeType.ALL)  
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)  
     @JoinTable(name="room_table__reservation", 
     joinColumns=@JoinColumn(name="reservation_id"), 
     inverseJoinColumns=@JoinColumn(name="room_table_id"))  

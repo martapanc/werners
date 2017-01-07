@@ -68,11 +68,12 @@
 					<div class="col-md-12">
 						<div class="box box-primary">
 							<table id="table" data-detail-view="true" data-striped="true"
+								data-url="../../takeaway" data-method="post" data-query-params='action=list'
+								data-content-type="application/x-www-form-urlencoded"
 								data-pagination="true" data-pagination-loop="false"
 								data-page-size="25" data-show-refresh="true" data-search="true"
 								data-resizable="true" data-show-toggle="true"
-								data-show-export="true" data-detail-formatter="detailFormatter"
-								data-url="../../plugins/bootstrap-table-examples/json/data5.json">
+								data-show-export="true" data-detail-formatter="detailFormatter">
 								<thead>
 									<tr>
 										<th data-field="order_id" data-sortable="true">ID</th>

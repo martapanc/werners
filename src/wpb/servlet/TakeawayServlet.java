@@ -34,24 +34,12 @@ public class TakeawayServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at:
-		// ").append(request.getContextPath());
-
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
+		
 		Map<String, String[]> paramMap = request.getParameterMap();
 		String cart = (String) request.getParameter("cart");
 		String data = (String) request.getParameter("data");
@@ -62,10 +50,19 @@ public class TakeawayServlet extends HttpServlet {
 		//formValidation(paramMap, request, pMap, errList);
 		
 		if (paramMap.containsKey("action")) {
-			String action = (String) request.getAttribute("action");
+			String action = request.getParameter("action");
+			
 			if(action.equals("list")) {
-				System.out.println("list");
+				JsonArray result = (JsonArray) new Gson().toJsonTree(toManager.getAll());
+				//System.out.println(resManager.get((long) 99, true));
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				try (PrintWriter out = response.getWriter()) {
+					out.println(result.toString());
+				}
+				
 			}
+			
 			
 		} else {
 			
