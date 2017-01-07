@@ -64,7 +64,7 @@
 							</div>
 
 							<form id="reservation-form" method="post"
-								action="/restaurantProject/ReservationServlet"
+								action="/restaurantProject/reservation"
 								data-toggle="validator">
 								<div class="box-body">
 									<div class="col-md-12">
