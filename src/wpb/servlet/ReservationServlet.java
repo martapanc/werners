@@ -9,12 +9,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import wpb.util.Validator;
+import wpb.entity.Reservation;
+import wpb.entity.User;
 
 @WebServlet(name = "ReservationServlet", urlPatterns = "/ReservationServlet")
 public class ReservationServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	SimpleDateFormat FMT = new SimpleDateFormat("EEE, dd MMM yyyy");
+	Reservation res = new Reservation();
+	User user = new User();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -50,6 +54,20 @@ public class ReservationServlet extends HttpServlet {
 		request.setAttribute("todayDate", FMT.format(new Date()));
 
 		System.out.println(pMap);
+		
+		String title = request.getParameter("title");
+		String fn = request.getParameter("firstname");
+		String ln = request.getParameter("lastname");
+		
+		user.setFullName(title + " " + fn + " " + ln);
+		user.setEmail(request.getParameter("email"));
+		if (pMap.containsKey("telephone"))
+			user.setPhoneNumber(request.getParameter("telephone")); 
+		
+		res.setGuest(user);
+		//res.setStartDate(request.getParameter("time"));
+		
+		
 		request.getRequestDispatcher("pages/customer/reservationInvoice.jsp").forward(request, response);
 	}
 

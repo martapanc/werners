@@ -9,7 +9,7 @@ import javax.persistence.Table;
 public class Role extends Restaurant {
     
 	public enum RoleEnum {
-		ADMIN, DBMANAGER, WAITER, CUSTOMER
+		ADMIN, DBMANAGER, WAITER, CUSTOMER, OVERLORD
 	}
 	
 	@Column(name = "name", nullable = false, unique = true)

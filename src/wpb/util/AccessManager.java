@@ -35,6 +35,14 @@ public class AccessManager {
 		permissions.put(RoleEnum.CUSTOMER, customerSections);
 		permissions.put(RoleEnum.WAITER, waiterSections);
 		permissions.put(RoleEnum.DBMANAGER, dbManagerSections);
+		
+		HashSet<Section> overlordSections = new HashSet<Section>();
+		overlordSections.add(Section.TABLES);
+		overlordSections.add(Section.SCHEDULER);
+		overlordSections.add(Section.CUSTOMER);
+		overlordSections.add(Section.CALENDAR);
+		overlordSections.add(Section.DASHBOARD);
+		permissions.put(RoleEnum.OVERLORD, overlordSections);
 
 	}
 

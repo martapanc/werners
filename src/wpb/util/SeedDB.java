@@ -33,7 +33,7 @@ public class SeedDB {
 	private static GenericManager<RoomTable, Long> rtManager;
 	private static FoodClassManager fcManager;
 	private static GenericManager<TakeawayOrder,Long> taManager;
-    private static Role roleWaiter, roleAdmin, roleDBManager, roleCustomer;
+    private static Role roleWaiter, roleAdmin, roleDBManager, roleCustomer, roleOverlord;
     private static GenericManager<User,Long> userManager;
     private static GenericManager<Role,Long> roleManager;
 	private static GenericManager<AccessControlList, Long> aclManager;
@@ -194,13 +194,18 @@ public class SeedDB {
 		roleWaiter = saveRole(Role.RoleEnum.WAITER);
 		roleDBManager = saveRole(Role.RoleEnum.DBMANAGER);
 		roleCustomer = saveRole(Role.RoleEnum.CUSTOMER);
+		
+		roleOverlord = saveRole(Role.RoleEnum.OVERLORD);
 	}
     
 	public static void seedUsers() {
+		saveUser("overlord@wpb.it", roleOverlord, "overlord", "Chuck Norris"); 
         saveUser("admin@wpb.it", roleAdmin, "admin", "I am God");
         saveUser("marta@wpb.it", roleDBManager, "marta", "Marta Pancaldi");
         saveUser("werner@wpb.it", roleWaiter, "werner", "Werner Sperandio");
         saveUser("giulia@wpb.it", roleCustomer, "giulia", "Giulia");
+        
+        
     }
 	
     private static Role saveRole(RoleEnum name) {
