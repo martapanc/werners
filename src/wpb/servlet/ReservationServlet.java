@@ -1,6 +1,8 @@
 package wpb.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -8,14 +10,39 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-import wpb.util.Validator;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
-@WebServlet(name = "ReservationServlet", urlPatterns = "/ReservationServlet")
+import wpb.util.HibernateUtil;
+import wpb.util.Validator;
+import wpb.entity.FoodClass;
+import wpb.entity.Item;
+import wpb.entity.Reservation;
+import wpb.entity.User;
+import wpb.entity.RoomTable;
+import wpb.manager.GenericManager;
+
+@WebServlet(name = "ReservationServlet", urlPatterns = "/reservation")
 public class ReservationServlet extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
 	SimpleDateFormat FMT = new SimpleDateFormat("EEE, dd MMM yyyy");
+	Reservation res = new Reservation();
+	User user = new User();
+	RoomTable table = new RoomTable();
+	private static GenericManager<Reservation, Long> resManager = null;
+	private static GenericManager<RoomTable, Long> rtManager = null;
 
+<<<<<<< HEAD
+=======
+	public void init() throws ServletException {
+		resManager = new GenericManager<Reservation, Long>(Reservation.class, HibernateUtil.getSessionJavaConfigFactory());
+		rtManager = new GenericManager<RoomTable, Long>(RoomTable.class, HibernateUtil.getSessionJavaConfigFactory());
+	}
+
+>>>>>>> branch 'auth' of ssh://git@gitlab.inf.unibz.it/InMoSe_group9/restaurantProject.git
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -31,18 +58,90 @@ public class ReservationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+<<<<<<< HEAD
 
+=======
+		//doGet(request, response);
+>>>>>>> branch 'auth' of ssh://git@gitlab.inf.unibz.it/InMoSe_group9/restaurantProject.git
 		Map<String, String[]> paramMap = request.getParameterMap();
 		Map<String, Object> pMap = new HashMap<String, Object>();
 		List<HashMap<String, String>> errList = new ArrayList<HashMap<String, String>>();
+		
+		
+		if (paramMap.containsKey("action")) {
+			String action = (String) request.getParameter("action");
+			
+			if (action.equals("list")) {
+				
+				JsonArray result = (JsonArray) new Gson().toJsonTree(rtManager.getAll());
+				//JsonArray resu = (JsonArray) new Gson().toJsonTree(resManager.getAll());
+				System.out.println(result);
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				try (PrintWriter out = response.getWriter()) {
+					out.println(result.toString());
+				}
+			}
+		}
 
-		analyzeParameters(paramMap, request, pMap, errList);
+		else {
+			
 
-		request.setAttribute("map", pMap);
-		request.setAttribute("todayDate", FMT.format(new Date()));
+			analyzeParameters(paramMap, request, pMap, errList);
 
-		System.out.println(pMap);
-		request.getRequestDispatcher("pages/customer/reservationInvoice.jsp").forward(request, response);
+			request.setAttribute("map", pMap);
+			request.setAttribute("todayDate", FMT.format(new Date()));
+
+			System.out.println(pMap);
+
+			String title = request.getParameter("title");
+			String fn = request.getParameter("firstname");
+			String ln = request.getParameter("lastname");
+
+			user.setFullName(title + " " + fn + " " + ln);
+			user.setEmail(request.getParameter("email"));
+			if (pMap.containsKey("telephone"))
+				user.setPhoneNumber(request.getParameter("telephone"));
+			user.setPassword("password");
+
+			res.setGuest(user);
+
+			// table.setSeats(Integer.parseInt(request.getParameter("guests")));
+
+			String date = request.getParameter("date");
+			String time = request.getParameter("time");
+
+			try {
+				SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm");
+				Date parsedDate = dateFormat.parse(date + " " + time);
+				Timestamp start = new Timestamp(parsedDate.getTime());
+				res.setStartDate(start);
+
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(start);
+				cal.add(Calendar.HOUR_OF_DAY, 2);
+				Timestamp end = new Timestamp(cal.getTime().getTime());
+
+				res.setEndDate(end);
+				Set<RoomTable> tableList = new HashSet<RoomTable>();
+				
+				RoomTable rt = new RoomTable();
+				rt.setName("Table 221");
+				
+				rt.setRoom("Room " + (int) Math.floor(Math.random() * 3));
+				rt.setCategory(RoomTable.CategoryType.medium);
+				tableList.add(rt);
+				
+				res.setTableList(tableList);
+			} catch (Exception e) {
+				e.getMessage();
+			}
+			System.out.println(res.toString());
+			//resManager.add(res);
+			request.getRequestDispatcher("pages/customer/reservationInvoice.jsp").forward(request, response);
+		}
+
+		
 	}
 
 	private void analyzeParameters(Map<String, String[]> paramMap, HttpServletRequest request,

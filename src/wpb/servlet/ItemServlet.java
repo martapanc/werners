@@ -62,7 +62,14 @@ public class ItemServlet extends HttpServlet {
 			}
 		
 			case "list": {
-				JsonArray result = (JsonArray) gson.toJsonTree(itmManager.getAll());
+				//Added "foodClassName" attribute to each item array for better visualizaiton in takeawayOrder.jsp
+				JsonArray result = (JsonArray) new Gson().toJsonTree(itmManager.getAll());
+				for (int i = 0; i<result.size(); i++) {
+					JsonObject obj = result.get(i).getAsJsonObject();
+					JsonObject foodCl = obj.get("foodClass").getAsJsonObject();
+					obj.add("foodClassName", foodCl.get("name"));
+					result.get(i).getAsJsonObject().add("foodClassName", foodCl.get("name"));
+				}
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				try (PrintWriter out = response.getWriter()) {
