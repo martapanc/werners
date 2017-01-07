@@ -193,6 +193,7 @@
 								<table class="table table-striped">
 									<thead>
 										<tr>
+											<th>Id</th>
 											<th>Item</th>
 											<th>Quantity</th>
 											<th>Cost</th>
@@ -288,12 +289,12 @@
 
 			cart.forEach(function(entry) {
 				$(".cart").append(
-						"<tr><td>" + entry.name + "</td><td>" + entry.qnt
+						"<tr><td>" + entry.id + "</td><td>" + entry.name + "</td><td>" + entry.qnt
 								+ "</td><td>€ " + entry.totPrice.toFixed(2)
 								+ "</td></tr>");
 			});
 			$(".cart").append(
-					"<tr><td></td><th>Total: </th><td>€ " + totPrice.toFixed(2)
+					"<tr><td></td><td></td><th>Total: </th><td>€ " + totPrice.toFixed(2)
 							+ "</td></tr>");
 			//localStorage.clear();
 		});
@@ -409,7 +410,8 @@
 								url : "/restaurantProject/takeaway",
 								data : {
 									"data" : JSON.stringify(data),
-									"cart" : localStorage.getItem("cart")
+									"cart" : localStorage.getItem("cart"),
+									"tot" : totPrice
 								},
 								complete : function(response) {
 									console.log("Ok" + JSON.stringify(response));

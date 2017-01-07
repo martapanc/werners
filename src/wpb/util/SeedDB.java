@@ -181,15 +181,27 @@ public class SeedDB {
 		OrderItem ot = new OrderItem();
 		ot.setComment("this is item with id 5 and qty 10");
 		ot.setQuantity(10);
+		
+		OrderItem ot2 = new OrderItem();
+		ot2.setComment("sample comment");
+		ot2.setQuantity(7);
 
 		TakeawayOrder to = new TakeawayOrder();
 		Set<OrderItem> items = new HashSet<OrderItem>();
 		items.add(ot);
+		items.add(ot2);
 		to.setOrderItemList(items);
 		to.setStatus("PRONTO");
 		to.setAddress("Piazza Domenicani, Design Faculty");
 		to.setCost(3.50);
 		taManager.add(to);
+		
+		TakeawayOrder to2 = new TakeawayOrder();
+		to2.setOrderItemList(items);
+		to2.setStatus("pronto");
+		to2.setAddress("221B Baker St");
+		to2.setCost(17.90);
+		taManager.add(to2);
 	}
 
 	public static void seedReservation(int count) {

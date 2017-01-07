@@ -25,12 +25,16 @@ import org.apache.commons.validator.routines.EmailValidator;
 public class TakeawayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static GenericManager<TakeawayOrder, Long> toManager = null;
-	private static GenericManager<Item, Long> itmManager = null;
+	private static GenericManager<OrderItem, Long> oiManager = null;
+	private static GenericManager<User, Long> userManager = null;
 	User user = new User();
+	TakeawayOrder to = new TakeawayOrder();
+	OrderItem oi = new OrderItem();
 	@Override
 	public void init() throws ServletException {
-		itmManager = new GenericManager<Item, Long>(Item.class, HibernateUtil.getSessionJavaConfigFactory());
+		oiManager = new GenericManager<OrderItem, Long>(OrderItem.class, HibernateUtil.getSessionJavaConfigFactory());
 		toManager = new GenericManager<TakeawayOrder, Long>(TakeawayOrder.class, HibernateUtil.getSessionJavaConfigFactory());
+		userManager = new GenericManager<User, Long>(User.class, HibernateUtil.getSessionJavaConfigFactory());
 	}
 
 	/**
@@ -54,15 +58,12 @@ public class TakeawayServlet extends HttpServlet {
 			
 			if(action.equals("list")) {
 				JsonArray result = (JsonArray) new Gson().toJsonTree(toManager.getAll());
-				//System.out.println(resManager.get((long) 99, true));
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				try (PrintWriter out = response.getWriter()) {
 					out.println(result.toString());
 				}
-				
 			}
-			
 			
 		} else {
 			
@@ -71,10 +72,17 @@ public class TakeawayServlet extends HttpServlet {
 			String ln = request.getParameter("lastname");
 			user.setFullName(title + " " + fn + " " + ln);
 			user.setPhoneNumber(request.getParameter("telephone"));
-			if (paramMap.containsKey("email"))
-				user.setEmail(request.getParameter("email"));
-			user.setBillingAddress(request.getParameter("address"));
 			
+			user.setEmail(request.getParameter("email"));
+			user.setBillingAddress(request.getParameter("address"));
+			//userManager.add(user);
+			
+			to.setAddress(request.getParameter("address"));
+			to.setCost(Float.parseFloat(request.getParameter("tot")));
+			to.setGuest(user);
+			to.setStatus("pronto");
+			
+			//for every orderItem
 			
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");

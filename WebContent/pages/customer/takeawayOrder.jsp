@@ -106,10 +106,10 @@
 														data-show-toggle="true">
 														<thead>
 															<tr>
+																<th data-field="id">Id</th>
 																<th data-field="name" data-sortable="true">Name</th>
 																<th data-field="price" data-sortable="true" data-align="right">Price</th>
 																<!-- Should show only available items -->
-																<th data-field="foodClassName">Class</th>
 																<th data-field="action" data-formatter="actionFormatter" data-events="actionEvent">Add to Cart</th>
 															</tr>
 														</thead>
@@ -143,19 +143,7 @@
 
 							<div class="cart-form">
 								<div class="box-body">
-									<table class="table table-striped order-list">
-										<!-- <thead>
-											<tr>
-												<th></th>
-												<th data-field="action" data-formatter="pmFormatter"
-													data-events="pmEvents"></th> 
-												<th></th> 
-												<th></th> 
-											</tr>							
-										</thead> 
-										<tbody class="order-list">
-										</tbody>-->
-									</table>
+									<table class="table table-striped order-list"></table>
 								</div>
 								<!-- /. box body -->
 
@@ -247,7 +235,7 @@
 						dupCheck = i; //Store the index of the duplicate item
 				});
 				if (dupCheck == -1) //If the cart has no duplicates (=the loop found no match and the index did not change) push a new item
-					cart.push([ row.name, 1, row.price, row.price ]);
+					cart.push([ row.name, 1, row.price, row.price, row.id ]);
 				else {
 					cart[dupCheck][1] += 1; //Else update quantity and price of the item already in cart
 					cart[dupCheck][2] += cart[dupCheck][3];
@@ -366,7 +354,8 @@
 					"name" : entry[0],
 					"qnt" : entry[1],
 					"totPrice" : entry[2],
-					"uPrice" : entry[3]
+					"uPrice" : entry[3],
+					"id": entry[4]
 				});
 			});
 			var cartToSend = JSON.stringify(jsoncart.jcart);
