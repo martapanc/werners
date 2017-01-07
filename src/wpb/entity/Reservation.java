@@ -27,6 +27,9 @@ public class Reservation extends Restaurant {
 	@ManyToOne(cascade = CascadeType.ALL)
     private User guest;
 
+	@Column(name = "customer_name")
+	private String customerName; 
+	
 	public Timestamp getStartDate() {
 		return startDate;
 	}

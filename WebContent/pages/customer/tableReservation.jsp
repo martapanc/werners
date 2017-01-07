@@ -18,12 +18,10 @@
 <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
 <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
-<link rel="stylesheet" href="../../plugins/datepicker/datepicker3.css">
 <!-- iCheck for checkboxes and radio inputs -->
 <link rel="stylesheet" href="../../plugins/iCheck/all.css">
-<!-- Bootstrap time Picker -->
-<link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
-
+<!-- Bootstrap Datetime Picker -->
+<link rel="stylesheet" href="../../plugins/datetime-picker/bootstrap-datetimepicker.css">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -83,35 +81,31 @@
 											<!-- First name -->
 											<div class="form-group">
 												<label>First name:</label> <input id="fn" name="firstname"
-													type="text" class="form-control" placeholder="Walter" required>
+													type="text" class="form-control" placeholder="Walter"
+													required>
 											</div>
 											<!-- /.form group -->
 										</div>
 
 										<div class="col-md-5">
 											<!-- Last name -->
-											<div class="bootstrap-timepicker">
 												<div class="form-group">
 													<label>Last name:</label> <input name="lastname"
-														type="text" class="form-control" placeholder="White" required>
+														type="text" class="form-control" placeholder="White"
+														required>
 												</div>
-												<!-- /.form group -->
-											</div>
 										</div>
 									</div>
 
 									<div class="col-md-12">
 										<div class="col-md-5">
-											<!-- Date dd/mm/yyyy -->
 											<div class="form-group">
 												<label>Date:</label>
-
 												<div class="input-group date">
 													<div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													</div>
-													<input name="date" type="text"
-														class="form-control pull-right" id="datepicker" required>
+													<input name="date" type="text" class="form-control pull-right" id="datepicker" required>
 												</div>
 												<!-- /.input group -->
 											</div>
@@ -119,22 +113,18 @@
 										</div>
 
 										<div class="col-md-5">
-											<!-- time Picker -->
-											<div class="bootstrap-timepicker">
+											<!-- Time Picker -->
 												<div class="form-group">
 													<label>Time:</label>
-
 													<div class="input-group">
 														<div class="input-group-addon">
 															<i class="fa fa-clock-o"></i>
 														</div>
-														<input name="time" type="text"
-															class="form-control timepicker" data-date-container="tp" required>
+														<input name="time" type="text" class="form-control" id="timepicker" required>
 													</div>
 													<!-- /.input group -->
 												</div>
 												<!-- /.form group -->
-											</div>
 										</div>
 
 										<div class="col-md-2">
@@ -157,26 +147,25 @@
 										</div>
 									</div>
 
-									<div class="col-md-12">
+									<div class="col-md-6">
 
-										<!-- phone mask -->
-										<div class="col-md-6">
+										<!-- phone input -->
+										<div class="col-md-12">
 											<div class="form-group">
 												<label>Telephone number:</label>
-
 												<div class="input-group">
 													<div class="input-group-addon">
 														<i class="fa fa-phone"></i>
 													</div>
-													<input name="telephone" type="text" class="form-control">
+													<input name="telephone" type="text" pattern="^[0-9]{10}$" class="form-control">
 												</div>
 												<!-- /.input group -->
 											</div>
 											<!-- /.form group -->
 										</div>
 
-										<!-- email mask -->
-										<div class="col-md-6">
+										<!-- email input -->
+										<div class="col-md-12">
 											<div class="form-group">
 												<label>Email:</label>
 
@@ -193,26 +182,40 @@
 										</div>
 									</div>
 
-								</div>
-								<!-- /. box body -->
-								<div class="box-footer">
+									<!-- comment input -->
+									<div class="col-md-6">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label>Comments:</label>
+												<textarea class="form-control" style="resize:none" rows="5" id="comments" ></textarea>
+											</div>
+											<!-- /.form group -->
+										</div>							
+									</div>
+								<div class="col-md-12">
+									<div class="col-md-12">
 									<button type="submit" class="btn btn-primary">Submit</button>
 									<button type="reset" class="btn btn-warning">Reset</button>
-								</div>
-							</form>
-							<!-- /.box-body -->
+									</div>
+								</div>	
+							</div>
+							<!-- /. box body -->
+						<div class="box-footer">
 						</div>
-						<!-- /. box -->
+						</form>
+						<!-- /.box-body -->
 					</div>
-					<!-- /.col -->
+					<!-- /. box -->
 				</div>
-				<!-- /.row -->
-			</section>
-			<!-- /.content -->
+				<!-- /.col -->
 		</div>
-		<!-- /.content-wrapper -->
+		<!-- /.row -->
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
 
-		<jsp:include page="../../WEB-INF/footer.html" />
+	<jsp:include page="../../WEB-INF/footer.html" />
 
 	</div>
 	<!-- ./wrapper -->
@@ -221,13 +224,10 @@
 	<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<!-- Bootstrap 3.3.6 -->
 	<script src="../../bootstrap/js/bootstrap.min.js"></script>
-	<!-- Date-range-picker -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-	<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
-	<!-- Bootstrap datepicker -->
-	<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
-	<!-- Bootstrap time picker -->
-	<script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
+	<!-- Moment library -->
+	<script src="../../plugins/moment/moment.min.js"></script>
+	<!-- Date Time Picker -->
+	<script src="../../plugins/datetime-picker/bootstrap-datetimepicker.min.js"></script>
 	<!-- SlimScroll 1.3.0 -->
 	<script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 	<!-- iCheck 1.0.1 -->
@@ -238,31 +238,24 @@
 	<script src="../../dist/js/app.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="../../dist/js/demo.js"></script>
+
 	<!-- Form validator -->
-	<script src="/restaurantProject/plugins/validator/validator.min.js"></script>
+	<script src="../../plugins/validator/validator.min.js"></script>
 	<script>
 			$(document).ready(function() {
 				$('#customer-menu').addClass('active');
 				
-				// Initialize Datepicker
-				$('#datepicker').datepicker({
-					autoclose : true,
-					daysOfWeekDisabled : "1",
-					format : 'D, dd M yyyy',
-					startDate : new Date,
-					todayBtn : true,
-					todayHighlight : true,
-					weekStart : 1
-				});
+				$('#timepicker').datetimepicker({
+                    format: 'HH:mm',
+                    stepping: 15,
+                    defaultDate: moment()
+                });
 				
-
-				// Initialize Timepicker
-				$(".timepicker").timepicker({
-					showInputs : false,
-					container : "#tp",
-					defaultTime : 'current',
-					showMeridian : false
-				});
+				$('#datepicker').datetimepicker({
+                    format: 'DD/MM/YYYY',
+                    defaultDate: moment()
+                });
+															
 			});
 	</script>
 </body>

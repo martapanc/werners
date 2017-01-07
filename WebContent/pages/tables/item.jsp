@@ -203,7 +203,6 @@
 <script src="../../plugins/bootstrap-table/extensions/export/bootstrap-table-export.min.js"></script>
 <script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.min.js"></script>
 <script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.min.js"></script>
-<script src="../../plugins/bootstrap-table/extensions/group-by-v2/bootstrap-table-group-by.min.js"></script>
 <!-- scripts for form validation ad notifications -->
 <script src="/restaurantProject/plugins/notify/bootstrap-notify.js"></script>
 <script src="/restaurantProject/plugins/validator/validator.min.js"></script>

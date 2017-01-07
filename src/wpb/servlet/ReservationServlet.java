@@ -40,15 +40,13 @@ public class ReservationServlet extends HttpServlet {
 		rtManager = new GenericManager<RoomTable, Long>(RoomTable.class, HibernateUtil.getSessionJavaConfigFactory());
 	}
 
-	
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		Map<String, String[]> paramMap = request.getParameterMap();
 		Map<String, Object> pMap = new HashMap<String, Object>();
 		List<HashMap<String, String>> errList = new ArrayList<HashMap<String, String>>();
@@ -142,7 +140,6 @@ public class ReservationServlet extends HttpServlet {
 			extrMap.put("date", d);
 		}
 
-		// parse flight info
 		if (paramMap.containsKey("firstname")) {
 			String fn = (String) request.getParameter("firstname");
 			extrMap.put("firstname", fn);

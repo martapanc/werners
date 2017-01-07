@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 <!-- Bootstrap table -->
 <link rel="stylesheet" href="../../plugins/bootstrap-table/bootstrap-table.css">
+<!-- Bootstrap table group by-->
+<link rel="stylesheet" href="../../plugins/bootstrap-table/extensions/group-by-v2/bootstrap-table-group-by.css">
 
 <!-- Theme style -->
 <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
@@ -40,6 +42,7 @@
 
 </head>
 <body class="hold-transition skin-red sidebar-mini">
+
 	<div class="wrapper">
 
 		<jsp:include page="../../WEB-INF/upper-navbar.jsp" />
@@ -51,10 +54,11 @@
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					Take-Away Order <small>Customer View</small>
+					Take-Away Order <small></small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="/restaurantProject/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li><a href="/restaurantProject/pages/dashboard.jsp"><i
+							class="fa fa-dashboard"></i> Home</a></li>
 					<li><a href="#">Customer View</a></li>
 					<li class="active">Take-Away Order</li>
 				</ol>
@@ -62,103 +66,53 @@
 
 			<!-- Main content -->
 			<section class="content">
-
 				<div class="row">
+					<!-- /.col -->
 					<div class="col-md-8">
-						<div class="box box-info">
+						<div class="box box-primary">
 							<div class="box-header with-border">
-								<h3 class="box-title order-minus">Take-Away Order</h3>
+								<h3 class="box-title">
+									<span class="fa fa-cube"></span> &nbsp; Product List
+								</h3>
 							</div>
-
-							<form>
-								<div class="box-body">
-									<div class="food-menu col-md-3">
-										<div class="btn-group btn-block btn-group-vertical">
-											<a href="#" id="burger-btn" class="btn btn-lg btn-primary  active"> <img width="30"
-												src="../../dist/img/flat-icon-gastronomy/burger.svg"> &emsp;Burgers
-											</a> <a href="#" id="salad-btn" class="btn btn-lg btn-primary"> <img width="30"
-												src="../../dist/img/flat-icon-gastronomy/salad.svg"> &emsp;Salads
-											</a> <a href="#" id="pizza-btn" class="btn btn-lg btn-primary"> <img width="30"
-												src="../../dist/img/flat-icon-gastronomy/pizza-2.svg"> &emsp;Pizza
-											</a> <a href="#" id="chinese-btn" class="btn btn-lg btn-primary"> <img width="30"
-												src="../../dist/img/flat-icon-gastronomy/noodles.svg"> &emsp;Chinese
-											</a> <a href="#" id="dessert-btn" class="btn btn-lg btn-primary"> <img width="30"
-												src="../../dist/img/flat-icon-gastronomy/cupcake.svg"> &emsp;Desserts
-											</a> <a href="#" id="drink-btn" class="btn btn-lg btn-primary"> <img width="30"
-												src="../../dist/img/flat-icon-gastronomy/glass-3.svg"> &emsp;Drinks
-											</a>
-										</div>
-
-									</div>
-									<!-- /. food-menu -->
-
-									<div class="food-offers col-md-9">
-										<div class="thmenu-header with-border">
-											<h3>BURGERS</h3>
-										</div>
-										<div class="col-md-12">
-											<div class="box box-primary">
-												<div class="box-body table-responsive">
-
-													<table id="item-table" data-toggle="table" data-url="../../listItem" data-method="post"
-														data-content-type="application/x-www-form-urlencoded" data-query-params='action=list' data-striped="true"
-														data-pagination="true" data-pagination-loop="false" data-page-size="10" data-show-refresh="true" data-search="true"
-														data-show-toggle="true">
-														<thead>
-															<tr>
-																<th data-field="name" data-sortable="true">Name</th>
-																<th data-field="price" data-sortable="true" data-align="right">Price</th>
-																<!-- Should show only available items -->
-																<th data-field="foodClassName">Class</th>
-																<th data-field="action" data-formatter="actionFormatter" data-events="actionEvent">Add to Cart</th>
-															</tr>
-														</thead>
-													</table>
-												</div>
-
-												<div class="result"></div>
-												<!-- /.box-body -->
-											</div>
-											<!-- /. box -->
-										</div>
-										<!-- /.col -->
-									</div>
-									<!-- /. food-offers -->
-								</div>
-								<!-- /. box body -->
-							</form>
-
+							<div class="box-body table-responsive">
+								<table id="table" data-toggle="table" data-url="../../item"
+									data-method="post"
+									data-content-type="application/x-www-form-urlencoded"
+									data-query-params='action=listavailable' 
+									data-striped="true"
+									data-pagination="true"
+									data-pagination-loop="false"
+									data-group-by="true"
+									data-group-by-field="name"
+									data-resizable="true">
+									<thead>
+										<tr>
+											<th data-field="name" data-width="30%">Name</th>
+											<th data-field="foodClass.name">Food class</th>
+											<th data-field="price" data-align="right">Price</th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<!-- /.box-body -->
 						</div>
-						<!-- /.box-body -->
+						<!-- /. box -->
 					</div>
-					<!-- /.box -->
-
-					<div class="col-md-4 ">
+					<!-- /.col -->
+					<div class="col-md-4">
 						<div class="box box-info">
 							<div class="box-header with-border">
 								<h3 class="box-title">
 									<span class="fa fa-shopping-cart"></span> &nbsp; My Order
 								</h3>
 							</div>
-
 							<div class="cart-form">
 								<div class="box-body">
 									<table class="table table-striped order-list">
-										<!-- <thead>
-											<tr>
-												<th></th>
-												<th data-field="action" data-formatter="pmFormatter"
-													data-events="pmEvents"></th> 
-												<th></th> 
-												<th></th> 
-											</tr>							
-										</thead> 
-										<tbody class="order-list">
-										</tbody>-->
 									</table>
 								</div>
 								<!-- /. box body -->
-
 								<div id="total-price-box" class="box-footer">
 									<h4>
 										<span class="pull-right total-price">Total price: € 0.00</span>
@@ -170,22 +124,22 @@
 								</div>
 
 							</div>
-
 						</div>
-						<!-- /.box-body -->
+						<!-- /. box -->
 					</div>
-
+					<!-- /.col -->
 				</div>
+				<!-- /.row -->
+			</section>
+			<!-- /.content -->
 		</div>
-
-
-
-		</section>
-		<!-- /.content -->
+		<!-- /.content-wrapper -->
 
 		<jsp:include page="../../WEB-INF/footer.html" />
+
 	</div>
 	<!-- ./wrapper -->
+
 
 	<!-- jQuery 2.2.3 -->
 	<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -206,13 +160,14 @@
 	<!-- put your locale files after bootstrap-table.js -->
 	<script src="../../plugins/bootstrap-table/locale/bootstrap-table-en-US.js"></script>
 	<!-- extensions for bootstrap-table -->
-	<script src="../../plugins/bootstrap-table/extensions/tableExport-jquery/tableExport.js"></script>
-	<script src="../../plugins/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
 	<script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
 	<script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
 	<script src="../../plugins/bootstrap-table/extensions/filter-control/bootstrap-table-filter-control.js"></script>
+	<script src="../../plugins/bootstrap-table/extensions/group-by-v2/bootstrap-table-group-by.js"></script>
 	<script>
+	
 		//Show "salad" item as default view
+		/*
 		$(document).ready(function() {
 			$("#item-table").bootstrapTable('filterBy', {
 				"foodClassName" : "Burger"
@@ -462,7 +417,8 @@
 				$("#drink-btn").removeClass("active");
 			}
 			;
-		});
+		});*/
+		
 	</script>
 
 </body>
