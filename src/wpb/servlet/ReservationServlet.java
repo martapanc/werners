@@ -50,14 +50,14 @@ public class ReservationServlet extends HttpServlet {
 		Map<String, String[]> paramMap = request.getParameterMap();
 		Map<String, Object> pMap = new HashMap<String, Object>();
 		List<HashMap<String, String>> errList = new ArrayList<HashMap<String, String>>();
-		JsonArray result = (JsonArray) new Gson().toJsonTree(resManager.getAll());
+		//
 		
 		if (paramMap.containsKey("action")) {
 			String action = (String) request.getParameter("action");
 			
 			if (action.equals("list")) {
 				
-				
+				JsonArray result = (JsonArray) new Gson().toJsonTree(resManager.getAll());
 				//JsonArray resu = (JsonArray) new Gson().toJsonTree(resManager.getAll());
 				
 				
