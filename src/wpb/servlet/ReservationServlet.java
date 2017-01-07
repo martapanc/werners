@@ -90,7 +90,7 @@ public class ReservationServlet extends HttpServlet {
 			
 			usrManager.add(user);
 			
-			res.setGuest(user);
+			res.setUser(user);
 
 			// table.setSeats(Integer.parseInt(request.getParameter("guests")));
 			

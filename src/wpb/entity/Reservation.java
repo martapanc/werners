@@ -25,7 +25,7 @@ public class Reservation extends Restaurant {
 	private String comment;
     
 	@ManyToOne(cascade = CascadeType.ALL)
-    private User guest;
+    private User user;
 
 	@Column(name = "customer_name")
 	private String customerName; 
@@ -62,12 +62,12 @@ public class Reservation extends Restaurant {
 		this.comment = comment;
 	}
 
-	public User getGuest() {
-		return guest;
+	public User getUser() {
+		return user;
 	}
 
-	public void setGuest(User guest) {
-		this.guest = guest;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 }

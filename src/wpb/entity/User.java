@@ -1,5 +1,7 @@
 package wpb.entity;
 
+import java.sql.Timestamp;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,7 +13,7 @@ public class User extends Restaurant {
     
     //@ManyToOne(targetEntity = Role.class, fetch=FetchType.EAGER)
     //@JoinColumn(name = "role_id")
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne(cascade = CascadeType.REFRESH, optional=false)
     private Role role;
     
 	// @Email
@@ -32,6 +34,12 @@ public class User extends Restaurant {
 	
     @Column(name = "vip_status")
 	private boolean vipStatus;
+    
+    @Column(name = "avatar", nullable=false)
+	private String avatar;
+    
+    @Column(name = "creation_date", nullable=false)
+    private Timestamp creationDate;
 
 	public String getEmail() {
 		return email;
@@ -95,6 +103,22 @@ public class User extends Restaurant {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	public Timestamp getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Timestamp creation_date) {
+		this.creationDate = creation_date;
 	}
 
 }

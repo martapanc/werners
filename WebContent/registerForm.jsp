@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,33 +36,37 @@
 		</div>
 		<div class="register-box-body">
 			<p class="login-box-msg">Create a New Account</p>
-
-			<form action="/restaurantProject" method="post" data-toggle="validator">
+			<c:if test="${message != null}">
+   				<div class="alert alert-danger text-center" id="message-div">
+    				${message}
+  				</div>
+			</c:if>
+			<form action="/restaurantProject/register" method="post" data-toggle="validator">
 				<div class="form-group has-feedback">
-					<input type="text" class="form-control" placeholder="Full name" required> <span
+					<input type="text" class="form-control" placeholder="Full name" name="fullname"required> <span
 						class="glyphicon glyphicon-user form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="email" class="form-control" placeholder="Email" required> <span
+					<input type="email" class="form-control" placeholder="Email" name="email" required> <span
 						class="glyphicon glyphicon-envelope form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="password" id="password" class="form-control" placeholder="Password" required> <span
+					<input type="password" id="password" class="form-control" name="password" placeholder="Password" required> <span
 						class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="password" id="confirm_password" class="form-control" placeholder="Retype password" 
-					id="inputPasswordConfirm" data-match="#password" data-match-error="Passwords don't match" required> <span
+					<input type="password" name="password-confirm" class="form-control" placeholder="Retype password" 
+					data-match="#password" data-match-error="Passwords don't match" required> <span
 						class="glyphicon glyphicon-log-in form-control-feedback"></span>
 				<div class="help-block with-errors"></div>
 				</div>
 				<div class="form-group has-feedback text-center">
 				<p>Choose Avatar</p>
-					<select class="image-picker text-center">
-  						<option data-img-src="dist/img/avatar1.png" data-img-class="first" data-img-alt="Page 1" value="1" selected></option>
-  						<option data-img-src="dist/img/avatar2.png" data-img-alt="Page 2" value="2"></option>
-  						<option data-img-src="dist/img/avatar3.png" data-img-alt="Page 3" value="3"></option>
-  						<option data-img-src="dist/img/gusteau160x160.jpg" data-img-alt="Page 4" data-img-class="last" value="4"></option>
+					<select class="image-picker text-center" name="avatar">
+  						<option data-img-src="dist/img/avatar1.png" data-img-class="first" data-img-alt="Page 1" value="/restaurantProject/dist/img/avatar1.png" selected></option>
+  						<option data-img-src="dist/img/avatar2.png" data-img-alt="Page 2" value="/restaurantProject/dist/img/avatar2.png"></option>
+  						<option data-img-src="dist/img/avatar3.png" data-img-alt="Page 3" value="/restaurantProject/dist/img/avatar3.png"></option>
+  						<option data-img-src="dist/img/gusteau160x160.jpg" data-img-alt="Page 4" data-img-class="last" value="/restaurantProject/dist/img/gusteau160x160.jpg"></option>
 					</select>
 				</div>
 				<div class="row">
@@ -105,7 +111,11 @@
 				$('form').validator('validate');
 			});
 			
-		$("select").imagepicker()
+			$('input').focus(function() {
+				$('#message-div').fadeOut('medium');
+			});
+			
+			$('select').imagepicker();
 		});
 	</script>
 </body>

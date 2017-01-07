@@ -1,14 +1,16 @@
 package wpb.util;
 
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import wpb.entity.AccessControlList;
 import wpb.entity.FoodClass;
 import wpb.entity.Item;
 import wpb.entity.OrderItem;
@@ -19,7 +21,6 @@ import wpb.entity.RoomTable;
 import wpb.entity.TableOrder;
 import wpb.entity.TakeawayOrder;
 import wpb.entity.User;
-import wpb.enums.Section;
 import wpb.manager.FoodClassManager;
 import wpb.manager.GenericManager;
 
@@ -37,7 +38,6 @@ public class SeedDB {
 	private static Role roleWaiter, roleAdmin, roleDBManager, roleCustomer, roleOverlord;
 	private static GenericManager<User, Long> userManager;
 	private static GenericManager<Role, Long> roleManager;
-	private static GenericManager<AccessControlList, Long> aclManager;
 	private static GenericManager<Reservation, Long> resManager;
 	private static String[] foodClasses = { "Pizza", "Burger", "Chinese", "Salad", "Dessert", "Drink" };
 
@@ -45,7 +45,6 @@ public class SeedDB {
 		SeedDB.initialize(HibernateUtil.getSessionJavaConfigFactory());
 		SeedDB.seedRoles();
 		SeedDB.seedUsers();
-		// SeedDB.seedACL();
 		SeedDB.seedRoomTables(30);
 		SeedDB.seedFoodClasses();
 		SeedDB.seedItems();
@@ -63,7 +62,6 @@ public class SeedDB {
 		taManager = new GenericManager<TakeawayOrder, Long>(TakeawayOrder.class, mySessionFactory);
 		userManager = new GenericManager<User, Long>(User.class, mySessionFactory);
 		roleManager = new GenericManager<Role, Long>(Role.class, mySessionFactory);
-		aclManager = new GenericManager<AccessControlList, Long>(AccessControlList.class, mySessionFactory);
 		resManager = new GenericManager<Reservation, Long>(Reservation.class, mySessionFactory);
 	}
 
@@ -202,7 +200,7 @@ public class SeedDB {
 
 			res.setStartDate(new Timestamp(date.getTime()));
 			res.setEndDate(new Timestamp(date.getTime() + 3600 * 1000));
-			res.setGuest(userManager.get((long) 6, false));
+			res.setUser(userManager.get((long) 6, false));
 			Set<RoomTable> tableList = new HashSet<RoomTable>();
 			tableList.add(rtManager.get((long) 12, false));
 			res.setTableList(tableList);
@@ -243,34 +241,16 @@ public class SeedDB {
 		user.setRole(role);
 		user.setFullName(fullname);
 		user.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
-
+		
+		//create Timestamp
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		Timestamp ts = new Timestamp(cal.getTime().getTime());
+		
+		user.setCreationDate(ts);
+		user.setAvatar("dist/img/gusteau160x160.jpg");
 		userManager.add(user);
 	}
-
-	/*
-	 * public static void seedACL() {
-	 * 
-	 * // List<Role> rolesList = roleManager.getAll(); Section[] sections =
-	 * Section.values(); for (Section section : sections) {
-	 * 
-	 * // admin has no restrictions saveACL(section, roleAdmin, true, true,
-	 * true, true);
-	 * 
-	 * // waiter has access only to scheduler if (section == Section.SCHEDULER)
-	 * { saveACL(section, roleWaiter, true, true, true, true); } else {
-	 * saveACL(section, roleWaiter, false, false, false, false); }
-	 * 
-	 * // customer has access only to takeaway order and online reservation if
-	 * (section == Section.CUSTOMER_TAKEAWAY || section ==
-	 * Section.CUSTOMER_TAKEAWAY ) { saveACL(section, roleCustomer, true, true,
-	 * true, true); } else { saveACL(section, roleCustomer, false, false, false,
-	 * false); }
-	 * 
-	 * // DBManager has no restrictions except cancelling DB entries and
-	 * modifying itself if (section == Section.ACL ) { saveACL(section,
-	 * roleDBManager, false, false, false, false); } else { saveACL(section,
-	 * roleDBManager, true, true, true, false); } } }
-	 */
 
 	private static void saveItem(String name, FoodClass fc, double price, boolean available) {
 		Item itm = new Item();
@@ -280,20 +260,6 @@ public class SeedDB {
 		itm.setAvailable(available);
 
 		itmManager.add(itm);
-	}
-
-	private static void saveACL(Section section, Role role, boolean viewable, boolean insertable, boolean updateable,
-			boolean deleteable) {
-
-		AccessControlList acl = new AccessControlList();
-		acl.setSection(section);
-		acl.setRole(role);
-		acl.setViewPermission(viewable);
-		acl.setInsertPermission(insertable);
-		acl.setUpdatePermission(updateable);
-		acl.setDeletePermission(deleteable);
-
-		aclManager.add(acl);
 	}
 
 }

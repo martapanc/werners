@@ -61,7 +61,7 @@
 						<div class="box box-primary">
 							<div class="box-body box-profile">
 								<img class="profile-user-img img-responsive img-circle"
-									src="/restaurantProject/dist/img/burger-160x160.jpg"
+									src="${sessionScope.userSession.user.avatar}"
 									alt="User profile picture">
 
 								<h3 class="profile-username text-center">${sessionScope.userSession.user.fullName}</h3>
@@ -93,7 +93,7 @@
 											</tr>								
 											<tr>
 												<td>Member since</td>
-												<td>TODO</td>
+												<td>${sessionScope.userSession.user.creationDate}</td>
 											</tr>
 
 										</tbody>
