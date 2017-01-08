@@ -145,31 +145,48 @@
 					$table.bootstrapTable({
 						columns : [{
 							field : 'id',
-							title : 'Id'
+							title : 'Order Id'
+						}, {
+							field : 'customerName',
+							title : 'Customer Name'
 						}, {
 							field : 'address',
 							title : 'Address'
 						}, {
+							field : 'phoneNumber',
+							title : 'Telephone'
+						}, {
+							field : 'guest.id',
+							title : 'User Id'
+						}, {
 							field : 'cost',
-							title : 'Cost'
+							title : 'Order Cost'
 						}, {
 							field : 'status',
 							title : 'Status'
+						},{
+							field : 'comment',
+							title : 'Comment'
 						}],
 						data : data,
 						detailView : true,
 						onExpandRow : function(index, row, $detail) {
-							console.log(row)
 							$detail.html('<table></table>').find('table').bootstrapTable({
 								columns : [{
 									field : 'id',
 									title : 'Id'
 								},{
+									field : 'item.foodClass.name',
+									title : 'Food Class'
+								},{
+									field : 'item.name',
+									title : 'Name'
+								},{
 									field : 'quantity',
 									title : 'Quantity'
 								},{
-									field : 'comment',
-									title : 'Comment'
+									field : 'item.price',
+									title : 'Unit Price'
 								}],
 								data : row.orderItemList
 							});
@@ -179,6 +196,7 @@
 			}
 		});
 
+		
 		$(document).ready(function() {
 			$('#table-menu').addClass('active');
 		});

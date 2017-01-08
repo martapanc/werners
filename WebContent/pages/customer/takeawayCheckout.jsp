@@ -126,41 +126,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-md-12">
-										<!-- phone mask -->
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Telephone number:</label>
-
-												<div class="input-group">
-													<div class="input-group-addon">
-														<i class="fa fa-phone"></i>
-													</div>
-													<input id="telephone" name="telephone" type="text" class="form-control" data-inputmask='"mask": "9999999999"'
-														min-length="10" data-mask>
-												</div>
-												<!-- /.input group -->
-											</div>
-											<!-- /.form group -->
-										</div>
-
-										<!-- email mask -->
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Email (optional):</label>
-
-												<div class="input-group">
-													<div class="input-group-addon">
-														<i class="fa fa-at"></i>
-													</div>
-													<input id="email" name="email" type="text" class="form-control" placeholder="email@example.com">
-												</div>
-												<!-- /.input group -->
-											</div>
-											<!-- /.form group -->
-										</div>
-
-									</div>
+									
 									<!-- Home address -->
 									<div class="col-md-12">
 										<div class="col-md-12">
@@ -178,6 +144,56 @@
 											<!-- /.form group -->
 										</div>
 									</div>
+									
+									<div class="col-md-6">
+										<!-- phone mask -->
+										<div class="col-md-12">
+											<div class="form-group">
+												<label>Telephone number:</label>
+
+												<div class="input-group">
+													<div class="input-group-addon">
+														<i class="fa fa-phone"></i>
+													</div>
+													<input id="telephone" name="telephone" type="text" class="form-control" data-inputmask='"mask": "9999999999"'
+														min-length="10" data-mask>
+												</div>
+												<!-- /.input group -->
+											</div>
+											<!-- /.form group -->
+										</div>
+										
+										<div class="col-md-12">
+											<div class="form-group">
+												<label>Email (optional):</label>
+
+												<div class="input-group">
+													<div class="input-group-addon">
+														<i class="fa fa-at"></i>
+													</div>
+													<input id="email" name="email" type="text" class="form-control" placeholder="email@example.com">
+												</div>
+												<!-- /.input group -->
+											</div>
+											<!-- /.form group -->
+										</div>
+										
+									</div>
+									
+									<!-- comment input -->
+										<div class="col-md-6">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label>Comments:</label>
+													<textarea name="comment" class="form-control" style="resize:none" rows="5" id="comments" ></textarea>
+												</div>
+												<!-- /.form group -->
+											</div>							
+										</div>
+										
+
+									
+									
 
 
 								</div>
@@ -377,32 +393,31 @@
 		$("#submit-btn")
 				.click(
 						function() {
-							var data = new Object();
-							data.title = document.getElementById("title").value;
-							data.firstname = document.getElementById("firstname").value;
-							data.lastname = document.getElementById("lastname").value;
-							data.telephone = document.getElementById("telephone").value;
-							data.mail = document.getElementById("email").value;
-							data.address = document.getElementById("address").value;
+							var title = document.getElementById("title").value;
+							var firstname = document.getElementById("firstname").value;
+							var lastname = document.getElementById("lastname").value;
+							var telephone = document.getElementById("telephone").value;
+							var email = document.getElementById("email").value;
 							var session = document.getElementById("session").value;
 							var address = document.getElementById("address").value;
+							var comment = document.getElementById("comments").value;
 
 							$(".reservation-area").addClass("col-md-12").html(
 									"</br><strong>Reservation name:</strong>")
 									.append(
-											"&emsp;" + data.title + " "
-													+ data.firstname + " "
-													+ data.lastname + "</br>")
+											"&emsp;" + title + " "
+													+ firstname + " "
+													+ lastname + "</br>")
 									.append(
 											"<strong>Telephone number: </strong>&emsp;"
-													+ data.telephone + "</br>")
+													+ telephone + "</br>")
 									.append(
 											"<strong>Delivery address: </strong>&emsp;"
-													+ data.address + "</br>");
-							if (data.mail != "")
+													+ address + "</br>");
+							if (email != "")
 								$(".reservation-area").append(
 										"<strong>Email address: </strong>&emsp;"
-												+ data.mail);
+												+ email);
 							$(".reservation-area").append("</br>&emsp;");
 
 							alert("We are currently working on your reservation! You will receive a phone call as soon as we are ready to deliver it.");
@@ -411,14 +426,19 @@
 								type : "POST",
 								url : "/restaurantProject/takeaway",
 								data : {
-									"data" : JSON.stringify(data),
 									"cart" : localStorage.getItem("cart"),
 									"tot" : totPrice,
+									"title": title,
+									"firstname": firstname,
+									"lastname": lastname,
+									"email": email,
+									"telephone": telephone,
 									"session": session,
-									"address": address
+									"address": address,
+									"comment": comment
 								},
 								complete : function(response) {
-									console.log("Ok" + JSON.stringify(response));
+									console.log("ok");
 								},
 								error : function(error) {
 									console.log("error" + error);

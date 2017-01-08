@@ -15,8 +15,6 @@ import wpb.entity.*;
 import wpb.manager.GenericManager;
 import wpb.util.HibernateUtil;
 
-import org.apache.commons.validator.routines.EmailValidator;
-
 @WebServlet(name = "TakeawayServlet", urlPatterns = "/takeaway")
 public class TakeawayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -44,7 +42,7 @@ public class TakeawayServlet extends HttpServlet {
 		
 		Map<String, String[]> paramMap = request.getParameterMap();
 		String cart = (String) request.getParameter("cart");
-		String data = (String) request.getParameter("data");
+		//String data = (String) request.getParameter("data");
 		
 		//Map<String, Object> pMap = new HashMap<String, Object>();
 		//List<HashMap<String, String>> errList = new ArrayList<HashMap<String, String>>();
@@ -82,6 +80,7 @@ public class TakeawayServlet extends HttpServlet {
 			*/
 			
 			Long id = Long.parseLong(request.getParameter("session"));
+			System.out.println("Id: " + id);
 			to.setGuest(userManager.get(id, true));
 			to.setAddress(request.getParameter("address"));
 			to.setCost(Float.parseFloat(request.getParameter("tot")));
@@ -102,16 +101,18 @@ public class TakeawayServlet extends HttpServlet {
 			System.out.println("Order item list: " + orderItemList.toString());
 			
 			to.setOrderItemList(orderItemList);
-			
+			to.setCustomerName(request.getParameter("firstname") + " " + request.getParameter("lastname"));
+			to.setPhoneNumber(request.getParameter("telephone"));
+			to.setComment(request.getParameter("comment"));
 			toManager.add(to);
 			
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
-			System.out.println(orderItemList.toString());
-			response.getWriter().write(data);
+			System.out.println(to);
+			//response.getWriter().write(data);
 			
 			PrintWriter out = response.getWriter();
-			out.println(data);
+			out.println("ok");
 		}
 		
 		
@@ -125,7 +126,7 @@ public class TakeawayServlet extends HttpServlet {
 		}*/
 	}
 
-	private void formValidation(Map<String, String[]> paramMap, HttpServletRequest request, Map<String, Object> extrMap,
+	/*private void formValidation(Map<String, String[]> paramMap, HttpServletRequest request, Map<String, Object> extrMap,
 			List<HashMap<String, String>> errList) {
 
 		if (paramMap.containsKey("title")) {
@@ -190,6 +191,6 @@ public class TakeawayServlet extends HttpServlet {
 		errors.put("pName", pName);
 		errors.put("msg", errMsg);
 		errList.add(errors);
-	}
+	}*/
 
 }

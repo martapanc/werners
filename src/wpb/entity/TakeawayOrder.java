@@ -47,6 +47,12 @@ public class TakeawayOrder extends Restaurant {
 		this.orderItemList = orderItemList;
 	}
 	
+	@Column(name = "customer_name")
+	private String customerName; 
+	
+	@Column(name = "phone_number")
+	private String phoneNumber; 
+	
 	public String getAddress() {
 		return address;
 	}
@@ -77,6 +83,14 @@ public class TakeawayOrder extends Restaurant {
 	
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	
+	public void setCustomerName(String name) {
+		this.customerName = name;
+	}
+	
+	public void setPhoneNumber(String phone) {
+		this.phoneNumber = phone;
 	}
 	
 }
