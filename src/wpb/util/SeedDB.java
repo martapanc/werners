@@ -260,7 +260,7 @@ public class SeedDB {
 		Timestamp ts = new Timestamp(cal.getTime().getTime());
 		
 		user.setCreationDate(ts);
-		user.setAvatar("dist/img/gusteau160x160.jpg");
+		user.setAvatar("/restaurantProject/dist/img/gusteau160x160.jpg");
 		userManager.add(user);
 	}
 

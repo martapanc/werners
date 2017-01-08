@@ -59,6 +59,7 @@
 						<div class="box box-info">
 							<div class="box-header with-border">
 								<h3 class="box-title">Reservation Details</h3>
+								<input type="hidden" name="sessionId" value="${sessionScope.userSession.user.id}" />
 							</div>
 
 							<form id="reservation-form" method="post"
@@ -187,7 +188,7 @@
 										<div class="col-md-12">
 											<div class="form-group">
 												<label>Comments:</label>
-												<textarea class="form-control" style="resize:none" rows="5" id="comments" ></textarea>
+												<textarea name="comment" class="form-control" style="resize:none" rows="5" id="comments" ></textarea>
 											</div>
 											<!-- /.form group -->
 										</div>							

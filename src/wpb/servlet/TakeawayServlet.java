@@ -2,7 +2,9 @@ package wpb.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -75,6 +77,11 @@ public class TakeawayServlet extends HttpServlet {
 			
 			user.setEmail(request.getParameter("email"));
 			user.setBillingAddress(request.getParameter("address"));
+			user.setAvatar("/restaurantProject/dist/img/gusteau160x160.jpg");
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(new Date());
+			Timestamp ts = new Timestamp(cal.getTime().getTime());
+			user.setCreationDate(ts);
 			//userManager.add(user);
 			
 			to.setAddress(request.getParameter("address"));

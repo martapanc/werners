@@ -3,6 +3,7 @@ package wpb.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -20,6 +21,7 @@ import wpb.util.Validator;
 import wpb.entity.FoodClass;
 import wpb.entity.Item;
 import wpb.entity.Reservation;
+import wpb.entity.Role;
 import wpb.entity.User;
 import wpb.entity.RoomTable;
 import wpb.manager.GenericManager;
@@ -35,9 +37,11 @@ public class ReservationServlet extends HttpServlet {
 	private static GenericManager<Reservation, Long> resManager = null;
 	private static GenericManager<RoomTable, Long> rtManager = null;
 	private static GenericManager<User, Long> usrManager = null;
+	Calendar cal = Calendar.getInstance();
 
 	public void init() throws ServletException {
-		resManager = new GenericManager<Reservation, Long>(Reservation.class, HibernateUtil.getSessionJavaConfigFactory());
+		resManager = new GenericManager<Reservation, Long>(Reservation.class,
+				HibernateUtil.getSessionJavaConfigFactory());
 		rtManager = new GenericManager<RoomTable, Long>(RoomTable.class, HibernateUtil.getSessionJavaConfigFactory());
 		usrManager = new GenericManager<User, Long>(User.class, HibernateUtil.getSessionJavaConfigFactory());
 	}
@@ -53,10 +57,10 @@ public class ReservationServlet extends HttpServlet {
 		Map<String, Object> pMap = new HashMap<String, Object>();
 		List<HashMap<String, String>> errList = new ArrayList<HashMap<String, String>>();
 		//
-		
+
 		if (paramMap.containsKey("action")) {
 			String action = (String) request.getParameter("action");
-			
+
 			if (action.equals("list")) {
 				JsonArray result = (JsonArray) new Gson().toJsonTree(resManager.getAll());
 				System.out.println(resManager.getAll());
@@ -69,7 +73,6 @@ public class ReservationServlet extends HttpServlet {
 		}
 
 		else {
-			
 
 			analyzeParameters(paramMap, request, pMap, errList);
 
@@ -77,7 +80,7 @@ public class ReservationServlet extends HttpServlet {
 			request.setAttribute("todayDate", FMT.format(new Date()));
 
 			System.out.println(pMap);
-
+/*
 			String title = request.getParameter("title");
 			String fn = request.getParameter("firstname");
 			String ln = request.getParameter("lastname");
@@ -87,53 +90,65 @@ public class ReservationServlet extends HttpServlet {
 			if (pMap.containsKey("telephone"))
 				user.setPhoneNumber(request.getParameter("telephone"));
 			user.setPassword("password");
-			
+			user.setAvatar("/restaurantProject/dist/img/gusteau160x160.jpg");
+			cal.setTime(new Date());
+			Timestamp ts = new Timestamp(cal.getTime().getTime());
+			user.setCreationDate(ts);
+			Role role = new Role();
+			role.setName(Role.RoleEnum.CUSTOMER);
+			user.setRole(role);
 			usrManager.add(user);
-			
-			res.setUser(user);
+
+			res.setUser(user);*/
+			if (paramMap.containsKey("sessionId")) {
+				long id = Long.parseLong(request.getParameter("sessionId"));
+				res.setUser(usrManager.get(id, false));
+			}
+			else 
+				res.setUser(usrManager.get((long) 2, false));
 
 			// table.setSeats(Integer.parseInt(request.getParameter("guests")));
-			
+
 			String date = request.getParameter("date");
 			System.out.println(date);
 			String time = request.getParameter("time");
 
+			// SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+			Date parsedDate;
 			try {
-				//SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm");
-				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-				Date parsedDate = dateFormat.parse(date + " " + time);
+				parsedDate = dateFormat.parse(date + " " + time);
 				Timestamp start = new Timestamp(parsedDate.getTime());
 				res.setStartDate(start);
 				System.out.println(parsedDate);
-				Calendar cal = Calendar.getInstance();
 				cal.setTime(start);
 				cal.add(Calendar.HOUR_OF_DAY, 2);
 				Timestamp end = new Timestamp(cal.getTime().getTime());
-
 				res.setEndDate(end);
-				Set<RoomTable> tableList = new HashSet<RoomTable>();
-				
-				RoomTable rt = new RoomTable();
-				rt.setName("Table 221");
-				
-				rt.setRoom("Room " + (int) Math.floor(Math.random() * 3));
-				rt.setCategory(RoomTable.CategoryType.medium);
-				
-				rtManager.add(rt);
-				tableList.add(rt);
-				
-				
-				
-				res.setTableList(tableList);
-			} catch (Exception e) {
-				e.getMessage();
+			} catch (ParseException e) {
+				e.printStackTrace();
 			}
-			System.out.println(res.toString());
+			
+			Set<RoomTable> tableList = new HashSet<RoomTable>();
+			RoomTable rt = new RoomTable();
+			rt.setName("Table 222");
+
+			rt.setRoom("Room " + (int) Math.floor(Math.random() * 3));
+			rt.setCategory(RoomTable.CategoryType.medium);
+
+			rtManager.add(rt);
+			tableList.add(rt);
+			res.setComment(request.getParameter("comment"));
+			res.setCustomerName(request.getParameter("firstname") + " " + request.getParameter("lastname"));
+			res.setTableList(tableList);
+			res.setVersionNumber(1);
+			
 			resManager.add(res);
+			System.out.println(res.toString());
+
 			request.getRequestDispatcher("pages/customer/reservationInvoice.jsp").forward(request, response);
 		}
 
-		
 	}
 
 	private void analyzeParameters(Map<String, String[]> paramMap, HttpServletRequest request,

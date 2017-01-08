@@ -70,4 +70,8 @@ public class Reservation extends Restaurant {
 		this.user = user;
 	}
 	
+	public void setCustomerName(String name) {
+		this.customerName = name;
+	}
+	
 }
