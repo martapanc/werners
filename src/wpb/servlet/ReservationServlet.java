@@ -76,26 +76,7 @@ public class ReservationServlet extends HttpServlet {
 			analyzeParameters(paramMap, request, pMap, errList);
 			request.setAttribute("map", pMap);
 			request.setAttribute("todayDate", FMT.format(new Date()));
-/*
-			String title = request.getParameter("title");
-			String fn = request.getParameter("firstname");
-			String ln = request.getParameter("lastname");
 
-			user.setFullName(title + " " + fn + " " + ln);
-			user.setEmail(request.getParameter("email"));
-			if (pMap.containsKey("telephone"))
-				user.setPhoneNumber(request.getParameter("telephone"));
-			user.setPassword("password");
-			user.setAvatar("/restaurantProject/dist/img/gusteau160x160.jpg");
-			cal.setTime(new Date());
-			Timestamp ts = new Timestamp(cal.getTime().getTime());
-			user.setCreationDate(ts);
-			Role role = new Role();
-			role.setName(Role.RoleEnum.CUSTOMER);
-			user.setRole(role);
-			usrManager.add(user);
-
-			res.setUser(user);*/
 			Long id= Long.parseLong(request.getParameter("session"));
 			res.setUser(usrManager.get(id, true));
 			
