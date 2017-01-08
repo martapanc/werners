@@ -7,7 +7,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "User")
 public class User extends Restaurant {
-   
+  
+	
     @Column(name = "full_name", nullable = false)
 	private String fullName;
     

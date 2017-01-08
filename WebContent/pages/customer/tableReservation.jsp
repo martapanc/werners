@@ -47,7 +47,7 @@
 					<li><a href="/restaurantProject/pages/dashboard.jsp"><i
 							class="fa fa-dashboard"></i> Home</a></li>
 					<li><a href="#">Customer View</a></li>
-					<li class="active">Table Reservation</li>
+					<li class="active">${sessionScope.userSession.user.id}</li>
 				</ol>
 			</section>
 
@@ -59,15 +59,13 @@
 						<div class="box box-info">
 							<div class="box-header with-border">
 								<h3 class="box-title">Reservation Details</h3>
-								<input type="hidden" name="sessionId" value="${sessionScope.userSession.user.id}" />
 							</div>
 
-							<form id="reservation-form" method="post"
-								action="/restaurantProject/reservation"
-								data-toggle="validator">
+							<form id="reservation-form" method="post" action="/restaurantProject/reservation" data-toggle="validator">
 								<div class="box-body">
 									<div class="col-md-12">
 										<div class="col-md-2">
+											<input type="hidden" name="session" value="${sessionScope.userSession.user.id}" />
 											<!-- Title -->
 											<label for="title">Title:</label> <select name="title"
 												class="form-control">
@@ -253,10 +251,10 @@
                 });
 				
 				$('#datepicker').datetimepicker({
-                    format: 'DD/MM/YYYY',
+                    format: 'DD MMM YYYY',
                     defaultDate: moment()
                 });
-															
+						
 			});
 	</script>
 </body>

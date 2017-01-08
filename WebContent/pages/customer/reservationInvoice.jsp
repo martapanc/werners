@@ -76,7 +76,7 @@
 			<!-- info row -->
 			<div class="row invoice-info">
 				<div class="col-sm-4 invoice-col">
-					<span class="lead">Your details</span><br>
+					<span class="lead">Reservation details</span><br>
 					<h4>
 						<strong>${map.get("title")}</strong> &ensp; ${map.get("firstname")} ${map.get("lastname")} <br> <strong>Tel: </strong>
 						&ensp; ${map.get("telephone")}<br> <strong>Email:</strong> &ensp; ${map.get("email")}<br>

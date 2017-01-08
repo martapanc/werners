@@ -69,8 +69,8 @@
 											<th data-field="id" data-sortable="true">Id</th>
 											<th data-field="startDate" data-sortable="true">Start Date</th>
 											<th data-field="endDate" data-sortable="true">End Date</th>
-											<th data-field="guest.id" data-sortable="true">Guest User Id</th>
-											<th data-field="guest.fullName" data-sortable="true">Customer Name</th>
+											<th data-field="user.id" data-sortable="true">User Id</th>
+											<th data-field="customerName" data-sortable="true">Customer Name</th>
 											<th data-field="comment" data-sortable="true">Comment</th>
 										</tr>
 									</thead>

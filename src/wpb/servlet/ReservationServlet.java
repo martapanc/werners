@@ -56,7 +56,6 @@ public class ReservationServlet extends HttpServlet {
 		Map<String, String[]> paramMap = request.getParameterMap();
 		Map<String, Object> pMap = new HashMap<String, Object>();
 		List<HashMap<String, String>> errList = new ArrayList<HashMap<String, String>>();
-		//
 
 		if (paramMap.containsKey("action")) {
 			String action = (String) request.getParameter("action");
@@ -75,11 +74,8 @@ public class ReservationServlet extends HttpServlet {
 		else {
 
 			analyzeParameters(paramMap, request, pMap, errList);
-
 			request.setAttribute("map", pMap);
 			request.setAttribute("todayDate", FMT.format(new Date()));
-
-			System.out.println(pMap);
 /*
 			String title = request.getParameter("title");
 			String fn = request.getParameter("firstname");
@@ -100,21 +96,15 @@ public class ReservationServlet extends HttpServlet {
 			usrManager.add(user);
 
 			res.setUser(user);*/
-			if (paramMap.containsKey("sessionId")) {
-				long id = Long.parseLong(request.getParameter("sessionId"));
-				res.setUser(usrManager.get(id, false));
-			}
-			else 
-				res.setUser(usrManager.get((long) 2, false));
-
-			// table.setSeats(Integer.parseInt(request.getParameter("guests")));
-
+			Long id= Long.parseLong(request.getParameter("session"));
+			res.setUser(usrManager.get(id, true));
+			
 			String date = request.getParameter("date");
 			System.out.println(date);
 			String time = request.getParameter("time");
 
 			// SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm");
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm");
 			Date parsedDate;
 			try {
 				parsedDate = dateFormat.parse(date + " " + time);
