@@ -90,6 +90,7 @@
 								<div class="box-body">
 									<div class="col-md-12">
 										<div class="col-md-1">
+										<input type="hidden" id="session" value="${sessionScope.userSession.user.id}" />
 											<!-- Title -->
 											<label for="title">Title:</label> <select id="title" name="title" class="form-control">
 												<option value="Mr" selected>Mr</option>
@@ -277,6 +278,7 @@
 
 	</div>
 	<script>
+	
 		var today = new Date();
 		$(".date").html(
 				"Date: &ensp;<strong>"
@@ -382,8 +384,8 @@
 							data.telephone = document.getElementById("telephone").value;
 							data.mail = document.getElementById("email").value;
 							data.address = document.getElementById("address").value;
-							//var data = new Array();
-							console.log(data);
+							var session = document.getElementById("session").value;
+							var address = document.getElementById("address").value;
 
 							$(".reservation-area").addClass("col-md-12").html(
 									"</br><strong>Reservation name:</strong>")
@@ -411,7 +413,9 @@
 								data : {
 									"data" : JSON.stringify(data),
 									"cart" : localStorage.getItem("cart"),
-									"tot" : totPrice
+									"tot" : totPrice,
+									"session": session,
+									"address": address
 								},
 								complete : function(response) {
 									console.log("Ok" + JSON.stringify(response));
@@ -426,6 +430,7 @@
 		$(function() {
 			$(document).ready(function() {
 				$('#customer-menu').addClass('active');
+				
 			});
 		});
 	</script>

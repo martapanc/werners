@@ -47,7 +47,7 @@
 					<li><a href="/restaurantProject/pages/dashboard.jsp"><i
 							class="fa fa-dashboard"></i> Home</a></li>
 					<li><a href="#">Customer View</a></li>
-					<li class="active">${sessionScope.userSession.user.id}</li>
+					<li class="active">Table Reservation</li>
 				</ol>
 			</section>
 

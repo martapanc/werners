@@ -1,14 +1,8 @@
 package wpb.servlet;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,14 +23,16 @@ public class TakeawayServlet extends HttpServlet {
 	private static GenericManager<TakeawayOrder, Long> toManager = null;
 	private static GenericManager<OrderItem, Long> oiManager = null;
 	private static GenericManager<User, Long> userManager = null;
+	private static GenericManager<Item,Long> itemManager = null;
 	User user = new User();
 	TakeawayOrder to = new TakeawayOrder();
-	OrderItem oi = new OrderItem();
+	OrderItem oi;
 	@Override
 	public void init() throws ServletException {
 		oiManager = new GenericManager<OrderItem, Long>(OrderItem.class, HibernateUtil.getSessionJavaConfigFactory());
 		toManager = new GenericManager<TakeawayOrder, Long>(TakeawayOrder.class, HibernateUtil.getSessionJavaConfigFactory());
 		userManager = new GenericManager<User, Long>(User.class, HibernateUtil.getSessionJavaConfigFactory());
+		itemManager = new GenericManager<Item, Long>(Item.class, HibernateUtil.getSessionJavaConfigFactory());
 	}
 
 	/**
@@ -52,9 +48,9 @@ public class TakeawayServlet extends HttpServlet {
 		
 		//Map<String, Object> pMap = new HashMap<String, Object>();
 		//List<HashMap<String, String>> errList = new ArrayList<HashMap<String, String>>();
-		//JsonArray jdata = (JsonArray) new Gson().toJsonTree(data);
-		//formValidation(paramMap, request, pMap, errList);
 		
+		//formValidation(paramMap, request, pMap, errList);
+		System.out.println("address: " + request.getParameter("address"));
 		if (paramMap.containsKey("action")) {
 			String action = request.getParameter("action");
 			
@@ -68,7 +64,7 @@ public class TakeawayServlet extends HttpServlet {
 			}
 			
 		} else {
-			
+			/*
 			String title = request.getParameter("title");
 			String fn = request.getParameter("firstname");
 			String ln = request.getParameter("lastname");
@@ -83,17 +79,35 @@ public class TakeawayServlet extends HttpServlet {
 			Timestamp ts = new Timestamp(cal.getTime().getTime());
 			user.setCreationDate(ts);
 			//userManager.add(user);
+			*/
 			
+			Long id = Long.parseLong(request.getParameter("session"));
+			to.setGuest(userManager.get(id, true));
 			to.setAddress(request.getParameter("address"));
 			to.setCost(Float.parseFloat(request.getParameter("tot")));
-			to.setGuest(user);
+			//to.setGuest(user);
 			to.setStatus("pronto");
 			
-			//for every orderItem
+			JsonParser parser = new JsonParser();
+			JsonArray arr = parser.parse(cart).getAsJsonArray();
+			Set<OrderItem> orderItemList = new HashSet<OrderItem>();
+			for (int i=0; i<arr.size(); i++) {
+				JsonObject o = arr.get(i).getAsJsonObject();
+				oi = new OrderItem();
+				oi.setQuantity(o.get("qnt").getAsInt());
+				oi.setItem(itemManager.get(o.get("id").getAsLong(), true));
+				oi.setVersionNumber(0);
+				orderItemList.add(oi);
+			}
+			System.out.println("Order item list: " + orderItemList.toString());
+			
+			to.setOrderItemList(orderItemList);
+			
+			toManager.add(to);
 			
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
-			System.out.println(data + " - " + cart);
+			System.out.println(orderItemList.toString());
 			response.getWriter().write(data);
 			
 			PrintWriter out = response.getWriter();
