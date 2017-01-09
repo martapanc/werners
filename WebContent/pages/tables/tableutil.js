@@ -75,7 +75,8 @@
 	*            value The row number.
 	*/
 	function priceFormatter(value) {
-		return value + ' €';
+		var num = parseFloat(value);
+		return '€ ' + num.toFixed(2);
 	}
 
 	/**

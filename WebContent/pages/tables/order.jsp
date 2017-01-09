@@ -70,6 +70,10 @@
 										<th data-field="orderDate" data-sortable="true">Order Date</th>
 										<th data-field="totalCost" data-sortable="true">Total Cost</th>
 										<th data-field="comment" data-sortable="true">Comment</th>
+										<th data-field="guest.id" data-sortable="true">Comment</th>
+										<th data-field="cost" data-sortable="true">Comment</th>
+										<th data-field="status" data-sortable="true">Comment</th>
+										<th data-field="comment" data-sortable="true">Comment</th>
 									</tr>
 								</thead>
 							</table>
@@ -117,20 +121,8 @@
 	<script src="../../plugins/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
 	<script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
 	<script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
+	<script src="/restaurantProject/pages/tables/tableutil.js"></script>
 	<script>
-
-		function availableFormatter(value, row) {
-			var icon = row.available === true ? 'fa-check' : 'fa-times';
-			return '<i class="fa ' + icon + '"></i>';
-		}
-
-		function availableSorter(a, b) {
-			if (a === true)
-				return 1;
-			if (a === false)
-				return -1;
-			return 0;
-		}
 
 		$.ajax({
 			url : '/restaurantProject/takeaway',
@@ -160,7 +152,8 @@
 							title : 'User Id'
 						}, {
 							field : 'cost',
-							title : 'Order Cost'
+							title : 'Order Cost',
+							formatter: priceFormatter
 						}, {
 							field : 'status',
 							title : 'Status'
@@ -186,7 +179,8 @@
 									title : 'Quantity'
 								},{
 									field : 'item.price',
-									title : 'Unit Price'
+									title : 'Unit Price',
+									formatter: priceFormatter
 								}],
 								data : row.orderItemList
 							});
