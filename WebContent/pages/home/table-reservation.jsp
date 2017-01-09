@@ -69,11 +69,11 @@
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul id="top-menu" class="nav navbar-nav navbar-right main-nav">
-							<li><a href="../../homepage.html">Home</a></li>
-							<li><a href="../../homepage.html#aboutUs">About Us</a></li>
-							<li class="active"><a href="#">Table Reservation</a></li>
-							<li><a href="takeaway-order.jsp">Take-away Order</a></li>
-							<li><a href="../../loginForm.jsp">Login/Register</a></li>
+							<li><a href="../../homepage.html"><i class="fa fa-home"></i>&ensp;Home</a></li>
+							<li><a href="../../homepage.html#aboutUs"><i class="fa fa-info"></i>&ensp;About Us</a></li>
+							<li class="active"><a href="#"><i class="fa fa-cutlery"></i>&ensp;Table Reservation</a></li>
+							<li><a href="takeaway-order.jsp"><i class="fa fa-paper-plane-o"></i>&ensp;Take-away Order</a></li>
+							<li><a href="../../loginForm.jsp"><i class="fa fa-user"></i>&ensp;Login/Register</a></li>
 						</ul>
 					</div>
 					<!--/.nav-collapse -->
