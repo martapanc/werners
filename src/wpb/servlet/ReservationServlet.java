@@ -81,8 +81,10 @@ public class ReservationServlet extends HttpServlet {
 			if (!idStr.equals("")) {
 				Long id= Long.parseLong(request.getParameter("session"));
 				res.setUser(usrManager.get(id, true));
+				System.out.println("internal");
 			}
 			else {
+				System.out.println("external");
 				User newUser = new User();
 				newUser.setAvatar("/restaurantProject/dist/img/gusteau160x160.jpg");
 				cal.setTime(new Date());
@@ -138,8 +140,7 @@ public class ReservationServlet extends HttpServlet {
 			if (!idStr.equals("")) {
 				request.getRequestDispatcher("pages/customer/reservationInvoice.jsp").forward(request, response);
 			}
-			else 
-				request.getRequestDispatcher("pages/customer/reservationInvoice.jsp").forward(request, response);
+			else  request.getRequestDispatcher("pages/home/reservation-invoice.jsp").forward(request, response);
 		}
 
 	}
