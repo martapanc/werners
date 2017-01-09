@@ -76,9 +76,28 @@ public class ReservationServlet extends HttpServlet {
 			analyzeParameters(paramMap, request, pMap, errList);
 			request.setAttribute("map", pMap);
 			request.setAttribute("todayDate", FMT.format(new Date()));
-
-			Long id= Long.parseLong(request.getParameter("session"));
-			res.setUser(usrManager.get(id, true));
+			
+			String idStr = request.getParameter("session");
+			if (!idStr.equals("")) {
+				Long id= Long.parseLong(request.getParameter("session"));
+				res.setUser(usrManager.get(id, true));
+			}
+			else {
+				User newUser = new User();
+				newUser.setAvatar("/restaurantProject/dist/img/gusteau160x160.jpg");
+				cal.setTime(new Date());
+				Timestamp ts = new Timestamp(cal.getTime().getTime());
+				newUser.setCreationDate(ts);
+				newUser.setEmail(request.getParameter("email"));
+				newUser.setFullName(request.getParameter("firstname") + " " + request.getParameter("lastname"));
+				newUser.setPassword("password");
+				newUser.setPhoneNumber(request.getParameter("telephone"));
+				Role role = new Role();
+				role.setName(Role.RoleEnum.CUSTOMER);
+				newUser.setRole(role);
+				newUser.setVersionNumber(0);
+				usrManager.add(newUser);
+			}
 			
 			String date = request.getParameter("date");
 			System.out.println(date);
@@ -116,8 +135,11 @@ public class ReservationServlet extends HttpServlet {
 			
 			resManager.add(res);
 			System.out.println(res.toString());
-
-			request.getRequestDispatcher("pages/customer/reservationInvoice.jsp").forward(request, response);
+			if (!idStr.equals("")) {
+				request.getRequestDispatcher("pages/customer/reservationInvoice.jsp").forward(request, response);
+			}
+			else 
+				request.getRequestDispatcher("pages/customer/reservationInvoice.jsp").forward(request, response);
 		}
 
 	}

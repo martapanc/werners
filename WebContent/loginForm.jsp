@@ -63,9 +63,11 @@
 					<!-- /.col -->
 				</div>
 			</form>
-
-			<a href="#">I forgot my password (not implemented yet)</a><br> <a href="/restaurantProject/registerForm.jsp" class="text-center">Create a New Account</a>
-
+			
+			<a href="#">I forgot my password (not implemented yet)</a><br>
+			<a href="/restaurantProject/registerForm.jsp" class="text-center">Create a New Account</a><br>
+			<a class="pull-right" href="homepage.html"><i class="fa fa-home"></i>&ensp;Back home</a><br> 
+			
 		</div>
 		<!-- /.login-box-body -->
 	</div>
