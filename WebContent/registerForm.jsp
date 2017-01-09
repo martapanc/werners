@@ -41,7 +41,7 @@
     				${message}
   				</div>
 			</c:if>
-			<form action="/restaurantProject/register" method="post" data-toggle="validator">
+			<form action="/register" method="post" data-toggle="validator">
 				<div class="form-group has-feedback">
 					<input type="text" class="form-control" placeholder="Full name" name="fullname"required> <span
 						class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -63,10 +63,10 @@
 				<div class="form-group has-feedback text-center">
 				<p>Choose Avatar</p>
 					<select class="image-picker text-center" name="avatar">
-  						<option data-img-src="dist/img/avatar1.png" data-img-class="first" data-img-alt="Page 1" value="/restaurantProject/dist/img/avatar1.png" selected></option>
-  						<option data-img-src="dist/img/avatar2.png" data-img-alt="Page 2" value="/restaurantProject/dist/img/avatar2.png"></option>
-  						<option data-img-src="dist/img/avatar3.png" data-img-alt="Page 3" value="/restaurantProject/dist/img/avatar3.png"></option>
-  						<option data-img-src="dist/img/gusteau160x160.jpg" data-img-alt="Page 4" data-img-class="last" value="/restaurantProject/dist/img/gusteau160x160.jpg"></option>
+  						<option data-img-src="dist/img/avatar1.png" data-img-class="first" data-img-alt="Page 1" value="dist/img/avatar1.png" selected></option>
+  						<option data-img-src="dist/img/avatar2.png" data-img-alt="Page 2" value="dist/img/avatar2.png"></option>
+  						<option data-img-src="dist/img/avatar3.png" data-img-alt="Page 3" value="dist/img/avatar3.png"></option>
+  						<option data-img-src="dist/img/gusteau160x160.jpg" data-img-alt="Page 4" data-img-class="last" value="dist/img/gusteau160x160.jpg"></option>
 					</select>
 				</div>
 				<div class="row">

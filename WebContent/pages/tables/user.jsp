@@ -5,6 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" href="../../dist/img/favicon.png">
   <title>WPB | Users</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -50,7 +51,7 @@
         <small></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="/restaurantProject/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="../dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Tables</a></li>
         <li class="active">Users</li>
       </ol>
@@ -138,7 +139,7 @@
 <script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
 <script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
 <!-- custom scripts -->
-<script src="/restaurantProject/pages/tables/tableutil.js"></script>
+<script src="tableutil.js"></script>
 <script>
 $(document).ready(function() {
 	 $('#table-menu').addClass('active');

@@ -6,6 +6,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>WPB | Food Categories</title>
+  <link rel="icon" href="../../dist/img/favicon.png">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -114,7 +115,7 @@
         <small></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="/restaurantProject/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="../dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Tables</a></li>
         <li class="active">Food Categories</li>
       </ol>
@@ -205,14 +206,14 @@
 <script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.min.js"></script>
 <script src="../../plugins/bootstrap-table/extensions/group-by-v2/bootstrap-table-group-by.min.js"></script>
 <!-- scripts for form validation ad notifications -->
-<script src="/restaurantProject/plugins/notify/bootstrap-notify.js"></script>
-<script src="/restaurantProject/plugins/validator/validator.min.js"></script>
+<script src="../../plugins/notify/bootstrap-notify.js"></script>
+<script src="../../plugins/validator/validator.min.js"></script>
 <!-- custom scripts -->
-<script src="/restaurantProject/pages/tables/tableutil.js"></script>
-<script src="/restaurantProject/pages/tables/crud.js"></script>
+<script src="../../pages/tables/tableutil.js"></script>
+<script src="../../pages/tables/crud.js"></script>
 <script>
 
-	const URL = '/restaurantProject/foodClass';
+	const URL = '../../foodClass';
 
 	$(document).ready(function() {
 		 $('#table-menu').addClass('active');

@@ -4,21 +4,21 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>WPB | Table Reservation </title>
-<link rel="icon" href="dist/img/favicon.png">
+<link rel="icon" href="../../dist/img/favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Favicon 
     <link rel="shortcut icon" type="image/icon" href="img/wpf-favicon.png"/>-->
 <!-- CSS -->
 <!-- Bootstrap css file-->
-<link href="/restaurantProject/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- Superslide css file-->
-<link rel="stylesheet" href="/restaurantProject/dist/css/superslides.css">
+<link rel="stylesheet" href="../../dist/css/superslides.css">
 <!-- Slick slider css file -->
-<link href="/restaurantProject/dist/css/slick.css" rel="stylesheet">
+<link href="../../dist/css/slick.css" rel="stylesheet">
 <!-- smooth animate css file -->
-<link rel="stylesheet" href="/restaurantProject/dist/css/animate.css">
+<link rel="stylesheet" href="../../dist/css/animate.css">
 <!-- Main structure css file -->
-<link href="/restaurantProject/dist/css/main/style.css" rel="stylesheet">
+<link href="../../dist/css/main/style.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -47,7 +47,7 @@
 						</button>
 						<!-- LOGO -->
 						<div class="pull-left image" style="margin: 10px">
-							<img src="/restaurantProject/dist/img/burger-160x160.jpg" height="60px" class="img-circle" alt="User Image">
+							<img src="../../dist/img/burger-160x160.jpg" height="60px" class="img-circle" alt="User Image">
 						</div>
 						<a class="navbar-brand" href="#"><b>Werner's </b><span style="font-size: 16px">Panini&amp;Burgers</span></a>
 					</div>
@@ -55,9 +55,9 @@
 						<ul id="top-menu" class="nav navbar-nav navbar-right main-nav">
 							<li class="active"><a href="#">Home</a></li>
 							<li><a href="#aboutUs">About Us</a></li>
-							<li><a href="/restaurantProject/pages/home/tableReservation.jsp">Table Reservation</a></li>
-							<li><a href="/restaurantProject/pages/home/takeawayOrder.jsp">Take-away Order</a></li>
-							<li><a href="/restaurantProject/loginForm.jsp">Login/Register</a></li>
+							<li><a href="tableReservation.jsp">Table Reservation</a></li>
+							<li><a href="takeawayOrder.jsp">Take-away Order</a></li>
+							<li><a href="loginForm.jsp">Login/Register</a></li>
 						</ul>
 					</div>
 					<!--/.nav-collapse -->
@@ -76,7 +76,7 @@
 					Online Reservation <small></small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="/restaurantProject/pages/dashboard.jsp"><i
+					<li><a href="../dashboard.jsp"><i
 							class="fa fa-dashboard"></i> Home</a></li>
 					<li><a href="#">Customer View</a></li>
 					<li class="active">Table Reservation</li>
@@ -93,7 +93,7 @@
 								<h3 class="box-title">Reservation Details</h3>
 							</div>
 
-							<form id="reservation-form" method="post" action="/restaurantProject/reservation" data-toggle="validator">
+							<form id="reservation-form" method="post" action="../../reservation" data-toggle="validator">
 								<div class="box-body">
 									<div class="col-md-12">
 										<div class="col-md-2">
@@ -332,24 +332,24 @@
 	<!-- Javascript Files -->
 
 	<!-- initialize jQuery Library -->
-	<script src="/restaurantProject/plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<!-- For smooth animatin  
     <script src="js/wow.min.js"></script>  -->
 	<!-- Bootstrap js -->
-	<script src="/restaurantProject/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../../bootstrap/js/bootstrap.min.js"></script>
 	<!-- slick slider -->
-	<script src="/restaurantProject/dist/js/main/slick.min.js"></script>
+	<script src="../../dist/js/main/slick.min.js"></script>
 	<!-- superslides slider -->
-	<script src="/restaurantProject/dist/js/main/jquery.easing.1.3.js"></script>
-	<script src="/restaurantProject/dist/js/main/jquery.animate-enhanced.min.js"></script>
-	<script src="/restaurantProject/dist/js/main/jquery.superslides.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../dist/js/main/jquery.easing.1.3.js"></script>
+	<script src="../../dist/js/main/jquery.animate-enhanced.min.js"></script>
+	<script src="../../dist/js/main/jquery.superslides.min.js" type="text/javascript" charset="utf-8"></script>
 	<!-- for circle counter -->
-	<script src='https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js'></script>
+	<script src="https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js"></script>
 	<!-- Gallery slider -->
-	<script type="text/javascript" language="javascript" src="/restaurantProject/dist/js/main/jquery.tosrus.min.all.js"></script>
+	<script src="../../dist/js/main/jquery.tosrus.min.all.js"></script>
 
 	<!-- Custom js-->
-	<script src="/restaurantProject/dist/js/main/custom.js"></script>
+	<script src="../../dist/js/main/custom.js"></script>
 
 
 

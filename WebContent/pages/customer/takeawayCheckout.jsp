@@ -6,31 +6,31 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>WPB | Take-Away Invoice</title>
-
+<link rel="icon" href="../../dist/img/favicon.png">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!-- Bootstrap 3.3.6 -->
-<link rel="stylesheet" href="/restaurantProject/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 <!-- DataTables -->
-<link rel="stylesheet" href="/restaurantProject/plugins/datatables/dataTables.bootstrap.css">
+<link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="/restaurantProject/dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
 <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-<link rel="stylesheet" href="/restaurantProject/dist/css/skins/_all-skins.min.css">
-<link rel="stylesheet" href="/restaurantProject/plugins/datepicker/datepicker3.css">
+<link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+<link rel="stylesheet" href="../../plugins/datepicker/datepicker3.css">
 <!-- iCheck for checkboxes and radio inputs -->
-<link rel="stylesheet" href="/restaurantProject/plugins/iCheck/all.css">
+<link rel="stylesheet" href="../../plugins/iCheck/all.css">
 <!-- Bootstrap Color Picker -->
-<link rel="stylesheet" href="/restaurantProject/plugins/colorpicker/bootstrap-colorpicker.min.css">
+<link rel="stylesheet" href="../../plugins/colorpicker/bootstrap-colorpicker.min.css">
 <!-- Bootstrap time Picker -->
-<link rel="stylesheet" href="/restaurantProject/plugins/timepicker/bootstrap-timepicker.min.css">
+<link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
 <!-- Select2 -->
-<link rel="stylesheet" href="/restaurantProject/plugins/select2/select2.min.css">
-<link rel="stylesheet" href="/restaurantProject/plugins/jQueryUI/jquery-ui.min.css">
+<link rel="stylesheet" href="../../plugins/select2/select2.min.css">
+<link rel="stylesheet" href="../../plugins/jQueryUI/jquery-ui.min.css">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -69,7 +69,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<h2 class="page-header">
-						<img src="/restaurantProject/dist/img/burger-160x160.jpg" width="40"> &ensp;Werner's Panini & Burgers <span
+						<img src="../../dist/img/burger-160x160.jpg" width="40"> &ensp;Werner's Panini & Burgers <span
 							class="pull-right">
 							<h4 class="date"></h4>
 						</span>
@@ -227,12 +227,12 @@
 							<!-- Payment methods -->
 							<div class="col-sm-4">
 								<p class="lead">Payment Methods we accept:</p>
-								<img src="/restaurantProject/dist/img/credit/cash.ico" height="45" alt="Cash"> <img
-									src="/restaurantProject/dist/img/credit/visa.png" alt="Visa"> <img
-									src="/restaurantProject/dist/img/credit/mastercard.png" alt="Mastercard"> <img
-									src="/restaurantProject/dist/img/credit/mestro.png" alt="Maestro"> <img
-									src="/restaurantProject/dist/img/credit/american-express.png" alt="American Express"> <img
-									src="/restaurantProject/dist/img/credit/paypal2.png" alt="PayPal">
+								<img src="../../dist/img/credit/cash.ico" height="45" alt="Cash"> <img
+									src="../../dist/img/credit/visa.png" alt="Visa"> <img
+									src="../../dist/img/credit/mastercard.png" alt="Mastercard"> <img
+									src="../../dist/img/credit/mestro.png" alt="Maestro"> <img
+									src="../../dist/img/credit/american-express.png" alt="American Express"> <img
+									src="../../dist/img/credit/paypal2.png" alt="PayPal">
 							</div>
 						</div>
 					</div>
@@ -261,36 +261,36 @@
 	<!-- Javascript -->
 	<div>
 		<!-- jQuery 2.2.3 -->
-		<script src="/restaurantProject/plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
 		<!-- Bootstrap 3.3.6 -->
-		<script src="/restaurantProject/bootstrap/js/bootstrap.min.js"></script>
+		<script src="../../bootstrap/js/bootstrap.min.js"></script>
 		<!-- Select2 -->
-		<script src="/restaurantProject/plugins/select2/select2.full.min.js"></script>
+		<script src="../../plugins/select2/select2.full.min.js"></script>
 		<!-- InputMask -->
-		<script src="/restaurantProject/plugins/input-mask/jquery.inputmask.js"></script>
-		<script src="/restaurantProject/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-		<script src="/restaurantProject/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+		<script src="../../plugins/input-mask/jquery.inputmask.js"></script>
+		<script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+		<script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
 		<!-- date-range-picker -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-		<script src="/restaurantProject/plugins/daterangepicker/daterangepicker.js"></script>
+		<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
 		<!-- bootstrap datepicker -->
-		<script src="/restaurantProject/plugins/datepicker/bootstrap-datepicker.js"></script>
+		<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
 		<!-- bootstrap color picker -->
-		<script src="/restaurantProject/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+		<script src="../../plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
 		<!-- bootstrap time picker -->
-		<script src="/restaurantProject/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+		<script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
 		<!-- SlimScroll 1.3.0 -->
-		<script src="/restaurantProject/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+		<script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 		<!-- iCheck 1.0.1 -->
-		<script src="/restaurantProject/plugins/iCheck/icheck.min.js"></script>
+		<script src="../../plugins/iCheck/icheck.min.js"></script>
 		<!-- FastClick -->
-		<script src="/restaurantProject/plugins/fastclick/fastclick.js"></script>
+		<script src="../../plugins/fastclick/fastclick.js"></script>
 		<!-- AdminLTE App -->
-		<script src="/restaurantProject/dist/js/app.min.js"></script>
+		<script src="../../dist/js/app.min.js"></script>
 		<!-- AdminLTE for demo purposes -->
-		<script src="/restaurantProject/dist/js/demo.js"></script>
-		<script src="/restaurantProject/bootstrap/js/date.format.js"></script>
-		<script src="/restaurantProject/plugins/bootstrapvalidator/dist/js/bootstrapValidator.min.js"></script>
+		<script src="../../dist/js/demo.js"></script>
+		<script src="../../bootstrap/js/date.format.js"></script>
+		<script src="../../plugins/bootstrapvalidator/dist/js/bootstrapValidator.min.js"></script>
 
 	</div>
 	<script>
@@ -424,7 +424,7 @@
 
 							$.post({
 								type : "POST",
-								url : "/restaurantProject/takeaway",
+								url : "../../takeaway",
 								data : {
 									"cart" : localStorage.getItem("cart"),
 									"tot" : totPrice,

@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>WPB | Table Reservation</title>
-
+<link rel="icon" href="../../dist/img/favicon.png">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!-- Bootstrap 3.3.6 -->
 <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
@@ -44,7 +44,7 @@
 					Online Reservation <small></small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="/restaurantProject/pages/dashboard.jsp"><i
+					<li><a href="../dashboard.jsp"><i
 							class="fa fa-dashboard"></i> Home</a></li>
 					<li><a href="#">Customer View</a></li>
 					<li class="active">Table Reservation</li>
@@ -61,7 +61,7 @@
 								<h3 class="box-title">Reservation Details</h3>
 							</div>
 
-							<form id="reservation-form" method="post" action="/restaurantProject/reservation" data-toggle="validator">
+							<form id="reservation-form" method="post" action=".././reservation" data-toggle="validator">
 								<div class="box-body">
 									<div class="col-md-12">
 										<div class="col-md-2">

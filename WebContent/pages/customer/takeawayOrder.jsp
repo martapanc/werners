@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>WPB | Take-Away</title>
+<link rel="icon" href="../../dist/img/favicon.png">
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!-- Bootstrap 3.3.6 -->
@@ -54,7 +55,7 @@
 					Take-Away Order <small>Customer View</small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="/restaurantProject/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li><a href="../dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
 					<li><a href="#">Customer View</a></li>
 					<li class="active">Take-Away Order</li>
 				</ol>
@@ -199,7 +200,7 @@
 	<script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
 	<script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
 	<script src="../../plugins/bootstrap-table/extensions/filter-control/bootstrap-table-filter-control.js"></script>
-	<script src="/restaurantProject/pages/tables/tableutil.js"></script>
+	<script src="../tables/tableutil.js"></script>
 	<script>
 		//Show "salad" item as default view
 		$(document).ready(function() {
