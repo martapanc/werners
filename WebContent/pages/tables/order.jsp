@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 <!-- Bootstrap table -->
 <link rel="stylesheet" href="../../plugins/bootstrap-table/bootstrap-table.css">
-<link rel="stylesheet" href="../../plugins/bootstrap-table-examples/assets/examples.css">
 
 <!-- Theme style -->
 <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
@@ -114,7 +113,6 @@
 	<!-- Page specific script -->
 	<script src="../../plugins/bootstrap-table/bootstrap-table.js"></script>
 	<!-- put your locale files after bootstrap-table.js -->
-	<script src="../../plugins/bootstrap-table-examples/ga.js"></script>
 	<script src="../../plugins/bootstrap-table/locale/bootstrap-table-en-US.js"></script>
 	<!-- extensions for bootstrap-table -->
 	<script src="../../plugins/bootstrap-table/extensions/tableExport-jquery/tableExport.js"></script>
