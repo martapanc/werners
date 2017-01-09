@@ -1,13 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>WPB | Table Reservation </title>
+<title>WPB | Table Reservation</title>
 <link rel="icon" href="dist/img/favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Favicon 
-    <link rel="shortcut icon" type="image/icon" href="img/wpf-favicon.png"/>-->
 <!-- CSS -->
 <!-- Bootstrap css file-->
 <link href="/restaurantProject/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -19,6 +16,20 @@
 <link rel="stylesheet" href="/restaurantProject/dist/css/animate.css">
 <!-- Main structure css file -->
 <link href="/restaurantProject/dist/css/main/style.css" rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<!-- DataTables -->
+<link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+<!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
+<link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+<!-- iCheck for checkboxes and radio inputs -->
+<link rel="stylesheet" href="../../plugins/iCheck/all.css">
+<!-- Bootstrap Datetime Picker -->
+<link rel="stylesheet" href="../../plugins/datetime-picker/bootstrap-datetimepicker.css">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,12 +37,17 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+<style>
+.footer_top {
+	padding: 10px;
+}
 
+.content {
+	padding: 65px 10px 10px;
+}
+</style>
 </head>
 <body>
-
-	<a class="scrollToTop" href="#"></a>
-
 	<!-- BEGIN HEADER SECTION -->
 	<header id="header">
 		<!-- BEGIN MENU -->
@@ -53,11 +69,11 @@
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul id="top-menu" class="nav navbar-nav navbar-right main-nav">
-							<li class="active"><a href="#">Home</a></li>
-							<li><a href="#aboutUs">About Us</a></li>
-							<li><a href="/restaurantProject/pages/home/tableReservation.jsp">Table Reservation</a></li>
-							<li><a href="/restaurantProject/pages/home/takeawayOrder.jsp">Take-away Order</a></li>
-							<li><a href="/restaurantProject/loginForm.jsp">Login/Register</a></li>
+							<li><a href="../../homepage.html">Home</a></li>
+							<li><a href="../../homepage.html#aboutUs">About Us</a></li>
+							<li class="active"><a href="#">Table Reservation</a></li>
+							<li><a href="takeaway-order.jsp">Take-away Order</a></li>
+							<li><a href="../../loginForm.jsp">Login/Register</a></li>
 						</ul>
 					</div>
 					<!--/.nav-collapse -->
@@ -67,20 +83,14 @@
 		<!-- END MENU -->
 	</header>
 	<!-- END HEADER SECTION -->
-
-			<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper">
+	<div class="col-md-12">
+		<!-- Content Wrapper. Contains page content -->
+		<div class="">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
 					Online Reservation <small></small>
 				</h1>
-				<ol class="breadcrumb">
-					<li><a href="/restaurantProject/pages/dashboard.jsp"><i
-							class="fa fa-dashboard"></i> Home</a></li>
-					<li><a href="#">Customer View</a></li>
-					<li class="active">Table Reservation</li>
-				</ol>
 			</section>
 
 			<!-- Main content -->
@@ -97,10 +107,8 @@
 								<div class="box-body">
 									<div class="col-md-12">
 										<div class="col-md-2">
-											<input type="hidden" name="session" value="${sessionScope.userSession.user.id}" />
 											<!-- Title -->
-											<label for="title">Title:</label> <select name="title"
-												class="form-control">
+											<label for="title">Title:</label> <select name="title" class="form-control">
 												<option value="Mr" selected="selected">Mr</option>
 												<option value="Mrs">Mrs</option>
 												<option value="Ms">Ms</option>
@@ -111,8 +119,7 @@
 										<div class="col-md-5">
 											<!-- First name -->
 											<div class="form-group">
-												<label>First name:</label> <input id="fn" name="firstname"
-													type="text" class="form-control" placeholder="Walter"
+												<label>First name:</label> <input id="fn" name="firstname" type="text" class="form-control" placeholder="Walter"
 													required>
 											</div>
 											<!-- /.form group -->
@@ -120,11 +127,9 @@
 
 										<div class="col-md-5">
 											<!-- Last name -->
-												<div class="form-group">
-													<label>Last name:</label> <input name="lastname"
-														type="text" class="form-control" placeholder="White"
-														required>
-												</div>
+											<div class="form-group">
+												<label>Last name:</label> <input name="lastname" type="text" class="form-control" placeholder="White" required>
+											</div>
 										</div>
 									</div>
 
@@ -145,17 +150,17 @@
 
 										<div class="col-md-5">
 											<!-- Time Picker -->
-												<div class="form-group">
-													<label>Time:</label>
-													<div class="input-group">
-														<div class="input-group-addon">
-															<i class="fa fa-clock-o"></i>
-														</div>
-														<input name="time" type="text" class="form-control" id="timepicker" required>
+											<div class="form-group">
+												<label>Time:</label>
+												<div class="input-group">
+													<div class="input-group-addon">
+														<i class="fa fa-clock-o"></i>
 													</div>
-													<!-- /.input group -->
+													<input name="time" type="text" class="form-control" id="timepicker" required>
 												</div>
-												<!-- /.form group -->
+												<!-- /.input group -->
+											</div>
+											<!-- /.form group -->
 										</div>
 
 										<div class="col-md-2">
@@ -168,8 +173,7 @@
 														<div class="input-group-addon">
 															<i class="fa fa-users"></i>
 														</div>
-														<input name="guests" type="number" class="form-control"
-															value="2" min="1" max="12">
+														<input name="guests" type="number" class="form-control" value="2" min="1" max="12">
 													</div>
 
 												</div>
@@ -204,8 +208,7 @@
 													<div class="input-group-addon">
 														<i class="fa fa-at"></i>
 													</div>
-													<input name="email" type="email" required
-														class="form-control" placeholder="email@example.com">
+													<input name="email" type="email" required class="form-control" placeholder="email@example.com">
 												</div>
 												<!-- /.input group -->
 											</div>
@@ -218,34 +221,34 @@
 										<div class="col-md-12">
 											<div class="form-group">
 												<label>Comments:</label>
-												<textarea name="comment" class="form-control" style="resize:none" rows="5" id="comments" ></textarea>
+												<textarea name="comment" class="form-control" style="resize: none" rows="5" id="comments"></textarea>
 											</div>
 											<!-- /.form group -->
-										</div>							
+										</div>
 									</div>
-								<div class="col-md-12">
 									<div class="col-md-12">
-									<button type="submit" class="btn btn-primary">Submit</button>
-									<button type="reset" class="btn btn-warning">Reset</button>
+										<div class="col-md-12">
+											<button type="submit" class="btn btn-primary">Submit</button>
+											<button type="reset" class="btn btn-warning">Reset</button>
+										</div>
 									</div>
-								</div>	
-							</div>
-							<!-- /. box body -->
-						<div class="box-footer">
-						</div>
-						</form>
-						<!-- /.box-body -->
-					</div>
-					<!-- /. box -->
-				</div>
-				<!-- /.col -->
-		</div>
-		<!-- /.row -->
-		</section>
-		<!-- /.content -->
-	</div>
-	<!-- /.content-wrapper -->		
+								</div>
+								<!-- /. box body -->
 
+							</form>
+							<!-- /.box-body -->
+						</div>
+						<!-- /. box -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+	</div>
+	
 	<!-- BEGIN FOOTER SECTION -->
 	<footer id="footer">
 		<!-- Start footer top area -->
@@ -308,17 +311,13 @@
 		<div class="footer_bottom">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-6 col-md-6 col-sm-6">
-						<div class="footer_bootomLeft">
-							<p>Copyright &copy; All Rights Reserved</p>
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="pull-right hidden-xs">
+							<b>Version</b> 1.0
 						</div>
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-6">
-						<div class="footer_bootomRight">
-							<p>
-								Designed by <a href="http://wpfreeware.com/" rel="nofollow">Wpfreeware.com</a>
-							</p>
-						</div>
+						<strong>Copyright &copy; 2016-2017 <a href="http://gitlab.inf.unibz.it/InMoSe_group9/">The Awesome Group 9 @
+								UniBZ</a>.
+						</strong> All rights reserved.
 					</div>
 				</div>
 			</div>
@@ -347,10 +346,38 @@
 	<script src='https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js'></script>
 	<!-- Gallery slider -->
 	<script type="text/javascript" language="javascript" src="/restaurantProject/dist/js/main/jquery.tosrus.min.all.js"></script>
-
-	<!-- Custom js-->
-	<script src="/restaurantProject/dist/js/main/custom.js"></script>
-
+	<!-- Moment library -->
+	<script src="../../plugins/moment/moment.min.js"></script>
+	<!-- Date Time Picker -->
+	<script src="../../plugins/datetime-picker/bootstrap-datetimepicker.min.js"></script>
+	<!-- SlimScroll 1.3.0 -->
+	<script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+	<!-- iCheck 1.0.1 -->
+	<script src="../../plugins/iCheck/icheck.min.js"></script>
+	<!-- FastClick -->
+	<script src="../../plugins/fastclick/fastclick.js"></script>
+	<!-- AdminLTE App -->
+	<script src="../../dist/js/app.min.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script src="../../dist/js/demo.js"></script>
+	<!-- Form validator -->
+	<script src="../../plugins/validator/validator.min.js"></script>
+	<script>
+			$(document).ready(function() {
+				
+				$('#timepicker').datetimepicker({
+                    format: 'HH:mm',
+                    stepping: 15,
+                    defaultDate: moment()
+                });
+				
+				$('#datepicker').datetimepicker({
+                    format: 'DD MMM YYYY',
+                    defaultDate: moment()
+                });
+						
+			});
+	</script>
 
 
 </body>
