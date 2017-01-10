@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 public class SecurityFilter implements Filter {
 
 	private static final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(
-	        Arrays.asList("/register", "", "/login", "/logout", "/registerForm.jsp", "/homepage.html", "/item", "/reservation",
+	        Arrays.asList("/register", "/rdsinfo", "/test.jsp", "", "/login", "/logout", "/registerForm.jsp", "/homepage.html", "/item", "/reservation",
 	        		"/pages/home/table-reservation.jsp", "/pages/home/reservation-invoice.jsp","/pages/home/takeaway-order.jsp")));
 	
 	private static final String ALLOWED_REGEX = ".*(css|jpg|png|gif|js)$|/(bootstrap|dist|plugins)/.*";

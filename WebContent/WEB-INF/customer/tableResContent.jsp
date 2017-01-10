@@ -8,7 +8,7 @@
 								<h3 class="box-title">Reservation Details</h3>
 							</div>
 
-							<form id="reservation-form" method="post" action="/restaurantProject/reservation" data-toggle="validator">
+							<form id="reservation-form" method="post" action="../../reservation" data-toggle="validator">
 								<div class="box-body">
 									<div class="col-md-12">
 										<div class="col-md-2">

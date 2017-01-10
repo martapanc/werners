@@ -98,11 +98,27 @@ public class HibernateUtil {
             */
             
             /*Werner's localhost*/
+            /*
             props.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
             props.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/wpbdb");
             props.put("hibernate.connection.username", "root");
             props.put("hibernate.connection.password", "1234");
+            */
             
+            /*AW's localhost*/
+            
+    		final String hostname = System.getProperty("RDS_HOSTNAME");
+    		final String dbname = System.getProperty("RDS_DB_NAME");
+    		final String username = System.getProperty("RDS_USERNAME");
+    		final String pw = System.getProperty("RDS_PASSWORD");
+    		final String port = System.getProperty("RDS_PORT");
+    		final String java = System.getProperty("RDS_PORT");
+    		
+            props.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
+            props.put("hibernate.connection.url", "jdbc:mysql://" + hostname + ":" + port + "/wpbdb");
+            props.put("hibernate.connection.username", username);
+            props.put("hibernate.connection.password", pw);
+                        
             
             //advanced and debug settings
             props.put("hibernate.show_sql", "true");
@@ -111,12 +127,13 @@ public class HibernateUtil {
             props.put("hibernate.hbm2ddl.auto", "update");
             
             //pool properties
-            props.put("hibernate.c3p0.min_size", "5"); 
+            /*
+            props.put("hibernate.c3p0.min_size", "0"); 
             props.put("hibernate.c3p0.max_size", "20");
             props.put("hibernate.c3p0.timeout","300"); 		
             props.put("hibernate.c3p0.max_statements","50"); 	
             props.put("hibernate.c3p0.idle_test_period", "3000");
-            
+            */
             configuration.setProperties(props);
             
             //we can set mapping file or class with annotation

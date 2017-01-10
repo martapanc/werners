@@ -33,12 +33,12 @@
 		<ul class="sidebar-menu">
 			<li class="header">MAIN NAVIGATION</li>
 			<c:if test="<%=accessManager.isAllowed(session, Section.DASHBOARD)%>">
-				<li id="dashboard-menu" class="treeview"><a href="/restaurantProject/pages/dashboard.jsp"> <i class="fa fa-dashboard"></i>
+				<li id="dashboard-menu" class="treeview"><a href="${pageContext.request.contextPath}/pages/dashboard.jsp"> <i class="fa fa-dashboard"></i>
 						<span>Dashboard</span>
 				</a></li>
 			</c:if>
 			<c:if test="<%=accessManager.isAllowed(session, Section.SCHEDULER)%>">
-				<li id="scheduler-menu"><a href="/restaurantProject/pages/scheduler.jsp"> <i class="fa fa-clock-o"></i> <span>Scheduler</span>
+				<li id="scheduler-menu"><a href="${pageContext.request.contextPath}/pages/scheduler.jsp"> <i class="fa fa-clock-o"></i> <span>Scheduler</span>
 				</a></li>
 			</c:if>
 			<c:if test="<%=accessManager.isAllowed(session, Section.TABLES)%>">
@@ -47,19 +47,19 @@
 					</span>
 				</a>
 					<ul class="treeview-menu">
-						<li id="table-menu-fc"><a href="/restaurantProject/pages/tables/foodClass.jsp"> <i class="fa fa-apple"></i>Food
+						<li id="table-menu-fc"><a href="${pageContext.request.contextPath}/pages/tables/foodClass.jsp"> <i class="fa fa-apple"></i>Food
 								Categories
 						</a></li>
-						<li id="table-menu-item"><a href="/restaurantProject/pages/tables/item.jsp"> <i class="fa fa-cube"></i>Items
+						<li id="table-menu-item"><a href="${pageContext.request.contextPath}/pages/tables/item.jsp"> <i class="fa fa-cube"></i>Items
 						</a></li>
-						<li id="table-menu-order"><a href="/restaurantProject/pages/tables/order.jsp"> <i class="fa fa-archive"></i>Orders
+						<li id="table-menu-order"><a href="${pageContext.request.contextPath}/pages/tables/order.jsp"> <i class="fa fa-archive"></i>Orders
 						</a></li>
-						<li id="table-menu-reservation"><a href="/restaurantProject/pages/tables/reservation.jsp"> <i class="fa fa-book"></i>Reservations
+						<li id="table-menu-reservation"><a href="${pageContext.request.contextPath}/pages/tables/reservation.jsp"> <i class="fa fa-book"></i>Reservations
 						</a></li>
-						<li id="table-menu-table"><a href="/restaurantProject/pages/tables/restaurantTable.jsp"> <i class="fa fa-cutlery"></i>Restaurant
+						<li id="table-menu-table"><a href="${pageContext.request.contextPath}/pages/tables/restaurantTable.jsp"> <i class="fa fa-cutlery"></i>Restaurant
 								Tables
 						</a></li>
-						<li id="table-menu-user"><a href="/restaurantProject/pages/tables/user.jsp"> <i class="fa fa-user"></i>Users
+						<li id="table-menu-user"><a href="${pageContext.request.contextPath}/pages/tables/user.jsp"> <i class="fa fa-user"></i>Users
 						</a></li>
 					</ul></li>
 			</c:if>
@@ -69,17 +69,17 @@
 					</span>
 				</a>
 					<ul class="treeview-menu">
-						<li><a href="/restaurantProject/pages/customer/tableReservation.jsp"> <i class="fa fa-cutlery"></i>Table
+						<li><a href="${pageContext.request.contextPath}/pages/customer/tableReservation.jsp"> <i class="fa fa-cutlery"></i>Table
 								Reservation
 						</a></li>
-						<li><a href="/restaurantProject/pages/customer/takeawayOrder.jsp"> <i class="fa fa-paper-plane-o"></i>Take-Away
+						<li><a href="${pageContext.request.contextPath}/pages/customer/takeawayOrder.jsp"> <i class="fa fa-paper-plane-o"></i>Take-Away
 								Order
 						</a></li>
 
 					</ul></li>
 			</c:if>
 			<li class="header">HELP</li>
-			<li><a href="/restaurantProject/documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+			<li><a href="${pageContext.request.contextPath}/documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
 		</ul>
 	</section>
 	<!-- /.sidebar -->

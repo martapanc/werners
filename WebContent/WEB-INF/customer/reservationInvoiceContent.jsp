@@ -3,7 +3,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<h2 class="page-header">
-						<img src="/restaurantProject/dist/img/burger-160x160.jpg" width="40"> &ensp;Werner's Panini & Burgers <span
+						<img src="../../dist/img/burger-160x160.jpg" width="40"> &ensp;Werner's Panini &amp; Burgers <span
 							class="pull-right"><h4>
 								Date: &ensp;<strong>${todayDate}</strong>
 							</h4> </span>
@@ -31,11 +31,11 @@
 				<!-- /.col -->
 				<div class="col-sm-4">
 					<p class="lead">Payment Methods we accept:</p>
-					<img src="/restaurantProject/dist/img/credit/visa.png" alt="Visa"> <img
-						src="/restaurantProject/dist/img/credit/mastercard.png" alt="Mastercard"> <img
-						src="/restaurantProject/dist/img/credit/mestro.png" alt="Maestro"> <img
-						src="/restaurantProject/dist/img/credit/american-express.png" alt="American Express"> <img
-						src="/restaurantProject/dist/img/credit/cash.ico" height="45" alt="Cash">
+					<img src="../../dist/img/credit/visa.png" alt="Visa"> <img
+						src="../../dist/img/credit/mastercard.png" alt="Mastercard"> <img
+						src="../../dist/img/credit/mestro.png" alt="Maestro"> <img
+						src="../../dist/img/credit/american-express.png" alt="American Express"> <img
+						src="../../dist/img/credit/cash.ico" height="45" alt="Cash">
 				</div>
 			</div>
 			<!-- /.row --> <!-- Table row -->
