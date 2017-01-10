@@ -113,7 +113,7 @@
         <small></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="/restaurantProject/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="../../pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Tables</a></li>
         <li class="active">Items</li>
       </ol>
@@ -204,14 +204,14 @@
 <script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.min.js"></script>
 <script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.min.js"></script>
 <!-- scripts for form validation ad notifications -->
-<script src="/restaurantProject/plugins/notify/bootstrap-notify.js"></script>
-<script src="/restaurantProject/plugins/validator/validator.min.js"></script>
+<script src="../../plugins/notify/bootstrap-notify.js"></script>
+<script src="../../plugins/validator/validator.min.js"></script>
 <!-- custom scripts -->
-<script src="/restaurantProject/pages/tables/tableutil.js"></script>
-<script src="/restaurantProject/pages/tables/crud.js"></script>
+<script src="../../pages/tables/tableutil.js"></script>
+<script src="../../pages/tables/crud.js"></script>
 <script>
 	
-	const URL = '/restaurantProject/item';
+	const URL = '../../item';
 	
 	$(document).ready(function() {
 		 $('#table-menu').addClass('active');

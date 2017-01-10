@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>WPB | Scheduler</title>
-  <link rel="icon" href="/restaurantProject/dist/img/favicon.png">
+  <link rel="icon" href="../dist/img/favicon.png">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -58,7 +58,7 @@
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="/restaurantProject/pages/dashboard.jsp"><i class="fa fa-apple"></i> Home</a></li>
+        <li><a href="../pages/dashboard.jsp"><i class="fa fa-apple"></i> Home</a></li>
         <li class="active">Scheduler</li>
       </ol>
     </section>

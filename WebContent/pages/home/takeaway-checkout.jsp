@@ -7,15 +7,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- CSS -->
 <!-- Bootstrap css file-->
-<link href="/restaurantProject/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- Superslide css file-->
-<link rel="stylesheet" href="/restaurantProject/dist/css/superslides.css">
+<link rel="stylesheet" href="../../dist/css/superslides.css">
 <!-- Slick slider css file -->
-<link href="/restaurantProject/dist/css/slick.css" rel="stylesheet">
+<link href="../../dist/css/slick.css" rel="stylesheet">
 <!-- smooth animate css file -->
-<link rel="stylesheet" href="/restaurantProject/dist/css/animate.css">
+<link rel="stylesheet" href="../../dist/css/animate.css">
 <!-- Main structure css file -->
-<link href="/restaurantProject/dist/css/main/style.css" rel="stylesheet">
+<link href="../../dist/css/main/style.css" rel="stylesheet">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 <!-- Ionicons -->
@@ -75,7 +75,7 @@
 						</button>
 						<!-- LOGO -->
 						<div class="pull-left image" style="margin: 10px">
-							<img src="/restaurantProject/dist/img/burger-160x160.jpg" height="60px" class="img-circle" alt="User Image">
+							<img src="../../dist/img/burger-160x160.jpg" height="60px" class="img-circle" alt="User Image">
 						</div>
 						<a class="navbar-brand" href="#"><b>Werner's </b><span style="font-size: 16px">Panini&amp;Burgers</span></a>
 					</div>
@@ -194,21 +194,21 @@
 
 	<!-- Javascript Files -->
 	<!-- initialize jQuery Library -->
-	<script src="/restaurantProject/plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<!-- For smooth animatin  
     <script src="js/wow.min.js"></script>  -->
 	<!-- Bootstrap js -->
-	<script src="/restaurantProject/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../../bootstrap/js/bootstrap.min.js"></script>
 	<!-- slick slider -->
-	<script src="/restaurantProject/dist/js/main/slick.min.js"></script>
+	<script src="../../dist/js/main/slick.min.js"></script>
 	<!-- superslides slider -->
-	<script src="/restaurantProject/dist/js/main/jquery.easing.1.3.js"></script>
-	<script src="/restaurantProject/dist/js/main/jquery.animate-enhanced.min.js"></script>
-	<script src="/restaurantProject/dist/js/main/jquery.superslides.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../dist/js/main/jquery.easing.1.3.js"></script>
+	<script src="../../dist/js/main/jquery.animate-enhanced.min.js"></script>
+	<script src="../../dist/js/main/jquery.superslides.min.js" type="text/javascript" charset="utf-8"></script>
 	<!-- for circle counter -->
 	<script src='https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js'></script>
 	<!-- Gallery slider -->
-	<script type="text/javascript" language="javascript" src="/restaurantProject/dist/js/main/jquery.tosrus.min.all.js"></script>
+	<script type="text/javascript" language="javascript" src="../../dist/js/main/jquery.tosrus.min.all.js"></script>
 	<!-- Moment library -->
 	<script src="../../plugins/moment/moment.min.js"></script>
 	<!-- Date Time Picker -->

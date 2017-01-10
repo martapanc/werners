@@ -47,7 +47,7 @@
 					Reservations <small>Here we have a list of all reservations</small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="/restaurantProject/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li><a href="../../pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
 					<li><a href="#">Tables</a></li>
 					<li class="active">Reservations</li>
 				</ol>
@@ -60,7 +60,7 @@
 					<div class="col-md-12">
 						<div class="box box-primary">
 							<div class="box-body table-responsive">
-								<table id="item-table" data-toggle="table" data-url="/restaurantProject/reservation" data-method="post" data-query-params='action=list'
+								<table id="item-table" data-toggle="table" data-url="../../reservation" data-method="post" data-query-params='action=list'
 									data-content-type="application/x-www-form-urlencoded" data-striped="true" data-pagination="true"
 									data-pagination-loop="false" data-page-size="25" data-show-refresh="true" data-search="true" data-resizable="true"
 									data-show-toggle="true" data-show-export="true">
@@ -123,11 +123,11 @@
 	<script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
 	<script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
 	<!-- scripts for form validation ad notifications -->
-	<script src="/restaurantProject/plugins/notify/bootstrap-notify.js"></script>
-	<script src="/restaurantProject/plugins/validator/validator.min.js"></script>
+	<script src="../../plugins/notify/bootstrap-notify.js"></script>
+	<script src="../../plugins/validator/validator.min.js"></script>
 	<!-- custom scripts -->
-	<script src="/restaurantProject/pages/tables/tableutil.js"></script>
-	<script src="/restaurantProject/pages/tables/crud.js"></script>
+	<script src="../../pages/tables/tableutil.js"></script>
+	<script src="../../pages/tables/crud.js"></script>
 	<script>
 		$(document).ready(function() {
 			 $('#table-menu').addClass('active');

@@ -47,7 +47,7 @@
 					Orders <small>here we have a list of all orders</small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="/restaurantProject/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li><a href="../../pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
 					<li><a href="#">Tables</a></li>
 					<li class="active">Take-Away Orders</li>
 				</ol>
@@ -119,11 +119,11 @@
 	<script src="../../plugins/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
 	<script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
 	<script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
-	<script src="/restaurantProject/pages/tables/tableutil.js"></script>
+	<script src="../../pages/tables/tableutil.js"></script>
 	<script>
 
 		$.ajax({
-			url : '/restaurantProject/takeaway',
+			url : '../../takeaway',
 			type : 'post',
 			data : {
 				"action" : "list"
