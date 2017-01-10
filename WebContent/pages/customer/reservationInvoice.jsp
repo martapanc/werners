@@ -102,7 +102,7 @@
 		$(function() {
 
 			$(document).ready(function() {
-				$('#customer-menu').addClass('active');
+				$('#reservation-menu').addClass('active');
 			});
 		});
 	</script>

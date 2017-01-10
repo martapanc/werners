@@ -92,6 +92,11 @@
 	<script src="../../plugins/bootstrap-table/extensions/filter-control/bootstrap-table-filter-control.js"></script>
 	<script src="../tables/tableutil.js"></script>
 	<script src="js/takeawayOrderUtil.js"></script>		
-
+	<script>
+	$(document).ready(function() {
+		$('#ta-order-menu').addClass('active');
+	});
+	
+	</script>
 </body>
 </html>

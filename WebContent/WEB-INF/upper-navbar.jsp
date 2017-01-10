@@ -1,7 +1,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="/restaurantProject/index.jsp" class="logo">
+    <a href="${pageContext.request.contextPath}/index.jsp" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>W</b>B&amp;P</span>
       <!-- logo for regular state and mobile devices -->
@@ -31,7 +31,7 @@
                   <li><!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="/restaurantProject/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="${pageContext.request.contextPath}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Support Team
@@ -44,7 +44,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="/restaurantProject/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="${pageContext.request.contextPath}/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         AdminLTE Design Team
@@ -56,7 +56,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="/restaurantProject/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="${pageContext.request.contextPath}/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Developers
@@ -68,7 +68,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="/restaurantProject/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="${pageContext.request.contextPath}/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Sales Department
@@ -80,7 +80,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="/restaurantProject/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="${pageContext.request.contextPath}/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Reviewers
@@ -228,10 +228,10 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="/restaurantProject/profile.jsp" class="btn btn-default btn-flat">Profile</a>
+                  <a href="${pageContext.request.contextPath}/profile.jsp" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="/restaurantProject/logout" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="${pageContext.request.contextPath}/logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>

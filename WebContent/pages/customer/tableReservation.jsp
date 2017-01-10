@@ -83,7 +83,7 @@
 	<script src="../../plugins/validator/validator.min.js"></script>
 	<script>
 			$(document).ready(function() {
-				$('#customer-menu').addClass('active');
+				$('#reservation-menu').addClass('active');
 				
 				$('#timepicker').datetimepicker({
                     format: 'HH:mm',

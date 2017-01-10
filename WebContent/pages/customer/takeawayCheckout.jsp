@@ -110,7 +110,7 @@
 	<script>
 		$(function() {
 			$(document).ready(function() {
-				$('#customer-menu').addClass('active');
+				$('#ta-order-menu').addClass('active');
 			});
 		});
 	</script>

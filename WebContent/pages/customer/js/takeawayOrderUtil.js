@@ -185,9 +185,7 @@ $(document).ready(function() {
 			});
 
 	$(function() {
-		$(document).ready(function() {
-			$('#customer-menu').addClass('active');
-		});
+		
 
 		//Button menu functions
 		$("#salad-btn").click(function() {
