@@ -123,17 +123,15 @@ public class ReservationServlet extends HttpServlet {
 			
 			Set<RoomTable> tableList = new HashSet<RoomTable>();
 			RoomTable rt = new RoomTable();
-			rt.setName("Table 222");
-
-			rt.setRoom("Room " + (int) Math.floor(Math.random() * 3));
-			rt.setCategory(RoomTable.CategoryType.medium);
-
-			rtManager.add(rt);
-			tableList.add(rt);
+			rt.setSeats((int) pMap.get("guests"));
+			
+			List<RoomTable> fitTables = rtManager.getAllByExample(rt);
+			List<RoomTable> firstTable = new ArrayList<RoomTable>();
+			firstTable.add(fitTables.get(0));
+			res.setTableList(tableList);
 			res.setComment(request.getParameter("comment"));
 			res.setCustomerName(request.getParameter("firstname") + " " + request.getParameter("lastname"));
 			res.setTableList(tableList);
-			res.setVersionNumber(1);
 			
 			resManager.add(res);
 			System.out.println(res.toString());
@@ -184,7 +182,7 @@ public class ReservationServlet extends HttpServlet {
 		}
 
 		if (paramMap.containsKey("guests")) {
-			String guests = (String) request.getParameter("guests");
+			int guests = Integer.parseInt(request.getParameter("guests"));
 			extrMap.put("guests", guests);
 		}
 

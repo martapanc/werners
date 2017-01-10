@@ -84,6 +84,8 @@ public class TakeawayServlet extends HttpServlet {
 			}
 			//Long id = Long.parseLong(request.getParameter("session"));
 			//to.setGuest(userManager.get(id, true));
+			Timestamp ts1 = new Timestamp(cal.getTime().getTime());
+			to.setOrderDate(ts1);
 			to.setAddress(request.getParameter("address"));
 			to.setCost(Float.parseFloat(request.getParameter("tot")));
 			to.setStatus("pronto");
