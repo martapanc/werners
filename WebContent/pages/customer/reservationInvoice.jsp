@@ -100,7 +100,6 @@
 	<script src="dist/js/demo.js"></script>
 	<script>
 		$(function() {
-
 			$(document).ready(function() {
 				$('#reservation-menu').addClass('active');
 			});

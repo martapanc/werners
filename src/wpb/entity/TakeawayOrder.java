@@ -1,5 +1,6 @@
 package wpb.entity;
 
+import java.sql.Timestamp;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -18,6 +19,8 @@ public class TakeawayOrder extends Restaurant {
     inverseJoinColumns=@JoinColumn(name="order_item_id"))  
 	private Set<OrderItem> orderItemList;
 	
+	@Column(name = "order_date")
+	private Timestamp orderDate;
 	
 	@Column(name = "address", nullable = false)
 	private String address;
@@ -59,6 +62,14 @@ public class TakeawayOrder extends Restaurant {
 	
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	
+	public Timestamp getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(Timestamp orderDate) {
+		this.orderDate = orderDate;
 	}
 	
 	public double getCost() {

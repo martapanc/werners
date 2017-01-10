@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <title>WPB | Takeaway Order</title>
-<link rel="icon" href="dist/img/favicon.png">
+<link rel="icon" href="../../dist/img/favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- CSS -->
 <!-- Bootstrap css file-->

@@ -68,10 +68,9 @@
 										<th data-field="order_id" data-sortable="true">ID</th>
 										<th data-field="orderDate" data-sortable="true">Order Date</th>
 										<th data-field="totalCost" data-sortable="true">Total Cost</th>
-										<th data-field="comment" data-sortable="true">Comment</th>
-										<th data-field="guest.id" data-sortable="true">Comment</th>
-										<th data-field="cost" data-sortable="true">Comment</th>
-										<th data-field="status" data-sortable="true">Comment</th>
+										<th data-field="guest.id" data-sortable="true">Guest ID</th>
+										<th data-field="cost" data-sortable="true">Cost</th>
+										<th data-field="status" data-sortable="true">Status</th>
 										<th data-field="comment" data-sortable="true">Comment</th>
 									</tr>
 								</thead>
@@ -136,6 +135,9 @@
 						columns : [{
 							field : 'id',
 							title : 'Order Id'
+						}, {
+							field : 'orderDate',
+							title : 'Order Date'
 						}, {
 							field : 'customerName',
 							title : 'Customer Name'
