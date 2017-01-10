@@ -23,6 +23,7 @@ public class TakeawayServlet extends HttpServlet {
 	private static GenericManager<User, Long> userManager = null;
 	private static GenericManager<Item,Long> itemManager = null;
 	User user = new User();
+	Calendar cal = Calendar.getInstance();
 	TakeawayOrder to = new TakeawayOrder();
 	OrderItem oi;
 	@Override
@@ -57,9 +58,32 @@ public class TakeawayServlet extends HttpServlet {
 			}
 			
 		} else {
-			
-			Long id = Long.parseLong(request.getParameter("session"));
-			to.setGuest(userManager.get(id, true));
+
+			String idStr = request.getParameter("session");
+			if (!idStr.equals("")) {
+				Long id= Long.parseLong(idStr);
+				to.setGuest(userManager.get(id, true));
+				System.out.println("internal");
+			}
+			else {
+				System.out.println("external");
+				User newUser = new User();
+				newUser.setAvatar("/restaurantProject/dist/img/gusteau160x160.jpg");
+				cal.setTime(new Date());
+				Timestamp ts = new Timestamp(cal.getTime().getTime());
+				newUser.setCreationDate(ts);
+				newUser.setEmail(request.getParameter("email"));
+				newUser.setFullName(request.getParameter("firstname") + " " + request.getParameter("lastname"));
+				newUser.setPassword("password");
+				newUser.setPhoneNumber(request.getParameter("telephone"));
+				Role role = new Role();
+				role.setName(Role.RoleEnum.CUSTOMER);
+				newUser.setRole(role);
+				newUser.setVersionNumber(0);
+				userManager.add(newUser);
+			}
+			//Long id = Long.parseLong(request.getParameter("session"));
+			//to.setGuest(userManager.get(id, true));
 			to.setAddress(request.getParameter("address"));
 			to.setCost(Float.parseFloat(request.getParameter("tot")));
 			to.setStatus("pronto");

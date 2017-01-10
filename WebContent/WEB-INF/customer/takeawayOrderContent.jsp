@@ -12,6 +12,7 @@
 								<div class="box-body">
 									<div class="food-menu col-md-3">
 										<div class="btn-group btn-block btn-group-vertical">
+										<input type="hidden" id="session" value="${sessionScope.userSession.user.id}" />
 											<a href="#" id="burger-btn" class="btn btn-lg btn-primary  active"> <img width="30"
 												src="../../dist/img/flat-icon-gastronomy/burger.svg"> &emsp;Burgers
 											</a> <a href="#" id="salad-btn" class="btn btn-lg btn-primary"> <img width="30"

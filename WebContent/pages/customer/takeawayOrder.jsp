@@ -91,7 +91,7 @@
 	<script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
 	<script src="../../plugins/bootstrap-table/extensions/filter-control/bootstrap-table-filter-control.js"></script>
 	<script src="../tables/tableutil.js"></script>
-	<script src="takeawayOrderUtil.js"></script>		
+	<script src="js/takeawayOrderUtil.js"></script>		
 
 </body>
 </html>

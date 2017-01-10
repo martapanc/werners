@@ -159,11 +159,16 @@ $(document).ready(function() {
 		if (typeof (Storage) != "undefined") {
 			localStorage.setItem("cart", cartToSend);
 			localStorage.setItem("totPrice", price)
-			console.log("Saved: " + cartToSend + "\nPrice: " + price);
+			console.log("Cart saved: " + cartToSend + "\nPrice: " + price);
 		} else {
 			console.log("Local storage non supported.")
 		}
-		window.location.href = "takeawayCheckout.jsp";
+		var session = document.getElementById("session").value;
+		console.log("session " + session);
+		if (session != "")
+			window.location.href = "takeawayCheckout.jsp";
+		else 
+			window.location.href = "/restaurantProject/pages/home/takeaway-checkout.jsp";
 	});
 
 	//Reset button functions
