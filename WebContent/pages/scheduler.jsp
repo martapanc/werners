@@ -190,7 +190,7 @@
 		},
 		resourceLabelText: 'Tables',
 		resources: {
-	        url: '../roomTable?action=list',
+	        url: '../roomTable?action=listResources',
 	        type: 'POST'
 	    },
 		events: [

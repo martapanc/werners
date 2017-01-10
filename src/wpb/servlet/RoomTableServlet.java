@@ -2,6 +2,7 @@ package wpb.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.property.access.spi.SetterFieldImpl;
+
+import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonPrimitive;
 
 import wpb.entity.RoomTable;
 import wpb.entity.RoomTable.CategoryType;
@@ -63,6 +68,26 @@ public class RoomTableServlet extends HttpServlet {
 			
 				case "list": {
 					JsonArray result = (JsonArray) gson.toJsonTree(rtManager.getAll());
+					response.setContentType("application/json");
+					response.setCharacterEncoding("UTF-8");
+					try (PrintWriter out = response.getWriter()) {
+						out.println(result.toString());
+						}
+					break;
+				}
+				
+				case "listResources": {
+					GsonBuilder gsonBuilder = new GsonBuilder()
+				    .setFieldNamingStrategy(new FieldNamingStrategy() {
+						
+							@Override
+							public String translateName(Field f) {
+								String ret = f.getName().equals("name") ? "title" : f.getName();
+								return ret;
+							}
+
+						});
+					JsonArray result = (JsonArray) gsonBuilder.create().toJsonTree(rtManager.getAll());
 					response.setContentType("application/json");
 					response.setCharacterEncoding("UTF-8");
 					try (PrintWriter out = response.getWriter()) {

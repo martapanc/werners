@@ -68,7 +68,7 @@ public class TakeawayServlet extends HttpServlet {
 			else {
 				System.out.println("external");
 				User newUser = new User();
-				newUser.setAvatar("/restaurantProject/dist/img/gusteau160x160.jpg");
+				newUser.setAvatar("dist/img/gusteau160x160.jpg");
 				cal.setTime(new Date());
 				Timestamp ts = new Timestamp(cal.getTime().getTime());
 				newUser.setCreationDate(ts);
