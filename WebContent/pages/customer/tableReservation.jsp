@@ -44,7 +44,7 @@
 					Online Reservation <small></small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="/restaurantProject/pages/dashboard.jsp"><i
+					<li><a href="../dashboard.jsp"><i
 							class="fa fa-dashboard"></i> Home</a></li>
 					<li><a href="#">Customer View</a></li>
 					<li class="active">Table Reservation</li>
