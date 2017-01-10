@@ -90,20 +90,20 @@ public class HibernateUtil {
             */
             
             /*AWS database connection properties*/
-            /*
+            
             props.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
             props.put("hibernate.connection.url", "jdbc:mysql://ec2-35-167-62-207.us-west-2.compute.amazonaws.com:3306/wpbdb");
             props.put("hibernate.connection.username", "root");
             props.put("hibernate.connection.password", "restaurant");
-            */
+            
             
             /*Werner's localhost*/
-            
+            /*
             props.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
             props.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/wpbdb");
             props.put("hibernate.connection.username", "root");
             props.put("hibernate.connection.password", "1234");
-            
+            */
             
             //advanced and debug settings
             props.put("hibernate.show_sql", "true");

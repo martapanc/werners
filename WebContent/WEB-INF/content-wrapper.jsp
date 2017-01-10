@@ -25,7 +25,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">CPU Traffic</span>
-              <span class="info-box-number">90<small>%</small></span>
+              <span class="info-box-number">82<small>%</small></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -38,7 +38,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Likes</span>
-              <span class="info-box-number">41,410</span>
+              <span class="info-box-number">56,872</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -55,7 +55,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Sales</span>
-              <span class="info-box-number">760</span>
+              <span class="info-box-number">999</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -68,7 +68,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">New Members</span>
-              <span class="info-box-number">2,000</span>
+              <span class="info-box-number">3491</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -106,7 +106,7 @@
               <div class="row">
                 <div class="col-md-8">
                   <p class="text-center">
-                    <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                    <strong>Sales: 1 Jul, 2016 - 12 Jan, 2017</strong>
                   </p>
 
                   <div class="chart">
