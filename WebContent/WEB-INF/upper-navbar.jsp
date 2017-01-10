@@ -213,13 +213,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="${sessionScope.userSession.user.avatar}" class="user-image" alt="User Image">
+              <img src="${pageContext.request.contextPath}/${sessionScope.userSession.user.avatar}" class="user-image" alt="User Image">
               <span class="hidden-xs">${sessionScope.userSession.user.fullName}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="${sessionScope.userSession.user.avatar}" class="img-circle" alt="User Image">
+                <img src="${pageContext.request.contextPath}/${sessionScope.userSession.user.avatar}" class="img-circle" alt="User Image">
 
                 <p>${sessionScope.userSession.user.fullName}
                   <small>${sessionScope.userSession.loginTime}</small>
