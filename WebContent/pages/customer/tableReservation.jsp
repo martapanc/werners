@@ -93,7 +93,8 @@
 				
 				$('#datepicker').datetimepicker({
                     format: 'DD MMM YYYY',
-                    defaultDate: moment()
+                    defaultDate: moment(),
+                    minDate: moment()
                 });
 				
 				var session = document.getElementById("session").value;

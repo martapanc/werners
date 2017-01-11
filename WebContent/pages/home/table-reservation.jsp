@@ -222,7 +222,8 @@
 				
 				$('#datepicker').datetimepicker({
                     format: 'DD MMM YYYY',
-                    defaultDate: moment()
+                    defaultDate: moment(),
+                    minDate: moment()
                 });
 					
 				
