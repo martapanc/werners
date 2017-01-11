@@ -18,7 +18,7 @@ public class Restaurant {
 	
 	@Version
 	@Column(name="version_number")
-	private int versionNumber;
+	private Integer versionNumber;
 	
 	public long getId() {
 		return id;
@@ -26,10 +26,6 @@ public class Restaurant {
 	
 	public int getVersionNumber() {
 		return versionNumber;
-	}
-	
-	public void setVersionNumber(int versionNumber) {
-		this.versionNumber = versionNumber;
 	}
 	
 	public String toString() {

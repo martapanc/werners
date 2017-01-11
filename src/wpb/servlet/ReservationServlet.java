@@ -85,7 +85,7 @@ public class ReservationServlet extends HttpServlet {
 				break;
 			}
 
-			/*case "listForScheduler": {	
+			case "listForScheduler": {	
 				result = serializeReservations(resManager.findAll());
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
@@ -93,7 +93,7 @@ public class ReservationServlet extends HttpServlet {
 					out.println(result.toString());
 				}
 				break;
-			}*/
+			}
 			
 			}
 		}

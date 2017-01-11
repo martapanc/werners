@@ -119,7 +119,7 @@ public class ItemServlet extends HttpServlet {
 					Item itm = itmManager.get(id, true);
 					itm.setName(request.getParameter("name"));
 					itm.setPrice(Double.parseDouble(request.getParameter("price")));
-					itm.setVersionNumber(Integer.parseInt(request.getParameter("version-number")));
+					//itm.setVersionNumber(Integer.parseInt(request.getParameter("version-number")));
 					FoodClass fc = fcManager.get(Long.parseLong(request.getParameter("foodClass")), true);
 					itm.setFoodClass(fc);
 					boolean available = (request.getParameter("available") == null) ? false : true;

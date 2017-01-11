@@ -98,7 +98,7 @@ public class TakeawayServlet extends HttpServlet {
 				oi = new OrderItem();
 				oi.setQuantity(o.get("qnt").getAsInt());
 				oi.setItem(itemManager.get(o.get("id").getAsLong(), true));
-				oi.setVersionNumber(0);
+				//oi.setVersionNumber(0);
 				orderItemList.add(oi);
 			}
 			System.out.println("Order item list: " + orderItemList.toString());
