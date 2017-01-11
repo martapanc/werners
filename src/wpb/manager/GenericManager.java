@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -15,15 +14,12 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Example;
 
-import wpb.entity.User;
-import wpb.util.BCrypt;
-
 public class GenericManager<T, PK extends Serializable> implements GenericDao<T, PK> {
 
 	// use of JPA entityManager recommended
 	protected SessionFactory sf;
 	private Class<T> persistentClass;
-
+	
 	public GenericManager(Class<T> persistentClass, SessionFactory sf) {
 		this.sf = sf;
 		this.persistentClass = persistentClass;
@@ -119,6 +115,11 @@ public class GenericManager<T, PK extends Serializable> implements GenericDao<T,
 		return objList;
 	}
 	
+	@Override
+    public List<T> findAll() {  
+        return findByCriteria();  
+    }  
+    
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
 	public List<T> getAllByExample(T exampleEntity) {
@@ -222,36 +223,26 @@ public class GenericManager<T, PK extends Serializable> implements GenericDao<T,
 		}
 		return totalCount;
 	}
-
-	/**
-	 * Use this inside subclasses as a convenience method.
-	 */
-	@SuppressWarnings("unchecked")
+	
+	@Override
+    public T makePersistent(T entity) { 
+		sf.getCurrentSession().saveOrUpdate(entity);  
+        return entity;  
+    } 
+    
+    /** 
+     * Use this inside subclasses as a convenience method. 
+     */  
+	@SuppressWarnings({"unchecked" , "deprecation"})
 	protected List<T> findByCriteria(Criterion... criterion) {
-		Session session = sf.openSession();
-		CriteriaBuilder builder = session.getCriteriaBuilder();
-		CriteriaQuery<T> criteria = builder.createQuery(getPersistentClass());
-		//List<Predicate> predicates = new ArrayList<Predicate>();
-		//predicates.add(arg0)
-		//Predicate p = new Predicate();
-		//Restriction.like("name", "Fritz%");
-		
-		//criteria.select(builder.count((criteria.from((getPersistentClass())))));
-		//Criteria crit = sf.getCurrentSession().createCriteria(getPersistentClass());
+		List<T> list = null;
+		Transaction tx = sf.getCurrentSession().beginTransaction();
+		Criteria crit = sf.getCurrentSession().createCriteria(getPersistentClass());
 		for (Criterion c : criterion) {
-			((Criteria) criteria).add(c);
+			crit.add(c);
 		}
-		return (List<T>) criteria.getGroupList();
-		
-		/*
-        Criteria crit = getSession().createCriteria(getPersistentClass());
-        for (Criterion c : criterion) {
-            crit.add(c);
-        }
-        return crit.list();
-        */
-   }
-
-
-
+		list = crit.list();
+		tx.commit();
+		return list;
+	}
 }

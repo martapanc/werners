@@ -67,7 +67,7 @@ public class RoomTableServlet extends HttpServlet {
 				}
 			
 				case "list": {
-					JsonArray result = (JsonArray) gson.toJsonTree(rtManager.getAll());
+					JsonArray result = (JsonArray) gson.toJsonTree(rtManager.findAll());
 					response.setContentType("application/json");
 					response.setCharacterEncoding("UTF-8");
 					try (PrintWriter out = response.getWriter()) {
@@ -76,7 +76,7 @@ public class RoomTableServlet extends HttpServlet {
 					break;
 				}
 				
-				case "listResources": {
+				case "listForScheduler": {
 					GsonBuilder gsonBuilder = new GsonBuilder()
 				    .setFieldNamingStrategy(new FieldNamingStrategy() {
 						
@@ -87,7 +87,7 @@ public class RoomTableServlet extends HttpServlet {
 							}
 
 						});
-					JsonArray result = (JsonArray) gsonBuilder.create().toJsonTree(rtManager.getAll());
+					JsonArray result = (JsonArray) gsonBuilder.create().toJsonTree(rtManager.findAll());
 					response.setContentType("application/json");
 					response.setCharacterEncoding("UTF-8");
 					try (PrintWriter out = response.getWriter()) {

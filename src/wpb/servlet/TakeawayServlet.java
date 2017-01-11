@@ -49,7 +49,7 @@ public class TakeawayServlet extends HttpServlet {
 			String action = request.getParameter("action");
 			
 			if(action.equals("list")) {
-				JsonArray result = (JsonArray) new Gson().toJsonTree(toManager.getAll());
+				JsonArray result = (JsonArray) new Gson().toJsonTree(toManager.findAll());
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				try (PrintWriter out = response.getWriter()) {

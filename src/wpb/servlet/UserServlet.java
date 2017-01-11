@@ -52,7 +52,7 @@ public class UserServlet extends HttpServlet {
 			switch (action) {
 		
 			case "list": {
-				JsonArray result = (JsonArray) gson.toJsonTree(usrManager.getAll());
+				JsonArray result = (JsonArray) gson.toJsonTree(usrManager.findAll());
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				try (PrintWriter out = response.getWriter()) {

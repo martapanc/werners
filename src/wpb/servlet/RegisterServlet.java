@@ -82,7 +82,7 @@ public class RegisterServlet extends HttpServlet {
 	private void analyzeParameters(Map<String, String[]> paramMap, HttpServletRequest request,
 			Map<String, Object> extrMap, List<HashMap<String, String>> errList) {
 
-		List<User> userList = userManager.getAll();
+		List<User> userList = userManager.findAll();
 		
 		if (paramMap.containsKey("fullname")) {
 			String fn = (String) request.getParameter("fullname");

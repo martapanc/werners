@@ -53,7 +53,7 @@ public class FoodClassServlet extends HttpServlet {
 				}
 			
 				case "list": {
-					JsonArray result = (JsonArray) gson.toJsonTree(fcManager.getAll());
+					JsonArray result = (JsonArray) gson.toJsonTree(fcManager.findAll());
 					response.setContentType("application/json");
 					response.setCharacterEncoding("UTF-8");
 					try (PrintWriter out = response.getWriter()) {

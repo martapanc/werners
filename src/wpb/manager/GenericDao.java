@@ -19,6 +19,9 @@ public interface GenericDao <T, PK extends Serializable> {
     /** Get a list of all objects from persistent storage in the database */
     List<T> getAll();
     
+    /** Get a list of all objects from persistent storage in the database (via */
+    List<T> findAll();
+    
     /** Get a list of all objects based on an example object  */
     List<T> getAllByExample(T exampleEntity);
     
@@ -33,5 +36,8 @@ public interface GenericDao <T, PK extends Serializable> {
     
     /** Remove the total count of entities */
     public long getTotalCount();
+    
+    /** Make entity persistent */
+    public T makePersistent(T entity);
     
 }

@@ -53,7 +53,7 @@ public class ItemServlet extends HttpServlet {
 
 			case "find": {
 				Item item = (id == 0) ? new Item() : itmManager.get(id, true);
-				List<FoodClass> fcList = fcManager.getAll();
+				List<FoodClass> fcList = fcManager.findAll();
 				//request.getSession().setAttribute("fc", fcList);
 				//request.getSession().setAttribute("itm", item);
 				request.setAttribute("fc", fcList);
@@ -63,7 +63,7 @@ public class ItemServlet extends HttpServlet {
 		
 			case "list": {
 				//Added "foodClassName" attribute to each item array for better visualizaiton in takeawayOrder.jsp
-				JsonArray result = (JsonArray) new Gson().toJsonTree(itmManager.getAll());
+				JsonArray result = (JsonArray) new Gson().toJsonTree(itmManager.findAll());
 				for (int i = 0; i<result.size(); i++) {
 					JsonObject obj = result.get(i).getAsJsonObject();
 					JsonObject foodCl = obj.get("foodClass").getAsJsonObject();
@@ -79,7 +79,7 @@ public class ItemServlet extends HttpServlet {
 			}
 			
 			case "listavailable": {
-				List<Item> itmList =  itmManager.getAll();
+				List<Item> itmList =  itmManager.findAll();
 				List<Item> availableItems = new ArrayList<Item>();
 				
 				// create new list of available items
