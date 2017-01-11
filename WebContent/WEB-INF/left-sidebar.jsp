@@ -52,7 +52,7 @@
 						</a></li>
 						<li id="table-menu-item"><a href="${pageContext.request.contextPath}/pages/tables/item.jsp"> <i class="fa fa-cube"></i>Items
 						</a></li>
-						<li id="table-menu-order"><a href="${pageContext.request.contextPath}/pages/tables/order.jsp"> <i class="fa fa-archive"></i>Orders
+						<li id="table-menu-order"><a href="${pageContext.request.contextPath}/pages/tables/order.jsp"> <i class="fa fa-archive"></i>Takeaway Orders
 						</a></li>
 						<li id="table-menu-reservation"><a href="${pageContext.request.contextPath}/pages/tables/reservation.jsp"> <i class="fa fa-book"></i>Reservations
 						</a></li>

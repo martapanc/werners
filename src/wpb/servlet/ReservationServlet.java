@@ -85,7 +85,7 @@ public class ReservationServlet extends HttpServlet {
 				break;
 			}
 
-			case "listForScheduler": {	
+			/*case "listForScheduler": {	
 				result = serializeReservations(resManager.findAll());
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
@@ -93,7 +93,7 @@ public class ReservationServlet extends HttpServlet {
 					out.println(result.toString());
 				}
 				break;
-			}
+			}*/
 			
 			}
 		}
@@ -148,14 +148,15 @@ public class ReservationServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			Set<RoomTable> tableList = new HashSet<RoomTable>();
+			
+			//Set<RoomTable> tableList = new HashSet<RoomTable>();
 			List<RoomTable> fitTables = rtManager.findSuitableTables((int) pMap.get("guests"));
-			tableList.add(fitTables.get(0));
+			RoomTable rt = fitTables.get(0);
 			System.out.println("fit tables: " + fitTables.toString() + " \nFirst fit:" + fitTables.get(0));
-			res.setTableList(tableList);
+			res.setRoomTable(rt);
 			res.setComment(request.getParameter("comment"));
 			res.setCustomerName(request.getParameter("firstname") + " " + request.getParameter("lastname"));
-			res.setTableList(tableList);
+
 
 			resManager.add(res);
 			System.out.println(res.toString());
@@ -234,18 +235,18 @@ public class ReservationServlet extends HttpServlet {
 				
 				String startDate = TimestampUtils.getISO8601String(res.getStartDate());
 				String endDate = TimestampUtils.getISO8601String(res.getEndDate());
-				String resourceId = "0";
+				
 				String tag = res.getCustomerName();
+				long id = res.getId();
 
-				Set<RoomTable> rtList = res.getTableList();
-				if (!rtList.isEmpty()) {
-					resourceId = Long.toString(rtList.iterator().next().getId());
-				}
+				long resourceId = res.getRoomTable().getId();
+				
 				
 				jsonObj.addProperty("start", startDate);
 				jsonObj.addProperty("end", endDate);
 				jsonObj.addProperty("resourceId", resourceId);
 				jsonObj.addProperty("title", tag);
+				jsonObj.addProperty("id", id);
 				return jsonObj;
 			}
 		};

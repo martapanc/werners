@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "reservation")
@@ -15,11 +16,9 @@ public class Reservation extends Restaurant {
     @Column(name = "end_date")
     private Timestamp endDate;
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)  
-    @JoinTable(name="room_table__reservation", 
-    joinColumns=@JoinColumn(name="reservation_id"), 
-    inverseJoinColumns=@JoinColumn(name="room_table_id"))  
-	private Set<RoomTable> tableList;  
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @NotNull
+    private RoomTable roomTable;
 	
 	@Column(name = "comment")
 	private String comment;
@@ -46,12 +45,12 @@ public class Reservation extends Restaurant {
 		this.endDate = endDate;
 	}
 
-	public Set<RoomTable> getTableList() {
-		return tableList;
+	public void setRoomTable(RoomTable rt) {
+		this.roomTable = rt;
 	}
 
-	public void setTableList(Set<RoomTable> tableList) {
-		this.tableList = tableList;
+	public RoomTable getRoomTable() {
+		return roomTable;
 	}
 
 	public String getComment() {
