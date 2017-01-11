@@ -114,10 +114,6 @@
 <script src="../plugins/scheduler/scheduler.min.js"></script>
 
 <script>
-
-
-
-  $(function () { 
 	  $( document ).ready(function() {
 			$('#dashboard-menu').removeClass('active');
 		    $('#scheduler-menu').addClass('active');
@@ -128,45 +124,8 @@
 		    $('#calendar-menu').removeClass('active');
 		});
 
-    /* initialize the external events
-     -----------------------------------------------------------------*/
-    function ini_events(ele) {
-      ele.each(function () {
-
-        // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-        // it doesn't need to have a start or end
-        var eventObject = {
-          title: $.trim($(this).text()) // use the element's text as the event title
-        };
-
-        // store the Event Object in the DOM element so we can get to it later
-        $(this).data('eventObject', eventObject);
-
-        // make the event draggable using jQuery UI
-        $(this).draggable({
-          zIndex: 1070,
-          revert: true, // will cause the event to go back to its
-          revertDuration: 0  //  original position after the drag
-        });
-
-      });
-    }
-
-    ini_events($('#external-events div.external-event'));
-
     /* initialize the calendar
      -----------------------------------------------------------------*/
-    //Date for the calendar events (dummy data)
-    var date = new Date();
-    var d = date.getDate(),
-        m = date.getMonth(),
-        y = date.getFullYear();
-   
-	var todayDate = moment().startOf('day');
-	var YESTERDAY = todayDate.clone().subtract(1, 'day').format('YYYY-MM-DD');
-	var TODAY = todayDate.format('YYYY-MM-DD');
-	var TOMORROW = todayDate.clone().add(1, 'day').format('YYYY-MM-DD');
-
 	$('#scheduler').fullCalendar({
 		schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
 		nowIndicator: true,
@@ -190,28 +149,15 @@
 		},
 		resourceLabelText: 'Tables',
 		resources: {
-	        url: '../roomTable?action=listResources',
+	        url: '../roomTable?action=listForScheduler',
 	        type: 'POST'
 	    },
-		events: [
-			{ id: '1', resourceId: '261', start: TODAY + 'T15:00:00', end: TODAY + 'T17:00:00', title: 'event 1' },
-			{ id: '2', resourceId: '261', start: TODAY + 'T05:00:00', end: TODAY + 'T22:00:00', title: 'event 2' },
-			{ id: '3', resourceId: '261', start: YESTERDAY, end: TOMORROW, title: 'event 3' },
-			{ id: '4', resourceId: '261', start: TODAY + 'T03:00:00', end: TODAY + 'T08:00:00', title: 'event 4' },
-			{ id: '5', resourceId: '261', start: TODAY + 'T00:30:00', end: TODAY + 'T02:30:00', title: 'event 5' }
-		],
-      
-	
-      /*windowResize: function(view) {
-      alert('The scheduler has adjusted to a window resize');
-      if ($(window).width() < 514){
-        $('#scheduler').fullCalendar( 'changeView', 'agendaDay' );
-      } else {
-        $('#scheduler').fullCalendar( 'changeView', 'agendaWeek' );
-      }
-  }*/
-});
-});
+		events: {
+			url: '../reservation?action=listForScheduler',
+			type: 'POST'		
+		}
+	});
+
 
 // readjust sizing after font load
 $(window).on('load', function() {

@@ -49,7 +49,7 @@ public class TakeawayServlet extends HttpServlet {
 			String action = request.getParameter("action");
 			
 			if(action.equals("list")) {
-				JsonArray result = (JsonArray) new Gson().toJsonTree(toManager.findAll());
+				JsonArray result = (JsonArray) new Gson().toJsonTree(toManager.getAll());
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				try (PrintWriter out = response.getWriter()) {
@@ -65,7 +65,7 @@ public class TakeawayServlet extends HttpServlet {
 				to.setGuest(userManager.get(id, true));
 				System.out.println("internal");
 			}
-			else {
+			/*else {
 				System.out.println("external");
 				User newUser = new User();
 				newUser.setAvatar("dist/img/gusteau160x160.jpg");
@@ -81,7 +81,7 @@ public class TakeawayServlet extends HttpServlet {
 				newUser.setRole(role);
 				newUser.setVersionNumber(0);
 				userManager.add(newUser);
-			}
+			}*/
 			//Long id = Long.parseLong(request.getParameter("session"));
 			//to.setGuest(userManager.get(id, true));
 			Timestamp ts1 = new Timestamp(cal.getTime().getTime());

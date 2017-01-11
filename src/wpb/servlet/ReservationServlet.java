@@ -29,11 +29,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import wpb.entity.Reservation;
-import wpb.entity.Role;
-import wpb.entity.RoomTable;
-import wpb.entity.User;
-import wpb.manager.GenericManager;
+import wpb.entity.*;
+import wpb.manager.*;
 import wpb.util.HibernateUtil;
 import wpb.util.StopWatch;
 import wpb.util.TimestampUtils;
@@ -48,14 +45,15 @@ public class ReservationServlet extends HttpServlet {
 	User user = new User();
 	RoomTable table = new RoomTable();
 	private static GenericManager<Reservation, Long> resManager = null;
-	private static GenericManager<RoomTable, Long> rtManager = null;
+	private static RoomTableManager  rtManager = null;
 	private static GenericManager<User, Long> usrManager = null;
+	
 	Calendar cal = Calendar.getInstance();
 
 	public void init() throws ServletException {
 		resManager = new GenericManager<Reservation, Long>(Reservation.class,
 				HibernateUtil.getSessionJavaConfigFactory());
-		rtManager = new GenericManager<RoomTable, Long>(RoomTable.class, HibernateUtil.getSessionJavaConfigFactory());
+		rtManager = new RoomTableManager(HibernateUtil.getSessionJavaConfigFactory());
 		usrManager = new GenericManager<User, Long>(User.class, HibernateUtil.getSessionJavaConfigFactory());
 	}
 
@@ -111,7 +109,7 @@ public class ReservationServlet extends HttpServlet {
 				Long id = Long.parseLong(request.getParameter("session"));
 				res.setUser(usrManager.get(id, true));
 				System.out.println("internal");
-			} else {
+			} /*else {
 				System.out.println("external");
 				User newUser = new User();
 				newUser.setAvatar("dist/img/gusteau160x160.jpg");
@@ -127,7 +125,7 @@ public class ReservationServlet extends HttpServlet {
 				newUser.setRole(role);
 				newUser.setVersionNumber(0);
 				usrManager.add(newUser);
-			}
+			}*/
 
 			String date = request.getParameter("date");
 			System.out.println(date);
@@ -151,12 +149,9 @@ public class ReservationServlet extends HttpServlet {
 			}
 
 			Set<RoomTable> tableList = new HashSet<RoomTable>();
-			RoomTable rt = new RoomTable();
-			rt.setSeats((int) pMap.get("guests"));
-
-			List<RoomTable> fitTables = rtManager.getAllByExample(rt);
-			List<RoomTable> firstTable = new ArrayList<RoomTable>();
-			firstTable.add(fitTables.get(0));
+			List<RoomTable> fitTables = rtManager.findSuitableTables((int) pMap.get("guests"));
+			tableList.add(fitTables.get(0));
+			System.out.println("fit tables: " + fitTables.toString() + " \nFirst fit:" + fitTables.get(0));
 			res.setTableList(tableList);
 			res.setComment(request.getParameter("comment"));
 			res.setCustomerName(request.getParameter("firstname") + " " + request.getParameter("lastname"));
@@ -240,6 +235,7 @@ public class ReservationServlet extends HttpServlet {
 				String startDate = TimestampUtils.getISO8601String(res.getStartDate());
 				String endDate = TimestampUtils.getISO8601String(res.getEndDate());
 				String resourceId = "0";
+				String tag = res.getCustomerName();
 
 				Set<RoomTable> rtList = res.getTableList();
 				if (!rtList.isEmpty()) {
@@ -249,6 +245,7 @@ public class ReservationServlet extends HttpServlet {
 				jsonObj.addProperty("start", startDate);
 				jsonObj.addProperty("end", endDate);
 				jsonObj.addProperty("resourceId", resourceId);
+				jsonObj.addProperty("title", tag);
 				return jsonObj;
 			}
 		};

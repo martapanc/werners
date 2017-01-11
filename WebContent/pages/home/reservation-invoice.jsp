@@ -212,8 +212,6 @@
 	<script src="dist/js/demo.js"></script>
 	<!-- Form validator -->
 	<script src="plugins/validator/validator.min.js"></script>
-	<script>
-		
-	</script>
+
 </body>
 </html>

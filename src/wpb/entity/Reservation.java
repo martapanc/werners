@@ -74,4 +74,8 @@ public class Reservation extends Restaurant {
 		this.customerName = name;
 	}
 	
+	public String getCustomerName() {
+		return customerName;
+	}
+	
 }
