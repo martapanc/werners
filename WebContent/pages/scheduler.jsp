@@ -134,7 +134,7 @@
 		editable: false,
 		slotDuration: '00:15',
 		columnFormat: 'H(:mm)',
-		minTime: '04:00',
+		minTime: '11:00',
 		maxTime: '26:00',
 		slotWidth: 15,
 		aspectRatio: 1.5,
