@@ -61,10 +61,10 @@
 			</section>
 
 			<jsp:include page="../../WEB-INF/customer/takeawayOrderContent.jsp" />
-
-		<jsp:include page="../../WEB-INF/footer.html" />
 	</div>
 	<!-- ./wrapper -->
+	
+	<jsp:include page="../../WEB-INF/footer.html" />
 
 	<!-- jQuery 2.2.3 -->
 	<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -93,10 +93,9 @@
 	<script src="../tables/tableutil.js"></script>
 	<script src="js/takeawayOrderUtil.js"></script>		
 	<script>
-	$(document).ready(function() {
-		$('#ta-order-menu').addClass('active');
-	});
-	
+		$(document).ready(function() {
+			$('#ta-order-menu').addClass('active');
+		});
 	</script>
 </body>
 </html>
