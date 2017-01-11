@@ -13,6 +13,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Order;
 
 public class GenericManager<T, PK extends Serializable> implements GenericDao<T, PK> {
 
@@ -234,12 +235,29 @@ public class GenericManager<T, PK extends Serializable> implements GenericDao<T,
      * Use this inside subclasses as a convenience method. 
      */  
 	@SuppressWarnings({"unchecked" , "deprecation"})
+	protected List<T> findByCriteria(Criterion[] criterion, Order order) {
+		List<T> list = null;
+		Transaction tx = sf.getCurrentSession().beginTransaction();
+		Criteria crit = sf.getCurrentSession().createCriteria(getPersistentClass());
+		for (Criterion c : criterion) {
+			crit.add(c);	
+		}
+		crit.addOrder(order);
+		list = crit.list();
+		tx.commit();
+		return list;
+	}
+	
+    /** 
+     * Use this inside subclasses as a convenience method. 
+     */  
+	@SuppressWarnings({"unchecked" , "deprecation"})
 	protected List<T> findByCriteria(Criterion... criterion) {
 		List<T> list = null;
 		Transaction tx = sf.getCurrentSession().beginTransaction();
 		Criteria crit = sf.getCurrentSession().createCriteria(getPersistentClass());
 		for (Criterion c : criterion) {
-			crit.add(c);
+			crit.add(c);	
 		}
 		list = crit.list();
 		tx.commit();
