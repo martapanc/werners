@@ -225,10 +225,7 @@
                     defaultDate: moment(),
                     minDate: moment()
                 });
-					
 				
-				var session = document.getElementById("session").value;
-				console.log("sessions: " + session);
 			});
 	</script>
 

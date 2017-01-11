@@ -239,10 +239,6 @@
 	<script src="../../pages/tables/tableutil.js"></script>
 	<script src="../../pages/customer/js/takeawayOrderUtil.js"></script>
 	<script src="../../pages/customer/js/takeawayCheckoutUtil.js"></script>
-	<script>
-	
-	</script>
-
 
 </body>
 </html>
