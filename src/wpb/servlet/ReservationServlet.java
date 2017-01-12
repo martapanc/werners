@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,9 +46,9 @@ public class ReservationServlet extends HttpServlet {
 	User user = new User();
 	RoomTable table = new RoomTable();
 	private static GenericManager<Reservation, Long> resManager = null;
-	private static RoomTableManager  rtManager = null;
+	private static RoomTableManager rtManager = null;
 	private static GenericManager<User, Long> usrManager = null;
-	
+
 	Calendar cal = Calendar.getInstance();
 
 	public void init() throws ServletException {
@@ -71,30 +72,27 @@ public class ReservationServlet extends HttpServlet {
 		if (paramMap.containsKey("action")) {
 			String action = (String) request.getParameter("action");
 			JsonArray result;
-
 			switch (action) {
-
-			case "list": {
-				result = (JsonArray) new Gson().toJsonTree(resManager.findAll());
-				System.out.println(resManager.findAll());
-				response.setContentType("application/json");
-				response.setCharacterEncoding("UTF-8");
-				try (PrintWriter out = response.getWriter()) {
-					out.println(result.toString());
+				case "list": {
+					result = (JsonArray) new Gson().toJsonTree(resManager.findAll());
+					System.out.println(resManager.findAll());
+					response.setContentType("application/json");
+					response.setCharacterEncoding("UTF-8");
+					try (PrintWriter out = response.getWriter()) {
+						out.println(result.toString());
+					}
+					break;
 				}
-				break;
-			}
-
-			case "listForScheduler": {	
-				result = serializeReservations(resManager.findAll());
-				response.setContentType("application/json");
-				response.setCharacterEncoding("UTF-8");
-				try (PrintWriter out = response.getWriter()) {
-					out.println(result.toString());
+	
+				case "listForScheduler": {
+					result = serializeReservations(resManager.findAll());
+					response.setContentType("application/json");
+					response.setCharacterEncoding("UTF-8");
+					try (PrintWriter out = response.getWriter()) {
+						out.println(result.toString());
+					}
+					break;
 				}
-				break;
-			}
-			
 			}
 		}
 
@@ -103,40 +101,26 @@ public class ReservationServlet extends HttpServlet {
 			analyzeParameters(paramMap, request, pMap, errList);
 			request.setAttribute("map", pMap);
 			request.setAttribute("todayDate", FMT.format(new Date()));
-
+			
+			res.setCustomerName(pMap.get("firstname") + " " + pMap.get("lastname"));
+			res.setComment(pMap.get("comment").toString());
+			
 			String idStr = request.getParameter("session");
 			if (!idStr.equals("")) {
 				Long id = Long.parseLong(request.getParameter("session"));
 				res.setUser(usrManager.get(id, true));
-				System.out.println("internal");
-			} /*else {
-				System.out.println("external");
-				User newUser = new User();
-				newUser.setAvatar("dist/img/gusteau160x160.jpg");
-				cal.setTime(new Date());
-				Timestamp ts = new Timestamp(cal.getTime().getTime());
-				newUser.setCreationDate(ts);
-				newUser.setEmail(request.getParameter("email"));
-				newUser.setFullName(request.getParameter("firstname") + " " + request.getParameter("lastname"));
-				newUser.setPassword("password");
-				newUser.setPhoneNumber(request.getParameter("telephone"));
-				Role role = new Role();
-				role.setName(Role.RoleEnum.CUSTOMER);
-				newUser.setRole(role);
-				newUser.setVersionNumber(0);
-				usrManager.add(newUser);
-			}*/
+			} 
 
 			String date = request.getParameter("date");
 			System.out.println(date);
 			String time = request.getParameter("time");
 
-			// SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM
-			// yyyy HH:mm");
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm");
 			Date parsedDate;
+
 			try {
 				parsedDate = dateFormat.parse(date + " " + time);
+
 				Timestamp start = new Timestamp(parsedDate.getTime());
 				res.setStartDate(start);
 				System.out.println(parsedDate);
@@ -144,26 +128,30 @@ public class ReservationServlet extends HttpServlet {
 				cal.add(Calendar.HOUR_OF_DAY, 2);
 				Timestamp end = new Timestamp(cal.getTime().getTime());
 				res.setEndDate(end);
-			} catch (ParseException e) {
-				e.printStackTrace();
+				List<RoomTable> fitTables;
+				fitTables = findAvailableTables(start, end, (int) pMap.get("guests"));
+				if (!fitTables.isEmpty()) {
+					RoomTable rt = fitTables.get(0); //The first room table in the list is the table with the smallest num of seats
+					System.out.println("fit tables: " + fitTables.toString() + " \nFirst fit:" + fitTables.get(0));
+					res.setRoomTable(rt);
+				
+					
+					resManager.add(res);
+					System.out.println(res.toString());
+					if (!idStr.equals("")) {
+						request.getRequestDispatcher("pages/customer/reservationInvoice.jsp").forward(request, response);
+					} else
+						request.getRequestDispatcher("pages/home/reservation-invoice.jsp").forward(request, response);
+				} else {
+					request.setAttribute("reservationError", "Sorry, no places available at chosen time. "
+							+ "Please choose a different start time for your reservation");
+					System.out.println("Restaurant full");
+				}
+
+			} catch (ParseException e1) {
+				e1.printStackTrace();
 			}
 
-			
-			//Set<RoomTable> tableList = new HashSet<RoomTable>();
-			List<RoomTable> fitTables = rtManager.findSuitableTables((int) pMap.get("guests"));
-			RoomTable rt = fitTables.get(0);
-			System.out.println("fit tables: " + fitTables.toString() + " \nFirst fit:" + fitTables.get(0));
-			res.setRoomTable(rt);
-			res.setComment(request.getParameter("comment"));
-			res.setCustomerName(request.getParameter("firstname") + " " + request.getParameter("lastname"));
-
-
-			resManager.add(res);
-			System.out.println(res.toString());
-			if (!idStr.equals("")) {
-				request.getRequestDispatcher("pages/customer/reservationInvoice.jsp").forward(request, response);
-			} else
-				request.getRequestDispatcher("pages/home/reservation-invoice.jsp").forward(request, response);
 		}
 
 	}
@@ -216,10 +204,14 @@ public class ReservationServlet extends HttpServlet {
 			extrMap.put("telephone", tel);
 		}
 
+		if (paramMap.containsKey("comment")) {
+			String comm = (String) request.getParameter("comment");
+			extrMap.put("comment", comm);
+		}
 	}
 
 	/**
-	 * Converts a list of reservations into a JSONarray according to what the 
+	 * Converts a list of reservations into a JSONarray according to what the
 	 * scheduler plugin expects
 	 * 
 	 * @return
@@ -227,21 +219,20 @@ public class ReservationServlet extends HttpServlet {
 	private JsonArray serializeReservations(List<Reservation> resList) {
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
-		
+
 		JsonSerializer<Reservation> serializer = new JsonSerializer<Reservation>() {
 			@Override
 			public JsonElement serialize(Reservation res, Type typeOfSrc, JsonSerializationContext context) {
 				JsonObject jsonObj = new JsonObject();
-				
+
 				String startDate = TimestampUtils.getISO8601String(res.getStartDate());
 				String endDate = TimestampUtils.getISO8601String(res.getEndDate());
-				
+
 				String tag = res.getCustomerName();
 				long id = res.getId();
 
 				long resourceId = res.getRoomTable().getId();
-				
-				
+
 				jsonObj.addProperty("start", startDate);
 				jsonObj.addProperty("end", endDate);
 				jsonObj.addProperty("resourceId", resourceId);
@@ -250,10 +241,47 @@ public class ReservationServlet extends HttpServlet {
 				return jsonObj;
 			}
 		};
-		
+
 		gsonBuilder.registerTypeAdapter(Reservation.class, serializer);
 		Gson customGson = gsonBuilder.create();
 		JsonArray arr = (JsonArray) customGson.toJsonTree(resList);
 		return arr;
+	}
+
+	private List<RoomTable> findAvailableTables(Date resStart, Date resEnd, int guests) throws ParseException {
+		SimpleDateFormat FMT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+		FMT.setTimeZone(TimeZone.getTimeZone("GMT+1:00"));
+		List<RoomTable> fitTables = rtManager.findSuitableTables(guests); //Get all tables
+		JsonArray result = serializeReservations(resManager.findAll()); //Get existing reservations
+		List<RoomTable> avTables = fitTables;
+		ArrayList<Long> al = new ArrayList<Long>();
+		for (int i = 0; i < fitTables.size(); i++) {
+			long index = fitTables.get(i).getId();
+			for (int j = 0; j < result.size(); j++) {
+				JsonObject o = result.get(j).getAsJsonObject();
+				long objId = o.get("resourceId").getAsLong();
+				if (objId == index) {	//Search for reservations associated to tables
+					Date start = FMT.parse(o.get("start").getAsString());
+					Date end = FMT.parse(o.get("end").getAsString());
+					//A 2-hour time slot is available for a new reservation if there are no existing reservation overlapping it
+					if ((start.after(resStart) && start.before(resEnd)) || start.compareTo(resStart) == 0
+							|| (end.after(resStart) && end.before(resEnd))) {
+						al.add(index); //Create a list of the table indices that are not available
+					}
+				}
+			}
+		}
+
+		ArrayList<RoomTable> toDelete = new ArrayList<RoomTable>();
+		for (int k = 0; k < fitTables.size(); k++) {
+			long id = fitTables.get(k).getId();
+			if (al.contains(id))
+				toDelete.add(avTables.get(k));
+		}
+		//Remove occupied tables from the "Available tables" list
+		for (RoomTable del : toDelete) 
+			avTables.remove(del);
+		System.out.println("AL:" + al.toString());
+		return avTables;
 	}
 }

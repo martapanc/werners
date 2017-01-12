@@ -109,7 +109,7 @@
 			
 			<div class="alert alert-success alert-dismissible fade-in col-md-4 pull-right" role="alert">
 				Are you a regular customer? You can sign up and save time when you make reservations. 
-				<a href="loginForm.jsp">Click here to register.</a>
+				<a href="/restaurantProject/loginForm.jsp">Click here to register.</a>
 			</div>
 		</div>
 		<!-- /.content-wrapper -->

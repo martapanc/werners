@@ -35,51 +35,50 @@ public class ResTest {
 		SimpleDateFormat FMT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		FMT.setTimeZone(TimeZone.getTimeZone("GMT+1:00"));
 		List<RoomTable> fitTables = rtManager.findSuitableTables(1);
-		
-		RoomTable rt = fitTables.get(0);
-		// System.out.println("fit tables: " + fitTables.toString() + " \nFirst
-		// fit:" + fitTables.get(0));
+
 		JsonArray result = new JsonArray();
 		Date test1, test2;
 
-		test1 = FMT.parse("2017-01-11T20:00:00Z");
-		test2 = FMT.parse("2017-01-11T22:00:00Z");
+		test1 = FMT.parse("2017-01-12T20:45:00Z");
+		test2 = FMT.parse("2017-01-12T22:45:00Z");
 
 		result = serializeReservations(resManager.findAll());
-		System.out.println(result.toString());
+		
 		List<RoomTable> avTables = fitTables;
-		ArrayList<String> al = new ArrayList<String>();
+		ArrayList<Long> al = new ArrayList<Long>();
+		ArrayList<Long> al2 = new ArrayList<Long>();
 		System.out.println("\nSub: " + fitTables.size() + " " + avTables.size());
 		for (int i = 0; i < fitTables.size(); i++) {
 			long index = fitTables.get(i).getId();
-			System.out.println("fit id:" + index);
 			for (int j = 0; j < result.size(); j++) {
 				JsonObject o = result.get(j).getAsJsonObject();
-
 				long objId = o.get("resourceId").getAsLong();
 				if (objId == index) {
-					System.out.println("\tobj: " + o.toString() + " o.resID: " + o.get("resourceId"));
-
 					Date start = FMT.parse(o.get("start").getAsString());
 					Date end = FMT.parse(o.get("end").getAsString());
-					System.out.println(start + " " + test1 + " " + start.after(test1));
-					if ((start.after(test1) && start.before(test2)) || start.compareTo(test1) == 0
+					if ((start.after(test1) && start.before(test2)) 
+							|| start.compareTo(test1) == 0
 							|| (end.after(test1) && end.before(test2))) {
-						al.add((index-10) + "");
-						fitTables.remove(i);
-						
+						al.add(index);		
+						al2.add((index-10));
 					}
-
 				}
 			}
 		}
 
+		ArrayList<RoomTable> toDelete = new ArrayList<RoomTable>();
+		for (int k = 0; k<fitTables.size(); k++) {
+			long id = fitTables.get(k).getId();
+			if (al.contains(id)) 
+				toDelete.add(avTables.get(k));
+		}
+		
+		for (RoomTable del : toDelete)
+			avTables.remove(del);
+		
 		System.out.println("\nAVAILABLE TABLES:" + avTables.toString());
 		System.out.println("\nSub: " + fitTables.size() + " " + avTables.size());
-		Date d = new Date(2017, 0, 9, 19, 45, 00);
-		Date e = new Date(2017, 0, 7, 19, 45, 00);
-
-		System.out.println(al.toString());
+		System.out.println("\n" + al2.toString());
 
 	}
 
