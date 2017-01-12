@@ -149,23 +149,28 @@ public class ReservationServlet extends HttpServlet {
 			}
 
 			
-			//Set<RoomTable> tableList = new HashSet<RoomTable>();
-			List<RoomTable> fitTables = rtManager.findSuitableTables((int) pMap.get("guests"));
-			RoomTable rt = fitTables.get(0);
-			System.out.println("fit tables: " + fitTables.toString() + " \nFirst fit:" + fitTables.get(0));
-			res.setRoomTable(rt);
-			res.setComment(request.getParameter("comment"));
-			res.setCustomerName(request.getParameter("firstname") + " " + request.getParameter("lastname"));
+			// Set<RoomTable> tableList = new HashSet<RoomTable>();
+			int seatCount = (int) pMap.get("guests");
+			Timestamp startDate = java.sql.Timestamp.valueOf("2017-01-12 17:00:00");
+			Timestamp endDate= java.sql.Timestamp.valueOf("2017-01-12 19:00:00");
+			List<RoomTable> freeTables = rtManager.findFreeRoomTables(seatCount, res.getStartDate(), res.getEndDate());
+			System.out.println("Free room tables:" + freeTables);
+			if (freeTables.isEmpty()) {
+				//no free table available
+				request.setAttribute("noTables", true);
+			} else {
 
-
-			resManager.add(res);
-			System.out.println(res.toString());
-			if (!idStr.equals("")) {
-				request.getRequestDispatcher("pages/customer/reservationInvoice.jsp").forward(request, response);
-			} else
-				request.getRequestDispatcher("pages/home/reservation-invoice.jsp").forward(request, response);
+				res.setRoomTable(freeTables.get(0));
+				res.setComment(request.getParameter("comment"));
+				res.setCustomerName(request.getParameter("firstname") + " " + request.getParameter("lastname"));
+				resManager.add(res);
+				System.out.println(res.toString());
+				if (!idStr.equals("")) {
+					request.getRequestDispatcher("pages/customer/reservationInvoice.jsp").forward(request, response);
+				} else
+					request.getRequestDispatcher("pages/home/reservation-invoice.jsp").forward(request, response);
+			}
 		}
-
 	}
 
 	private void analyzeParameters(Map<String, String[]> paramMap, HttpServletRequest request,
@@ -235,12 +240,9 @@ public class ReservationServlet extends HttpServlet {
 				
 				String startDate = TimestampUtils.getISO8601String(res.getStartDate());
 				String endDate = TimestampUtils.getISO8601String(res.getEndDate());
-				
 				String tag = res.getCustomerName();
 				long id = res.getId();
-
 				long resourceId = res.getRoomTable().getId();
-				
 				
 				jsonObj.addProperty("start", startDate);
 				jsonObj.addProperty("end", endDate);

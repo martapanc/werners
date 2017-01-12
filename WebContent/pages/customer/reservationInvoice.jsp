@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -58,9 +59,15 @@
 				<li class="active">Invoice</li>
 			</ol>
 			</section>
-
-			<jsp:include page="../../WEB-INF/customer/reservationInvoiceContent.jsp"></jsp:include>
 			
+			<c:choose>
+				<c:when test="${noTables == false}">
+					<jsp:include page="../../WEB-INF/customer/reservationInvoiceContent.jsp"></jsp:include>
+				</c:when>
+				<c:when test="${noTables == true}">
+					<jsp:include page="../../WEB-INF/customer/reservationDenied.jsp"></jsp:include>
+				</c:when>	
+			</c:choose>
 			<div class="clearfix"></div>
 		</div>
 		<!-- /.content-wrapper -->

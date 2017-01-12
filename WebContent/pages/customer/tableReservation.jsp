@@ -66,6 +66,8 @@
 	<script src="../../bootstrap/js/bootstrap.min.js"></script>
 	<!-- Moment library -->
 	<script src="../../plugins/moment/moment.min.js"></script>
+	<!-- Moment rounding library -->
+	<script src="../../plugins/moment-round/moment-round.min.js"></script>
 	<!-- Date Time Picker -->
 	<script src="../../plugins/datetime-picker/bootstrap-datetimepicker.min.js"></script>
 	<!-- SlimScroll 1.3.0 -->
