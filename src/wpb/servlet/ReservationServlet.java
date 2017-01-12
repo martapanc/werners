@@ -145,7 +145,11 @@ public class ReservationServlet extends HttpServlet {
 				} else {
 					request.setAttribute("reservationError", "Sorry, no places available at chosen time. "
 							+ "Please choose a different start time for your reservation");
-					System.out.println("Restaurant full");
+					if (!idStr.equals("")) {
+						request.getRequestDispatcher("pages/customer/tableReservation.jsp").forward(request, response);
+					} else
+						request.getRequestDispatcher("pages/home/table-reservation.jsp").forward(request, response);
+					System.out.println("Restaurant full in selected time slot - or no tables with x+ seats available");
 				}
 
 			} catch (ParseException e1) {

@@ -7,29 +7,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- CSS -->
 <!-- Bootstrap css file-->
-<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- Superslide css file-->
-<link rel="stylesheet" href="../../dist/css/superslides.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/superslides.css">
 <!-- Slick slider css file -->
-<link href="../../dist/css/slick.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/dist/css/slick.css" rel="stylesheet">
 <!-- smooth animate css file -->
-<link rel="stylesheet" href="../../dist/css/animate.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/animate.css">
 <!-- Main structure css file -->
-<link href="../../dist/css/main/style.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/dist/css/main/style.css" rel="stylesheet">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 <!-- DataTables -->
-<link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/datatables/dataTables.bootstrap.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/AdminLTE.min.css">
 <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
-<link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/skins/_all-skins.min.css">
 <!-- iCheck for checkboxes and radio inputs -->
-<link rel="stylesheet" href="../../plugins/iCheck/all.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/iCheck/all.css">
 <!-- Bootstrap Datetime Picker -->
-<link rel="stylesheet" href="../../plugins/datetime-picker/bootstrap-datetimepicker.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/datetime-picker/bootstrap-datetimepicker.css">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -63,17 +63,17 @@
 						</button>
 						<!-- LOGO -->
 						<div class="pull-left image" style="margin: 10px">
-							<img src="../../dist/img/burger-160x160.jpg" height="60px" class="img-circle" alt="User Image">
+							<img src="${pageContext.request.contextPath}/dist/img/burger-160x160.jpg" height="60px" class="img-circle" alt="User Image">
 						</div>
 						<a class="navbar-brand" href="#"><b>Werner's </b><span style="font-size: 16px">Panini&amp;Burgers</span></a>
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul id="top-menu" class="nav navbar-nav navbar-right main-nav">
-							<li><a href="../../homepage.html"><i class="fa fa-home"></i>&ensp;Home</a></li>
-							<li><a href="../../homepage.html#aboutUs"><i class="fa fa-info"></i>&ensp;About Us</a></li>
+							<li><a href="${pageContext.request.contextPath}/homepage.html"><i class="fa fa-home"></i>&ensp;Home</a></li>
+							<li><a href="${pageContext.request.contextPath}/homepage.html#aboutUs"><i class="fa fa-info"></i>&ensp;About Us</a></li>
 							<li class="active"><a href="#"><i class="fa fa-cutlery"></i>&ensp;Table Reservation</a></li>
 							<li><a href="takeaway-order.jsp"><i class="fa fa-paper-plane-o"></i>&ensp;Take-away Order</a></li>
-							<li><a href="../../loginForm.jsp"><i class="fa fa-user"></i>&ensp;Login/Register</a></li>
+							<li><a href="${pageContext.request.contextPath}/loginForm.jsp"><i class="fa fa-user"></i>&ensp;Login/Register</a></li>
 						</ul>
 					</div>
 					<!--/.nav-collapse -->
@@ -180,37 +180,37 @@
 	<!-- Javascript Files -->
 
 	<!-- initialize jQuery Library -->
-	<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<!-- For smooth animatin  
     <script src="js/wow.min.js"></script>  -->
 	<!-- Bootstrap js -->
-	<script src="../../bootstrap/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 	<!-- slick slider -->
-	<script src="../../dist/js/main/slick.min.js"></script>
+	<script src="${pageContext.request.contextPath}/dist/js/main/slick.min.js"></script>
 	<!-- superslides slider -->
-	<script src="../../dist/js/main/jquery.easing.1.3.js"></script>
-	<script src="../../dist/js/main/jquery.animate-enhanced.min.js"></script>
-	<script src="../../dist/js/main/jquery.superslides.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${pageContext.request.contextPath}/dist/js/main/jquery.easing.1.3.js"></script>
+	<script src="${pageContext.request.contextPath}/dist/js/main/jquery.animate-enhanced.min.js"></script>
+	<script src="${pageContext.request.contextPath}/dist/js/main/jquery.superslides.min.js" type="text/javascript" charset="utf-8"></script>
 	<!-- for circle counter -->
 	<script src='https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js'></script>
 	<!-- Gallery slider -->
-	<script type="text/javascript" language="javascript" src="../../dist/js/main/jquery.tosrus.min.all.js"></script>
+	<script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/dist/js/main/jquery.tosrus.min.all.js"></script>
 	<!-- Moment library -->
-	<script src="../../plugins/moment/moment.min.js"></script>
+	<script src="${pageContext.request.contextPath}/plugins/moment/moment.min.js"></script>
 	<!-- Date Time Picker -->
-	<script src="../../plugins/datetime-picker/bootstrap-datetimepicker.min.js"></script>
+	<script src="${pageContext.request.contextPath}/plugins/datetime-picker/bootstrap-datetimepicker.min.js"></script>
 	<!-- SlimScroll 1.3.0 -->
-	<script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+	<script src="${pageContext.request.contextPath}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 	<!-- iCheck 1.0.1 -->
-	<script src="../../plugins/iCheck/icheck.min.js"></script>
+	<script src="${pageContext.request.contextPath}/plugins/iCheck/icheck.min.js"></script>
 	<!-- FastClick -->
-	<script src="../../plugins/fastclick/fastclick.js"></script>
+	<script src="${pageContext.request.contextPath}/plugins/fastclick/fastclick.js"></script>
 	<!-- AdminLTE App -->
-	<script src="../../dist/js/app.min.js"></script>
+	<script src="${pageContext.request.contextPath}/dist/js/app.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
-	<script src="../../dist/js/demo.js"></script>
+	<script src="${pageContext.request.contextPath}/dist/js/demo.js"></script>
 	<!-- Form validator -->
-	<script src="../../plugins/validator/validator.min.js"></script>
+	<script src="${pageContext.request.contextPath}/plugins/validator/validator.min.js"></script>
 	<script>
 			$(document).ready(function() {
 				
@@ -226,6 +226,10 @@
                     defaultDate: moment(),
                     minDate: moment()
                 });
+				
+				var jsAtt = '${reservationError}';
+				if (jsAtt != "")
+					alert(jsAtt);
 				
 			});
 	</script>
