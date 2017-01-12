@@ -215,7 +215,7 @@ public class SeedDB {
 			res.setUser(userManager.get((long) 6, false));
 			Set<RoomTable> tableList = new HashSet<RoomTable>();
 			tableList.add(rtManager.get((long) 12, false));
-			res.setTableList(tableList);
+			//res.setTableList(tableList);
 			res.setComment("I'm a comment");
 
 			resManager.add(res);
