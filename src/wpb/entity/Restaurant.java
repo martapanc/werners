@@ -18,7 +18,7 @@ public class Restaurant {
 	
 	@Version
 	@Column(name="version_number")
-	private Integer versionNumber;
+	private Integer versionNumber = 0;
 	
 	public long getId() {
 		return id;

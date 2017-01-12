@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Table(name = "item")
 public class Item extends Restaurant {
-   
+	
 	@Column(name = "name", nullable = false)
 	@NotEmpty
 	private String name;
