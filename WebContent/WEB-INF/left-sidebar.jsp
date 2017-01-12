@@ -21,7 +21,8 @@
 		<!-- search form -->
 		<form action="#" method="get" class="sidebar-form">
 			<div class="input-group">
-				<input type="text" name="q" class="form-control" placeholder="not implemented yet..."> <span class="input-group-btn">
+				<input type="text" name="q" class="form-control" placeholder="Search..."> <span class="input-group-btn">
+				<!--<input type="text" name="q" class="form-control" placeholder="not implemented yet..."> <span class="input-group-btn"> That was embarassing...-->
 					<button type="submit" name="search" id="search-btn" class="btn btn-flat">
 						<i class="fa fa-search"></i>
 					</button>
