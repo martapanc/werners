@@ -15,11 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.property.access.spi.SetterFieldImpl;
 
-import com.google.gson.FieldNamingStrategy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonPrimitive;
+import com.google.gson.*;
 
 import wpb.entity.RoomTable;
 import wpb.entity.RoomTable.CategoryType;
@@ -77,22 +73,19 @@ public class RoomTableServlet extends HttpServlet {
 				}
 				
 				case "listForScheduler": {
-					GsonBuilder gsonBuilder = new GsonBuilder()
-				    .setFieldNamingStrategy(new FieldNamingStrategy() {
-						
-							@Override
-							public String translateName(Field f) {
-								String ret = f.getName().equals("name") ? "title" : f.getName();
-								return ret;
-							}
-
-						});
+					GsonBuilder gsonBuilder = new GsonBuilder().setFieldNamingStrategy(new FieldNamingStrategy() {
+						@Override
+						public String translateName(Field f) {
+							String ret = f.getName().equals("name") ? "title" : f.getName();
+							return ret;
+						}
+					});
 					JsonArray result = (JsonArray) gsonBuilder.create().toJsonTree(rtManager.findAll());
 					response.setContentType("application/json");
 					response.setCharacterEncoding("UTF-8");
 					try (PrintWriter out = response.getWriter()) {
 						out.println(result.toString());
-						}
+					}
 					break;
 				}
 
