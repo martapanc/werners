@@ -28,7 +28,7 @@
 											<div class="form-group">
 												<label>First name:</label> <input id="fn" name="firstname"
 													type="text" class="form-control" placeholder="Walter"
-													required>
+													required value="${sessionScope.userSession.user.getFirstName()}">
 											</div>
 											<!-- /.form group -->
 										</div>
@@ -38,7 +38,7 @@
 												<div class="form-group">
 													<label>Last name:</label> <input name="lastname"
 														type="text" class="form-control" placeholder="White"
-														required>
+														required value="${sessionScope.userSession.user.getLastName()}">
 												</div>
 										</div>
 									</div>
@@ -103,7 +103,8 @@
 													<div class="input-group-addon">
 														<i class="fa fa-phone"></i>
 													</div>
-													<input name="telephone" type="text" pattern="^[0-9]{10}$" class="form-control">
+													<input name="telephone" type="text" pattern="^[0-9]{10}$" class="form-control"
+														value="${sessionScope.userSession.user.phoneNumber}">
 												</div>
 												<!-- /.input group -->
 											</div>
@@ -120,7 +121,8 @@
 														<i class="fa fa-at"></i>
 													</div>
 													<input name="email" type="email" required
-														class="form-control" placeholder="email@example.com">
+														class="form-control" placeholder="email@example.com" 
+														value="${sessionScope.userSession.user.email}">
 												</div>
 												<!-- /.input group -->
 											</div>

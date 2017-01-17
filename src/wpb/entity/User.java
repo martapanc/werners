@@ -121,5 +121,17 @@ public class User extends Restaurant {
 	public void setCreationDate(Timestamp creation_date) {
 		this.creationDate = creation_date;
 	}
+	
+	public String getFirstName() {
+		String full = this.fullName;
+		String[] a = full.split("\\s");
+		return a[0];
+	}
+	
+	public String getLastName() {
+		String full = this.fullName;
+		String[] a = full.split("\\s");
+		return a[1];
+	}
 
 }

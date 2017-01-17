@@ -84,6 +84,14 @@
 												<td>${sessionScope.userSession.user.email}</td>
 											</tr>
 											<tr>
+												<td>Telephone Number</td>
+												<td>${sessionScope.userSession.user.phoneNumber}</td>
+											</tr>
+											<tr>
+												<td>Billing Address</td>
+												<td>${sessionScope.userSession.user.billingAddress}</td>
+											</tr>
+											<tr>
 												<td>Password</td>
 												<td>***************</td>
 											</tr>

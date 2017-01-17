@@ -44,7 +44,7 @@
 											<!-- First name -->
 											<div class="form-group">
 												<label>First name:</label> <input id="firstname" name="firstname" type="text" class="form-control" placeholder="John"
-													value="">
+													value="${sessionScope.userSession.user.getFirstName()}">
 											</div>
 											<!-- /.form group -->
 										</div>
@@ -54,7 +54,7 @@
 											<div class="bootstrap-timepicker">
 												<div class="form-group">
 													<label>Last name:</label> <input id="lastname" name="lastname" type="text" class="form-control" placeholder="Watson"
-														value="">
+														value="${sessionScope.userSession.user.getLastName()}">
 												</div>
 												<!-- /.form group -->
 											</div>
@@ -71,7 +71,8 @@
 													<div class="input-group-addon">
 														<i class="fa fa-home"></i>
 													</div>
-													<input id="address" name="address" type="text" class="form-control" placeholder="221B Baker St, London, UK">
+													<input id="address" name="address" type="text" class="form-control" 
+													placeholder="221B Baker St, London, UK" value="${sessionScope.userSession.user.billingAddress}">
 												</div>
 												<!-- /.input group -->
 											</div>
@@ -89,8 +90,8 @@
 													<div class="input-group-addon">
 														<i class="fa fa-phone"></i>
 													</div>
-													<input id="telephone" name="telephone" type="text" class="form-control" data-inputmask='"mask": "9999999999"'
-														min-length="10" data-mask>
+													<input name="telephone" type="text" pattern="^[0-9]{10}$" class="form-control"
+														value="${sessionScope.userSession.user.phoneNumber}">
 												</div>
 												<!-- /.input group -->
 											</div>
@@ -105,7 +106,8 @@
 													<div class="input-group-addon">
 														<i class="fa fa-at"></i>
 													</div>
-													<input id="email" name="email" type="text" class="form-control" placeholder="email@example.com">
+													<input id="email" name="email" type="text" class="form-control" placeholder="email@example.com"
+														value="${sessionScope.userSession.user.email}">
 												</div>
 												<!-- /.input group -->
 											</div>
