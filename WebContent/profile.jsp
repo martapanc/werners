@@ -36,6 +36,117 @@
 
 		<jsp:include page="/WEB-INF/left-sidebar.jsp" />
 
+		<!-- First-Last name modal -->
+		<div id="nameModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Change User Name</h4>
+					</div>
+					<form method="post" action="user?action=name">
+						<input type="hidden" name="session" value="${sessionScope.userSession.user.id}" />
+						<div class="modal-body">
+							<label for="firstname"><strong>First name:</strong></label>
+							<input type="text" name="firstname" class="form-control" value="${sessionScope.userSession.user.getFirstName()}">
+							<label for="lastname"><strong>Last name:</strong></label><br>
+							<input type="text" name="lastname" class="form-control" value="${sessionScope.userSession.user.getLastName()}">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Save changes</button>
+						</div>
+					</form>
+
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+
+		<!-- telephone modal -->
+		<div id="telModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Change Telephone Number</h4>
+					</div>
+					<form method="post" action="user?action=tel">
+						<input type="hidden" name="session" value="${sessionScope.userSession.user.id}" />
+						<div class="modal-body">
+							<label for="telephone"><strong>Telephone number:</strong></label>
+							<input type="number" name="telephone" class="form-control" value="${sessionScope.userSession.user.phoneNumber}"> 
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Save changes</button>
+						</div>
+					</form>	
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+
+		<!-- Address modal -->
+		<div id="addressModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Change Delivery Address</h4>
+					</div>
+					<form method="post" action="user?action=address">
+						<input type="hidden" name="session" value="${sessionScope.userSession.user.id}" />
+						<div class="modal-body">
+							<label for="address"><strong>Address:</strong></label> 
+							<input type="text" name="address" class="form-control" value="${sessionScope.userSession.user.billingAddress}"> 
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Save changes</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+
+		<!-- Password modal -->
+		<div id="passModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Change Password</h4>
+					</div>
+					<form method="post" action="user?action=pw">
+						<input type="hidden" name="session" value="${sessionScope.userSession.user.id}" />
+						<div class="modal-body">
+							<label for="oldPass"><strong>Old Password:</strong></label>
+							<input type="password" name="oldPass" class="form-control" value="**********">
+							<label for="newPass1"><strong>New Password:</strong></label>
+							<input type="password" name="newPass1" class="form-control">
+							<label for="newPass2"><strong>Confirm New Password:</strong></label>
+							<input type="password" name="newPass2" class="form-control">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Save changes</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 
@@ -45,8 +156,7 @@
 					Profile <small></small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="${pageContext.request.contextPath}/pages/dashboard.jsp"><i
-							class="fa fa-dashboard"></i> Home</a></li>
+					<li><a href="${pageContext.request.contextPath}/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
 					<li class="active">Profile</li>
 
 				</ol>
@@ -60,8 +170,7 @@
 						<!-- Profile Image -->
 						<div class="box box-primary">
 							<div class="box-body box-profile">
-								<img class="profile-user-img img-responsive img-circle"
-									src="${sessionScope.userSession.user.avatar}"
+								<img class="profile-user-img img-responsive img-circle" src="${sessionScope.userSession.user.avatar}"
 									alt="User profile picture">
 
 								<h3 class="profile-username text-center">${sessionScope.userSession.user.fullName}</h3>
@@ -72,36 +181,44 @@
 									<table class="table table-striped">
 										<tbody>
 											<tr>
-												<td>Full name</td>
+												<td><strong>Full name</strong></td>
 												<td>${sessionScope.userSession.user.fullName}</td>
+												<td><button class="btn btn-primary" data-toggle="modal" data-target="#nameModal">Edit</button></td>
 											</tr>
 											<tr>
-												<td>Role</td>
+												<td><strong>Role</strong></td>
 												<td>${sessionScope.userSession.user.role.name}</td>
+												<td></td>
 											</tr>
 											<tr>
-												<td>Profile Email</td>
+												<td><strong>Profile Email</strong></td>
 												<td>${sessionScope.userSession.user.email}</td>
+												<td></td>
 											</tr>
 											<tr>
-												<td>Telephone Number</td>
+												<td><strong>Telephone Number</strong></td>
 												<td>${sessionScope.userSession.user.phoneNumber}</td>
+												<td><button class="btn btn-primary" data-toggle="modal" data-target="#telModal">Edit</button></td>
 											</tr>
 											<tr>
-												<td>Billing Address</td>
+												<td><strong>Billing Address</strong></td>
 												<td>${sessionScope.userSession.user.billingAddress}</td>
+												<td><button class="btn btn-primary" data-toggle="modal" data-target="#addressModal">Edit</button></td>
 											</tr>
 											<tr>
-												<td>Password</td>
-												<td>***************</td>
+												<td><strong>Password</strong></td>
+												<td>**********</td>
+												<td><button class="btn btn-primary" data-toggle="modal" data-target="#passModal">Edit</button></td>
 											</tr>
 											<tr>
-												<td>Logged in at</td>
+												<td><strong>Logged in at</strong></td>
 												<td>${sessionScope.userSession.loginTime}</td>
-											</tr>								
+												<td></td>
+											</tr>
 											<tr>
-												<td>Member since</td>
+												<td><strong>Member since</strong></td>
 												<td>${sessionScope.userSession.user.creationDate}</td>
+												<td></td>
 											</tr>
 
 										</tbody>
@@ -142,5 +259,8 @@
 	<script src="${pageContext.request.contextPath}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 	<!-- ChartJS 1.0.1 -->
 	<script src="${pageContext.request.contextPath}/plugins/chartjs/Chart.min.js"></script>
+	<script>
+		
+	</script>
 </body>
 </html>

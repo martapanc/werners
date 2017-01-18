@@ -51,17 +51,39 @@ public class UserServlet extends HttpServlet {
 			String action = (String) request.getParameter("action");
 			switch (action) {
 		
-			case "list": {
-				JsonArray result = (JsonArray) gson.toJsonTree(usrManager.findAll());
-				response.setContentType("application/json");
-				response.setCharacterEncoding("UTF-8");
-				try (PrintWriter out = response.getWriter()) {
-					out.println(result.toString());
-					}
-				break;
-				}			
+				case "list": {
+					JsonArray result = (JsonArray) gson.toJsonTree(usrManager.findAll());
+					response.setContentType("application/json");
+					response.setCharacterEncoding("UTF-8");
+					try (PrintWriter out = response.getWriter()) {
+						out.println(result.toString());
+						}
+					break;
+				}	
+				case "name": {
+					String firstname = request.getParameter("firstname");
+					String lastname = request.getParameter("lastname");
+					System.out.println(firstname + lastname);
+					long id = Long.parseLong(request.getParameter("session"));
+					User user = usrManager.get(id, true);
+					user.setFullName(firstname + " " + lastname);
+					usrManager.update(user);
+					request.getRequestDispatcher("profile.jsp").forward(request, response);
+					break;
+				}	
+				case "tel": {
+					System.out.println("tel");
+					break;
+				}
+				case "address": {
+					System.out.println("address");
+					break;
+				}
+				case "pw": {
+					System.out.println("pw");
+					break;
+				}
 			}
-
 		}
 	}
 }
