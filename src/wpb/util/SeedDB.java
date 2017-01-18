@@ -10,6 +10,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.type.EnumType;
 
 import wpb.entity.FoodClass;
 import wpb.entity.Item;
@@ -18,6 +19,7 @@ import wpb.entity.Reservation;
 import wpb.entity.Role;
 import wpb.entity.Role.RoleEnum;
 import wpb.entity.RoomTable;
+import wpb.entity.RoomTable.CategoryType;
 import wpb.entity.TableOrder;
 import wpb.entity.TakeawayOrder;
 import wpb.entity.User;
@@ -213,9 +215,16 @@ public class SeedDB {
 			res.setStartDate(new Timestamp(date.getTime()));
 			res.setEndDate(new Timestamp(date.getTime() + 3600 * 1000));
 			res.setUser(userManager.get((long) 6, false));
-			Set<RoomTable> tableList = new HashSet<RoomTable>();
-			tableList.add(rtManager.get((long) 12, false));
+			
+			//Set<RoomTable> tableList = new HashSet<RoomTable>();
+			//tableList.add(rtManager.get((long) 12, false));
 			//res.setTableList(tableList);
+			RoomTable rt = new RoomTable();
+			rt.setName("Reservation test");
+			rt.setRoom("1");
+			rt.setSeats(3);
+			rt.setCategory(CategoryType.highend);
+			res.setRoomTable(rtManager.get((long) 12, false));
 			res.setComment("I'm a comment");
 
 			resManager.add(res);

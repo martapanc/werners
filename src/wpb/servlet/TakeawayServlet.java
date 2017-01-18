@@ -25,7 +25,7 @@ public class TakeawayServlet extends HttpServlet {
 	private static GenericManager<User, Long> userManager = null;
 	private static GenericManager<Item,Long> itemManager = null;
 	User user = new User();
-	Calendar cal = Calendar.getInstance();
+	
 	TakeawayOrder to = new TakeawayOrder();
 	OrderItem oi;
 	@Override
@@ -38,7 +38,7 @@ public class TakeawayServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		Calendar cal = Calendar.getInstance();
 		Map<String, String[]> paramMap = request.getParameterMap();
 		Map<String, Object> pMap = new HashMap<String, Object>();
 		String cart = (String) pMap.get("cart");
@@ -58,10 +58,12 @@ public class TakeawayServlet extends HttpServlet {
 		} else {
 
 			String idStr = (String) pMap.get("session");
+			System.out.println("current session: " + idStr);
 			if (!idStr.equals("")) {
 				Long id= Long.parseLong(idStr);
 				to.setGuest(userManager.get(id, true));
-			}
+			} else
+				to.setGuest(null);
 			
 			Timestamp ts1 = new Timestamp(cal.getTime().getTime());
 			to.setOrderDate(ts1);
@@ -88,7 +90,7 @@ public class TakeawayServlet extends HttpServlet {
 			
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");	
-			PrintWriter out = response.getWriter();
+			
 		}
 	}
 	
