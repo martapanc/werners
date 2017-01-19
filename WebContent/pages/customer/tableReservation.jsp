@@ -106,6 +106,25 @@
 					alert(jsAtt);
 
 			});
+			
+			var session = '${sessionScope.userSession.user.id}';
+
+			$.ajax({
+				type : 'POST',
+				cache : false,
+				url : "/restaurantProject/user",
+				data : {
+					"session" : session,
+					"action" : "getData"
+				},
+				success : function(response) {
+					var tel = response.phoneNumber;
+					$("#telephone").val(tel);
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
 	</script>
 </body>
 </html>

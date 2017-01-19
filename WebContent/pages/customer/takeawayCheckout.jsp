@@ -113,6 +113,27 @@
 				$('#ta-order-menu').addClass('active');
 			});
 		});
+		
+		var session = '${sessionScope.userSession.user.id}';
+
+		$.ajax({
+			type : 'POST',
+			cache : false,
+			url : "/restaurantProject/user",
+			data : {
+				"session" : session,
+				"action" : "getData"
+			},
+			success : function(response) {
+				var tel = response.phoneNumber;
+				var add = response.billingAddress;
+				$("#address").val(add);
+				$("#telephone").val(tel);
+			},
+			error : function(error) {
+				console.log(error);
+			}
+		});
 	</script>
 </body>
 </html>

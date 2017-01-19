@@ -103,7 +103,7 @@
 													<div class="input-group-addon">
 														<i class="fa fa-phone"></i>
 													</div>
-													<input name="telephone" type="text" pattern="^[0-9]{10}$" class="form-control"
+													<input name="telephone" id="telephone" type="text" pattern="^[0-9]{10}$" class="form-control"
 														value="${sessionScope.userSession.user.phoneNumber}">
 												</div>
 												<!-- /.input group -->

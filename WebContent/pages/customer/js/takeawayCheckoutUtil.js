@@ -130,7 +130,7 @@ $("#submit-btn")
 							"comment" : comment
 						},
 						complete : function(response) {
-							console.log("ok");
+							console.log(response);
 						},
 						error : function(error) {
 							console.log("error" + error);

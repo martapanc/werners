@@ -44,8 +44,7 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">Change User Name</h4>
 					</div>
-					<form method="post" action="user?action=name">
-						<input type="hidden" name="session" value="${sessionScope.userSession.user.id}" />
+					<form >
 						<div class="modal-body">
 							<label for="firstname"><strong>First name:</strong></label>
 							<input type="text" name="firstname" class="form-control" value="${sessionScope.userSession.user.getFirstName()}">
@@ -73,15 +72,14 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">Change Telephone Number</h4>
 					</div>
-					<form method="post" action="user?action=tel">
-						<input type="hidden" name="session" value="${sessionScope.userSession.user.id}" />
+					<form>
 						<div class="modal-body">
 							<label for="telephone"><strong>Telephone number:</strong></label>
-							<input type="number" name="telephone" class="form-control" value="${sessionScope.userSession.user.phoneNumber}"> 
+							<input type="text" id="tel-input" name="tel-input" class="form-control"> 
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Save changes</button>
+							<button type="button" class="btn btn-primary" id="submit-telephone-btn">Save changes</button>
 						</div>
 					</form>	
 				</div>
@@ -99,15 +97,14 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">Change Delivery Address</h4>
 					</div>
-					<form method="post" action="user?action=address">
-						<input type="hidden" name="session" value="${sessionScope.userSession.user.id}" />
+					<form id="address-form">
 						<div class="modal-body">
 							<label for="address"><strong>Address:</strong></label> 
-							<input type="text" name="address" class="form-control" value="${sessionScope.userSession.user.billingAddress}"> 
+							<input type="text" id="address-input" name="address-input" class="form-control"> 
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Save changes</button>
+							<button type="button" id="submit-address-btn" class="btn btn-primary">Save changes</button>
 						</div>
 					</form>
 				</div>
@@ -125,19 +122,19 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">Change Password</h4>
 					</div>
-					<form method="post" action="user?action=pw">
+					<form>
 						<input type="hidden" name="session" value="${sessionScope.userSession.user.id}" />
 						<div class="modal-body">
 							<label for="oldPass"><strong>Old Password:</strong></label>
-							<input type="password" name="oldPass" class="form-control" value="**********">
+							<input type="password" id="oldPass" class="form-control" placeholder="**********">
 							<label for="newPass1"><strong>New Password:</strong></label>
-							<input type="password" name="newPass1" class="form-control">
+							<input type="password" id="newPass1" class="form-control" placeholder="**********">
 							<label for="newPass2"><strong>Confirm New Password:</strong></label>
-							<input type="password" name="newPass2" class="form-control">
+							<input type="password" id="newPass2" class="form-control" placeholder="**********">
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Save changes</button>
+							<button type="button" id="submit-pw-btn" class="btn btn-primary">Save changes</button>
 						</div>
 					</form>
 				</div>
@@ -158,7 +155,6 @@
 				<ol class="breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
 					<li class="active">Profile</li>
-
 				</ol>
 			</section>
 
@@ -172,18 +168,16 @@
 							<div class="box-body box-profile">
 								<img class="profile-user-img img-responsive img-circle" src="${sessionScope.userSession.user.avatar}"
 									alt="User profile picture">
-
 								<h3 class="profile-username text-center">${sessionScope.userSession.user.fullName}</h3>
-
 								<p class="text-muted text-center">${sessionScope.userSession.user.role.name}</p>
-
 								<div class="col-md-8 col-md-offset-2">
 									<table class="table table-striped">
 										<tbody>
 											<tr>
 												<td><strong>Full name</strong></td>
 												<td>${sessionScope.userSession.user.fullName}</td>
-												<td><button class="btn btn-primary" data-toggle="modal" data-target="#nameModal">Edit</button></td>
+												
+												<td></td>
 											</tr>
 											<tr>
 												<td><strong>Role</strong></td>
@@ -197,12 +191,12 @@
 											</tr>
 											<tr>
 												<td><strong>Telephone Number</strong></td>
-												<td>${sessionScope.userSession.user.phoneNumber}</td>
+												<td id="tel-td"></td>
 												<td><button class="btn btn-primary" data-toggle="modal" data-target="#telModal">Edit</button></td>
 											</tr>
 											<tr>
 												<td><strong>Billing Address</strong></td>
-												<td>${sessionScope.userSession.user.billingAddress}</td>
+												<td id="add-td"></td>
 												<td><button class="btn btn-primary" data-toggle="modal" data-target="#addressModal">Edit</button></td>
 											</tr>
 											<tr>
@@ -260,7 +254,127 @@
 	<!-- ChartJS 1.0.1 -->
 	<script src="${pageContext.request.contextPath}/plugins/chartjs/Chart.min.js"></script>
 	<script>
+		var session = '${sessionScope.userSession.user.id}';
+
+		$.ajax({
+			type : 'POST',
+			cache : false,
+			url : "/restaurantProject/user",
+			data : {
+				"session" : session,
+				"action" : "getData"
+			},
+			success : function(response) {
+				var tel = response.phoneNumber;
+				var add = response.billingAddress;
+				$("#tel-td").html(tel);
+				$("#tel-input").val(tel);
+				$("#add-td").html(add);
+				$("#address-input").val(add);
+			},
+			error : function(error) {
+				console.log(error);
+			}
+		});
+
+		/* Address Modal functions */
+		$("#submit-address-btn").click(function() {
+			var address = document.getElementById("address-input").value;
+			var telRE = /^[0-9]{10}$/;
+			var re = /^[a-zA-Z0-9- ,.]{5,100}$/;
+
+			if (re.test(address)) {
+				$.ajax({
+					type : "POST",
+					cache : false,
+					url : "/restaurantProject/user",
+					data : {
+						"session" : session,
+						"address" : address,
+						"action" : "address"
+					},
+					success : function(response) {
+						console.log("resp: " + response);
+						$("#add-td").html(response);
+						$("#address-input").val(response);
+						$("#addressModal").modal("hide");
+					},
+					error : function(error) {
+						console.log(error);
+					}
+				});
+				return false;
+			} else
+				alert("Please insert a valid billing address");
+		});
 		
+		/* Telephone Modal functions */
+		$("#submit-telephone-btn").click(function() {
+			var telephone = document.getElementById("tel-input").value;
+			var re = /^[0-9]{10}$/;
+			
+			if (re.test(telephone)) {
+				$.ajax({
+					type : "POST",
+					cache : false,
+					url : "/restaurantProject/user",
+					data : {
+						"session" : session,
+						"telephone" : telephone,
+						"action" : "telephone"
+					},
+					success : function(response) {
+						console.log("resp: " + response);
+						$("#tel-td").html(response);
+						$("#telephone-input").val(response);
+						$("#telModal").modal("hide");
+					},
+					error : function(error) {
+						console.log(error);
+					}
+				});
+				return false;
+			} else
+				alert("Please insert a valid phone number (ex: 01234567890)");
+		});
+		
+		/* Password Modal functions */
+		$("#submit-pw-btn").click(function() {
+			var oldPw = document.getElementById("oldPass").value;
+			var newPass1 = document.getElementById("newPass1").value;
+			var newPass2 = document.getElementById("newPass2").value;
+			if (oldPw != "" && newPass1 == newPass2 && newPass1 != "") {
+				$.ajax({
+					type : "POST",
+					cache : false,
+					url : "/restaurantProject/user",
+					data : {
+						"session" : session,
+						"oldPw" : oldPw,
+						"newPass1": newPass1,
+						"newPass2": newPass2,
+						"action" : "pw"
+					},
+					success : function(response) {
+						alert(response);
+						$("#passModal").modal("hide");
+					},
+					error : function(error) {
+						console.log(error);
+					}
+				});
+				$("#oldPass").val("").attr("placeholder", "**********");
+				$("#newPass1").val("").attr("placeholder", "**********");
+				$("#newPass2").val("").attr("placeholder", "**********");
+				return false;
+			} else {
+				alert("Passwords do not match and/or no input can be null.");
+				$("#oldPass").val("").attr("placeholder", "**********");
+				$("#newPass1").val("").attr("placeholder", "**********");
+				$("#newPass2").val("").attr("placeholder", "**********");
+			}
+			
+		});
 	</script>
 </body>
 </html>

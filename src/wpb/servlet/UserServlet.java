@@ -10,14 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
+import com.google.gson.*;
 
 import wpb.entity.User;
 import wpb.manager.GenericManager;
+import wpb.util.BCrypt;
 import wpb.util.HibernateUtil;
 
 /**
@@ -71,16 +68,71 @@ public class UserServlet extends HttpServlet {
 					request.getRequestDispatcher("profile.jsp").forward(request, response);
 					break;
 				}	
-				case "tel": {
-					System.out.println("tel");
+				case "telephone": {
+					String tel = request.getParameter("telephone");
+					long id = Long.parseLong(request.getParameter("session"));
+					User user = usrManager.get(id, true);
+					user.setPhoneNumber(tel);
+					usrManager.update(user);
+					try (PrintWriter out = response.getWriter()) {
+						out.println(tel);
+					}
+					//request.setAttribute("newTel", tel);
+					//request.getRequestDispatcher("profile.jsp").forward(request, response);
 					break;
 				}
 				case "address": {
-					System.out.println("address");
+					String add = request.getParameter("address");
+					long id = Long.parseLong(request.getParameter("session"));
+
+					User user = usrManager.get(id, true);
+					user.setBillingAddress(add);
+					System.out.println(add + " " + id + " " + user);
+					usrManager.update(user);
+					try (PrintWriter out = response.getWriter()) {
+						out.println(add);
+					}
+					
 					break;
 				}
 				case "pw": {
-					System.out.println("pw");
+					String old = request.getParameter("oldPw");
+					String new1 = request.getParameter("newPass1");
+					String new2 = request.getParameter("newPass2");
+					long id = Long.parseLong(request.getParameter("session"));
+					User user = usrManager.get(id, true);
+					if(new1.equals(new2) && BCrypt.checkpw(old, user.getPassword())) {
+						System.out.println("pw changed");
+						String hashPassword = BCrypt.hashpw(new1, BCrypt.gensalt());
+						user.setPassword(hashPassword);
+						usrManager.update(user);
+						try (PrintWriter out = response.getWriter()) {
+							out.println("Your password was successfully changed!");
+						}
+					} else {
+						System.out.println("pw not changed " + new1 + " " + new2);
+						try (PrintWriter out = response.getWriter()) {
+							out.println("You must insert your current password in order to change it.");
+						}
+					}
+					break;
+				}
+				
+				case "getData": {
+					long id = Long.parseLong(request.getParameter("session"));
+					JsonParser parser = new JsonParser();
+					Gson gson = new Gson();
+					
+					User user = usrManager.get(id, true);
+					String jUser = gson.toJson(user);
+					JsonObject o = parser.parse(jUser).getAsJsonObject();
+					
+					response.setContentType("application/json");
+					response.setCharacterEncoding("UTF-8");
+					try (PrintWriter out = response.getWriter()) {
+						out.println(o);
+					}
+					System.out.println(o);
 					break;
 				}
 			}
