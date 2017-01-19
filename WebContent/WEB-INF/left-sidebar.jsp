@@ -18,17 +18,17 @@
 				<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 			</div>
 		</div>
-		<!-- search form -->
+		<!-- search form 
 		<form action="#" method="get" class="sidebar-form">
 			<div class="input-group">
 				<input type="text" name="q" class="form-control" placeholder="Search..."> <span class="input-group-btn">
-				<!--<input type="text" name="q" class="form-control" placeholder="not implemented yet..."> <span class="input-group-btn"> That was embarassing...-->
+				<input type="text" name="q" class="form-control" placeholder="not implemented yet..."> <span class="input-group-btn"> That was embarassing...
 					<button type="submit" name="search" id="search-btn" class="btn btn-flat">
 						<i class="fa fa-search"></i>
 					</button>
 				</span>
 			</div>
-		</form>
+		</form>-->
 		<!-- /.search form -->
 		<!-- sidebar menu: : style can be found in sidebar.less -->
 		<ul class="sidebar-menu">
@@ -67,31 +67,19 @@
 			<c:if test="<%=accessManager.isAllowed(session, Section.CUSTOMER)%>">
 				<li id="reservation-menu">
 					<a href="${pageContext.request.contextPath}/pages/customer/tableReservation.jsp"> 
-						<i class="fa fa-cutlery"></i> Table Reservation
+						<i class="fa fa-cutlery"></i> <span>Table Reservation</span>
 					</a>
 				</li>
 				<li id="ta-order-menu">
 					<a href="${pageContext.request.contextPath}/pages/customer/takeawayOrder.jsp">
-						<i class="fa fa-paper-plane-o"></i> Take-Away Order
+						<i class="fa fa-paper-plane-o"></i> <span>Take-Away Order</span>
 					</a>
 				</li>
 			
-				<!-- <li id="customer-menu" class="treeview"><a href="#"> <i class="fa fa-user"></i> <span>Customer View</span> <span
-						class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i>
-					</span>
-				</a>
-					<ul class="treeview-menu">
-						<li><a href="${pageContext.request.contextPath}/pages/customer/tableReservation.jsp"> <i class="fa fa-cutlery"></i>Table
-								Reservation
-						</a></li>
-						<li><a href="${pageContext.request.contextPath}/pages/customer/takeawayOrder.jsp"> <i class="fa fa-paper-plane-o"></i>Take-Away
-								Order
-						</a></li>
-
-					</ul></li>-->
+				
 			</c:if>
 			<li class="header">HELP</li>
-			<li><a href="${pageContext.request.contextPath}/documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+			<li><a href="${pageContext.request.contextPath}/pages/documentation.jsp"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
 		</ul>
 	</section>
 	<!-- /.sidebar -->

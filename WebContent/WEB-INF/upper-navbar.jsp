@@ -236,10 +236,17 @@
               </li>
             </ul>
           </li>
-          <!-- Control Sidebar Toggle Button -->
+          <!-- Control Sidebar Toggle Button 
           <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+            <a href="#" data-toggle="control-sidebar"><i class=""></i></a>
+          </li>-->
+          <li>
+          	<a href="${pageContext.request.contextPath}/profile.jsp"> <i class="fa fa-gears"></i> Profile</a>
           </li>
+          <li>
+          	<a href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out"></i> Logout</a>
+          </li>
+          
         </ul>
       </div>
 
