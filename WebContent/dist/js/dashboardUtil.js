@@ -17,27 +17,27 @@ $(function () {
   var salesChart = new Chart(salesChartCanvas);
 
   var salesChartData = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: ["August", "September","October", "November", "December", "January"],
     datasets: [
       {
-        label: "Electronics",
+        label: "Table Reservations",
         fillColor: "rgb(210, 214, 222)",
         strokeColor: "rgb(210, 214, 222)",
         pointColor: "rgb(210, 214, 222)",
         pointStrokeColor: "#c1c7d1",
         pointHighlightFill: "#fff",
         pointHighlightStroke: "rgb(220,220,220)",
-        data: [65, 59, 80, 81, 56, 55, 40]
+        data: [76, 81, 75, 68, 97, 81]
       },
       {
-        label: "Digital Goods",
-        fillColor: "rgba(60,141,188,0.9)",
-        strokeColor: "rgba(60,141,188,0.8)",
+        label: "Takeaway Orders",
+        fillColor: "rgba(60,141,188,0.7)",
+        strokeColor: "rgba(60,141,188,0.7)",
         pointColor: "#3b8bba",
         pointStrokeColor: "rgba(60,141,188,1)",
         pointHighlightFill: "#fff",
         pointHighlightStroke: "rgba(60,141,188,1)",
-        data: [28, 48, 40, 19, 86, 27, 90]
+        data: [59, 63, 88, 49, 69, 78]
       }
     ]
   };
@@ -96,7 +96,7 @@ $(function () {
   var pieChart = new Chart(pieChartCanvas);
   var PieData = [
     {
-      value: 701,
+      value: 1001,
       color: "#f56f54",
       highlight: "#f56954",
       label: "Chrome"

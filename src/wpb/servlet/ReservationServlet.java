@@ -71,7 +71,7 @@ public class ReservationServlet extends HttpServlet {
 			switch (action) {
 			case "list": {
 				result = (JsonArray) new Gson().toJsonTree(resManager.findAll());
-				System.out.println(resManager.findAll());
+				//System.out.println(resManager.findAll());
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				try (PrintWriter out = response.getWriter()) {

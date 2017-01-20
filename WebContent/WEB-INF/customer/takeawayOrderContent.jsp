@@ -3,7 +3,7 @@
 
 				<div class="row">
 					<div class="col-md-8">
-						<div class="box box-info">
+						<div class="box box-solid box-primary">
 							<div class="box-header with-border">
 								<h3 class="box-title order-minus">Take-Away Order</h3>
 							</div>
@@ -73,7 +73,7 @@
 					<!-- /.box -->
 
 					<div class="col-md-4 ">
-						<div class="box box-info">
+						<div class="box box-solid box-primary">
 							<div class="box-header with-border">
 								<h3 class="box-title">
 									<span class="fa fa-shopping-cart"></span> &nbsp; My Order
