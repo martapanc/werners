@@ -171,10 +171,10 @@ img{
   background-color: transparent;
 }
 .navbar-nav > li > .dropdown-menu {
-  background-color: #48575a; 
+  background-color: transparent;
 }
 .navbar-nav > li > .dropdown-menu:before { 
-  border-bottom: 15px solid #48575a; 
+  border-bottom: 15px solid transparent; 
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
   content: "";

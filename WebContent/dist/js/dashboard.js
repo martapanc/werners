@@ -82,7 +82,8 @@ $(function() {
 	// - MONTHLY SALES CHART -
 	// -----------------------
 	// Get context with jQuery - using jQuery's .get() method.
-	var salesChartId = document.getElementById('#salesChart'); //Check if the element exists (it doesn't for some user categories) to avoid errors
+	var salesChartId = document.getElementById('salesChart'); //Check if the element exists (it doesn't for some user categories) to avoid errors
+	
 	if (salesChartId !== null) {
 		var salesChartCanvas = $("#salesChart").get(0).getContext("2d");
 		// This will get the first returned node in the jQuery collection.

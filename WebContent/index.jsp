@@ -28,7 +28,7 @@
 <!-- smooth animate css file -->
 <link rel="stylesheet" href="dist/css/animate.css">
 <!-- Main structure css file -->
-<link href="dist/css/main/style.css" rel="stylesheet">
+<link href="dist/css/main/dashboard-style.css" rel="stylesheet">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,6 +36,12 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  
+  <style>
+  	.navbar-nav > li > .dropdown-menu {
+    	background-color: white; 
+	}
+  </style>
 </head>
 <body class="hold-transition skin-red sidebar-mini">
 <div class="wrapper">
@@ -68,7 +74,7 @@
 	<!-- ChartJS 1.0.1 -->
 	<script src="plugins/chartjs/Chart.min.js"></script>
 	<!-- Dashboard functions -->
-	<script src="dist/js/dashboardUtil.js"></script>
+	<script src="dist/js/dashboard.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="dist/js/demo.js"></script>
 	<!-- Page specific script -->
