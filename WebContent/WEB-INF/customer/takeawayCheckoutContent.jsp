@@ -1,3 +1,9 @@
+<style>
+	.table-responsive, .box-footer {
+		margin-left: 15px;
+	}
+</style>
+
 <!-- Main content -->
 			<section class="invoice"> <!-- title row -->
 			<div class="row">
@@ -165,14 +171,7 @@
 						</div>
 					</div>
 					<!-- /.box-body -->
-					<div class="footer col-sm-12">
-						<button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-							<i class="fa fa-download"></i> Generate PDF
-						</button>
-						<button type="button" class="btn btn-default pull-right" style="margin-right: 5px;">
-							<i class="fa fa-print"></i> Print
-						</button>
-					</div>
+					
 				</div>
 				<!-- /.box -->
 			</div>

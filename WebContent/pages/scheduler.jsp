@@ -16,12 +16,6 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   
-  <!-- FullCalendar 2.2.5-->
-   <!--
-  <link rel="stylesheet" href="../plugins/fullcalendar/fullcalendar.min.css">
-  <link rel="stylesheet" href="../plugins/fullcalendar/fullcalendar.print.css" media="print"> 
-  --!> 
-  
   <!-- FullCalendar & Scheduler 3.1.0-->
   <link rel="stylesheet" href="../plugins/fullcalendar/fullcalendar.min.css">
   <link rel="stylesheet" href="../plugins/scheduler/scheduler.min.css">
