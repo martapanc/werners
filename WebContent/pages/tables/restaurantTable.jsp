@@ -142,7 +142,8 @@
               data-resizable="true"
               data-show-toggle="true"
               data-toolbar=".toolbar"
-              data-show-export="true">
+              data-show-export="true"
+              data-page-size="15">
               	<thead>
     				<tr>
     					<th data-field="state" data-checkbox="true"></th>

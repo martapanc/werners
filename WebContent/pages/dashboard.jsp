@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +22,9 @@
 <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+
+<!-- Bootstrap table -->
+<link rel="stylesheet" href="../plugins/bootstrap-table/bootstrap-table.css">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -35,7 +39,9 @@
   
  <jsp:include page="../WEB-INF/left-sidebar.jsp" />
 
-  <jsp:include page="../WEB-INF/content-wrapper.jsp" />
+<jsp:include page="../WEB-INF/content-wrapper.jsp" />
+  
+  
 
   <jsp:include page="../WEB-INF/footer.html" />
   
@@ -59,10 +65,49 @@
 	<!-- ChartJS 1.0.1 -->
 	<script src="../plugins/chartjs/Chart.min.js"></script>
 	<!-- Dashboard functions -->
-	<script src="../dist/js/dashboardUtil.js"></script>
+	<script src="../dist/js/dashboard.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="../dist/js/demo.js"></script>
-
+	
+	<!-- Page specific script -->
+	<script src="../plugins/bootstrap-table/bootstrap-table.js"></script>
+	<!-- put your locale files after bootstrap-table.js -->
+	<script src="../plugins/bootstrap-table/locale/bootstrap-table-en-US.js"></script>
+	<!-- extensions for bootstrap-table -->
+	<script src="../plugins/bootstrap-table/extensions/tableExport-jquery/tableExport.js"></script>
+	<script src="../plugins/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
+	<script src="../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
+	<script src="../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
+	<!-- scripts for form validation ad notifications -->
+	<script src="../plugins/notify/bootstrap-notify.js"></script>
+	<script src="../plugins/validator/validator.min.js"></script>
+	<!-- custom scripts -->
+	<script src="../pages/tables/tableutil.js"></script>
+	<script src="../pages/tables/crud.js"></script>
+	<script>
+	var ctx = "${pageContext.request.contextPath}";
+	$.ajax({
+		type : 'POST',
+		cache : false,
+		url : "../user",
+		data : {
+			"action" : "list"
+		},
+		success : function(response) {
+			$("#db-user-list").html("");
+			response.forEach(function(entry) {
+				$("#db-user-list").append("<li><img src='" + ctx + "/" + entry.avatar + "' alt='User Image'>" 
+						+ "<a class='users-list-name' href='#'>" + entry.fullName + "</a> <span class='users-list-date'>" 
+						+ entry.creationDate + "</span></li>");
+			});
+			
+		},
+		error : function(error) {
+			console.log(error);
+		}
+	});
+	
+	</script>
 </body>
 </html>
 
