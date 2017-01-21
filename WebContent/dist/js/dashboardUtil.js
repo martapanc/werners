@@ -1,10 +1,11 @@
 $(function () {
 
   'use strict';
-
+  var turl = "/restaurantProject/takeaway";
+  var ctx = "${pageContext.request.contextPath}";
   //Takeaway Order Table 
   $.ajax({
-		url : '../takeaway',
+		url : turl,
 		type : 'post',
 		data : {
 			"action" : "list"

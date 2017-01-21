@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,7 +61,47 @@
 	<script src="dist/js/dashboardUtil.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="dist/js/demo.js"></script>
-
+	<!-- Page specific script -->
+	<script src="plugins/bootstrap-table/bootstrap-table.js"></script>
+	<!-- put your locale files after bootstrap-table.js -->
+	<script src="plugins/bootstrap-table/locale/bootstrap-table-en-US.js"></script>
+	<!-- extensions for bootstrap-table -->
+	<script src="plugins/bootstrap-table/extensions/tableExport-jquery/tableExport.js"></script>
+	<script src="plugins/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
+	<script src="plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
+	<script src="plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
+	<!-- scripts for form validation ad notifications -->
+	<script src="plugins/notify/bootstrap-notify.js"></script>
+	<script src="plugins/validator/validator.min.js"></script>
+	<!-- custom scripts -->
+	<script src="pages/tables/tableutil.js"></script>
+	<script src="pages/tables/crud.js"></script>
+	
+	
+	<script type="text/javascript">
+	var ctx = "${pageContext.request.contextPath}";
+	$.ajax({
+		type : 'POST',
+		cache : false,
+		url : ctx + "/user",
+		data : {
+			"action" : "list"
+		},
+		success : function(response) {
+			$("#db-user-list").html("");
+			response.forEach(function(entry) {
+				$("#db-user-list").append("<li><img src='" + ctx + "/" + entry.avatar + "' alt='User Image'>" 
+						+ "<a class='users-list-name' href='#'>" + entry.fullName + "</a> <span class='users-list-date'>" 
+						+ entry.creationDate + "</span></li>");
+			});
+			
+		},
+		error : function(error) {
+			console.log(error);
+		}
+	});
+	
+	</script>
 </body>
 </html>
 
