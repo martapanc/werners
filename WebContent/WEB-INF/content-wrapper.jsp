@@ -4,19 +4,110 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean id="accessManager" scope="request" class="wpb.util.AccessManager" />
 
+<style>
+	.content-header {
+		padding: 15px;
+	}
+	.slider_area {
+		margin-top: 10px;
+	}
+</style>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-	<section class="content-header">
-		<h1>Dashboard</h1>
-		<ol class="breadcrumb">
-			<li><a href="${pageContext.request.contextPath}/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active">Dashboard</li>
-		</ol>
-	</section>
 
+
+	<c:if test="<%=!accessManager.isAllowed(session, Section.DASHBOARD)%>">
+		<!-- Content Header (Page header) CUSTOMER VIEW -->
+		<div class="col-md-12">
+			<section class="content-header">
+				<h1>Welcome to your personal account!</h1>
+				<ol class="breadcrumb">
+					<li><a href="${pageContext.request.contextPath}/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li class="active">Dashboard</li>
+				</ol>
+			</section>
+		</div>
+		<div class="col-md-8">
+			<div class="box box-info">
+				<div class="box-body">
+					<h3>From here you can </h3>
+						<ul>
+							<li><h4>&emsp;<i class="fa fa-cutlery"></i>&emsp;&emsp;
+								<a href="${pageContext.request.contextPath}/pages/customer/tableReservation.jsp">reserve a table</a></h4>
+							</li>
+							<li><h4>&emsp;<i class="fa fa-paper-plane"></i>&emsp;&emsp;
+								<a href="${pageContext.request.contextPath}/pages/customer/takeawayOrder.jsp">make a takeaway order</a></h4>
+							</li>
+							<li><h4>&emsp;<i class="fa fa-gears"></i>&emsp;&emsp;
+								<a href="${pageContext.request.contextPath}/profile.jsp">manage your account</a></h4>
+							</li>
+						</ul>
+				</div>
+			</div>
+		</div>
+	</c:if>
+
+	<c:if test="<%=accessManager.isAllowed(session, Section.DASHBOARD)%>">
+		<!-- Content Header (Page header) OTHER USERS VIEW -->
+		<section class="content-header">
+			<h1>Dashboard</h1>
+			<ol class="breadcrumb">
+				<li><a href="${pageContext.request.contextPath}/pages/dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
+				<li class="active">Dashboard</li>
+			</ol>
+		</section>
+	</c:if>
 	<!-- Main content -->
-	<section class="content">
+	<section class="content slider">
+		<!-- ONLY VISIBLE TO CUSTOMERS -->
+		<c:if test="<%=!accessManager.isAllowed(session, Section.DASHBOARD)%>">
+			<!-- Info boxes -->
+			<div class="row">
+				<div class="col-lg-12 col-md-12">
+					<div class="slider_area">
+						<!-- Start super slider -->
+						<div id="slides">
+							<ul class="slides-container">
+
+								<li><img src="dist/img/fast-food.jpg" alt="img">
+									<div class="slider_caption">
+										<h2>Taste the quality</h2>
+										<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at
+											its layout.The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.Many desktop
+											publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search</p>
+										<a class="slider_btn" href="#">Know More</a>
+									</div></li>
+								<!-- Start single slider-->
+								<li><img src="dist/img/restaurant-2.jpg" alt="img">
+									<div class="slider_caption">
+										<h2>Largest &amp; Beautiful Environment</h2>
+										<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at
+											its layout.</p>
+										<a class="slider_btn" href="#">Know More</a>
+									</div></li>
+								<!-- Start single slider-->
+								<li><img src="dist/img/photo1.png" alt="img">
+									<div class="slider_caption">
+										<h2>Find out you in better way</h2>
+										<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at
+											its layout.The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.Many desktop
+											publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search</p>
+										<a class="slider_btn" href="#">Know More</a>
+									</div></li>
+							</ul>
+							<nav class="slides-navigation">
+								<a href="#" class="next"></a> <a href="#" class="prev"></a>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.row -->
+		</c:if>
+		<!-- / .ONLY VISIBLE TO CUSTOMERS  -->
+
+		<!-- from now on - ONLY VISIBLE TO OTHER USERS -->
 		<c:if test="<%=accessManager.isAllowed(session, Section.DASHBOARD)%>">
 			<!-- Info boxes -->
 			<div class="row">
@@ -311,10 +402,10 @@
 						<!-- /.box-header -->
 						<div class="box-body">
 							<div class="table-responsive">
-								<table id="res-table" data-toggle="table" data-url="${pageContext.request.contextPath}/reservation" data-method="post" data-query-params='action=list'
-									data-content-type="application/x-www-form-urlencoded" data-striped="true" data-pagination="true"
-									data-pagination-loop="true" data-page-size="10" data-resizable="false" data-sort-name="id" data-sort-order="desc"
-									data-page-list="[10]">
+								<table id="res-table" data-toggle="table" data-url="${pageContext.request.contextPath}/reservation" data-method="post"
+									data-query-params='action=list' data-content-type="application/x-www-form-urlencoded" data-striped="true"
+									data-pagination="true" data-pagination-loop="true" data-page-size="10" data-resizable="false" data-sort-name="id"
+									data-sort-order="desc" data-page-list="[10]">
 									<thead>
 										<tr>
 											<th data-field="id" data-sortable="true">Id</th>
@@ -350,10 +441,10 @@
 						<!-- /.box-header -->
 						<div class="box-body">
 							<div class="table-responsive">
-								<table id="ta-table" data-detail-view="true" data-striped="true" data-url="${pageContext.request.contextPath}/takeaway" data-method="post"
-									data-query-params='action=list' data-content-type="application/x-www-form-urlencoded" data-pagination="true"
-									data-pagination-loop="false" data-page-size="10" data-resizable="false" data-sort-name="id" data-sort-order="desc"
-									data-detail-formatter="detailFormatter" data-page-list="[10]">
+								<table id="ta-table" data-detail-view="true" data-striped="true" data-url="${pageContext.request.contextPath}/takeaway"
+									data-method="post" data-query-params='action=list' data-content-type="application/x-www-form-urlencoded"
+									data-pagination="true" data-pagination-loop="false" data-page-size="10" data-resizable="false" data-sort-name="id"
+									data-sort-order="desc" data-detail-formatter="detailFormatter" data-page-list="[10]">
 									<thead>
 										<tr>
 											<th data-field="order_id" data-sortable="true">ID</th>

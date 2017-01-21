@@ -20,16 +20,18 @@ public class AccessManager {
 		HashSet<Section> adminSections = new HashSet<Section>();
 		adminSections.add(Section.TABLES);
 		adminSections.add(Section.SCHEDULER);
+		adminSections.add(Section.DASHBOARD);
 		
 		HashSet<Section> customerSections = new HashSet<Section>();
 		customerSections.add(Section.CUSTOMER);
-		customerSections.add(Section.CALENDAR);
 		
 		HashSet<Section> waiterSections = new HashSet<Section>();
 		waiterSections.add(Section.SCHEDULER);
+		waiterSections.add(Section.DASHBOARD);
 		
 		HashSet<Section> dbManagerSections = new HashSet<Section>();
 		dbManagerSections.add(Section.TABLES);
+		dbManagerSections.add(Section.DASHBOARD);
 
 		permissions.put(RoleEnum.ADMIN, adminSections);
 		permissions.put(RoleEnum.CUSTOMER, customerSections);

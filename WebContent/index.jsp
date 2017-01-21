@@ -20,6 +20,16 @@
 <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+
+<!-- Superslide css file-->
+<link rel="stylesheet" href="dist/css/superslides.css">
+<!-- Slick slider css file -->
+<link href="dist/css/slick.css" rel="stylesheet">
+<!-- smooth animate css file -->
+<link rel="stylesheet" href="dist/css/animate.css">
+<!-- Main structure css file -->
+<link href="dist/css/main/style.css" rel="stylesheet">
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -77,6 +87,19 @@
 	<script src="pages/tables/tableutil.js"></script>
 	<script src="pages/tables/crud.js"></script>
 	
+	
+	<!-- slick slider -->
+	<script src="dist/js/main/slick.min.js"></script>
+	<!-- superslides slider -->
+	<script src="dist/js/main/jquery.easing.1.3.js"></script>
+	<script src="dist/js/main/jquery.animate-enhanced.min.js"></script>
+	<script src="dist/js/main/jquery.superslides.min.js" type="text/javascript" charset="utf-8"></script>
+	<!-- for circle counter -->
+	<script src='https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js'></script>
+	<!-- Gallery slider -->
+	<script type="text/javascript" type="text/javascript" src="dist/js/main/jquery.tosrus.min.all.js"></script>
+	<!-- Custom js-->
+	<script src="dist/js/main/homepageUtil.js"></script>
 	
 	<script type="text/javascript">
 	var ctx = "${pageContext.request.contextPath}";
