@@ -136,7 +136,7 @@
 								<!-- /. box body -->
 								<div class="box-footer">
 									<button type="submit" id="submit-btn" class="btn btn-primary">Confirm</button>
-									<input type="reset" class="btn btn-warning" value="Reset" />
+									<button type="reset" id="reset-btn" class="btn btn-warning">Reset</button>
 								</div>
 							</form>
 						</div>

@@ -77,8 +77,6 @@
 								</thead>
 							</table>
 
-
-
 						</div>
 						<!-- /. box -->
 					</div>
@@ -110,7 +108,7 @@
 	<script src="../../dist/js/app.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="../../dist/js/demo.js"></script>
-	<!-- Page specific script -->
+	<!-- Page specific script --> 
 	<script src="../../plugins/bootstrap-table/bootstrap-table.js"></script>
 	<!-- put your locale files after bootstrap-table.js -->
 	<script src="../../plugins/bootstrap-table/locale/bootstrap-table-en-US.js"></script>
@@ -119,6 +117,7 @@
 	<script src="../../plugins/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
 	<script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
 	<script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
+	<script src="../../plugins/bootstrap-table/extensions/group-by-v2/bootstrap-table-group-by.min.js"></script>
 	<script src="../../pages/tables/tableutil.js"></script>
 	<script>
 

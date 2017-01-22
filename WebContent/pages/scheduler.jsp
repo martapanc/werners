@@ -9,6 +9,7 @@
   <link rel="icon" href="../dist/img/favicon.png">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
@@ -28,6 +29,7 @@
   
   <!-- Pace style -->
   <link rel="stylesheet" href="../plugins/pace/pace.min.css">
+  <link rel="stylesheet" href="../plugins/jQueryUI/jquery-ui.min.css">
   
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -52,7 +54,7 @@
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="../pages/dashboard.jsp"><i class="fa fa-apple"></i> Home</a></li>
+        <li><a href="../pages/dashboard.jsp"><i class="fa fa-home"></i> Home</a></li>
         <li class="active">Scheduler</li>
       </ol>
     </section>
@@ -140,8 +142,29 @@
 		},
 		defaultView: 'timelineDay',
 		views: {
+			month: { 
+	            titleFormat: 'MMMM YYYY',
+	            columnFormat: 'dddd'
+	        },
+	        agendaWeek: {
+	        	titleFormat: 'MMM DD, YYYY',
+	        	columnFormat: 'ddd M/D'
+	        },
+	        timelineThreeDays: {
+				type: 'timeline',
+				duration: { days: 3 }
+			}
 		},
-		resourceLabelText: 'Tables',
+		resourceColumns: [
+			{
+				labelText: 'Tables',
+				field: 'title'
+			},
+			{
+				labelText: 'Seats',
+				field: 'seats'
+			}
+		],
 		resources: {
 	        url: '../roomTable?action=listForScheduler',
 	        type: 'POST'

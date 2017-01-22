@@ -195,7 +195,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
 <!-- Page specific script --> 
-<script src="../../plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../../plugins/bootstrap-table/bootstrap-table.js"></script>
 <!-- put your locale files after bootstrap-table.js -->
 <script src="../../plugins/bootstrap-table/locale/bootstrap-table-en-US.js"></script>
 <!-- extensions for bootstrap-table -->
