@@ -127,6 +127,7 @@
 			success : function(response) {
 				var tel = response.phoneNumber;
 				var add = response.billingAddress;
+				var comment = response.comment;
 				$("#address").val(add);
 				$("#telephone").val(tel);
 			},

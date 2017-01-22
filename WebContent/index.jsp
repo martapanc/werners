@@ -30,6 +30,8 @@
 <!-- Main structure css file -->
 <link href="dist/css/main/dashboard-style.css" rel="stylesheet">
 
+<!-- Bootstrap table -->
+<link rel="stylesheet" href="plugins/bootstrap-table/bootstrap-table.css">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -38,10 +40,14 @@
   <![endif]-->
   
   <style>
-  	.navbar-nav > li > .dropdown-menu {
-    	background-color: white; 
+	.navbar-nav>li>.dropdown-menu {
+		background-color: white;
 	}
-  </style>
+	
+	.glyphicon-plus {
+		color: #3C8DBC !important;
+	}
+</style>
 </head>
 <body class="hold-transition skin-red sidebar-mini">
 <div class="wrapper">
@@ -81,17 +87,14 @@
 	<script src="plugins/bootstrap-table/bootstrap-table.js"></script>
 	<!-- put your locale files after bootstrap-table.js -->
 	<script src="plugins/bootstrap-table/locale/bootstrap-table-en-US.js"></script>
-	<!-- extensions for bootstrap-table -->
-	<script src="plugins/bootstrap-table/extensions/tableExport-jquery/tableExport.js"></script>
-	<script src="plugins/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
 	<script src="plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
-	<script src="plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
+	
 	<!-- scripts for form validation ad notifications -->
 	<script src="plugins/notify/bootstrap-notify.js"></script>
 	<script src="plugins/validator/validator.min.js"></script>
 	<!-- custom scripts -->
 	<script src="pages/tables/tableutil.js"></script>
-	<script src="pages/tables/crud.js"></script>
+	
 	
 	
 	<!-- slick slider -->
