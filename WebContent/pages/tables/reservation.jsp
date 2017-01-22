@@ -63,7 +63,7 @@
 								<table id="item-table" data-toggle="table" data-url="../../reservation" data-method="post" data-query-params='action=list'
 									data-content-type="application/x-www-form-urlencoded" data-striped="true" data-pagination="true"
 									data-pagination-loop="false" data-page-size="25" data-show-refresh="true" data-search="true" data-resizable="true"
-									data-show-toggle="true" data-show-export="true">
+									data-show-toggle="true" data-show-export="true" data-sort-name="id" data-sort-order="asc">
 									<thead>
 										<tr>
 											<th data-field="id" data-sortable="true">Id</th>

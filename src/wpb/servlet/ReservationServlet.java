@@ -69,26 +69,47 @@ public class ReservationServlet extends HttpServlet {
 			String action = (String) request.getParameter("action");
 			JsonArray result;
 			switch (action) {
-			case "list": {
-				result = (JsonArray) new Gson().toJsonTree(resManager.findAll());
-				//System.out.println(resManager.findAll());
-				response.setContentType("application/json");
-				response.setCharacterEncoding("UTF-8");
-				try (PrintWriter out = response.getWriter()) {
-					out.println(result.toString());
+				case "list": {
+					result = (JsonArray) new Gson().toJsonTree(resManager.findAll());
+					//System.out.println(resManager.findAll());
+					response.setContentType("application/json");
+					response.setCharacterEncoding("UTF-8");
+					try (PrintWriter out = response.getWriter()) {
+						out.println(result.toString());
+					}
+					break;
 				}
-				break;
-			}
-
-			case "listForScheduler": {
-				result = serializeReservations(resManager.findAll());
-				response.setContentType("application/json");
-				response.setCharacterEncoding("UTF-8");
-				try (PrintWriter out = response.getWriter()) {
-					out.println(result.toString());
+	
+				case "listForScheduler": {
+					result = serializeReservations(resManager.findAll());
+					response.setContentType("application/json");
+					response.setCharacterEncoding("UTF-8");
+					try (PrintWriter out = response.getWriter()) {
+						out.println(result.toString());
+					}
+					break;
 				}
-				break;
-			}
+				
+				case "count": {
+					result = (JsonArray) new Gson().toJsonTree(resManager.findAll());
+					JsonObject counts = new JsonObject();
+					response.setContentType("application/json");
+					response.setCharacterEncoding("UTF-8");
+					
+					for (int i = 0; i < result.size(); i++) {
+						JsonObject o = result.get(i).getAsJsonObject();
+						
+					}
+					
+					
+					counts.addProperty("resCount", result.size());
+					
+					try (PrintWriter out = response.getWriter()) {
+						out.println(result.size());
+					}
+					
+					break;
+				}
 			}
 		}
 
@@ -156,6 +177,7 @@ public class ReservationServlet extends HttpServlet {
 				Timestamp end = new Timestamp(cal.getTime().getTime());
 				extrMap.put("start", start);
 				extrMap.put("end", end);
+				extrMap.put("date", date);
 
 			} catch (Exception e) {
 				e.printStackTrace();

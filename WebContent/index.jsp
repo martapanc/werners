@@ -74,7 +74,7 @@
 	<!-- ChartJS 1.0.1 -->
 	<script src="plugins/chartjs/Chart.min.js"></script>
 	<!-- Dashboard functions -->
-	<script src="dist/js/dashboard.js"></script>
+	<script src="${pageContext.request.contextPath}/dist/js/dashboard.js?2"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="dist/js/demo.js"></script>
 	<!-- Page specific script -->
@@ -118,17 +118,19 @@
 		},
 		success : function(response) {
 			$("#db-user-list").html("");
-			response.forEach(function(entry) {
-				$("#db-user-list").append("<li><img src='" + ctx + "/" + entry.avatar + "' alt='User Image'>" 
-						+ "<a class='users-list-name' href='#'>" + entry.fullName + "</a> <span class='users-list-date'>" 
-						+ entry.creationDate + "</span></li>");
-			});
-			
+			for (var i = 0; i < 8; i++) {
+				$("#db-user-list").append("<li><img src='" + ctx + "/" + response[i].avatar + "' alt='User Image'>" 
+						+ "<a class='users-list-name' href='#'>" + response[i].fullName + "</a> <span class='users-list-date'>" 
+						+ response[i].creationDate + "</span></li>");
+			}
+			$("#user-count").html(response.length);
 		},
 		error : function(error) {
 			console.log(error);
 		}
 	});
+	
+	
 	
 	</script>
 </body>

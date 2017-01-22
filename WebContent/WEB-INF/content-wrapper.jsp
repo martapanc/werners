@@ -144,7 +144,7 @@
 						<span class="info-box-icon bg-green"><i class="fa fa-shopping-cart"></i></span>
 
 						<div class="info-box-content">
-							<span class="info-box-text">Sales</span> <span class="info-box-number">4,171</span>
+							<span class="info-box-text">Sales</span> <span id="sales-tot" class="info-box-number"></span>
 						</div>
 						<!-- /.info-box-content -->
 					</div>
@@ -156,7 +156,7 @@
 						<span class="info-box-icon bg-yellow"><i class="fa fa-users"></i></span>
 
 						<div class="info-box-content">
-							<span class="info-box-text">New Members</span> <span class="info-box-number">1,895</span>
+							<span class="info-box-text">Members</span> <span id="user-count" class="info-box-number"></span>
 						</div>
 						<!-- /.info-box-content -->
 					</div>
@@ -185,7 +185,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<p class="text-center">
-										<strong>Period: 1 Oct, 2016 - 31 Jan, 2016</strong>
+										<strong>Period: 1 Sep, 2016 - 28 Feb, 2017</strong>
 									</p>
 
 									<div class="chart">
@@ -204,7 +204,7 @@
 								<div class="col-sm-4 col-xs-6">
 									<div class="description-block border-right">
 										<span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
-										<h5 class="description-header">$24,212.86</h5>
+										<h5 id="tot-revenue" class="description-header"></h5>
 										<span class="description-text">TOTAL REVENUE</span>
 									</div>
 									<!-- /.description-block -->
@@ -213,7 +213,7 @@
 								<div class="col-sm-4 col-xs-6">
 									<div class="description-block border-right">
 										<span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
-										<h5 class="description-header">$10,136.10</h5>
+										<h5 id="tot-cost" class="description-header"></h5>
 										<span class="description-text">TOTAL COST</span>
 									</div>
 									<!-- /.description-block -->
@@ -222,7 +222,7 @@
 								<div class="col-sm-4 col-xs-6">
 									<div class="description-block border-right">
 										<span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
-										<h5 class="description-header">$14,076.76</h5>
+										<h5 id="tot-profit" class="description-header"></h5>
 										<span class="description-text">TOTAL PROFIT</span>
 									</div>
 									<!-- /.description-block -->
@@ -325,11 +325,11 @@
 
 				<div class="col-md-3">
 					<!-- Info Boxes Style 2 -->
-					<div class="info-box bg-yellow">
+					<div class="info-box bg-red">
 						<span class="info-box-icon"><i class="fa fa-cube"></i></span>
 
 						<div class="info-box-content">
-							<span class="info-box-text">Inventory</span> <span class="info-box-number">519 items</span>
+							<span class="info-box-text">Inventory</span> <span id="item-count" class="info-box-number"></span>
 
 							<div class="progress">
 								<div class="progress-bar" style="width: 50%"></div>
@@ -339,11 +339,11 @@
 						<!-- /.info-box-content -->
 					</div>
 					<!-- /.info-box -->
-					<div class="info-box bg-green">
+					<div class="info-box bg-aqua">
 						<span class="info-box-icon"><i class="fa fa-cutlery"></i></span>
 
 						<div class="info-box-content">
-							<span class="info-box-text">Reservations</span> <span class="info-box-number">1,251</span>
+							<span class="info-box-text">Reservations</span> <span id="reservation-count" class="info-box-number"></span>
 
 							<div class="progress">
 								<div class="progress-bar" style="width: 20%"></div>
@@ -353,11 +353,11 @@
 						<!-- /.info-box-content -->
 					</div>
 					<!-- /.info-box -->
-					<div class="info-box bg-red">
+					<div class="info-box bg-yellow">
 						<span class="info-box-icon"><i class="fa fa-paper-plane"></i></span>
 
 						<div class="info-box-content">
-							<span class="info-box-text">Takeaway Orders</span> <span class="info-box-number">2,381</span>
+							<span class="info-box-text">Takeaway Orders</span> <span id="ta-count" class="info-box-number"></span>
 
 							<div class="progress">
 								<div class="progress-bar" style="width: 24%"></div>
@@ -367,7 +367,7 @@
 						<!-- /.info-box-content -->
 					</div>
 					<!-- /.info-box -->
-					<div class="info-box bg-aqua">
+					<div class="info-box bg-green">
 						<span class="info-box-icon"><i class="fa fa-apple"></i></span>
 
 						<div class="info-box-content">
