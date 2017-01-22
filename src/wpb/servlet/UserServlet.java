@@ -29,11 +29,9 @@ public class UserServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-
 		usrManager = new GenericManager<User, Long>(User.class, HibernateUtil.getSessionJavaConfigFactory());
 		gson = new GsonBuilder().create();
 	}
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -60,7 +58,6 @@ public class UserServlet extends HttpServlet {
 				case "name": {
 					String firstname = request.getParameter("firstname");
 					String lastname = request.getParameter("lastname");
-					System.out.println(firstname + lastname);
 					long id = Long.parseLong(request.getParameter("session"));
 					User user = usrManager.get(id, true);
 					user.setFullName(firstname + " " + lastname);
@@ -77,14 +74,11 @@ public class UserServlet extends HttpServlet {
 					try (PrintWriter out = response.getWriter()) {
 						out.println(tel);
 					}
-					//request.setAttribute("newTel", tel);
-					//request.getRequestDispatcher("profile.jsp").forward(request, response);
 					break;
 				}
 				case "address": {
 					String add = request.getParameter("address");
 					long id = Long.parseLong(request.getParameter("session"));
-
 					User user = usrManager.get(id, true);
 					user.setBillingAddress(add);
 					System.out.println(add + " " + id + " " + user);
@@ -92,7 +86,6 @@ public class UserServlet extends HttpServlet {
 					try (PrintWriter out = response.getWriter()) {
 						out.println(add);
 					}
-					
 					break;
 				}
 				case "pw": {
@@ -102,7 +95,6 @@ public class UserServlet extends HttpServlet {
 					long id = Long.parseLong(request.getParameter("session"));
 					User user = usrManager.get(id, true);
 					if(new1.equals(new2) && BCrypt.checkpw(old, user.getPassword())) {
-						System.out.println("pw changed");
 						String hashPassword = BCrypt.hashpw(new1, BCrypt.gensalt());
 						user.setPassword(hashPassword);
 						usrManager.update(user);
@@ -110,7 +102,6 @@ public class UserServlet extends HttpServlet {
 							out.println("Your password was successfully changed!");
 						}
 					} else {
-						System.out.println("pw not changed " + new1 + " " + new2);
 						try (PrintWriter out = response.getWriter()) {
 							out.println("You must insert your current password in order to change it.");
 						}
@@ -122,17 +113,14 @@ public class UserServlet extends HttpServlet {
 					long id = Long.parseLong(request.getParameter("session"));
 					JsonParser parser = new JsonParser();
 					Gson gson = new Gson();
-					
 					User user = usrManager.get(id, true);
 					String jUser = gson.toJson(user);
 					JsonObject o = parser.parse(jUser).getAsJsonObject();
-					
 					response.setContentType("application/json");
 					response.setCharacterEncoding("UTF-8");
 					try (PrintWriter out = response.getWriter()) {
 						out.println(o);
 					}
-					System.out.println(o);
 					break;
 				}
 			}

@@ -208,7 +208,7 @@
 	<!-- for circle counter -->
 	<script src='https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js'></script>
 	<!-- Gallery slider -->
-	<script type="text/javascript" language="javascript" src="../../dist/js/main/jquery.tosrus.min.all.js"></script>
+	<script type="text/javascript" src="../../dist/js/main/jquery.tosrus.min.all.js"></script>
 	<!-- Moment library -->
 	<script src="../../plugins/moment/moment.min.js"></script>
 	<!-- Date Time Picker -->

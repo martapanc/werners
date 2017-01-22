@@ -15,7 +15,6 @@ public class Restaurant {
     @Column(name = "id")
     private long id;
 	
-	
 	@Version
 	@Column(name="version_number")
 	private Integer versionNumber = 0;
@@ -54,7 +53,6 @@ public class Restaurant {
 	            result.append(newLine);
 	        }
 	        
-	        
 	        for (Field field : fields) {
 	            result.append("  ");
 	            try {
@@ -72,8 +70,5 @@ public class Restaurant {
 
 	        return result.toString();
 	    }
-	
 
-
-	
 }

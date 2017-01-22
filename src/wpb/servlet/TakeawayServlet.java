@@ -2,7 +2,6 @@ package wpb.servlet;
 
 import java.io.*;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.ServletException;
@@ -21,7 +20,6 @@ import wpb.util.Validator;
 public class TakeawayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static GenericManager<TakeawayOrder, Long> toManager = null;
-	//private static GenericManager<OrderItem, Long> oiManager = null;
 	private static GenericManager<User, Long> userManager = null;
 	private static GenericManager<Item,Long> itemManager = null;
 	User user = new User();
@@ -30,7 +28,6 @@ public class TakeawayServlet extends HttpServlet {
 	OrderItem oi;
 	@Override
 	public void init() throws ServletException {
-		//oiManager = new GenericManager<OrderItem, Long>(OrderItem.class, HibernateUtil.getSessionJavaConfigFactory());
 		toManager = new GenericManager<TakeawayOrder, Long>(TakeawayOrder.class, HibernateUtil.getSessionJavaConfigFactory());
 		userManager = new GenericManager<User, Long>(User.class, HibernateUtil.getSessionJavaConfigFactory());
 		itemManager = new GenericManager<Item, Long>(Item.class, HibernateUtil.getSessionJavaConfigFactory());
@@ -58,7 +55,6 @@ public class TakeawayServlet extends HttpServlet {
 		} else {
 
 			String idStr = (String) pMap.get("session");
-			System.out.println("current session: " + idStr);
 			if (!idStr.equals("")) {
 				Long id= Long.parseLong(idStr);
 				to.setGuest(userManager.get(id, true));
@@ -90,7 +86,6 @@ public class TakeawayServlet extends HttpServlet {
 			
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");	
-			
 		}
 	}
 	

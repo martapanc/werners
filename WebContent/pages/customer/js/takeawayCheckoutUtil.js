@@ -112,8 +112,6 @@ $("#submit-btn")
 										+ email);
 					$(".reservation-area").append("</br>&emsp;");
 
-					alert("We are currently working on your reservation! You will receive a phone call as soon as we are ready to deliver it.");
-
 					$.post({
 						type : "POST",
 						url : "/restaurantProject/takeaway",
@@ -131,9 +129,11 @@ $("#submit-btn")
 						},
 						complete : function(response) {
 							console.log(response);
+							alert("We are currently working on your reservation! You will receive a phone call as soon as we are ready to deliver it.");
 						},
 						error : function(error) {
 							console.log("error" + error);
+							alert("There was a problem with your takeaway order. Please retry.")
 						}
 					});
 					return false;

@@ -81,29 +81,38 @@ public class HibernateUtil {
             Properties props = new Properties();
             
             //connection properties
-            /*GearHost DB*/
+            
+            /*Werner's (and Marta's) localhost*/
             /*
+            props.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
+            props.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/wpbdb");
+            props.put("hibernate.connection.username", "root");
+            props.put("hibernate.connection.password", "1234");
+            */
+            
+            /*GearHost DB*/
+            
             props.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
             props.put("hibernate.connection.url", "jdbc:mysql://mysql2.gear.host/wpbdb");
             props.put("hibernate.connection.username", "giuliaburgio");
             props.put("hibernate.connection.password", "NpoS&45af");
+            
+            
+            /*Google Cloud DB*/
+            /*
+            props.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
+            props.put("hibernate.connection.url", "jdbc:mysql://104.199.81.244/wpbdb");
+            props.put("hibernate.connection.username", "wpbdb_admin");
+            props.put("hibernate.connection.password", "1234");
             */
             
-            /*Amazon hosting DB*/
+            /*Amazon hosting DB - not working anymore :( */
             /*
             props.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
             props.put("hibernate.connection.url", "jdbc:mysql://ec2-35-167-62-207.us-west-2.compute.amazonaws.com:3306/wpbdb");
             props.put("hibernate.connection.username", "root");
             props.put("hibernate.connection.password", "restaurant");
             */
-            
-            /*Werner's localhost*/
-            
-            props.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
-            props.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/wpbdb");
-            props.put("hibernate.connection.username", "root");
-            props.put("hibernate.connection.password", "1234");
-            
             
             //advanced and debug settings
             props.put("hibernate.show_sql", "true");

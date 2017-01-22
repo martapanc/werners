@@ -6,36 +6,17 @@ import java.lang.reflect.Type;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TimeZone;
+import java.util.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
+import com.google.gson.*;
 
 import wpb.entity.*;
 import wpb.manager.*;
-import wpb.util.HibernateUtil;
-import wpb.util.StopWatch;
-import wpb.util.TimestampUtils;
-import wpb.util.Validator;
+import wpb.util.*;
 
 @WebServlet(name = "ReservationServlet", urlPatterns = "/reservation")
 public class ReservationServlet extends HttpServlet {
@@ -48,8 +29,7 @@ public class ReservationServlet extends HttpServlet {
 	private static GenericManager<User, Long> usrManager = null;
 
 	public void init() throws ServletException {
-		resManager = new GenericManager<Reservation, Long>(Reservation.class,
-				HibernateUtil.getSessionJavaConfigFactory());
+		resManager = new GenericManager<Reservation, Long>(Reservation.class, HibernateUtil.getSessionJavaConfigFactory());
 		rtManager = new RoomTableManager(HibernateUtil.getSessionJavaConfigFactory());
 		usrManager = new GenericManager<User, Long>(User.class, HibernateUtil.getSessionJavaConfigFactory());
 	}
@@ -71,7 +51,6 @@ public class ReservationServlet extends HttpServlet {
 			switch (action) {
 				case "list": {
 					result = (JsonArray) new Gson().toJsonTree(resManager.findAll());
-					//System.out.println(resManager.findAll());
 					response.setContentType("application/json");
 					response.setCharacterEncoding("UTF-8");
 					try (PrintWriter out = response.getWriter()) {
@@ -87,27 +66,6 @@ public class ReservationServlet extends HttpServlet {
 					try (PrintWriter out = response.getWriter()) {
 						out.println(result.toString());
 					}
-					break;
-				}
-				
-				case "count": {
-					result = (JsonArray) new Gson().toJsonTree(resManager.findAll());
-					JsonObject counts = new JsonObject();
-					response.setContentType("application/json");
-					response.setCharacterEncoding("UTF-8");
-					
-					for (int i = 0; i < result.size(); i++) {
-						JsonObject o = result.get(i).getAsJsonObject();
-						
-					}
-					
-					
-					counts.addProperty("resCount", result.size());
-					
-					try (PrintWriter out = response.getWriter()) {
-						out.println(result.size());
-					}
-					
 					break;
 				}
 			}
@@ -260,7 +218,6 @@ public class ReservationServlet extends HttpServlet {
 				jsonObj.addProperty("resourceId", resourceId);
 				jsonObj.addProperty("title", tag + "  [" + seats + "]");
 				jsonObj.addProperty("id", id);
-				System.out.println(jsonObj);
 				return jsonObj;
 			}
 		};
@@ -286,8 +243,7 @@ public class ReservationServlet extends HttpServlet {
 				if (objId == index) { // Search for reservations associated to tables
 					Date start = FMT.parse(o.get("start").getAsString());
 					Date end = FMT.parse(o.get("end").getAsString());
-					// A 2-hour time slot is available for a new reservation if
-					// there are no existing reservation overlapping it
+					// A 2-hour time slot is available for a new reservation if there are no existing reservation overlapping it
 					if ((start.after(resStart) && start.before(resEnd)) || start.compareTo(resStart) == 0
 							|| (end.after(resStart) && end.before(resEnd))) {
 						al.add(index); // Create a list of the table indices that are not available
