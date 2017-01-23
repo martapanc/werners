@@ -79,6 +79,7 @@
 						<ul id="top-menu" class="nav navbar-nav navbar-right main-nav">
 							<li><a href="../../homepage.html"><i class="fa fa-home"></i>&ensp;Home</a></li>
 							<li><a href="../../homepage.html#aboutUs"><i class="fa fa-info"></i>&ensp;About Us</a></li>
+							<li><a href="../../pages/home/documentation.jsp"><i class="fa fa-book"></i>&ensp;Documentation</a></li>
 							<li><a href="table-reservation.jsp"><i class="fa fa-cutlery"></i>&ensp;Table Reservation</a></li>
 							<li class="active"><a href="takeaway-order.jsp"><i class="fa fa-paper-plane-o"></i>&ensp;Take-away Order</a></li>
 							<li><a href="../../loginForm.jsp"><i class="fa fa-user"></i>&ensp;Login/Register</a></li>

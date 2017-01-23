@@ -23,7 +23,8 @@ public class SecurityFilter implements Filter {
 	private static final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(
 	        Arrays.asList("/register", "", "/login", "/logout", "/registerForm.jsp", "/homepage.html", "/item", 
 	        		"/pages/home/table-reservation.jsp", "/pages/home/reservation-invoice.jsp", "/reservation",
-	        		"/pages/home/takeaway-order.jsp", "/pages/home/takeaway-checkout.jsp", "/takeaway")));
+	        		"/pages/home/takeaway-order.jsp", "/pages/home/takeaway-checkout.jsp", "/takeaway", 
+	        		"/pages/home/documentation.jsp")));
 	
 	private static final String ALLOWED_REGEX = ".*(css|jpg|png|gif|js)$|/(bootstrap|dist|plugins)/.*";
 	

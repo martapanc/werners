@@ -2,48 +2,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>WPB | Reservation Invoice</title>
+<title>WPB | Table Reservation</title>
 <link rel="icon" href="dist/img/favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- CSS -->
 <!-- Bootstrap css file-->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<!-- Superslide css file-->
-<link rel="stylesheet" href="dist/css/superslides.css">
-<!-- Slick slider css file -->
-<link href="dist/css/slick.css" rel="stylesheet">
-<!-- smooth animate css file -->
-<link rel="stylesheet" href="dist/css/animate.css">
+<link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- Main structure css file -->
-<link href="dist/css/main/style.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/dist/css/main/style.css" rel="stylesheet">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-<!-- DataTables -->
-<link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-<!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
-<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
-<!-- iCheck for checkboxes and radio inputs -->
-<link rel="stylesheet" href="plugins/iCheck/all.css">
-<!-- Bootstrap Datetime Picker -->
-<link rel="stylesheet" href="plugins/datetime-picker/bootstrap-datetimepicker.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/AdminLTE.min.css">
 
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
 <style>
 .footer_top {
 	padding: 10px;
 }
 
 .content {
-	padding: 85px 10px 10px;
+	padding: 15px 10px 10px;
+}
+
+.content-header {
+	margin-top: 80px;
+}
+
+.box-body {
+	font-size: 110%;
+}
+
+h4 {
+	font-weight: bold;
+	font-variant: small-caps
+}
+
+.gallerycontainer {
+	position: relative;
+	/*Add a height attribute and set to largest image's height to prevent overlaying*/
+}
+
+a.thumbnail {
+	width: 110px;
+}
+
+.thumbnail img {
+	border: 1px solid white;
+	margin: 0 5px 5px 0;
+}
+
+.thumbnail:hover {
+	background-color: transparent;
+}
+
+.thumbnail:hover img {
+	border: 1px solid blue;
+}
+
+.thumbnail span { /*CSS for enlarged image*/
+	position: fixed;
+	background-color: lightyellow;
+	padding: 5px;
+	left: -1000px;
+	margin-left: 150px;
+	margin-top: 50px;
+	border: 1px dashed gray;
+	visibility: hidden;
+	color: black;
+	text-decoration: none;
+}
+
+.thumbnail span img { /*CSS for enlarged image*/
+	border-width: 0;
+	padding: 2px;
+}
+
+.thumbnail:hover span { /*CSS for enlarged image*/
+	visibility: visible;
+	top: 0;
+	left: 230px;
+	/*position where enlarged image should offset horizontally */
+	z-index: 50;
 }
 </style>
 </head>
@@ -63,18 +105,18 @@
 						</button>
 						<!-- LOGO -->
 						<div class="pull-left image" style="margin: 10px">
-							<img src="dist/img/burger-160x160.jpg" height="60px" class="img-circle" alt="User Image">
+							<img src="${pageContext.request.contextPath}/dist/img/burger-160x160.jpg" height="60px" class="img-circle" alt="User Image">
 						</div>
 						<a class="navbar-brand" href="#"><b>Werner's </b><span style="font-size: 16px">Panini&amp;Burgers</span></a>
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul id="top-menu" class="nav navbar-nav navbar-right main-nav">
-							<li><a href="homepage.html"><i class="fa fa-home"></i>&ensp;Home</a></li>
-							<li><a href="homepage.html#aboutUs"><i class="fa fa-info"></i>&ensp;About Us</a></li>
-							<li><a href="pages/home/documentation.jsp"><i class="fa fa-book"></i>&ensp;Documentation</a></li>
-							<li class="active"><a href="#"><i class="fa fa-cutlery"></i>&ensp;Table Reservation</a></li>
-							<li><a href="pages/home/takeaway-order.jsp"><i class="fa fa-paper-plane-o"></i>&ensp;Take-away Order</a></li>
-							<li><a href="loginForm.jsp"><i class="fa fa-user"></i>&ensp;Login/Register</a></li>
+							<li><a href="${pageContext.request.contextPath}/homepage.html"><i class="fa fa-home"></i>&ensp;Home</a></li>
+							<li><a href="${pageContext.request.contextPath}/homepage.html#aboutUs"><i class="fa fa-info"></i>&ensp;About Us</a></li>
+							<li class="active"><a href="#"><i class="fa fa-book"></i>&ensp;Documentation</a></li>
+							<li><a href="table-reservation.jsp"><i class="fa fa-cutlery"></i>&ensp;Table Reservation</a></li>
+							<li><a href="takeaway-order.jsp"><i class="fa fa-paper-plane-o"></i>&ensp;Take-away Order</a></li>
+							<li><a href="${pageContext.request.contextPath}/loginForm.jsp"><i class="fa fa-user"></i>&ensp;Login/Register</a></li>
 						</ul>
 					</div>
 					<!--/.nav-collapse -->
@@ -86,19 +128,15 @@
 	<!-- END HEADER SECTION -->
 	<div class="col-md-12">
 		<!-- Content Wrapper. Contains page content -->
-		<div class="content">
+		<div class="body">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					Online Reservation Invoice<small></small>
+					Documentation <small></small>
 				</h1>
 			</section>
-			<jsp:include page="../../WEB-INF/customer/reservationInvoiceContent.jsp" />
-			
-			<div class="alert alert-success alert-dismissible fade-in col-md-4 pull-right" role="alert">
-				Are you a regular customer? You can sign up and save time when you make reservations. 
-				<a href="loginForm.jsp">Click here to register.</a>
-			</div>
+
+			<jsp:include page="../../WEB-INF/documentation-content.jsp" />
 		</div>
 		<!-- /.content-wrapper -->
 	</div>
@@ -182,37 +220,13 @@
 
 	<!-- Javascript Files -->
 	<!-- initialize jQuery Library -->
-	<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<!-- For smooth animatin  
     <script src="js/wow.min.js"></script>  -->
 	<!-- Bootstrap js -->
-	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<!-- slick slider -->
-	<script src="dist/js/main/slick.min.js"></script>
-	<!-- superslides slider -->
-	<script src="dist/js/main/jquery.easing.1.3.js"></script>
-	<script src="dist/js/main/jquery.animate-enhanced.min.js"></script>
-	<script src="dist/js/main/jquery.superslides.min.js" type="text/javascript" charset="utf-8"></script>
-	<!-- for circle counter -->
-	<script src='https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js'></script>
-	<!-- Gallery slider -->
-	<script type="text/javascript" language="javascript" src="dist/js/main/jquery.tosrus.min.all.js"></script>
-	<!-- Moment library -->
-	<script src="plugins/moment/moment.min.js"></script>
-	<!-- Date Time Picker -->
-	<script src="plugins/datetime-picker/bootstrap-datetimepicker.min.js"></script>
-	<!-- SlimScroll 1.3.0 -->
-	<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
-	<!-- iCheck 1.0.1 -->
-	<script src="plugins/iCheck/icheck.min.js"></script>
-	<!-- FastClick -->
-	<script src="plugins/fastclick/fastclick.js"></script>
+	<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 	<!-- AdminLTE App -->
-	<script src="dist/js/app.min.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="dist/js/demo.js"></script>
-	<!-- Form validator -->
-	<script src="plugins/validator/validator.min.js"></script>
-
+	<script src="${pageContext.request.contextPath}/dist/js/app.min.js"></script>
+	
 </body>
 </html>
