@@ -222,8 +222,6 @@
 	<!-- put your locale files after bootstrap-table.js -->
 	<script src="../../plugins/bootstrap-table/locale/bootstrap-table-en-US.js"></script>
 	<!-- extensions for bootstrap-table -->
-	<script src="../../plugins/bootstrap-table/extensions/tableExport-jquery/tableExport.js"></script>
-	<script src="../../plugins/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
 	<script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
 	<script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
 	<script src="../../plugins/bootstrap-table/extensions/filter-control/bootstrap-table-filter-control.js"></script>

@@ -8,28 +8,17 @@
 <!-- CSS -->
 <!-- Bootstrap css file-->
 <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<!-- Superslide css file-->
-<link rel="stylesheet" href="../../dist/css/superslides.css">
-<!-- Slick slider css file -->
-<link href="../../dist/css/slick.css" rel="stylesheet">
-<!-- smooth animate css file -->
-<link rel="stylesheet" href="../../dist/css/animate.css">
 <!-- Main structure css file -->
 <link href="../../dist/css/main/style.css" rel="stylesheet">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-<!-- DataTables -->
-<link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
 <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
-<!-- iCheck for checkboxes and radio inputs -->
-<link rel="stylesheet" href="../../plugins/iCheck/all.css">
-<!-- Bootstrap Datetime Picker -->
-<link rel="stylesheet" href="../../plugins/datetime-picker/bootstrap-datetimepicker.css">
+
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -202,22 +191,8 @@
 	<script src="../../bootstrap/js/bootstrap.min.js"></script>
 	<!-- slick slider -->
 	<script src="../../dist/js/main/slick.min.js"></script>
-	<!-- superslides slider -->
-	<script src="../../dist/js/main/jquery.easing.1.3.js"></script>
-	<script src="../../dist/js/main/jquery.animate-enhanced.min.js"></script>
-	<script src="../../dist/js/main/jquery.superslides.min.js" type="text/javascript" charset="utf-8"></script>
-	<!-- for circle counter -->
-	<script src='https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js'></script>
-	<!-- Gallery slider -->
-	<script type="text/javascript" src="../../dist/js/main/jquery.tosrus.min.all.js"></script>
 	<!-- Moment library -->
 	<script src="../../plugins/moment/moment.min.js"></script>
-	<!-- Date Time Picker -->
-	<script src="../../plugins/datetime-picker/bootstrap-datetimepicker.min.js"></script>
-	<!-- SlimScroll 1.3.0 -->
-	<script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
-	<!-- iCheck 1.0.1 -->
-	<script src="../../plugins/iCheck/icheck.min.js"></script>
 	<!-- FastClick -->
 	<script src="../../plugins/fastclick/fastclick.js"></script>
 	<!-- AdminLTE App -->
@@ -230,14 +205,7 @@
 	<script src="../../plugins/bootstrap-table/bootstrap-table.js"></script>
 	<!-- put your locale files after bootstrap-table.js -->
 	<script src="../../plugins/bootstrap-table/locale/bootstrap-table-en-US.js"></script>
-	<!-- extensions for bootstrap-table -->
-	<script src="../../plugins/bootstrap-table/extensions/tableExport-jquery/tableExport.js"></script>
-	<script src="../../plugins/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
-	<script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
-	<script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
-	<script src="../../plugins/bootstrap-table/extensions/filter-control/bootstrap-table-filter-control.js"></script>
 	<script src="../../plugins/bootstrapvalidator/dist/js/bootstrapValidator.min.js"></script>
-	<script src="../../pages/tables/tableutil.js"></script>
 	<script src="../../pages/customer/js/takeawayOrderUtil.js"></script>
 	<script src="../../pages/customer/js/takeawayCheckoutUtil.js"></script>
 

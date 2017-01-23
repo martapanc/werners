@@ -8,26 +8,16 @@
 <!-- CSS -->
 <!-- Bootstrap css file-->
 <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<!-- Superslide css file-->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/superslides.css">
-<!-- Slick slider css file -->
-<link href="${pageContext.request.contextPath}/dist/css/slick.css" rel="stylesheet">
-<!-- smooth animate css file -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/animate.css">
 <!-- Main structure css file -->
 <link href="${pageContext.request.contextPath}/dist/css/main/style.css" rel="stylesheet">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-<!-- DataTables -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/datatables/dataTables.bootstrap.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/AdminLTE.min.css">
 <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/skins/_all-skins.min.css">
-<!-- iCheck for checkboxes and radio inputs -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/iCheck/all.css">
 <!-- Bootstrap Datetime Picker -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/datetime-picker/bootstrap-datetimepicker.css">
 
@@ -176,40 +166,21 @@
 	</footer>
 	<!-- END FOOTER SECTION  -->
 
-
-
 	<!-- Javascript Files -->
-
 	<!-- initialize jQuery Library -->
 	<script src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<!-- For smooth animatin  
     <script src="js/wow.min.js"></script>  -->
 	<!-- Bootstrap js -->
 	<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
-	<!-- slick slider -->
-	<script src="${pageContext.request.contextPath}/dist/js/main/slick.min.js"></script>
-	<!-- superslides slider -->
-	<script src="${pageContext.request.contextPath}/dist/js/main/jquery.easing.1.3.js"></script>
-	<script src="${pageContext.request.contextPath}/dist/js/main/jquery.animate-enhanced.min.js"></script>
-	<script src="${pageContext.request.contextPath}/dist/js/main/jquery.superslides.min.js" type="text/javascript" charset="utf-8"></script>
-	<!-- for circle counter -->
-	<script src='https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js'></script>
-	<!-- Gallery slider -->
-	<script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/dist/js/main/jquery.tosrus.min.all.js"></script>
 	<!-- Moment library -->
 	<script src="${pageContext.request.contextPath}/plugins/moment/moment.min.js"></script>
 	<!-- Date Time Picker -->
 	<script src="${pageContext.request.contextPath}/plugins/datetime-picker/bootstrap-datetimepicker.min.js"></script>
-	<!-- SlimScroll 1.3.0 -->
-	<script src="${pageContext.request.contextPath}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-	<!-- iCheck 1.0.1 -->
-	<script src="${pageContext.request.contextPath}/plugins/iCheck/icheck.min.js"></script>
 	<!-- FastClick -->
 	<script src="${pageContext.request.contextPath}/plugins/fastclick/fastclick.js"></script>
 	<!-- AdminLTE App -->
 	<script src="${pageContext.request.contextPath}/dist/js/app.min.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="${pageContext.request.contextPath}/dist/js/demo.js"></script>
 	<!-- Form validator -->
 	<script src="${pageContext.request.contextPath}/plugins/validator/validator.min.js"></script>
 	<script>
@@ -234,7 +205,5 @@
 				
 			});
 	</script>
-
-
 </body>
 </html>

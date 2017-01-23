@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 <!-- Bootstrap table -->
 <link rel="stylesheet" href="../../plugins/bootstrap-table/bootstrap-table.css">
-
 <!-- Theme style -->
 <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
 <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -61,41 +60,39 @@
 			</section>
 
 			<jsp:include page="../../WEB-INF/customer/takeawayOrderContent.jsp" />
-	</div>
-	<!-- ./wrapper -->
-	
-	<jsp:include page="../../WEB-INF/footer.html" />
+		</div>
+		<!-- ./wrapper -->
 
-	<!-- jQuery 2.2.3 -->
-	<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
-	<!-- Bootstrap 3.3.6 -->
-	<script src="../../bootstrap/js/bootstrap.min.js"></script>
-	<!-- jQuery UI 1.11.4 -->
-	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-	<!-- Slimscroll -->
-	<script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
-	<!-- FastClick -->
-	<script src="../../plugins/fastclick/fastclick.js"></script>
-	<!-- AdminLTE App -->
-	<script src="../../dist/js/app.min.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="../../dist/js/demo.js"></script>
-	<!-- Page specific script -->
-	<script src="../../plugins/bootstrap-table/bootstrap-table.js"></script>
-	<!-- put your locale files after bootstrap-table.js -->
-	<script src="../../plugins/bootstrap-table/locale/bootstrap-table-en-US.js"></script>
-	<!-- extensions for bootstrap-table -->
-	<script src="../../plugins/bootstrap-table/extensions/tableExport-jquery/tableExport.js"></script>
-	<script src="../../plugins/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
-	<script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
-	<script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
-	<script src="../../plugins/bootstrap-table/extensions/filter-control/bootstrap-table-filter-control.js"></script>
-	<script src="../tables/tableutil.js"></script>
-	<script src="js/takeawayOrderUtil.js"></script>		
-	<script>
-		$(document).ready(function() {
-			$('#ta-order-menu').addClass('active');
-		});
-	</script>
+		<jsp:include page="../../WEB-INF/footer.html" />
+
+		<!-- jQuery 2.2.3 -->
+		<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<!-- Bootstrap 3.3.6 -->
+		<script src="../../bootstrap/js/bootstrap.min.js"></script>
+		<!-- jQuery UI 1.11.4 -->
+		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+		<!-- FastClick -->
+		<script src="../../plugins/fastclick/fastclick.js"></script>
+		<!-- AdminLTE App -->
+		<script src="../../dist/js/app.min.js"></script>
+		<!-- AdminLTE for demo purposes -->
+		<script src="../../dist/js/demo.js"></script>
+		<!-- Page specific script -->
+		<script src="../../plugins/bootstrap-table/bootstrap-table.js"></script>
+		<!-- put your locale files after bootstrap-table.js -->
+		<script src="../../plugins/bootstrap-table/locale/bootstrap-table-en-US.js"></script>
+		<!-- extensions for bootstrap-table -->
+		<script src="../../plugins/bootstrap-table/extensions/tableExport-jquery/tableExport.js"></script>
+		<script src="../../plugins/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
+		<script src="../../plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
+		<script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
+		<script src="../../plugins/bootstrap-table/extensions/filter-control/bootstrap-table-filter-control.js"></script>
+		<script src="../tables/tableutil.js"></script>
+		<script src="js/takeawayOrderUtil.js"></script>
+		<script>
+			$(document).ready(function() {
+				$('#ta-order-menu').addClass('active');
+			});
+		</script>
 </body>
 </html>

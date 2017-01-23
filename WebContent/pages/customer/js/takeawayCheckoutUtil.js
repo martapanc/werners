@@ -133,7 +133,6 @@ $("#submit-btn")
 						},
 						error : function(error) {
 							console.log("error" + error);
-							alert("There was a problem with your takeaway order. Please retry.")
 						}
 					});
 					return false;

@@ -221,8 +221,6 @@ a.thumbnail {
 	<!-- Javascript Files -->
 	<!-- initialize jQuery Library -->
 	<script src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
-	<!-- For smooth animatin  
-    <script src="js/wow.min.js"></script>  -->
 	<!-- Bootstrap js -->
 	<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 	<!-- AdminLTE App -->

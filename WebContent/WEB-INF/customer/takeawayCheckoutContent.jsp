@@ -87,7 +87,7 @@
 									</div>
 									
 									<div class="col-md-6">
-										<!-- phone mask -->
+										<!-- telephone -->
 										<div class="col-md-12">
 											<div class="form-group">
 												<label>Telephone number:</label>
