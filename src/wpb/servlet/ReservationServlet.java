@@ -76,6 +76,7 @@ public class ReservationServlet extends HttpServlet {
 			analyzeParameters(paramMap, request, pMap, errList);
 			request.setAttribute("map", pMap);
 			request.setAttribute("todayDate", FMT.format(new Date()));
+			SendMailTLS.sendReservationEmail(pMap);
 			res.setCustomerName(pMap.get("firstname") + " " + pMap.get("lastname"));
 			res.setComment(pMap.get("comment").toString());
 			String idStr = (String) pMap.get("session");

@@ -34,42 +34,36 @@
 		</div>
 		<!-- /.login-logo -->
 		<div class="login-box-body">
-			<p class="login-box-msg">Sign in to your personal account</p>
+			<p class="login-box-msg">Insert your email address.</p>
 			 <c:if test="${message != null}">
    			<div class="alert alert-danger text-center" id="message-div">
     			${message}
   			</div>
 			</c:if>
-			<form action="${pageContext.request.contextPath}/login" method="post" data-toggle="validator">
+			<form action="${pageContext.request.contextPath}/RecoveryServlet" method="post" data-toggle="validator">
 				<div class="form-group has-feedback">
 					<input type="text" class="form-control" name="email" required placeholder="Email"> <span
 						class="glyphicon glyphicon-envelope form-control-feedback"></span>
 				</div>
-				<div class="form-group has-feedback">
-					<input type="password" class="form-control" name="password" required placeholder="Password"> <span
-						class="glyphicon glyphicon-lock form-control-feedback"></span>
-				</div>
+				
 				<div class="row">
-					<div class="col-xs-8">
-						<div class="checkbox icheck">
-							<label> <input type="checkbox"> Remember Me
-							</label>
-						</div>
+					<div class="col-xs-6">
 					</div>
 					<!-- /.col -->
-					<div class="col-xs-4">
-						<button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+					<div class="col-xs-6">
+						<button type="submit" id="submit" class="btn btn-primary btn-block btn-flat">Retrieve Password</button>
 					</div>
 					<!-- /.col -->
 				</div>
 			</form>
 			
-			<a href="${pageContext.request.contextPath}/pwRecovery.jsp">I forgot my password</a><br>
+			<a href="${pageContext.request.contextPath}/loginForm.jsp">I know my username and password</a><br>
 			<a href="${pageContext.request.contextPath}/registerForm.jsp" class="text-center">Create a New Account</a><br>
 			<a class="pull-right" href="${pageContext.request.contextPath}/homepage.html"><i class="fa fa-home"></i>&ensp;Back home</a><br> 
 			
 		</div>
 		<!-- /.login-box-body -->
+		
 	</div>
 	<!-- /.login-box -->
 
@@ -92,6 +86,11 @@
 			$('input').focus(function() {
 				$('#message-div').fadeOut('medium');
 			});
+			$("#submit").on("click", function() {
+				alert("We received your request. If your address is in our database, you will receive an email with a new temporary password.");
+			});
+			
+			
 		});
 	</script>
 </body>
