@@ -66,6 +66,7 @@ public class FoodClassServlet extends HttpServlet {
 					try {
 						FoodClass fc = new FoodClass();
 						fc.setName(request.getParameter("name"));
+						fc.setImage(request.getParameter("image"));
 						fcManager.add(fc);
 					} catch (Exception e) {
 						// TODO: handle exception
@@ -78,6 +79,7 @@ public class FoodClassServlet extends HttpServlet {
 					try {
 						FoodClass fc = fcManager.get(id, true);
 						fc.setName(request.getParameter("name"));
+						fc.setImage(request.getParameter("image"));
 						fcManager.update(fc);
 					} catch (Exception e) {
 						// TODO: handle exception

@@ -83,20 +83,20 @@ public class HibernateUtil {
             //connection properties
             
             /*Werner's (and Marta's) localhost*/
-            /*
+            
             props.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
             props.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/wpbdb");
             props.put("hibernate.connection.username", "root");
             props.put("hibernate.connection.password", "1234");
-            */
+            
             
             /*GearHost DB*/
-            
+            /*
             props.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
             props.put("hibernate.connection.url", "jdbc:mysql://mysql2.gear.host/wpbdb");
             props.put("hibernate.connection.username", "giuliaburgio");
             props.put("hibernate.connection.password", "NpoS&45af");
-            
+            */
             
             /*Google Cloud DB*/
             /*

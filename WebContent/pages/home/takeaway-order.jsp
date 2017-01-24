@@ -47,7 +47,7 @@
 }
 
 .box-body {
-	min-height: 270px;
+	min-height: 480px;
 }
 
 .fa-plus-square, .fa-minus-square {
@@ -226,7 +226,7 @@
 	<script src="../../plugins/bootstrap-table/extensions/colResizable/colResizable-1.6.js"></script>
 	<script src="../../plugins/bootstrap-table/extensions/filter-control/bootstrap-table-filter-control.js"></script>
 	<script src="../../pages/tables/tableutil.js"></script>
-	<script src="../../pages/customer/js/takeawayOrderUtil.js"></script>
+	<script src="../../pages/customer/js/takeawayOrderUtil.js?3"></script>
 	<script>
 	$(document).ready(function() {
 		$("#item-table").bootstrapTable('filterBy', {

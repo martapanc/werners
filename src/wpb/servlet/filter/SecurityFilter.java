@@ -24,7 +24,7 @@ public class SecurityFilter implements Filter {
 	        Arrays.asList("/register", "", "/login", "/logout", "/registerForm.jsp", "/pwRecovery.jsp", "/homepage.html", "/item", 
 	        		"/pages/home/table-reservation.jsp", "/pages/home/reservation-invoice.jsp", "/reservation",
 	        		"/pages/home/takeaway-order.jsp", "/pages/home/takeaway-checkout.jsp", "/takeaway", 
-	        		"/pages/home/documentation.jsp", "/RecoveryServlet")));
+	        		"/pages/home/documentation.jsp", "/RecoveryServlet", "/foodClass")));
 	
 	private static final String ALLOWED_REGEX = ".*(css|jpg|png|gif|js)$|/(bootstrap|dist|plugins)/.*";
 	

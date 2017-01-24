@@ -15,6 +15,9 @@ public class FoodClass extends Restaurant {
    
 	@Column(name = "name", nullable = false, unique = true)
 	private String name;
+	
+	@Column(name = "image")
+	private String image;
 
 	public String getName() {
 		return name;
@@ -23,6 +26,15 @@ public class FoodClass extends Restaurant {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
 	
 }
 

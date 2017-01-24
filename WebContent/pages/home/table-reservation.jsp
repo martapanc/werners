@@ -34,6 +34,12 @@
 
 .content {
 	padding: 65px 10px 10px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.box-body {
+	min-height: 360px;
 }
 </style>
 </head>

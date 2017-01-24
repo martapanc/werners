@@ -17,6 +17,8 @@
   <!-- Bootstrap table --> 
   <link rel="stylesheet" href="../../plugins/bootstrap-table/bootstrap-table.css">
   <link rel="stylesheet" href="../../plugins/bootstrap-table/extensions/group-by-v2/bootstrap-table-group-by.css">
+  <!-- image picker -->
+  <link rel="stylesheet" href="../../plugins/image-picker/image-picker.css">
   
     <!-- Bootstrap notifications --> 
   <link rel="stylesheet" href="../../plugins/notify/bootstrap-notify.css">
@@ -182,6 +184,8 @@
 <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="../../bootstrap/js/bootstrap.min.js"></script>
+<!-- Image picker -->
+<script src="../../plugins/image-picker/image-picker.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <!-- PACE -->
@@ -207,6 +211,7 @@
 <!-- scripts for form validation ad notifications -->
 <script src="../../plugins/notify/bootstrap-notify.js"></script>
 <script src="../../plugins/validator/validator.min.js"></script>
+
 <!-- custom scripts -->
 <script src="../../pages/tables/tableutil.js"></script>
 <script src="../../pages/tables/crud.js"></script>
@@ -218,7 +223,10 @@
 		 $('#table-menu').addClass('active');
 		 $('#table-menu-fc').addClass('active');
 	 	initCRUD(URL);
+	 	
 	});	
+	
+	
 	
 </script>
 </body>

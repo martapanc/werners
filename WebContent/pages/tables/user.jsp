@@ -64,7 +64,7 @@
 								<table id="table" data-toggle="table" data-url="../../user" data-method="post"
 									data-content-type="application/x-www-form-urlencoded" data-query-params='action=list' data-striped="true"
 									data-show-columns="true" data-pagination="true" data-pagination-loop="false" data-show-refresh="true" data-search="true"
-									data-resizable="true" data-show-toggle="true" data-show-export="true">
+									data-resizable="true" data-show-toggle="true" data-show-export="true" data-page-size="20">
 									<thead>
 										<tr>
 											<th data-field="id" data-sortable="true">Id</th>

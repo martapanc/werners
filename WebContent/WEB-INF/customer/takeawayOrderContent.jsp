@@ -11,8 +11,9 @@
 							<form>
 								<div class="box-body">
 									<div class="food-menu col-md-3">
-										<div class="btn-group btn-block btn-group-vertical">
-										<input type="hidden" id="session" value="${sessionScope.userSession.user.id}" />
+									<input type="hidden" id="session" value="${sessionScope.userSession.user.id}" />
+										<div class="btn-group btn-block btn-group-vertical" id="food-class-list">
+										<!-- 
 											<a href="#" id="burger-btn" class="btn btn-lg btn-primary  active"> <img width="30"
 												src="../../dist/img/flat-icon-gastronomy/burger.svg"> &emsp;Burgers
 											</a> <a href="#" id="salad-btn" class="btn btn-lg btn-primary"> <img width="30"
@@ -25,7 +26,7 @@
 												src="../../dist/img/flat-icon-gastronomy/cupcake.svg"> &emsp;Desserts
 											</a> <a href="#" id="drink-btn" class="btn btn-lg btn-primary"> <img width="30"
 												src="../../dist/img/flat-icon-gastronomy/glass-3.svg"> &emsp;Drinks
-											</a>
+											</a>-->
 										</div>
 
 									</div>
@@ -33,7 +34,7 @@
 
 									<div class="food-offers col-md-9">
 										<div class="thmenu-header with-border">
-											<h3>BURGERS</h3>
+											<h3>PIZZA</h3>
 										</div>
 										<div class="col-md-12">
 											<div class="box box-primary">
@@ -105,3 +106,4 @@
 				</div>
 		</section>
 		<!-- /.content -->
+	

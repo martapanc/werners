@@ -68,7 +68,7 @@ a.thumbnail {
 	padding: 5px;
 	left: -1000px;
 	margin-left: 150px;
-	margin-top: 50px;
+	margin-top: 150px;
 	border: 1px dashed gray;
 	visibility: hidden;
 	color: black;

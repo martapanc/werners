@@ -32,6 +32,8 @@
 
 .content {
 	padding: 85px 10px 10px;
+	margin-top: 30px;
+	margin-bottom: 100px;
 }
 </style>
 </head>

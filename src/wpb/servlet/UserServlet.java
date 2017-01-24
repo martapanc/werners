@@ -81,7 +81,6 @@ public class UserServlet extends HttpServlet {
 					long id = Long.parseLong(request.getParameter("session"));
 					User user = usrManager.get(id, true);
 					user.setBillingAddress(add);
-					System.out.println(add + " " + id + " " + user);
 					usrManager.update(user);
 					try (PrintWriter out = response.getWriter()) {
 						out.println(add);
