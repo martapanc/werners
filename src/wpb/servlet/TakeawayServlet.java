@@ -14,6 +14,7 @@ import com.google.gson.*;
 import wpb.entity.*;
 import wpb.manager.GenericManager;
 import wpb.util.HibernateUtil;
+import wpb.util.SendMailTLS;
 import wpb.util.Validator;
 
 @WebServlet(name = "TakeawayServlet", urlPatterns = "/takeaway")
@@ -83,7 +84,8 @@ public class TakeawayServlet extends HttpServlet {
 			to.setPhoneNumber((String) pMap.get("telephone"));
 			to.setComment( (String) pMap.get("comment"));
 			toManager.add(to);
-			
+			if (pMap.containsKey("email"))
+				SendMailTLS.sendTakeawayEmail(pMap);
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");	
 		}
