@@ -84,7 +84,7 @@ public class TakeawayServlet extends HttpServlet {
 			to.setPhoneNumber((String) pMap.get("telephone"));
 			to.setComment( (String) pMap.get("comment"));
 			toManager.add(to);
-			if (pMap.containsKey("email"))
+			if (!pMap.get("email").equals(""))
 				SendMailTLS.sendTakeawayEmail(pMap);
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");	
