@@ -162,6 +162,22 @@ $(function() {
 		}
 	});
 	
+	//foodClass count
+	$.ajax({
+		type : 'POST',
+		cache : false,
+		url : "/restaurantProject/foodClass",
+		data : {
+			"action" : "list"
+		},
+		success : function(response) {
+			$("#food-class-count").html(response.length);	
+		},
+		error : function(error) {
+			console.log(error);
+		}
+	});
+	
 	/*
 	 * ChartJS ------- Here we will create a few charts using ChartJS
 	 */

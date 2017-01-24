@@ -371,7 +371,7 @@
 						<span class="info-box-icon"><i class="fa fa-apple"></i></span>
 
 						<div class="info-box-content">
-							<span class="info-box-text">Food Classes</span> <span class="info-box-number">6</span>
+							<span class="info-box-text">Food Classes</span> <span id="food-class-count" class="info-box-number"></span>
 							<div class="progress">
 								<div class="progress-bar" style="width: 40%"></div>
 							</div>
