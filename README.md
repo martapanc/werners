@@ -1,4 +1,4 @@
-# Werner's Panini & Burgers
+# Werner's Panini & Burgers :hamburger: :fries: :pizza: :spaghetti: :stew: :sushi: :bento: :ice_cream: :cake: :wine_glass: 
 
 Restaurant Webapp for taking online reservations and takeaway orders, created as a final project for the course "Internet & Mobile Services" @ [UniBZ](https://www.unibz.it/en/faculties/computer-science/bachelor-computer-science/).
 
