@@ -86,8 +86,8 @@ public class HibernateUtil {
             
             props.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
             props.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/wpbdb");
-            props.put("hibernate.connection.username", "root");
-            props.put("hibernate.connection.password", "1234");
+            props.put("hibernate.connection.username", "werner");
+            props.put("hibernate.connection.password", "}#rN8nB3");
             
             
             /*GearHost DB*/

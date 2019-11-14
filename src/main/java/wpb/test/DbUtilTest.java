@@ -21,8 +21,8 @@ public class DbUtilTest {
 		if (connection == null) {
 			String host = "localhost";
 			String database = "wpbdb";
-			String username = "root";
-			String password = "Sterno95";
+			String username = "werner";
+			String password = "}#rN8nB3";
 			String url = "jdbc:mysql://" + host + "/" + database;
 			String driverJDBC = "com.mysql.jdbc.Driver";
 			

@@ -54,16 +54,16 @@ public class SeedDB {
 
 		listBooks ();
 
-//		SeedDB.initialize(HibernateUtil.getSessionFactory ());
-//		SeedDB.seedRoles();
-//		SeedDB.seedUsers();
-//		SeedDB.seedRoomTables(30);
-//		SeedDB.seedFoodClasses();
-//		SeedDB.seedItems();
-//		SeedDB.seedTableOrders(1);
-//		SeedDB.seedTakeawayOrders(10);
-//
-//		SeedDB.seedReservation(10);
+		SeedDB.initialize(HibernateUtil.getSessionFactory ());
+		SeedDB.seedRoles();
+		SeedDB.seedUsers();
+		SeedDB.seedRoomTables(30);
+		SeedDB.seedFoodClasses();
+		SeedDB.seedItems();
+		SeedDB.seedTableOrders(1);
+		SeedDB.seedTakeawayOrders(10);
+
+		SeedDB.seedReservation(10);
 	}
 
 
@@ -201,7 +201,7 @@ public class SeedDB {
 		 * //creating random items for (int i = 1; i <= count; i++) { TableOrder
 		 * newItem = new TableOrder(); newItem.setStatus(idgen.nextSessionId());
 		 * toManager.addTableOrder(newItem); }
-		 * 
+		 *
 		 * System.out.println(toManager.getTotalCount() + " new Items created");
 		 */
 	}
@@ -211,7 +211,7 @@ public class SeedDB {
 		OrderItem ot = new OrderItem();
 		ot.setComment("this is item with id 5 and qty 10");
 		ot.setQuantity(10);
-		
+
 		OrderItem ot2 = new OrderItem();
 		ot2.setComment("sample comment");
 		ot2.setQuantity(7);
@@ -225,7 +225,7 @@ public class SeedDB {
 		to.setAddress("Piazza Domenicani, Design Faculty");
 		to.setCost(3.50);
 		taManager.add(to);
-		
+
 		TakeawayOrder to2 = new TakeawayOrder();
 		to2.setOrderItemList(items);
 		to2.setStatus("pronto");
@@ -243,7 +243,7 @@ public class SeedDB {
 			res.setStartDate(new Timestamp(date.getTime()));
 			res.setEndDate(new Timestamp(date.getTime() + 3600 * 1000));
 			res.setUser(userManager.get((long) 6, false));
-			
+
 			//Set<RoomTable> tableList = new HashSet<RoomTable>();
 			//tableList.add(rtManager.get((long) 12, false));
 			//res.setTableList(tableList);
@@ -290,12 +290,12 @@ public class SeedDB {
 		user.setRole(role);
 		user.setFullName(fullname);
 		user.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
-		
+
 		//create Timestamp
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 		Timestamp ts = new Timestamp(cal.getTime().getTime());
-		
+
 		user.setCreationDate(ts);
 		user.setAvatar("dist/img/gusteau160x160.jpg");
 		userManager.add(user);
