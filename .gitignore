@@ -1,3 +1,9 @@
 .classpath
-/bin/
-/build/
+bin/
+build/
+target/
+out/
+.idea/
+.DS_store
+.project
+.settings/
