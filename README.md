@@ -3,9 +3,9 @@
 Restaurant Webapp for taking online reservations and takeaway orders, created as a final project for the course "Internet & Mobile Services" @ [UniBZ](https://www.unibz.it/en/faculties/computer-science/bachelor-computer-science/).
 
 Team members:
-- Werner Sperandio
-- Marta Pancaldi
-- Giulia Burgio
+- **Werner** Sperandio
+- Marta **Pan**caldi
+- Giulia **Burg**io
 
 ## Setup
 **JDK**: Java 11
