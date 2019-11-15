@@ -1,4 +1,4 @@
-# Werner's Panini & Burgers 
+# Werner's Panini & Burgers :hamburger: :fries: :pizza: :spaghetti: :stew: :sushi: :bento: :ice_cream: :cake: :wine_glass: 
 
 Restaurant Webapp for taking online reservations and takeaway orders, created as a final project for the course "Internet & Mobile Services" @ [UniBZ](https://www.unibz.it/en/faculties/computer-science/bachelor-computer-science/).
 
@@ -24,5 +24,9 @@ Team members:
 
 **Local Server**:
 
-- Make sure Tomcat 8 is installed 
-- 
+- Make sure Tomcat 8 is installed
+- Run the command `mvn compile war:exploded`
+- Create a new Tomcat local server configuration
+- In the Deployment tab, choose "Add Artifact" and choose `restaurantProject war:exploded`
+- Change the Application Context to `/`
+- Save the configuration and hit 'Run Tomcat'

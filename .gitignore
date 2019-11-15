@@ -4,3 +4,6 @@ build/
 .idea/
 .settings/
 .project
+target/
+out/
+.DS_store
