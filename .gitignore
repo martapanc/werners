@@ -7,3 +7,4 @@ build/
 target/
 out/
 .DS_store
+${env.M2_HOME}
