@@ -1,0 +1,1 @@
+web: java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --port $PORT out/artifacts/restaurantProject_war_exploded2/*.war
