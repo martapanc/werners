@@ -1,0 +1,135 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum CategoryType {
+  lowcost
+  medium
+  highend
+}
+
+/// The original Java app had five roles (ADMIN, DBMANAGER, WAITER, CUSTOMER,
+/// OVERLORD). The rebuild only needs the two the demo exercises.
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+model User {
+  id             Int     @id @default(autoincrement())
+  email          String  @unique
+  passwordHash   String
+  fullName       String
+  role           Role    @default(CUSTOMER)
+  phoneNumber    String?
+  billingAddress String?
+  points         Int     @default(0)
+  vipStatus      Boolean @default(false)
+
+  orders       TakeawayOrder[]
+  reservations Reservation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum TakeawayStatus {
+  RECEIVED
+  PREPARING
+  READY
+  DELIVERED
+  CANCELED
+}
+
+model FoodClass {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  image String?
+
+  items Item[]
+}
+
+model Item {
+  id          Int      @id @default(autoincrement())
+  name        String
+  price       Float
+  available   Boolean  @default(true)
+  foodClassId Int
+
+  foodClass  FoodClass  @relation(fields: [foodClassId], references: [id], onDelete: Cascade)
+  orderItems OrderItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([foodClassId])
+}
+
+model TakeawayOrder {
+  id            Int            @id @default(autoincrement())
+  status        TakeawayStatus @default(RECEIVED)
+  orderDate     DateTime       @default(now())
+  address       String
+  cost          Float
+  comment       String?
+  customerName  String
+  phoneNumber   String
+  userId        Int?
+
+  items OrderItem[]
+  user  User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model OrderItem {
+  id              Int  @id @default(autoincrement())
+  quantity        Int
+  comment         String?
+  itemId          Int
+  takeawayOrderId Int
+
+  item          Item          @relation(fields: [itemId], references: [id], onDelete: Restrict)
+  takeawayOrder TakeawayOrder @relation(fields: [takeawayOrderId], references: [id], onDelete: Cascade)
+
+  @@index([itemId])
+  @@index([takeawayOrderId])
+}
+
+model RoomTable {
+  id       Int          @id @default(autoincrement())
+  name     String
+  room     String?
+  seats    Int
+  category CategoryType
+
+  reservations Reservation[]
+}
+
+model Reservation {
+  id           Int      @id @default(autoincrement())
+  startDate    DateTime
+  endDate      DateTime
+  partySize    Int
+  comment      String?
+  customerName String
+  roomTableId  Int
+  userId       Int?
+
+  roomTable RoomTable @relation(fields: [roomTableId], references: [id], onDelete: Restrict)
+  user      User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([roomTableId])
+  @@index([userId])
+  @@index([startDate, endDate])
+}

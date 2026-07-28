@@ -30,3 +30,16 @@ Team members:
 - In the Deployment tab, choose "Add Artifact" and choose `restaurantProject war:exploded`
 - Change the Application Context to `/`
 - Save the configuration and hit 'Run Tomcat'
+
+## Modern rebuild (portfolio)
+
+A modern version of this project lives in `modern/` (Next.js + Prisma).
+
+```bash
+cd modern
+pnpm install
+cp .env.example .env
+pnpm db:migrate
+pnpm db:seed
+pnpm dev
+```

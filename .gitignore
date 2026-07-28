@@ -7,3 +7,6 @@ build/
 target/
 out/
 .DS_store
+
+# pnpm content-addressable store, created when installing modern/
+.pnpm-store/

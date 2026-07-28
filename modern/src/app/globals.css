@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+:root {
+  /* Legacy WPB palette (AdminLTE skin-red + homepage CSS) */
+  --wpb-red: #dd4b39;
+  --wpb-red-dark: #d73925;
+  --wpb-dark: #222d32;
+  --wpb-light: #f6f6f6;
+
+  --background: var(--wpb-light);
+  --foreground: #2f2f2f;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+.wpb-btn {
+  background: var(--wpb-red);
+  color: white;
+}
+.wpb-btn:hover {
+  background: var(--wpb-red-dark);
+}
