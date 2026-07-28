@@ -5,6 +5,16 @@ import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/dal";
 
+/**
+ * These actions return errors rather than throwing them.
+ *
+ * An uncaught throw in a server action is a 500 with an opaque digest — fine for
+ * a bug, wrong for outcomes the user can actually cause. "That table is already
+ * booked" and "your cart refers to dishes that no longer exist" are ordinary
+ * results of using the app, and both used to crash the page.
+ */
+export type FormState = { error?: string } | undefined;
+
 const cartSchema = z.array(
   z.object({
     itemId: z.number().int().positive(),
@@ -20,7 +30,10 @@ const placeOrderSchema = z.object({
   cartJson: z.string().min(2),
 });
 
-export async function placeTakeawayOrder(formData: FormData) {
+export async function placeTakeawayOrder(
+  _state: FormState,
+  formData: FormData
+): Promise<FormState> {
   const parsed = placeOrderSchema.safeParse({
     customerName: formData.get("customerName"),
     phoneNumber: formData.get("phoneNumber"),
@@ -29,30 +42,46 @@ export async function placeTakeawayOrder(formData: FormData) {
     cartJson: formData.get("cartJson"),
   });
   if (!parsed.success) {
-    throw new Error("Invalid order data");
+    return { error: "Check the delivery details and try again." };
   }
 
-  const cartRaw = JSON.parse(parsed.data.cartJson);
-  const cart = cartSchema.parse(cartRaw);
-  if (cart.length === 0) throw new Error("Cart is empty");
+  const cart = cartSchema.safeParse(JSON.parse(parsed.data.cartJson));
+  if (!cart.success) return { error: "Your cart could not be read." };
+  if (cart.data.length === 0) return { error: "Your cart is empty." };
 
   const items = await prisma.item.findMany({
-    where: { id: { in: cart.map((c) => c.itemId) } },
+    where: { id: { in: cart.data.map((c) => c.itemId) } },
     select: { id: true, price: true, available: true, name: true },
   });
-
   const itemById = new Map(items.map((i) => [i.id, i]));
-  for (const line of cart) {
-    const item = itemById.get(line.itemId);
-    if (!item) throw new Error("Unknown item in cart");
-    if (!item.available) throw new Error(`Item not available: ${item.name}`);
+
+  // The cart lives in localStorage but the demo database is wiped and re-seeded
+  // on a schedule, so a cart left open across a reset points at ids that are
+  // gone. That is the common case here, not a corrupted request.
+  const missing = cart.data.filter((line) => !itemById.has(line.itemId));
+  if (missing.length > 0) {
+    return {
+      error:
+        "Some items in your cart are no longer on the menu — this demo resets its " +
+        "data every hour. Clear the cart and add them again.",
+    };
   }
 
-  const cost = cart.reduce((sum, line) => {
-    const item = itemById.get(line.itemId);
-    if (!item) return sum;
-    return sum + item.price * line.quantity;
-  }, 0);
+  const unavailable = cart.data
+    .map((line) => itemById.get(line.itemId)!)
+    .filter((item) => !item.available);
+  if (unavailable.length > 0) {
+    return {
+      error: `No longer available: ${unavailable
+        .map((i) => i.name)
+        .join(", ")}. Remove ${unavailable.length === 1 ? "it" : "them"} to continue.`,
+    };
+  }
+
+  const cost = cart.data.reduce(
+    (sum, line) => sum + itemById.get(line.itemId)!.price * line.quantity,
+    0
+  );
 
   // Ordering stays open to guests, exactly as in the original app; signing in
   // just attaches the order to the account.
@@ -65,9 +94,9 @@ export async function placeTakeawayOrder(formData: FormData) {
       address: parsed.data.address,
       comment: parsed.data.comment || null,
       userId: user?.id ?? null,
-      cost,
+      cost: Math.round(cost * 100) / 100,
       items: {
-        create: cart.map((line) => ({
+        create: cart.data.map((line) => ({
           quantity: line.quantity,
           item: { connect: { id: line.itemId } },
         })),
@@ -76,6 +105,8 @@ export async function placeTakeawayOrder(formData: FormData) {
     select: { id: true },
   });
 
+  // redirect() throws NEXT_REDIRECT by design — it must stay outside any
+  // try/catch, which is why the checks above return instead of throwing.
   redirect(`/orders/${order.id}`);
 }
 
@@ -88,7 +119,10 @@ const reservationSchema = z.object({
   comment: z.string().trim().max(500).optional().or(z.literal("")),
 });
 
-export async function createReservation(formData: FormData) {
+export async function createReservation(
+  _state: FormState,
+  formData: FormData
+): Promise<FormState> {
   const parsed = reservationSchema.safeParse({
     customerName: formData.get("customerName"),
     partySize: formData.get("partySize"),
@@ -97,19 +131,31 @@ export async function createReservation(formData: FormData) {
     durationMinutes: formData.get("durationMinutes"),
     comment: formData.get("comment"),
   });
-  if (!parsed.success) throw new Error("Invalid reservation data");
+  if (!parsed.success) {
+    return { error: "Check the booking details and try again." };
+  }
 
   const start = new Date(parsed.data.startDate);
-  if (Number.isNaN(start.getTime())) throw new Error("Invalid start date");
+  if (Number.isNaN(start.getTime())) {
+    return { error: "That start time could not be read." };
+  }
   const end = new Date(start.getTime() + parsed.data.durationMinutes * 60_000);
 
   const table = await prisma.roomTable.findUnique({
     where: { id: parsed.data.roomTableId },
     select: { id: true, seats: true, name: true },
   });
-  if (!table) throw new Error("Unknown table");
+  if (!table) {
+    return {
+      error:
+        "That table no longer exists — this demo resets its data every hour. " +
+        "Reload the page and pick a table again.",
+    };
+  }
   if (table.seats < parsed.data.partySize) {
-    throw new Error("Selected table is too small");
+    return {
+      error: `${table.name} seats ${table.seats}, which is too few for a party of ${parsed.data.partySize}.`,
+    };
   }
 
   const overlapping = await prisma.reservation.count({
@@ -119,7 +165,11 @@ export async function createReservation(formData: FormData) {
       endDate: { gt: start },
     },
   });
-  if (overlapping > 0) throw new Error("That table is already booked");
+  if (overlapping > 0) {
+    return {
+      error: `${table.name} is already booked for that slot. Pick another time or table.`,
+    };
+  }
 
   const user = await getCurrentUser();
 
@@ -138,4 +188,3 @@ export async function createReservation(formData: FormData) {
 
   redirect(`/reservations/${reservation.id}`);
 }
-

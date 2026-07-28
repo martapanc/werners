@@ -287,15 +287,25 @@ export async function resetDemoData(prisma: PrismaClient) {
     Math.max(...DEMO_ACCOUNTS.map((a) => a.id))
   );
 
-  for (const foodClass of foodClasses) {
-    await prisma.foodClass.create({ data: foodClass });
+  /**
+   * The catalogue is created with explicit, position-derived ids rather than
+   * letting Postgres allocate them.
+   *
+   * The cart lives in the visitor's localStorage and stores item ids; the table
+   * picker posts a table id. If a reset reallocated those ids, every cart and
+   * every open booking form left over from before the reset would point at rows
+   * that no longer exist — which is exactly how "Unknown item in cart" used to
+   * reach the checkout as a 500. Pinning them keeps a cart usable across resets.
+   */
+  for (const [index, foodClass] of foodClasses.entries()) {
+    await prisma.foodClass.create({ data: { id: index + 1, ...foodClass } });
   }
 
   const foodClassByName = new Map(
     (await prisma.foodClass.findMany()).map((fc) => [fc.name, fc])
   );
 
-  for (const item of items) {
+  for (const [index, item] of items.entries()) {
     const foodClass = foodClassByName.get(item.foodClass);
     if (!foodClass) throw new Error(`Missing food class: ${item.foodClass}`);
     if (!isValidFoodImage(item.image)) {
@@ -306,6 +316,7 @@ export async function resetDemoData(prisma: PrismaClient) {
     }
     await prisma.item.create({
       data: {
+        id: index + 1,
         name: item.name,
         price: item.price,
         available: item.available,
@@ -315,7 +326,22 @@ export async function resetDemoData(prisma: PrismaClient) {
     });
   }
 
-  await prisma.roomTable.createMany({ data: roomTables });
+  await prisma.roomTable.createMany({
+    data: roomTables.map((table, index) => ({ id: index + 1, ...table })),
+  });
+
+  // Explicit ids leave each sequence behind the rows just written, so the next
+  // insert would collide. Realign all three.
+  for (const [table, count] of [
+    ["FoodClass", foodClasses.length],
+    ["Item", items.length],
+    ["RoomTable", roomTables.length],
+  ] as const) {
+    await prisma.$executeRawUnsafe(
+      `SELECT setval(pg_get_serial_sequence('"${table}"', 'id'), $1, true)`,
+      count
+    );
+  }
 
   const itemByName = new Map(
     (await prisma.item.findMany({ select: { id: true, name: true, price: true } })).map(

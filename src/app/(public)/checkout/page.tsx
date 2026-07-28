@@ -1,14 +1,32 @@
 "use client";
 
-import { useMemo } from "react";
+import { useActionState, useMemo } from "react";
+import { useFormStatus } from "react-dom";
 import { useCart } from "@/components/cart-store";
 import { formatMoney } from "@/lib/money";
-import { placeTakeawayOrder } from "@/app/actions";
+import { placeTakeawayOrder, type FormState } from "@/app/actions";
 import { PublicContentHeader } from "@/components/public/content-header";
+
+function PlaceOrderButton({ disabled }: { disabled: boolean }) {
+  const { pending } = useFormStatus();
+  return (
+    <button
+      disabled={disabled || pending}
+      className="wpb-btn mt-2 w-full rounded-md px-5 py-3 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-40"
+    >
+      {pending ? "Placing order…" : "Place order"}
+    </button>
+  );
+}
 
 export default function CheckoutPage() {
   const { lines, setQuantity, removeLine, clear, subtotal, totalCount } =
     useCart();
+
+  const [state, formAction] = useActionState<FormState, FormData>(
+    placeTakeawayOrder,
+    undefined
+  );
 
   const normalizedCart = useMemo(
     () => lines.map((l) => ({ itemId: l.itemId, quantity: l.quantity })),
@@ -90,7 +108,24 @@ export default function CheckoutPage() {
         <section className="lg:col-span-2">
           <div className="rounded-md border border-black/10 bg-white p-6 shadow-sm">
             <h2 className="font-medium">Delivery details</h2>
-            <form action={placeTakeawayOrder} className="mt-4 space-y-4">
+
+            {state?.error ? (
+              <div
+                role="alert"
+                className="mt-4 rounded-md border border-[color:var(--wpb-red)]/30 bg-[color:var(--wpb-red)]/10 px-3 py-3 text-sm text-[color:var(--wpb-red-dark)]"
+              >
+                <p>{state.error}</p>
+                <button
+                  type="button"
+                  onClick={() => clear()}
+                  className="mt-2 cursor-pointer font-medium underline underline-offset-2"
+                >
+                  Clear the cart
+                </button>
+              </div>
+            ) : null}
+
+            <form action={formAction} className="mt-4 space-y-4">
               <input
                 type="hidden"
                 name="cartJson"
@@ -137,12 +172,7 @@ export default function CheckoutPage() {
                 />
               </label>
 
-              <button
-                className="wpb-btn mt-2 w-full rounded-md px-5 py-3 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-40"
-                disabled={lines.length === 0}
-              >
-                Place order
-              </button>
+              <PlaceOrderButton disabled={lines.length === 0} />
             </form>
           </div>
         </section>
