@@ -46,11 +46,16 @@ enum TakeawayStatus {
 }
 
 model FoodClass {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
-  image String?
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  /// Menu order. Categories read Burger → Pizza → Salad → Dessert → Drink,
+  /// which is neither alphabetical nor insertion order, so it is stored
+  /// explicitly rather than inferred from the id.
+  sortOrder Int @default(0)
 
   items Item[]
+
+  @@index([sortOrder])
 }
 
 model Item {
@@ -58,6 +63,9 @@ model Item {
   name        String
   price       Float
   available   Boolean  @default(true)
+  /// Path into the bundled gallery (see src/lib/food-images.ts), e.g.
+  /// "/food/pizza-margherita.jpg". Null renders a placeholder.
+  image       String?
   foodClassId Int
 
   foodClass  FoodClass  @relation(fields: [foodClassId], references: [id], onDelete: Cascade)

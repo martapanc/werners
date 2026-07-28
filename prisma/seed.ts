@@ -16,7 +16,8 @@ async function main() {
   const counts = await resetDemoData(prisma);
   console.log(
     `Seed complete: ${counts.users} users, ${counts.foodClasses} food classes, ` +
-      `${counts.items} items, ${counts.roomTables} tables.`
+      `${counts.items} items, ${counts.roomTables} tables, ${counts.orders} orders, ` +
+      `${counts.reservations} reservations.`
   );
 }
 

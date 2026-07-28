@@ -2,10 +2,12 @@ import { prisma } from "@/lib/prisma";
 import { formatMoney } from "@/lib/money";
 import { AdminContentHeader } from "@/components/admin/content-header";
 import { toggleItemAvailability, updateItemPrice } from "@/app/admin/actions";
+import { ItemImagePicker } from "@/components/admin/image-picker";
+import { galleryForCategory } from "@/lib/food-images";
 
 export default async function AdminMenuPage() {
   const foodClasses = await prisma.foodClass.findMany({
-    orderBy: { name: "asc" },
+    orderBy: { sortOrder: "asc" },
     include: { items: { orderBy: { name: "asc" } } },
   });
 
@@ -29,11 +31,20 @@ export default async function AdminMenuPage() {
                       key={item.id}
                       className="flex flex-wrap items-center justify-between gap-4 rounded-sm border border-black/10 px-4 py-3 text-sm"
                     >
-                      <div>
-                        <div className="font-medium">{item.name}</div>
-                        <div className="mt-1 text-xs text-zinc-600">
-                          {formatMoney(item.price)} ·{" "}
-                          {item.available ? "Available" : "Unavailable"}
+                      <div className="flex items-start gap-4">
+                        <ItemImagePicker
+                          itemId={item.id}
+                          itemName={item.name}
+                          current={item.image}
+                          // Photos from this dish's own category come first.
+                          gallery={galleryForCategory(fc.name)}
+                        />
+                        <div>
+                          <div className="font-medium">{item.name}</div>
+                          <div className="mt-1 text-xs text-zinc-600">
+                            {formatMoney(item.price)} ·{" "}
+                            {item.available ? "Available" : "Unavailable"}
+                          </div>
                         </div>
                       </div>
 

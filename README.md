@@ -93,6 +93,14 @@ check alone would not protect them. `src/proxy.ts` (Next.js 16 renamed
 Middleware to Proxy) only does a cheap optimistic redirect based on the cookie,
 so a stale or tampered role claim can never grant access on its own.
 
+**Item photos.** Each menu item can carry an image, shown on the public menu and
+set by an admin from Menu Management. The photos are a fixed gallery committed to
+`public/food/` and declared in `src/lib/food-images.ts` — no uploads, no storage
+service, no API keys, so the menu looks complete straight after every reset.
+That list doubles as an allow-list: `setItemImage` rejects any path not in it, so
+a crafted POST can't point `Item.image` at an off-site URL. Every photo is CC0 or
+public domain; provenance is recorded in `public/food/CREDITS.md`.
+
 **Demo reset.** `src/lib/demo-data.ts` is the single source of truth for the
 seeded dataset, used by both `prisma/seed.ts` and `GET /api/cron/reset`. That
 route takes a `CRON_SECRET` bearer token, wipes whatever visitors did and
