@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/components/cart-store";
+import { formatMoney } from "@/lib/money";
 import { logout } from "@/app/(auth)/actions";
 import type { CurrentUser } from "@/lib/dal";
 
@@ -15,7 +16,7 @@ const LINKS = [
 ];
 
 export function Nav({ user }: { user: CurrentUser | null }) {
-  const { totalCount } = useCart();
+  const { totalCount, subtotal } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
@@ -63,11 +64,18 @@ export function Nav({ user }: { user: CurrentUser | null }) {
               {link.label}
             </Link>
           ))}
+          {/* Fixed width + tabular figures: the count and total change as items
+              are added, and without this the links to the left of the cart slid
+              around on every change. */}
           <Link
             href="/checkout"
-            className="rounded-md bg-black/15 px-3 py-2 hover:bg-black/25"
+            aria-label={`Cart, ${totalCount} item${totalCount === 1 ? "" : "s"}, total ${formatMoney(subtotal)}`}
+            className="flex w-[9.5rem] items-center justify-between gap-2 rounded-md bg-black/15 px-3 py-2 tabular-nums hover:bg-black/25"
           >
-            Cart ({totalCount})
+            <span aria-hidden>Cart ({totalCount})</span>
+            <span aria-hidden className="font-medium">
+              {formatMoney(subtotal)}
+            </span>
           </Link>
 
           {user?.role === "ADMIN" ? (
@@ -108,24 +116,28 @@ export function Nav({ user }: { user: CurrentUser | null }) {
         <div className="flex items-center gap-1.5 md:hidden">
           <Link
             href="/checkout"
-            aria-label={`Cart, ${totalCount} item${totalCount === 1 ? "" : "s"}`}
-            className="flex items-center gap-1.5 rounded-md bg-black/15 px-3 py-2 text-sm hover:bg-black/25"
+            aria-label={`Cart, ${totalCount} item${totalCount === 1 ? "" : "s"}, total ${formatMoney(subtotal)}`}
+            className="flex w-[7.25rem] items-center justify-between gap-1.5 rounded-md bg-black/15 px-2.5 py-2 text-sm tabular-nums hover:bg-black/25"
           >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-4 w-4"
-              aria-hidden
-            >
-              <circle cx="9" cy="20" r="1.5" />
-              <circle cx="18" cy="20" r="1.5" />
-              <path d="M2 3h3l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.55L21 7H6" />
-            </svg>
-            <span className="tabular-nums">{totalCount}</span>
+            <span aria-hidden className="flex items-center gap-1.5">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-4 w-4 shrink-0"
+              >
+                <circle cx="9" cy="20" r="1.5" />
+                <circle cx="18" cy="20" r="1.5" />
+                <path d="M2 3h3l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.55L21 7H6" />
+              </svg>
+              {totalCount}
+            </span>
+            <span aria-hidden className="font-medium">
+              {formatMoney(subtotal)}
+            </span>
           </Link>
 
           <button

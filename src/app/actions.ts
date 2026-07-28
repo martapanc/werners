@@ -15,6 +15,13 @@ import { getCurrentUser } from "@/lib/dal";
  */
 export type FormState = { error?: string } | undefined;
 
+/**
+ * The order action reports the new id back instead of redirecting itself: the
+ * caller has to empty the cart on success, and that has to happen before the
+ * navigation. `redirect()` throws, so nothing after it would ever run.
+ */
+export type PlaceOrderResult = { error: string } | { orderId: number };
+
 const cartSchema = z.array(
   z.object({
     itemId: z.number().int().positive(),
@@ -31,9 +38,8 @@ const placeOrderSchema = z.object({
 });
 
 export async function placeTakeawayOrder(
-  _state: FormState,
   formData: FormData
-): Promise<FormState> {
+): Promise<PlaceOrderResult> {
   const parsed = placeOrderSchema.safeParse({
     customerName: formData.get("customerName"),
     phoneNumber: formData.get("phoneNumber"),
@@ -105,9 +111,7 @@ export async function placeTakeawayOrder(
     select: { id: true },
   });
 
-  // redirect() throws NEXT_REDIRECT by design — it must stay outside any
-  // try/catch, which is why the checks above return instead of throwing.
-  redirect(`/orders/${order.id}`);
+  return { orderId: order.id };
 }
 
 const reservationSchema = z.object({

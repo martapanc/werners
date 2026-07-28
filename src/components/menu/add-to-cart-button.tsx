@@ -20,7 +20,7 @@ export function AddToCartButton({
       type="button"
       disabled={disabled}
       onClick={() => addLine({ itemId, name, price })}
-      className="wpb-btn rounded-md px-4 py-2 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-40"
+      className="wpb-btn rounded-md px-4 py-2 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
     >
       Add
     </button>

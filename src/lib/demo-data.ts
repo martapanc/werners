@@ -78,7 +78,7 @@ const items = [
   { name: "Pastrami Burger", foodClass: "Burger", price: 13.5, available: true, image: "/food/pastrami-burger.jpg" },
   { name: "Veggie Burger", foodClass: "Burger", price: 12.5, available: true, image: "/food/veggie-burger.jpg" },
   { name: "Hot Dog", foodClass: "Burger", price: 6.0, available: true, image: "/food/hotdog.jpg" },
-  { name: "BauernToast", foodClass: "Burger", price: 5.5, available: true, image: "/food/ham-cheese-toast.jpg" },
+  { name: "Ham & Cheese Toast", foodClass: "Burger", price: 5.5, available: true, image: "/food/ham-cheese-toast.jpg" },
 
   // Salad
   { name: "Mixed Salad", foodClass: "Salad", price: 7.5, available: true, image: "/food/salad-mixed.jpg" },
