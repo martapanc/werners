@@ -1,45 +1,117 @@
-# Werner's Panini & Burgers :hamburger: :fries: :pizza: :spaghetti: :stew: :sushi: :bento: :ice_cream: :cake:
+# Werner's Panini & Burgers 🍔 🍟 🍕
 
-Restaurant Webapp for taking online reservations and takeaway orders, created as a final project for the course "Internet & Mobile Services" @ [UniBZ](https://www.unibz.it/en/faculties/computer-science/bachelor-computer-science/).
+Restaurant web app for online table reservations and take-away orders.
 
-Team members:
-- **Werner** S.
-- M. **Pan**caldi
-- G. **Burg**io
+Originally a final project for "Internet & Mobile Services" at
+[UniBZ](https://www.unibz.it/en/faculties/computer-science/bachelor-computer-science/)
+(2016–17), built with Java servlets, JSP, Hibernate and MySQL on Tomcat. This
+repo now holds a **full rebuild on a modern stack**, with the original code kept
+alongside it for comparison.
 
-## Setup
-**JDK**: Java 11
+**▶ [Live demo](https://werners-panini-burgers.vercel.app)** ·
+**[Demo accounts](https://werners-panini-burgers.vercel.app/demo)**
 
-**IDE**:
+Original team: **Werner** S. · M. **Pan**caldi · G. **Burg**io
 
-- The app was originally developed in Eclipse, but was recently tested successfully in IntelliJ IDEA (CE or Ultimate), which we recommend.
-- Clone the project and open it in IntelliJ
-- Run `mvn clean install` to setup the dependencies 
+## Try it
 
-**Database**: 
+The demo is fully interactive — orders, reservations and menu edits all write to
+a real database. It resets to the same seeded data on a schedule, so nothing you
+do sticks around.
 
-- To run the app locally, a local instance of MySQL must be running, with a database named `wpbdb`
-- update the access credentials in class `src/wpb/util/HibernateUtil.java` ~ line 85
-- Running the class `SeedDB.java` will setup the database with the tables needed for the webapp and will insert some sample data.
+| Role     | Email                   | Password    |
+| -------- | ----------------------- | ----------- |
+| Customer | `customer@werners.demo` | `demo1234`  |
+| Admin    | `admin@werners.demo`    | `admin1234` |
 
-**Local Server**:
+## Stack
 
-- Make sure Tomcat 8 is installed
-- Run the command `mvn compile war:exploded`
-- Create a new Tomcat local server configuration
-- In the Deployment tab, choose "Add Artifact" and choose `restaurantProject war:exploded`
-- Change the Application Context to `/`
-- Save the configuration and hit 'Run Tomcat'
+|              | Original (2016–17)          | Rebuild                        |
+| ------------ | --------------------------- | ------------------------------ |
+| UI           | JSP + Bootstrap + AngularJS | React 19 Server Components     |
+| Framework    | Java servlets on Tomcat     | Next.js 16 (App Router)        |
+| Requests     | `HttpServlet` subclasses    | Server Actions                 |
+| Data access  | Hibernate + custom DAOs     | Prisma 7                       |
+| Database     | MySQL                       | Postgres (Neon)                |
+| Auth         | `UserSession` table, BCrypt | Signed JWT cookie, bcrypt      |
+| Styling      | AdminLTE `skin-red`         | Tailwind CSS 4                 |
+| Hosting      | Local Tomcat                | Vercel                         |
 
-## Modern rebuild (portfolio)
+## Repo layout
 
-A modern version of this project lives in `modern/` (Next.js + Prisma).
+```
+├── src/               # Next.js app (App Router)
+│   ├── app/           # routes, layouts, server actions
+│   ├── components/    # UI components
+│   └── lib/           # prisma client, session, DAL, demo dataset
+├── prisma/            # schema, migrations, seed
+├── public/legacy/     # images and icons carried over from the original
+├── legacy/            # the original 2016-17 Java/JSP project
+└── .github/workflows/ # hourly demo reset
+```
+
+## Running locally
+
+Requires Node 20+, pnpm, and a Postgres database — [Neon](https://neon.tech) has
+a free tier and is what the deployed demo uses.
 
 ```bash
-cd modern
 pnpm install
-cp .env.example .env
-pnpm db:migrate
-pnpm db:seed
+cp .env.example .env      # then fill in the values
+pnpm db:migrate           # apply migrations
+pnpm db:seed              # write the demo dataset
 pnpm dev
 ```
+
+Generate the two secrets with `openssl rand -base64 32` each. `DATABASE_URL`
+should be Neon's **pooled** connection string (host contains `-pooler`);
+`DIRECT_DATABASE_URL` should be the unpooled one, which is what `prisma migrate`
+uses.
+
+| Script           | Does                                  |
+| ---------------- | ------------------------------------- |
+| `pnpm dev`       | Dev server on :3000                   |
+| `pnpm build`     | `prisma generate` + production build  |
+| `pnpm db:migrate`| Create/apply migrations (dev)         |
+| `pnpm db:deploy` | Apply migrations (production)         |
+| `pnpm db:seed`   | Reset to the demo dataset             |
+| `pnpm db:studio` | Browse the database                   |
+| `pnpm lint`      | ESLint                                |
+
+## How it works
+
+**Auth.** Sessions are a signed JWT (`jose`) in an httpOnly cookie; passwords are
+bcrypt-hashed. The original kept a `UserSession` row in the database — that would
+not survive the demo's scheduled reset, logging everyone out whenever it fired.
+Stateless sessions plus demo users seeded at fixed IDs keep a session valid
+across a reset.
+
+**Authorization** lives in `src/lib/dal.ts`. `requireAdmin()` re-reads the role
+from the database and is called by the `/admin` layout *and* by every admin
+server action — actions are individually addressable POST endpoints, so a layout
+check alone would not protect them. `src/proxy.ts` (Next.js 16 renamed
+Middleware to Proxy) only does a cheap optimistic redirect based on the cookie,
+so a stale or tampered role claim can never grant access on its own.
+
+**Demo reset.** `src/lib/demo-data.ts` is the single source of truth for the
+seeded dataset, used by both `prisma/seed.ts` and `GET /api/cron/reset`. That
+route takes a `CRON_SECRET` bearer token, wipes whatever visitors did and
+rewrites the original data. The dataset is fully deterministic — no
+`Math.random()` — so every reset produces an identical restaurant.
+
+Two schedulers point at it, because Vercel's Hobby plan allows only one cron run
+per day:
+
+- `vercel.json` — daily at 04:00 UTC, the safety net.
+- `.github/workflows/reset-demo.yml` — hourly, the real schedule. Needs
+  `CRON_SECRET` and `DEMO_BASE_URL` repository secrets.
+
+On Vercel Pro, drop the workflow and set `vercel.json` back to `0 * * * *`.
+
+## The original project
+
+The 2016–17 Java app is preserved in [`legacy/`](legacy/), including the
+original MySQL dumps. See [`legacy/README.md`](legacy/README.md) to run it.
+
+Only two of its five roles (`ADMIN`, `CUSTOMER`) are modelled in the rebuild —
+the demo does not exercise `DBMANAGER`, `WAITER` or `OVERLORD`.

@@ -27,26 +27,27 @@ export default async function Home({
           </p>
         ) : null}
 
-        <section className="rounded-md border border-black/10 bg-white p-8 shadow-sm">
+        <section className="rounded-2xl border border-black/10 bg-white p-8 shadow-sm">
           <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
             <div>
-              <h2 className="text-xl font-semibold tracking-tight">
+              <h2 className="text-2xl font-semibold tracking-tight">
                 Werner&apos;s Panini&amp;Burgers
               </h2>
-              <p className="mt-2 text-sm text-zinc-600">
-                Modern rebuild with the original skin-red vibe.
+              <p className="mt-2 max-w-md text-sm leading-6 text-zinc-600">
+                Order a take-away or reserve a table — the same restaurant app
+                from 2016, rebuilt on a modern stack.
               </p>
             </div>
-            <div className="flex gap-3">
+            <div className="flex shrink-0 gap-3">
               <Link
                 href="/menu"
-                className="wpb-btn inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-medium"
+                className="wpb-btn inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition hover:-translate-y-0.5"
               >
                 Take-away Order
               </Link>
               <Link
                 href="/reservations"
-                className="inline-flex items-center justify-center rounded-md border border-black/10 px-5 py-3 text-sm font-medium hover:bg-black/5"
+                className="inline-flex items-center justify-center rounded-full border border-black/15 px-6 py-3 text-sm font-semibold transition hover:bg-black/5"
               >
                 Table Reservation
               </Link>

@@ -3,7 +3,7 @@ name: Reset demo data
 # Vercel's Hobby plan caps cron jobs at once per day, so vercel.json only holds
 # a daily safety net. This workflow drives the hourly reset the demo actually
 # wants. It is a plain authenticated HTTP call — all the logic lives in
-# modern/src/app/api/cron/reset/route.ts.
+# src/app/api/cron/reset/route.ts.
 #
 # Requires two repository secrets:
 #   CRON_SECRET  — must match the CRON_SECRET env var on Vercel

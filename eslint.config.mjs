@@ -15,6 +15,9 @@ const eslintConfig = defineConfig([
     // Prisma (not part of the Next.js runtime bundle)
     "prisma/**",
     "prisma.config.ts",
+    // The original 2016-17 Java/JSP project, kept for reference. Includes
+    // vendored Bootstrap and AngularJS bundles that this config can't lint.
+    "legacy/**",
   ]),
 ]);
 
