@@ -73,11 +73,20 @@ check alone would not protect them. `src/proxy.ts` (Next.js 16 renamed
 Middleware to Proxy) only does a cheap optimistic redirect using the cookie.
 
 **Demo reset.** `src/lib/demo-data.ts` is the single source of truth for the
-seeded dataset, used by both `prisma/seed.ts` and `GET /api/cron/reset`. Vercel
-Cron hits that route hourly (see `vercel.json`) with a `CRON_SECRET` bearer
-token, wiping whatever visitors did and rewriting the original data. Everything
-in the dataset is deterministic — no `Math.random()` — so every reset produces an
-identical restaurant.
+seeded dataset, used by both `prisma/seed.ts` and `GET /api/cron/reset`. That
+route takes a `CRON_SECRET` bearer token and wipes whatever visitors did,
+rewriting the original data. Everything in the dataset is deterministic — no
+`Math.random()` — so every reset produces an identical restaurant.
+
+Two schedulers point at it, because Vercel's Hobby plan allows only one cron run
+per day:
+
+- `vercel.json` — daily at 04:00 UTC, the safety net.
+- `.github/workflows/reset-demo.yml` — hourly, the real schedule. Needs
+  `CRON_SECRET` and `DEMO_BASE_URL` repository secrets.
+
+Drop the GitHub workflow if you upgrade to Vercel Pro and set `vercel.json` back
+to `0 * * * *`.
 
 ## Notes
 

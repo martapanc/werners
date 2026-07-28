@@ -1,10 +1,17 @@
+# better-sqlite3 is an optional peer dependency of `prisma` itself, so it stays
+# in the tree even though this app talks to Postgres. It is explicitly ignored
+# rather than left undecided: pnpm fails the install with ERR_PNPM_IGNORED_BUILDS
+# on undecided build scripts, which breaks the Vercel build. Ignoring it also
+# skips compiling a native module nothing here loads.
 allowBuilds:
   '@prisma/engines': true
+  better-sqlite3: false
   esbuild: true
   prisma: true
   sharp: false
   unrs-resolver: false
 ignoredBuiltDependencies:
+  - better-sqlite3
   - sharp
   - unrs-resolver
 onlyBuiltDependencies:

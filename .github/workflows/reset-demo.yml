@@ -1,0 +1,36 @@
+name: Reset demo data
+
+# Vercel's Hobby plan caps cron jobs at once per day, so vercel.json only holds
+# a daily safety net. This workflow drives the hourly reset the demo actually
+# wants. It is a plain authenticated HTTP call — all the logic lives in
+# modern/src/app/api/cron/reset/route.ts.
+#
+# Requires two repository secrets:
+#   CRON_SECRET  — must match the CRON_SECRET env var on Vercel
+#   DEMO_BASE_URL — e.g. https://werners-panini-burgers.vercel.app
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch: # lets you reset on demand from the Actions tab
+
+jobs:
+  reset:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger reset endpoint
+        env:
+          BASE_URL: ${{ secrets.DEMO_BASE_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          if [ -z "$BASE_URL" ] || [ -z "$CRON_SECRET" ]; then
+            echo "::error::DEMO_BASE_URL and CRON_SECRET repository secrets must be set."
+            exit 1
+          fi
+
+          # --fail-with-body so a 401/500 fails the job loudly instead of
+          # silently leaving stale demo data in place.
+          curl --fail-with-body --silent --show-error \
+            --max-time 120 \
+            --header "Authorization: Bearer $CRON_SECRET" \
+            "$BASE_URL/api/cron/reset"
